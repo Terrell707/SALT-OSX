@@ -25,6 +25,7 @@
     
     // Grabs the error code value from the array and returns it.
     NSInteger code = [[[data objectAtIndex:0] valueForKey:@"error_code"] integerValue];
+    NSLog(@"Error: %@", [[data objectAtIndex:0] valueForKey:@"error_message"]);
     return code;
 }
 

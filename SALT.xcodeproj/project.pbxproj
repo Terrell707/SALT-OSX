@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		3AFD09191A8836C4001D8688 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09181A8836C4001D8688 /* AppDelegate.m */; };
 		3AFD091B1A8836C4001D8688 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091A1A8836C4001D8688 /* main.m */; };
-		3AFD091E1A8836C4001D8688 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091D1A8836C4001D8688 /* ViewController.m */; };
 		3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091F1A8836C4001D8688 /* SALT.xcdatamodeld */; };
 		3AFD09231A8836C4001D8688 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFD09221A8836C4001D8688 /* Images.xcassets */; };
 		3AFD09261A8836C4001D8688 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFD09241A8836C4001D8688 /* Main.storyboard */; };
 		3AFD09321A8836C4001D8688 /* SALTTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09311A8836C4001D8688 /* SALTTests.m */; };
+		3AFD09421A883793001D8688 /* MySQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD093E1A883793001D8688 /* MySQL.m */; };
+		3AFD09431A883793001D8688 /* StatusCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09401A883793001D8688 /* StatusCodes.m */; };
+		3AFD09491A883A42001D8688 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09481A883A42001D8688 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +34,18 @@
 		3AFD09171A8836C4001D8688 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3AFD09181A8836C4001D8688 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3AFD091A1A8836C4001D8688 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3AFD091C1A8836C4001D8688 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3AFD091D1A8836C4001D8688 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3AFD09201A8836C4001D8688 /* SALT.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SALT.xcdatamodel; sourceTree = "<group>"; };
 		3AFD09221A8836C4001D8688 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3AFD09251A8836C4001D8688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AFD092B1A8836C4001D8688 /* SALTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SALTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFD09301A8836C4001D8688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AFD09311A8836C4001D8688 /* SALTTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SALTTests.m; sourceTree = "<group>"; };
+		3AFD093D1A883793001D8688 /* MySQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySQL.h; sourceTree = "<group>"; };
+		3AFD093E1A883793001D8688 /* MySQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySQL.m; sourceTree = "<group>"; };
+		3AFD093F1A883793001D8688 /* StatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCodes.h; sourceTree = "<group>"; };
+		3AFD09401A883793001D8688 /* StatusCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCodes.m; sourceTree = "<group>"; };
+		3AFD09471A883A42001D8688 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3AFD09481A883A42001D8688 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +87,11 @@
 		3AFD09141A8836C4001D8688 /* SALT */ = {
 			isa = PBXGroup;
 			children = (
+				3AFD09461A8837E8001D8688 /* View */,
+				3AFD09451A8837B4001D8688 /* Controller */,
+				3AFD09441A8837A0001D8688 /* Utils */,
 				3AFD09171A8836C4001D8688 /* AppDelegate.h */,
 				3AFD09181A8836C4001D8688 /* AppDelegate.m */,
-				3AFD091C1A8836C4001D8688 /* ViewController.h */,
-				3AFD091D1A8836C4001D8688 /* ViewController.m */,
-				3AFD09221A8836C4001D8688 /* Images.xcassets */,
-				3AFD09241A8836C4001D8688 /* Main.storyboard */,
-				3AFD091F1A8836C4001D8688 /* SALT.xcdatamodeld */,
 				3AFD09151A8836C4001D8688 /* Supporting Files */,
 			);
 			path = SALT;
@@ -96,6 +100,8 @@
 		3AFD09151A8836C4001D8688 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3AFD091F1A8836C4001D8688 /* SALT.xcdatamodeld */,
+				3AFD09221A8836C4001D8688 /* Images.xcassets */,
 				3AFD09161A8836C4001D8688 /* Info.plist */,
 				3AFD091A1A8836C4001D8688 /* main.m */,
 			);
@@ -117,6 +123,34 @@
 				3AFD09301A8836C4001D8688 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3AFD09441A8837A0001D8688 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3AFD093D1A883793001D8688 /* MySQL.h */,
+				3AFD093E1A883793001D8688 /* MySQL.m */,
+				3AFD093F1A883793001D8688 /* StatusCodes.h */,
+				3AFD09401A883793001D8688 /* StatusCodes.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		3AFD09451A8837B4001D8688 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3AFD09471A883A42001D8688 /* LoginViewController.h */,
+				3AFD09481A883A42001D8688 /* LoginViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3AFD09461A8837E8001D8688 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3AFD09241A8836C4001D8688 /* Main.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,9 +252,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AFD091E1A8836C4001D8688 /* ViewController.m in Sources */,
+				3AFD09421A883793001D8688 /* MySQL.m in Sources */,
 				3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */,
 				3AFD091B1A8836C4001D8688 /* main.m in Sources */,
+				3AFD09491A883A42001D8688 /* LoginViewController.m in Sources */,
+				3AFD09431A883793001D8688 /* StatusCodes.m in Sources */,
 				3AFD09191A8836C4001D8688 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

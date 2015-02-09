@@ -16,7 +16,48 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    
+    // Initializes the MySQL and StatusCodes class.
+    mySQL = [[MySQL alloc] init];
+    statusChecker = [[StatusCodes alloc] init];
+}
+
+- (IBAction)cancelButton:(id)sender {
+    [NSApp terminate:self];
+}
+
+- (IBAction)loginButton:(id)sender {
+    // Grabs user info from the text fields.
+    NSString *user = [_userField stringValue];
+    NSString *password = [_passwordField stringValue];
+    
+    NSLog(@"User = %@", user);
+    NSLog(@"Pass = %@", password);
+    
+    // Creates a key value pairs for the user name and password.
+    NSArray *keys = [NSArray arrayWithObjects:@"user", @"password", nil];
+    NSArray *values = [NSArray arrayWithObjects:user, password, nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjects:values
+                                                         forKeys:keys];
+    
+    // Queries the database to see if the correct info was given.
+    NSArray *login = [mySQL grabInfoFromFile:@"login.php" withItems:userInfo];
+    
+    // Checks to see the status given back by the server.
+    NSInteger status = [statusChecker checkStatus:login];
+    
+    NSLog(@"Status = %ld", status);
+    
+    switch (status) {
+        case INVALID_USER:
+        case INCORRECT_PASSWORD:
+            [_statusLabel setStringValue:@"Incorrect Username/Password!"];
+            [_passwordField setStringValue:@""];
+            break;
+        case SUCCESS:
+            [_statusLabel setStringValue:@""];
+            [NSApp stopModalWithCode:SUCCESS];
+    }
 }
 
 @end

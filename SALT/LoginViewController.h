@@ -7,7 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MySQL.h"
+#import "StatusCodes.h"
 
-@interface LoginViewController : NSViewController
+@interface LoginViewController : NSViewController {
+    MySQL *mySQL;
+    StatusCodes *statusChecker;
+}
+
+@property (weak) IBOutlet NSTextField *userField;
+@property (weak) IBOutlet NSSecureTextField *passwordField;
+@property (weak) IBOutlet NSTextField *statusLabel;
+- (IBAction)cancelButton:(id)sender;
+- (IBAction)loginButton:(id)sender;
 
 @end
