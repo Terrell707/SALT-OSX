@@ -20,6 +20,7 @@
     // Initializes the MySQL and StatusCodes class.
     mySQL = [[MySQL alloc] init];
     statusChecker = [[StatusCodes alloc] init];
+    _loggedin = NO;
 }
 
 - (IBAction)cancelButton:(id)sender {
@@ -46,8 +47,6 @@
     // Checks to see the status given back by the server.
     NSInteger status = [statusChecker checkStatus:login];
     
-    NSLog(@"Status = %ld", status);
-    
     switch (status) {
         case INVALID_USER:
         case INCORRECT_PASSWORD:
@@ -56,7 +55,9 @@
             break;
         case SUCCESS:
             [_statusLabel setStringValue:@""];
+            _loggedin = YES;
             [NSApp stopModalWithCode:SUCCESS];
+            [[[self view] window] close];
     }
 }
 

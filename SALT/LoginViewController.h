@@ -21,4 +21,6 @@
 - (IBAction)cancelButton:(id)sender;
 - (IBAction)loginButton:(id)sender;
 
+@property (readonly) BOOL loggedin;
+
 @end
