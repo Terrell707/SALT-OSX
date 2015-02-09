@@ -32,23 +32,18 @@
     NSMutableString *sURL = [[NSMutableString alloc] initWithString:[server stringByAppendingString:fileName]];
     NSURLComponents *components = [NSURLComponents componentsWithString:sURL];
 
-    NSLog(@"Items = %@", items);
-    
     // If the list of query items are not null, we will add them to the url.
     if (items != nil) {
         NSMutableArray *queryItems = [NSMutableArray array];
         for (NSString *key in items) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:key value:[items valueForKey:key]]];
         }
-        NSLog(@"QueryItems = %@", queryItems);
         [components setQueryItems:queryItems];
     }
     
     // Finalizes the url and queries the server.
     NSURL *url = [components URL];
     NSData *dataURL = [NSData dataWithContentsOfURL:url];
-    
-    NSLog(@"URL = %@", url);
     
     // Tries to parse the json into a dictionary.
     NSError *error = nil;
