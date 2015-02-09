@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="41W-i5-Slq">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
@@ -649,10 +649,9 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
@@ -667,8 +666,8 @@
         <!--Window Controller-->
         <scene sceneID="Z4v-eQ-jZ7">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="41W-i5-Slq" sceneMemberID="viewController">
-                    <window key="window" title="Login" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="hit-Aq-1cw">
+                <windowController storyboardIdentifier="LoginWindowController" showSeguePresentationStyle="single" id="41W-i5-Slq" sceneMemberID="viewController">
+                    <window key="window" identifier="Login" title="Login" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="hit-Aq-1cw">
                         <windowStyleMask key="styleMask" titled="YES"/>
                         <rect key="contentRect" x="245" y="301" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -684,7 +683,7 @@
         <!--Login-->
         <scene sceneID="9OC-uV-K4f">
             <objects>
-                <viewController title="Login" storyboardIdentifier="Login" showSeguePresentationStyle="single" id="2Ui-Zq-m92" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController title="Login" showSeguePresentationStyle="single" id="2Ui-Zq-m92" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" id="RHT-r6-bdw">
                         <rect key="frame" x="0.0" y="0.0" width="261" height="166"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -770,7 +769,7 @@ DQ
         <!--Tab View Controller-->
         <scene sceneID="HSw-vu-zS6">
             <objects>
-                <tabViewController id="JEI-e1-rKC" sceneMemberID="viewController">
+                <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="0" id="JEI-e1-rKC" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="DYL-z7-277"/>
                         <tabViewItem identifier="" id="qbZ-Cs-5Bz"/>
@@ -790,10 +789,10 @@ DQ
             </objects>
             <point key="canvasLocation" x="75" y="665"/>
         </scene>
-        <!--View Controller-->
+        <!--Employees-->
         <scene sceneID="pEa-LQ-SdA">
             <objects>
-                <viewController id="Ta3-a8-xuV" sceneMemberID="viewController">
+                <viewController title="Employees" id="Ta3-a8-xuV" sceneMemberID="viewController">
                     <view key="view" id="uqM-aR-urZ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -803,10 +802,10 @@ DQ
             </objects>
             <point key="canvasLocation" x="742" y="479"/>
         </scene>
-        <!--View Controller-->
+        <!--Tickets-->
         <scene sceneID="M0Z-If-YPG">
             <objects>
-                <viewController id="QUM-jv-1NT" sceneMemberID="viewController">
+                <viewController title="Tickets" showSeguePresentationStyle="single" id="QUM-jv-1NT" sceneMemberID="viewController">
                     <view key="view" id="wsx-da-Vmz">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

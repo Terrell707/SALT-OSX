@@ -11,14 +11,24 @@
 @interface AppDelegate ()
 
 - (IBAction)saveAction:(id)sender;
-
+@property NSWindowController *controller;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
     
+    // When the application first loads, a login screen will be presented.
+    NSString *storyboardName = @"Main";
+    NSString *windowName = @"LoginWindowController";
+    
+    // Grabs the login window controller and presents it.
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:storyboardName bundle:nil];
+    _controller = [storyboard instantiateControllerWithIdentifier:windowName];
+    
+    // Grabs the status of the login.
+    NSInteger loggedIn = [NSApp runModalForWindow:[_controller window]];
+    NSLog(@"Logged in: %ld", loggedIn);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
