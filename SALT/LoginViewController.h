@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoginViewController.h
 //  SALT
 //
 //  Created by Adrian T. Chambers on 2/8/15.
@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
-
+@interface LoginViewController : NSViewController
 
 @end
-
