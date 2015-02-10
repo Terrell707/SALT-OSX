@@ -16,6 +16,9 @@
 		3AFD09421A883793001D8688 /* MySQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD093E1A883793001D8688 /* MySQL.m */; };
 		3AFD09431A883793001D8688 /* StatusCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09401A883793001D8688 /* StatusCodes.m */; };
 		3AFD09491A883A42001D8688 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09481A883A42001D8688 /* LoginViewController.m */; };
+		3AFD09521A89812E001D8688 /* TicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09511A89812E001D8688 /* TicketViewController.m */; };
+		3AFD09551A8983B4001D8688 /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09541A8983B4001D8688 /* Ticket.m */; };
+		3AFD09591A898AE8001D8688 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09581A898AE8001D8688 /* EmployeeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,12 @@
 		3AFD09401A883793001D8688 /* StatusCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCodes.m; sourceTree = "<group>"; };
 		3AFD09471A883A42001D8688 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3AFD09481A883A42001D8688 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3AFD09501A89812E001D8688 /* TicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketViewController.h; sourceTree = "<group>"; };
+		3AFD09511A89812E001D8688 /* TicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketViewController.m; sourceTree = "<group>"; };
+		3AFD09531A8983B4001D8688 /* Ticket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticket.h; sourceTree = "<group>"; };
+		3AFD09541A8983B4001D8688 /* Ticket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
+		3AFD09571A898AE8001D8688 /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
+		3AFD09581A898AE8001D8688 /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +96,12 @@
 		3AFD09141A8836C4001D8688 /* SALT */ = {
 			isa = PBXGroup;
 			children = (
+				3AFD09171A8836C4001D8688 /* AppDelegate.h */,
+				3AFD09181A8836C4001D8688 /* AppDelegate.m */,
+				3AFD09561A8986AA001D8688 /* Model */,
 				3AFD09461A8837E8001D8688 /* View */,
 				3AFD09451A8837B4001D8688 /* Controller */,
 				3AFD09441A8837A0001D8688 /* Utils */,
-				3AFD09171A8836C4001D8688 /* AppDelegate.h */,
-				3AFD09181A8836C4001D8688 /* AppDelegate.m */,
 				3AFD09151A8836C4001D8688 /* Supporting Files */,
 			);
 			path = SALT;
@@ -141,6 +151,10 @@
 			children = (
 				3AFD09471A883A42001D8688 /* LoginViewController.h */,
 				3AFD09481A883A42001D8688 /* LoginViewController.m */,
+				3AFD09501A89812E001D8688 /* TicketViewController.h */,
+				3AFD09511A89812E001D8688 /* TicketViewController.m */,
+				3AFD09571A898AE8001D8688 /* EmployeeViewController.h */,
+				3AFD09581A898AE8001D8688 /* EmployeeViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -151,6 +165,15 @@
 				3AFD09241A8836C4001D8688 /* Main.storyboard */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		3AFD09561A8986AA001D8688 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3AFD09531A8983B4001D8688 /* Ticket.h */,
+				3AFD09541A8983B4001D8688 /* Ticket.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,10 +277,13 @@
 			files = (
 				3AFD09421A883793001D8688 /* MySQL.m in Sources */,
 				3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */,
+				3AFD09591A898AE8001D8688 /* EmployeeViewController.m in Sources */,
 				3AFD091B1A8836C4001D8688 /* main.m in Sources */,
 				3AFD09491A883A42001D8688 /* LoginViewController.m in Sources */,
+				3AFD09521A89812E001D8688 /* TicketViewController.m in Sources */,
 				3AFD09431A883793001D8688 /* StatusCodes.m in Sources */,
 				3AFD09191A8836C4001D8688 /* AppDelegate.m in Sources */,
+				3AFD09551A8983B4001D8688 /* Ticket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

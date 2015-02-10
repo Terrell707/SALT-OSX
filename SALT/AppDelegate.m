@@ -20,19 +20,31 @@
     
     // When the application first loads, a login screen will be presented.
     NSString *storyboardName = @"Main";
-    NSString *windowName = @"LoginWindowController";
+    NSString *loginWindowName = @"LoginWindowController";
+    NSString *mainWindowName = @"MainWindowController";
     
     // Grabs the login window controller and presents it.
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:storyboardName bundle:nil];
-    _controller = [storyboard instantiateControllerWithIdentifier:windowName];
+    _controller = [storyboard instantiateControllerWithIdentifier:loginWindowName];
     
     // Grabs the status of the login.
-    NSInteger loggedIn = [NSApp runModalForWindow:[_controller window]];
-    NSLog(@"Logged in: %ld", loggedIn);
+    BOOL loggedIn = [NSApp runModalForWindow:[_controller window]];
+    NSLog(@"Logged in: %d", loggedIn);
+    
+    if (loggedIn == YES) {
+        [[_controller window] close];
+    } else {
+        [NSApp terminate:self];
+    }
+    
+    NSLog(@"Continuing");
+    
+    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+    NSLog(@"Terminating");
 }
 
 #pragma mark - Core Data stack

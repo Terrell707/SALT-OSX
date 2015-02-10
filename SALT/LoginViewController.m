@@ -20,11 +20,12 @@
     // Initializes the MySQL and StatusCodes class.
     mySQL = [[MySQL alloc] init];
     statusChecker = [[StatusCodes alloc] init];
-    _loggedin = NO;
 }
 
 - (IBAction)cancelButton:(id)sender {
-    [NSApp terminate:self];
+    NSLog(@"Cancel Button Clicked");
+    [NSApp stopModalWithCode:0];
+    [[[self view] window] close];
 }
 
 - (IBAction)loginButton:(id)sender {
@@ -55,8 +56,7 @@
             break;
         case SUCCESS:
             [_statusLabel setStringValue:@""];
-            _loggedin = YES;
-            [NSApp stopModalWithCode:SUCCESS];
+            [NSApp stopModalWithCode:1];
             [[[self view] window] close];
     }
 }
