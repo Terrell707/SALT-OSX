@@ -1,4 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="untitled.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Employee" representedClassName="Employee" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" maxValueString="15" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" maxValueString="40" syncable="YES"/>
+        <attribute name="emp_id" attributeType="Integer 32" minValueString="1" maxValueString="9999" defaultValueString="1" syncable="YES"/>
+        <attribute name="first_name" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" minValueString="10001" maxValueString="19999" defaultValueString="10001" syncable="YES"/>
+        <attribute name="last_name" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="middle_init" optional="YES" attributeType="String" maxValueString="1" syncable="YES"/>
+        <attribute name="pay" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="phone_number" optional="YES" attributeType="String" minValueString="10" maxValueString="10" regularExpressionString="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" minValueString="2" maxValueString="2" syncable="YES"/>
+        <attribute name="street" optional="YES" attributeType="String" maxValueString="45" syncable="YES"/>
+        <attribute name="zip" optional="YES" attributeType="String" minValueString="5" maxValueString="5" syncable="YES"/>
+        <relationship name="ticket" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ticket" inverseName="employee" inverseEntity="Ticket" syncable="YES"/>
+    </entity>
+    <entity name="Judge" syncable="YES">
+        <attribute name="first_name" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="judge_id" optional="YES" attributeType="Integer 32" minValueString="20001" maxValueString="29999" defaultValueString="20001" syncable="YES"/>
+        <attribute name="last_name" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="office" optional="YES" attributeType="String" maxValueString="3" syncable="YES"/>
+    </entity>
+    <entity name="Site" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" maxValueString="75" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" maxValueString="40" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" maxValueString="15" syncable="YES"/>
+        <attribute name="office_code" attributeType="String" minValueString="3" maxValueString="3" syncable="YES"/>
+        <attribute name="phone_number" optional="YES" attributeType="String" minValueString="10" maxValueString="10" regularExpressionString="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" syncable="YES"/>
+    </entity>
+    <entity name="Ticket" representedClassName="Ticket" syncable="YES">
+        <attribute name="at_site" attributeType="String" minValueString="3" maxValueString="3" syncable="YES"/>
+        <attribute name="bpa_no" optional="YES" attributeType="String" minValueString="13" maxValueString="13" syncable="YES"/>
+        <attribute name="call_order_no" attributeType="String" minValueString="15" maxValueString="15" syncable="YES"/>
+        <attribute name="can" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="emp_worked" attributeType="Integer 32" minValueString="10001" maxValueString="19999" syncable="YES"/>
+        <attribute name="first_name" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="hearing_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hearing_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="judge_presided" optional="YES" attributeType="Integer 32" minValueString="20001" maxValueString="29999" syncable="YES"/>
+        <attribute name="last_name" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="order_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="soc" optional="YES" attributeType="String" maxValueString="100" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" maxValueString="4" syncable="YES"/>
+        <attribute name="ticket_no" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="tin" attributeType="String" maxValueString="11" syncable="YES"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="ticket" inverseEntity="Employee" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Employee" positionX="-63" positionY="-18" width="128" height="238"/>
+        <element name="Ticket" positionX="-54" positionY="81" width="128" height="283"/>
+        <element name="Judge" positionX="-45" positionY="153" width="128" height="105"/>
+        <element name="Site" positionX="-36" positionY="162" width="128" height="118"/>
+    </elements>
 </model>
