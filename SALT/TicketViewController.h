@@ -7,9 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Ticket.h"
+#import "MySQL.h"
+#import "StatusCodes.h"
 
-@interface TicketViewController : NSViewController
+@interface TicketViewController : NSViewController {
+    MySQL *mySQL;
+    StatusCodes *statusChecker;
+    
+    NSMutableArray *tickets;
+    IBOutlet NSArrayController *ticketsController;
+}
 
-@property (strong, nonatomic) NSManagedObjectContext *ticketObjectContext;
+@property (weak) IBOutlet NSTableView *ticketTable;
 
 @end

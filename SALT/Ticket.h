@@ -32,6 +32,8 @@
 @property (readwrite, copy) Site *heldAt;
 @property (readwrite, copy) NSSet *helpedBy;
 
+- (id)initWithData:(NSDictionary *)data;
+
 - (void)addHelpedByObject:(Witness *)value;
 - (void)removeHelpedByObject:(Witness *)value;
 - (void)addHelpedBy:(NSSet *)values;

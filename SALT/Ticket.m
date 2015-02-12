@@ -49,21 +49,27 @@
 {
     self = [super init];
     if (self) {
+        NSLog(@"Ticket initWithData");
+        
         // Creates a ticket out of data from a json object.
-        ticket_no = data[@"ticket_no"];
-        order_date = data[@"order_date"];
+        NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-mm-dd"];
+        
+        ticket_no = [numFormat numberFromString:data[@"ticket_no"]];
+        order_date = [dateFormat dateFromString:data[@"order_date"]];
         call_order_no = data[@"call_order_no"];
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
         bpa_no = data[@"bpa_no"];
-        can = data[@"can"];
+        can = [numFormat numberFromString:data[@"can"]];
         tin = data[@"tin"];
         soc = data[@"soc"];
-        hearing_date = data[@"hearing_date"];
-        hearing_time = data[@"hearing_time"];
+        hearing_date = [dateFormat dateFromString:data[@"hearing_date"]];
+        hearing_time =  data[@"hearing_time"];
         status = data[@"status"];
-        emp_worked = data[@"emp_worked"];
-        judge_presided = data[@"judge_presided"];
+        emp_worked = [numFormat numberFromString:data[@"emp_worked"]];
+        judge_presided = [numFormat numberFromString:data[@"judge_presided"]];
         at_site = data[@"at_site"];
     }
     

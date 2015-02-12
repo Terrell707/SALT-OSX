@@ -987,51 +987,61 @@ DQ
         <!--Tickets-->
         <scene sceneID="M0Z-If-YPG">
             <objects>
-                <viewController title="Tickets" showSeguePresentationStyle="single" id="QUM-jv-1NT" sceneMemberID="viewController">
+                <viewController title="Tickets" showSeguePresentationStyle="single" id="QUM-jv-1NT" customClass="TicketViewController" sceneMemberID="viewController">
                     <view key="view" id="wsx-da-Vmz">
                         <rect key="frame" x="0.0" y="0.0" width="637" height="411"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvm-xB-Lih">
-                                <rect key="frame" x="20" y="93" width="597" height="298"/>
+                                <rect key="frame" x="20" y="61" width="597" height="330"/>
                                 <clipView key="contentView" misplaced="YES" id="T7J-va-Luu">
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="hu9-4l-4AB" id="FFU-hr-HCC">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="hu9-4l-4AB" id="FFU-hr-HCC">
                                             <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="86.38671875" minWidth="40" maxWidth="1000" id="2S2-iq-3Zd">
+                                                <tableColumn width="90" minWidth="40" maxWidth="1000" id="2S2-iq-3Zd">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Ticket Number">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="KMq-m1-CJy">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" minimumIntegerDigits="0" maximumIntegerDigits="42" id="qXK-EB-mVK"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="ticket_no"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.ticket_no" id="GkP-px-MC3"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="108.30859375" minWidth="40" maxWidth="1000" id="573-R7-hcY">
+                                                <tableColumn width="75" minWidth="40" maxWidth="1000" id="573-R7-hcY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Order Date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1sr-8C-aKb">
+                                                        <dateFormatter key="formatter" dateStyle="short" id="c4e-q0-caJ"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="order_date"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.order_date" id="G2E-6X-mGE"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="102" minWidth="10" maxWidth="3.4028234663852886e+38" id="qZ1-oA-y5D" userLabel="Call Order No.">
+                                                <tableColumn width="115" minWidth="10" maxWidth="3.4028234663852886e+38" id="qZ1-oA-y5D" userLabel="Call Order No.">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Call Order No.">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1042,9 +1052,13 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="call_order_no"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.call_order_no" id="icT-rD-gjC"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="116" minWidth="10" maxWidth="3.4028234663852886e+38" id="VyW-pI-F28" userLabel="First Name">
+                                                <tableColumn width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="VyW-pI-F28" userLabel="First Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant First Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1055,9 +1069,13 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="first_name"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.first_name" id="mzk-YS-Fop"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="115" minWidth="10" maxWidth="3.4028234663852886e+38" id="xUa-SY-Zyc" userLabel="Last Name">
+                                                <tableColumn width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="xUa-SY-Zyc" userLabel="Last Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant Last Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1068,9 +1086,13 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="last_name"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.last_name" id="W3S-Nv-4c0"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="102" minWidth="10" maxWidth="3.4028234663852886e+38" id="1Kc-F0-aDX" userLabel="BPA No.">
+                                                <tableColumn width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="1Kc-F0-aDX" userLabel="BPA No.">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="BPA No.">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1081,22 +1103,35 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="bpa_no"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.bpa_no" id="3KF-6V-RZK"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="102" minWidth="10" maxWidth="3.4028234663852886e+38" id="3Ag-Te-aeW" userLabel="CAN">
+                                                <tableColumn width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="3Ag-Te-aeW" userLabel="CAN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="CAN">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="AMu-Gn-k1r">
+                                                        <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" minimumIntegerDigits="0" maximumIntegerDigits="42" id="6nE-Be-EeF">
+                                                            <metadata>
+                                                                <real key="inspectorSampleValue" value="1"/>
+                                                            </metadata>
+                                                        </numberFormatter>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="can"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.can" id="H5B-2g-BpR"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="10" minWidth="10" maxWidth="3.4028234663852886e+38" id="zVz-3o-qJZ" userLabel="TIN">
+                                                <tableColumn width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="zVz-3o-qJZ" userLabel="TIN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="TIN">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1107,9 +1142,13 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="tin"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.tin" id="3Pb-Ah-tCy"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="10" minWidth="10" maxWidth="3.4028234663852886e+38" id="PmC-rC-Wz7" userLabel="SOC">
+                                                <tableColumn width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="PmC-rC-Wz7" userLabel="SOC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="SOC">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1120,35 +1159,49 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="soc"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.soc" id="3uK-oi-1Ko"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="102" minWidth="10" maxWidth="3.4028234663852886e+38" id="h9d-wo-dsn" userLabel="Hearing Date">
+                                                <tableColumn width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="h9d-wo-dsn" userLabel="Hearing Date">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Hearing Date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Uyg-sX-pmu">
+                                                        <dateFormatter key="formatter" dateStyle="short" id="8gc-CR-WYD"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="hearing_date"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.hearing_date" id="kdf-Jz-Dba"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="102" minWidth="10" maxWidth="3.4028234663852886e+38" id="yze-Z5-YvU" userLabel="Hearing Time">
+                                                <tableColumn width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="yze-Z5-YvU" userLabel="Hearing Time">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Hearing Time">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="qqj-gG-DGk">
+                                                        <dateFormatter key="formatter" timeStyle="short" id="BIc-M4-zvw"/>
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="hearing_time"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.hearing_time" id="poJ-ew-6ac"/>
+                                                    </connections>
                                                 </tableColumn>
-                                                <tableColumn width="102" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
+                                                <tableColumn width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1159,7 +1212,11 @@ DQ
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="status"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.status" id="MHc-Fg-Dk0"/>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                         </tableView>
@@ -1179,8 +1236,21 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="9pw-sc-kc2">
+                                <rect key="frame" x="580" y="17" width="39" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="9Yj-gt-Xnh"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" title="-" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EP8-Kd-jHM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="remove:" target="HHH-Fn-eU5" id="t94-a2-n1s"/>
+                                </connections>
+                            </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="n7c-nL-PKC">
-                                <rect key="frame" x="580" y="49" width="39" height="38"/>
+                                <rect key="frame" x="537" y="17" width="39" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="rPI-du-ByJ"/>
                                 </constraints>
@@ -1189,37 +1259,37 @@ DQ
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="2Lt-wB-9IN" kind="sheet" id="WBf-bl-w5J"/>
+                                    <action selector="add:" target="HHH-Fn-eU5" id="Nhf-dV-220"/>
                                 </connections>
                             </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" constant="20" symbolic="YES" id="1hl-bZ-0D5"/>
+                            <constraint firstItem="9pw-sc-kc2" firstAttribute="top" secondItem="n7c-nL-PKC" secondAttribute="top" id="1sF-QV-6Bj"/>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="leading" secondItem="wsx-da-Vmz" secondAttribute="leading" constant="20" symbolic="YES" id="2B8-Rk-BzJ"/>
-                            <constraint firstAttribute="bottom" secondItem="n7c-nL-PKC" secondAttribute="bottom" constant="52" id="8bH-6f-yyW"/>
+                            <constraint firstItem="9pw-sc-kc2" firstAttribute="baseline" secondItem="n7c-nL-PKC" secondAttribute="baseline" id="6y4-Mv-kbC"/>
+                            <constraint firstAttribute="bottom" secondItem="n7c-nL-PKC" secondAttribute="bottom" constant="20" id="8bH-6f-yyW"/>
                             <constraint firstItem="n7c-nL-PKC" firstAttribute="top" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="8" symbolic="YES" id="9nO-qI-h58"/>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="top" secondItem="wsx-da-Vmz" secondAttribute="top" constant="20" symbolic="YES" id="VF4-Ab-HvA"/>
-                            <constraint firstItem="n7c-nL-PKC" firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" id="b4B-HQ-gPv"/>
-                            <constraint firstAttribute="bottom" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="93" id="uc4-7Q-CjZ"/>
+                            <constraint firstItem="n7c-nL-PKC" firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" constant="-43" id="b4B-HQ-gPv"/>
+                            <constraint firstAttribute="bottom" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="61" id="uc4-7Q-CjZ"/>
+                            <constraint firstItem="9pw-sc-kc2" firstAttribute="leading" secondItem="n7c-nL-PKC" secondAttribute="trailing" constant="8" symbolic="YES" id="vBA-rN-sst"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ticketTable" destination="FFU-hr-HCC" id="c87-5q-qdf"/>
+                        <outlet property="ticketsController" destination="HHH-Fn-eU5" id="iZR-5T-5wC"/>
+                    </connections>
                 </viewController>
                 <customObject id="HPV-nW-0MA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="Ticket" automaticallyPreparesContent="YES" id="HHH-Fn-eU5" userLabel="TicketArrayController">
+                    <connections>
+                        <binding destination="QUM-jv-1NT" name="contentArray" keyPath="tickets" id="cir-zV-bOz"/>
+                    </connections>
+                </arrayController>
+                <userDefaultsController representsSharedInstance="YES" id="kIy-Ck-0hF"/>
             </objects>
             <point key="canvasLocation" x="841.5" y="868.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="sDW-W5-Zu2">
-            <objects>
-                <viewController id="2Lt-wB-9IN" sceneMemberID="viewController">
-                    <view key="view" id="KLl-fr-ruF">
-                        <rect key="frame" x="0.0" y="0.0" width="596" height="335"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="5CE-2y-r6Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1631" y="868.5"/>
         </scene>
     </scenes>
 </document>
