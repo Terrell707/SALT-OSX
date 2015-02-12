@@ -28,22 +28,14 @@
     statusChecker = [[StatusCodes alloc] init];
     tickets = [[NSMutableArray alloc] init];
     
-    // Get the date 30 days ago.
-    NSTimeInterval monthInSeconds = 30 * 24 * 60 * 60;
-    NSDate *now = [NSDate date];
-    NSDate *monthEarlier = [NSDate dateWithTimeInterval:monthInSeconds
-                                              sinceDate:now];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-mm-dd"];
-    NSString *monthAgo = [dateFormat stringFromDate:monthEarlier];
-    
-//    NSArray *keys = [NSArray arrayWithObjects:@"from", @"limit", nil];
-//    NSArray *values = [NSArray arrayWithObjects:monthAgo, @"20", nil];
-//    NSDictionary *dateInfo = [NSDictionary dictionaryWithObjects:values
-//                                                         forKeys:keys];
+    // Limits the number of results we recieve.
+    NSArray *keys = [NSArray arrayWithObjects:@"limit", nil];
+    NSArray *values = [NSArray arrayWithObjects:@"50", nil];
+    NSDictionary *limit = [NSDictionary dictionaryWithObjects:values
+                                                         forKeys:keys];
     
     // Query the database and get the response.
-    NSArray *ticketData = [mySQL grabInfoFromFile:@"tickets.php"];
+    NSArray *ticketData = [mySQL grabInfoFromFile:@"queries/tickets.php" withItems:limit];
     NSInteger status = [statusChecker checkStatus:ticketData];
     
     switch (status) {

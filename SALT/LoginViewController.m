@@ -43,7 +43,7 @@
                                                          forKeys:keys];
     
     // Queries the database to see if the correct info was given.
-    NSArray *login = [mySQL grabInfoFromFile:@"login.php" withItems:userInfo];
+    NSArray *login = [mySQL grabInfoFromFile:@"user_info/login.php" withItems:userInfo];
     
     // Checks to see the status given back by the server.
     NSInteger status = [statusChecker checkStatus:login];
