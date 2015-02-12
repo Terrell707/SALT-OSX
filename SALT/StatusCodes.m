@@ -19,7 +19,7 @@
 - (NSInteger)checkStatus:(NSArray *)data
 {
     // Checks that the json data has an error code key. If not, then no error was returned.
-    if ([[data objectAtIndex:0] valueForKey:@"error_code"] == nil) {
+    if (data == nil || [[data objectAtIndex:0] valueForKey:@"error_code"] == nil) {
         return SUCCESS;
     }
     
