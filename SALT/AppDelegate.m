@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "TicketViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +22,6 @@
     // When the application first loads, a login screen will be presented.
     NSString *storyboardName = @"Main";
     NSString *loginWindowName = @"LoginWindowController";
-    NSString *mainWindowName = @"MainWindowController";
     
     // Grabs the login window controller and presents it.
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:storyboardName bundle:nil];
@@ -33,13 +33,11 @@
     
     if (loggedIn == YES) {
         [[_controller window] close];
+        
+        
     } else {
         [NSApp terminate:self];
     }
-    
-    NSLog(@"Continuing");
-    
-    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

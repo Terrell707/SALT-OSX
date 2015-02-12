@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TicketViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
