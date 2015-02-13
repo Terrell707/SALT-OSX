@@ -69,6 +69,7 @@
         emp_worked = [numFormat numberFromString:data[@"emp_worked"]];
         judge_presided = [numFormat numberFromString:data[@"judge_presided"]];
         at_site = data[@"at_site"];
+        NSLog(@"Judge_preside=%@", judge_presided);
     }
     
     return self;

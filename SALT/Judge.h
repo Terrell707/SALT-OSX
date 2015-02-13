@@ -17,6 +17,13 @@
 @property (readwrite, retain) NSString * first_name;
 @property (readwrite, retain) NSString * last_name;
 @property (readwrite, retain) Clerk *assistedBy;
-@property (readwrite, retain) Ticket *worked;
+@property (readwrite, retain) NSMutableSet *worked;
+
+- (id)initWithData:(NSDictionary *)data;
+
+- (void)addWorkedObject:(Ticket *)value;
+- (void)removeWorkedObject:(Ticket *)value;
+- (void)addWorked:(NSSet *)values;
+- (void)removeWorked:(NSSet *)values;
 
 @end

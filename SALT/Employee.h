@@ -24,9 +24,9 @@
 @property (readwrite, retain) NSString * state;
 @property (readwrite, retain) NSString * zip;
 @property (readwrite, retain) NSNumber * pay;
-@property (readwrite, retain) NSSet *worked;
+@property (readwrite, retain) NSMutableSet *worked;
 @property (readwrite, retain) User *username;
-@property (readwrite, retain) NSSet *scheduled;
+@property (readwrite, retain) NSMutableSet *scheduled;
 
 - (id)initWithData:(NSDictionary *)data;
 

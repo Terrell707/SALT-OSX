@@ -34,7 +34,8 @@
 {
     self = [super init];
     if (self) {
-        
+        worked = [[NSMutableSet alloc] init];
+        scheduled = [[NSMutableSet alloc] init];
     }
     return self;
 }
@@ -43,6 +44,10 @@
 {
     self = [super init];
     if (self) {
+        // Initializes the sets.
+        worked = [[NSMutableSet alloc] init];
+        scheduled = [[NSMutableSet alloc] init];
+        
         // Creates an employee out of a json object.
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
         
@@ -60,6 +65,55 @@
         pay = [numFormat numberFromString:data[@"pay"]];
     }
     return self;
+}
+
+#pragma Worked Objects
+- (void)addWorkedObject:(Ticket *)value
+{
+    [worked addObject:value];
+}
+
+- (void)removeWorkedObject:(Ticket *)value
+{
+    [worked removeObject:value];
+}
+
+- (void)addWorked:(NSSet *)values
+{
+    for (Ticket *ticket in values) {
+        [worked addObject:ticket];
+    }
+}
+- (void)removeWorked:(NSSet *)values
+{
+    for (Ticket *ticket in values) {
+        [worked removeObject:ticket];
+    }
+}
+
+#pragma Scheduled Objects
+- (void)addScheduledObject:(Schedule *)value
+{
+    [scheduled addObject:value];
+}
+
+- (void)removeScheduledObject:(Schedule *)value
+{
+    [scheduled removeObject:value];
+}
+
+- (void)addScheduled:(NSSet *)values
+{
+    for (Schedule *schedule in values) {
+        [scheduled addObject:schedule];
+    }
+}
+
+- (void)removeScheduled:(NSSet *)values
+{
+    for (Schedule *schedule in values) {
+        [scheduled removeObject:schedule];
+    }
 }
 
 @end

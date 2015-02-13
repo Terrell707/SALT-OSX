@@ -10,6 +10,7 @@
 
 @interface DataController ()
 - (void)grabEmployeeData;
+- (void)grabJudgeData;
 - (void)grabTicketData;
 - (BOOL)checkStatus:(NSInteger)status;
 @end
@@ -33,6 +34,7 @@ static DataController *sharedDataController = nil;
         mySQL = [[MySQL alloc] init];
         statusChecker = [[StatusCodes alloc] init];
         _employees = [[NSMutableArray alloc] init];
+        _judges = [[NSMutableArray alloc] init];
         _tickets = [[NSMutableArray alloc] init];
     }
     return self;
@@ -43,8 +45,13 @@ static DataController *sharedDataController = nil;
     NSLog(@"Data Controller loadData");
     
     [self grabEmployeeData];
+    [self grabJudgeData];
     [self grabTicketData];
     [self hearingTicketInformation];
+    
+    for (Ticket *t in [[_judges objectAtIndex:0] worked]) {
+        NSLog(@"Judge worked Ticket = %@", t);
+    }
 }
 
 - (void)grabEmployeeData
@@ -57,6 +64,34 @@ static DataController *sharedDataController = nil;
             NSDictionary *data = [employeeData objectAtIndex:x];
             Employee *employee = [[Employee alloc] initWithData:data];
             [_employees addObject:employee];
+        }
+    }
+}
+
+- (void)grabJudgeData
+{
+    NSArray *judgeData = [mySQL grabInfoFromFile:@"queries/judges.php"];
+    NSInteger status = [statusChecker checkStatus:judgeData];
+    
+    if ([self checkStatus:status]) {
+        for (int x = 0; x < [judgeData count]; x++) {
+            NSDictionary *data = [judgeData objectAtIndex:x];
+            Judge *judge = [[Judge alloc] initWithData:data];
+            [_judges addObject:judge];
+        }
+    }
+}
+
+- (void)grabSiteData
+{
+    NSArray *siteData = [mySQL grabInfoFromFile:@"queries/sites.php"];
+    NSInteger status = [statusChecker checkStatus:siteData];
+    
+    if ([self checkStatus:status]) {
+        for (int x = 0; x < [siteData count]; x++) {
+            NSDictionary *data = [siteData objectAtIndex:x];
+            Site *site = [[Site alloc] initWithData:data];
+            [_sites addObject:site];
         }
     }
 }
@@ -85,12 +120,27 @@ static DataController *sharedDataController = nil;
 
 - (void)hearingTicketInformation
 {
+    // Populates the relevant information for every ticket object.
     for (Ticket *ticket in _tickets) {
+        // Finds the employee information for the employee that worked the current ticket.
         NSPredicate *workedByEmployee = [NSPredicate predicateWithFormat:@"database_id == %@", ticket.emp_worked];
         NSArray *arr = [_employees filteredArrayUsingPredicate:workedByEmployee];
+        // If there was an employee that worked the ticket, then their information is added to the ticket and the
+        //  ticket is added to the employee.
         if ([arr count] > 0) {
-            NSLog(@"%@", [[arr objectAtIndex:0] valueForKey:@"first_name"]);
-            [ticket setWorkedBy:(Employee *)arr[0]];
+            Employee *emp = arr[0];
+            [ticket setWorkedBy:emp];
+            [emp addWorkedObject:ticket];
+        }
+        
+        // Finds the judge that presided over the hearing and add the judge's information to the ticket.
+        NSPredicate *judgePresided = [NSPredicate predicateWithFormat:@"judge_id == %@", ticket.judge_presided];
+        arr = [_judges filteredArrayUsingPredicate:judgePresided];
+        NSLog(@"Judge=%@", ticket.judge_presided);
+        if ([arr count] > 0) {
+            Judge *judge = arr[0];
+            [ticket setJudgePresided:judge];
+            [judge addWorkedObject:ticket];
         }
     }
 }

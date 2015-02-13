@@ -20,6 +20,8 @@
 @property (readwrite, retain) NSSet *scheduled;
 @property (readwrite, retain) NSSet *ticket;
 
+- (id)initWithData:(NSDictionary *)data;
+
 - (void)addScheduledObject:(Schedule *)value;
 - (void)removeScheduledObject:(Schedule *)value;
 - (void)addScheduled:(NSSet *)values;

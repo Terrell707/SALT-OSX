@@ -21,4 +21,17 @@
 @synthesize scheduled;
 @synthesize ticket;
 
+- (id)initWithData:(NSDictionary *)data
+{
+    self = [super init];
+    if (self) {
+        office_code = data[@"office_code"];
+        name = data[@"name"];
+        address = data[@"address"];
+        phone_number = data[@"phone_number"];
+        email = data[@"email"];
+    }
+    return self;
+}
+
 @end
