@@ -31,8 +31,7 @@
     
     if (loggedIn == YES) {
         [[_controller window] close];
-        
-        
+        [[DataController sharedDataController] loadData];
     } else {
         [NSApp terminate:self];
     }
