@@ -13,24 +13,23 @@
 
 @interface Employee : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSNumber * emp_id;
-@property (nonatomic, retain) NSString * first_name;
-@property (nonatomic, retain) NSString * middle_init;
-@property (nonatomic, retain) NSString * last_name;
-@property (nonatomic, retain) NSString * phone_number;
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * street;
-@property (nonatomic, retain) NSString * city;
-@property (nonatomic, retain) NSString * state;
-@property (nonatomic, retain) NSString * zip;
-@property (nonatomic, retain) NSNumber * pay;
-@property (nonatomic, retain) NSSet *worked;
-@property (nonatomic, retain) User *username;
-@property (nonatomic, retain) NSSet *scheduled;
-@end
+@property (readwrite, copy) NSNumber * database_id;
+@property (readwrite, copy) NSNumber * emp_id;
+@property (readwrite, copy) NSString * first_name;
+@property (readwrite, copy) NSString * middle_init;
+@property (readwrite, copy) NSString * last_name;
+@property (readwrite, copy) NSString * phone_number;
+@property (readwrite, copy) NSString * email;
+@property (readwrite, copy) NSString * street;
+@property (readwrite, copy) NSString * city;
+@property (readwrite, copy) NSString * state;
+@property (readwrite, copy) NSString * zip;
+@property (readwrite, copy) NSNumber * pay;
+@property (readwrite, copy) NSSet *worked;
+@property (readwrite, copy) User *username;
+@property (readwrite, copy) NSSet *scheduled;
 
-@interface Employee (CoreDataGeneratedAccessors)
+- (id)initWithData:(NSDictionary *)data;
 
 - (void)addWorkedObject:(Ticket *)value;
 - (void)removeWorkedObject:(Ticket *)value;
