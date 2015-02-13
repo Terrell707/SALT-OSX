@@ -12,25 +12,25 @@
 
 @interface Ticket : NSObject
 
-@property (readwrite, copy) NSNumber * ticket_no;
-@property (readwrite, copy) NSDate * order_date;
-@property (readwrite, copy) NSString * call_order_no;
-@property (readwrite, copy) NSString * first_name;
-@property (readwrite, copy) NSString * last_name;
-@property (readwrite, copy) NSString * bpa_no;
-@property (readwrite, copy) NSNumber * can;
-@property (readwrite, copy) NSString * tin;
-@property (readwrite, copy) NSString * soc;
-@property (readwrite, copy) NSDate * hearing_date;
-@property (readwrite, copy) NSString * hearing_time;
-@property (readwrite, copy) NSString * status;
-@property (readwrite, copy) NSNumber * emp_worked;
-@property (readwrite, copy) NSNumber * judge_presided;
-@property (readwrite, copy) NSString * at_site;
-@property (readwrite, copy) Employee *workedBy;
-@property (readwrite, copy) Judge *judgePresided;
-@property (readwrite, copy) Site *heldAt;
-@property (readwrite, copy) NSSet *helpedBy;
+@property (readwrite, retain) NSNumber * ticket_no;
+@property (readwrite, retain) NSDate * order_date;
+@property (readwrite, retain) NSString * call_order_no;
+@property (readwrite, retain) NSString * first_name;
+@property (readwrite, retain) NSString * last_name;
+@property (readwrite, retain) NSString * bpa_no;
+@property (readwrite, retain) NSNumber * can;
+@property (readwrite, retain) NSString * tin;
+@property (readwrite, retain) NSString * soc;
+@property (readwrite, retain) NSDate * hearing_date;
+@property (readwrite, retain) NSString * hearing_time;
+@property (readwrite, retain) NSString * status;
+@property (readwrite, retain) NSNumber * emp_worked;
+@property (readwrite, retain) NSNumber * judge_presided;
+@property (readwrite, retain) NSString * at_site;
+@property (readwrite, retain) Employee *workedBy;
+@property (readwrite, retain) Judge *judgePresided;
+@property (readwrite, retain) Site *heldAt;
+@property (readwrite, retain) NSSet *helpedBy;
 
 - (id)initWithData:(NSDictionary *)data;
 

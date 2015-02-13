@@ -48,9 +48,7 @@
 - (id)initWithData:(NSDictionary *)data
 {
     self = [super init];
-    if (self) {
-        NSLog(@"Ticket initWithData");
-        
+    if (self) {;
         // Creates a ticket out of data from a json object.
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

@@ -7,27 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @class Schedule, Ticket, User;
 
-@interface Employee : NSManagedObject
+@interface Employee : NSObject
 
-@property (readwrite, copy) NSNumber * database_id;
-@property (readwrite, copy) NSNumber * emp_id;
-@property (readwrite, copy) NSString * first_name;
-@property (readwrite, copy) NSString * middle_init;
-@property (readwrite, copy) NSString * last_name;
-@property (readwrite, copy) NSString * phone_number;
-@property (readwrite, copy) NSString * email;
-@property (readwrite, copy) NSString * street;
-@property (readwrite, copy) NSString * city;
-@property (readwrite, copy) NSString * state;
-@property (readwrite, copy) NSString * zip;
-@property (readwrite, copy) NSNumber * pay;
-@property (readwrite, copy) NSSet *worked;
-@property (readwrite, copy) User *username;
-@property (readwrite, copy) NSSet *scheduled;
+@property (readwrite, retain) NSNumber * database_id;
+@property (readwrite, retain) NSNumber * emp_id;
+@property (readwrite, retain) NSString * first_name;
+@property (readwrite, retain) NSString * middle_init;
+@property (readwrite, retain) NSString * last_name;
+@property (readwrite, retain) NSString * phone_number;
+@property (readwrite, retain) NSString * email;
+@property (readwrite, retain) NSString * street;
+@property (readwrite, retain) NSString * city;
+@property (readwrite, retain) NSString * state;
+@property (readwrite, retain) NSString * zip;
+@property (readwrite, retain) NSNumber * pay;
+@property (readwrite, retain) NSSet *worked;
+@property (readwrite, retain) User *username;
+@property (readwrite, retain) NSSet *scheduled;
 
 - (id)initWithData:(NSDictionary *)data;
 

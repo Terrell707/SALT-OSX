@@ -43,8 +43,6 @@
 {
     self = [super init];
     if (self) {
-        NSLog(@"Employee initWithData");
-        
         // Creates an employee out of a json object.
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
         
