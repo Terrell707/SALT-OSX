@@ -769,7 +769,7 @@ DQ
         <!--SALT-->
         <scene sceneID="HSw-vu-zS6">
             <objects>
-                <tabViewController title="SALT" showSeguePresentationStyle="single" selectedTabViewItemIndex="1" id="JEI-e1-rKC" sceneMemberID="viewController">
+                <tabViewController title="SALT" showSeguePresentationStyle="single" selectedTabViewItemIndex="0" id="JEI-e1-rKC" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="DYL-z7-277"/>
                         <tabViewItem identifier="" id="qbZ-Cs-5Bz"/>
@@ -1003,6 +1003,7 @@ DQ
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <tableViewGridLines key="gridStyleMask" vertical="YES" dashed="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="90" minWidth="40" maxWidth="1000" id="2S2-iq-3Zd">
@@ -1218,6 +1219,38 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.status" id="MHc-Fg-Dk0"/>
                                                     </connections>
                                                 </tableColumn>
+                                                <tableColumn width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="FlJ-ak-WE4" userLabel="Emp First Name">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Employee First">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="iF5-Uh-PpC">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.workedBy.first_name" id="p8J-E2-qGK"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="qNa-jY-cls" userLabel="Emp Last Name">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Employee Last">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="vGW-OP-KSp">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.workedBy.last_name" id="OuY-d3-kak"/>
+                                                    </connections>
+                                                </tableColumn>
                                             </tableColumns>
                                         </tableView>
                                     </subviews>
@@ -1243,7 +1276,7 @@ DQ
                                 </constraints>
                                 <buttonCell key="cell" type="bevel" title="-" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EP8-Kd-jHM">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="system" size="15"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="remove:" target="HHH-Fn-eU5" id="QB5-ek-WM9"/>
@@ -1256,7 +1289,7 @@ DQ
                                 </constraints>
                                 <buttonCell key="cell" type="bevel" title="+" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Xei-16-Zf6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="system" size="15"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="add:" target="HHH-Fn-eU5" id="QB9-8q-Dwh"/>
@@ -1264,15 +1297,15 @@ DQ
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" constant="20" symbolic="YES" id="1hl-bZ-0D5"/>
+                            <constraint firstItem="nvm-xB-Lih" firstAttribute="trailing" secondItem="9pw-sc-kc2" secondAttribute="trailing" id="19c-WD-fja"/>
                             <constraint firstItem="9pw-sc-kc2" firstAttribute="top" secondItem="n7c-nL-PKC" secondAttribute="top" id="1sF-QV-6Bj"/>
-                            <constraint firstItem="nvm-xB-Lih" firstAttribute="leading" secondItem="wsx-da-Vmz" secondAttribute="leading" constant="20" symbolic="YES" id="2B8-Rk-BzJ"/>
                             <constraint firstItem="9pw-sc-kc2" firstAttribute="baseline" secondItem="n7c-nL-PKC" secondAttribute="baseline" id="6y4-Mv-kbC"/>
                             <constraint firstAttribute="bottom" secondItem="n7c-nL-PKC" secondAttribute="bottom" constant="20" id="8bH-6f-yyW"/>
-                            <constraint firstItem="n7c-nL-PKC" firstAttribute="top" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="8" symbolic="YES" id="9nO-qI-h58"/>
-                            <constraint firstItem="nvm-xB-Lih" firstAttribute="top" secondItem="wsx-da-Vmz" secondAttribute="top" constant="20" symbolic="YES" id="VF4-Ab-HvA"/>
-                            <constraint firstItem="n7c-nL-PKC" firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" constant="-43" id="b4B-HQ-gPv"/>
-                            <constraint firstAttribute="bottom" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="61" id="uc4-7Q-CjZ"/>
+                            <constraint firstItem="nvm-xB-Lih" firstAttribute="top" secondItem="wsx-da-Vmz" secondAttribute="top" constant="20" symbolic="YES" id="8ip-W0-6e7"/>
+                            <constraint firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" constant="20" symbolic="YES" id="D9F-Xw-gj0"/>
+                            <constraint firstAttribute="bottom" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="61" id="TgF-wy-xYr"/>
+                            <constraint firstItem="n7c-nL-PKC" firstAttribute="top" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="8" symbolic="YES" id="Wnn-P3-d2F"/>
+                            <constraint firstItem="nvm-xB-Lih" firstAttribute="leading" secondItem="wsx-da-Vmz" secondAttribute="leading" constant="20" symbolic="YES" id="aC2-0L-glG"/>
                             <constraint firstItem="9pw-sc-kc2" firstAttribute="leading" secondItem="n7c-nL-PKC" secondAttribute="trailing" constant="8" symbolic="YES" id="vBA-rN-sst"/>
                         </constraints>
                     </view>
@@ -1281,7 +1314,7 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="HPV-nW-0MA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="Ticket" automaticallyPreparesContent="YES" automaticallyRearrangesObjects="YES" id="HHH-Fn-eU5" userLabel="TicketArrayController">
+                <arrayController objectClassName="Ticket" id="HHH-Fn-eU5" userLabel="TicketArrayController">
                     <declaredKeys>
                         <string>ticket_no</string>
                     </declaredKeys>
