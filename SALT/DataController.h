@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MySQL.h"
 #import "StatusCodes.h"
+#import "Employee.h"
 #import "Ticket.h"
 
 @interface DataController : NSObject {
@@ -19,6 +20,7 @@
 + (DataController *)sharedDataController;
 - (void)loadData;
 
+@property (readwrite, copy) NSMutableArray *employees;
 @property (readwrite, copy) NSMutableArray *tickets;
 
 @end
