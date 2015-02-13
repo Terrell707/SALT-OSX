@@ -28,10 +28,8 @@
     [self willChangeValueForKey:@"tickets"];
     tickets = [[DataController sharedDataController] tickets];
     [self didChangeValueForKey:@"tickets"];
-    
+
     [_ticketTable reloadData];
-    
-    NSLog(@"Ticket Table = %@", _ticketTable);
 }
 
 @end

@@ -9,7 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
 
-@interface TicketViewController : NSViewController {
+@interface TicketViewController : NSViewController <NSTableViewDataSource> {
+    NSMutableArray *employees;
     NSMutableArray *tickets;
 }
 
