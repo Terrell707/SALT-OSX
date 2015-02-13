@@ -13,9 +13,9 @@
 
 @implementation Witness
 
-@dynamic expert_id;
-@dynamic ticket_no;
-@dynamic testified;
-@dynamic ticket;
+@synthesize expert_id;
+@synthesize ticket_no;
+@synthesize testified;
+@synthesize ticket;
 
 @end

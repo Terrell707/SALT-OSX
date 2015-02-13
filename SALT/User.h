@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-
 @class Employee;
 
-@interface User : NSManagedObject
+@interface User : NSObject
 
-@property (nonatomic, retain) NSString * username;
-@property (nonatomic, retain) NSNumber * emp;
-@property (nonatomic, retain) Employee *heldBy;
+@property (readwrite, retain) NSString * username;
+@property (readwrite, retain) NSNumber * emp;
+@property (readwrite, retain) Employee *heldBy;
 
 @end

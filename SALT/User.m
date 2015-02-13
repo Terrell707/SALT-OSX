@@ -12,8 +12,8 @@
 
 @implementation User
 
-@dynamic username;
-@dynamic emp;
-@dynamic heldBy;
+@synthesize username;
+@synthesize emp;
+@synthesize heldBy;
 
 @end

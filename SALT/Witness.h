@@ -7,19 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @class Expert, Ticket;
 
-@interface Witness : NSManagedObject
+@interface Witness : NSObject
 
-@property (nonatomic, retain) NSNumber * expert_id;
-@property (nonatomic, retain) NSNumber * ticket_no;
-@property (nonatomic, retain) NSSet *testified;
-@property (nonatomic, retain) NSSet *ticket;
-@end
-
-@interface Witness (CoreDataGeneratedAccessors)
+@property (readwrite, retain) NSNumber * expert_id;
+@property (readwrite, retain) NSNumber * ticket_no;
+@property (readwrite, retain) NSSet *testified;
+@property (readwrite, retain) NSSet *ticket;
 
 - (void)addTestifiedObject:(Expert *)value;
 - (void)removeTestifiedObject:(Expert *)value;

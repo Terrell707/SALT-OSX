@@ -7,16 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @class Witness;
 
-@interface Expert : NSManagedObject
+@interface Expert : NSObject
 
-@property (nonatomic, retain) NSNumber * expert_id;
-@property (nonatomic, retain) NSString * first_name;
-@property (nonatomic, retain) NSString * last_name;
-@property (nonatomic, retain) NSString * role;
-@property (nonatomic, retain) Witness *worked;
+@property (readwrite, retain) NSNumber * expert_id;
+@property (readwrite, retain) NSString * first_name;
+@property (readwrite, retain) NSString * last_name;
+@property (readwrite, retain) NSString * role;
+@property (readwrite, retain) Witness *worked;
 
 @end

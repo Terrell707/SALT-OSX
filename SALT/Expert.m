@@ -12,10 +12,10 @@
 
 @implementation Expert
 
-@dynamic expert_id;
-@dynamic first_name;
-@dynamic last_name;
-@dynamic role;
-@dynamic worked;
+@synthesize expert_id;
+@synthesize first_name;
+@synthesize last_name;
+@synthesize role;
+@synthesize worked;
 
 @end

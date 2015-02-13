@@ -12,11 +12,11 @@
 
 @implementation Clerk
 
-@dynamic clerk_id;
-@dynamic helps_judge;
-@dynamic first_name;
-@dynamic last_name;
-@dynamic email;
-@dynamic worksFor;
+@synthesize clerk_id;
+@synthesize helps_judge;
+@synthesize first_name;
+@synthesize last_name;
+@synthesize email;
+@synthesize worksFor;
 
 @end

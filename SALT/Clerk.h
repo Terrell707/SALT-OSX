@@ -7,17 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @class Judge;
 
-@interface Clerk : NSManagedObject
+@interface Clerk : NSObject
 
-@property (nonatomic, retain) NSNumber * clerk_id;
-@property (nonatomic, retain) NSNumber * helps_judge;
-@property (nonatomic, retain) NSString * first_name;
-@property (nonatomic, retain) NSString * last_name;
-@property (nonatomic, retain) NSString * email;
+@property (readwrite, retain) NSNumber * clerk_id;
+@property (readwrite, retain) NSNumber * helps_judge;
+@property (readwrite, retain) NSString * first_name;
+@property (readwrite, retain) NSString * last_name;
+@property (readwrite, retain) NSString * email;
 @property (nonatomic, retain) Judge *worksFor;
 
 @end

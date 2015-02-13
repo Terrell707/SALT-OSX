@@ -13,11 +13,11 @@
 
 @implementation Judge
 
-@dynamic judge_id;
-@dynamic office;
-@dynamic first_name;
-@dynamic last_name;
-@dynamic assistedBy;
-@dynamic worked;
+@synthesize judge_id;
+@synthesize office;
+@synthesize first_name;
+@synthesize last_name;
+@synthesize assistedBy;
+@synthesize worked;
 
 @end

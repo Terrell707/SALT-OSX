@@ -7,22 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @class Schedule, Ticket;
 
-@interface Site : NSManagedObject
+@interface Site : NSObject
 
-@property (nonatomic, retain) NSString * office_code;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * address;
-@property (nonatomic, retain) NSString * phone_number;
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSSet *scheduled;
-@property (nonatomic, retain) NSSet *ticket;
-@end
-
-@interface Site (CoreDataGeneratedAccessors)
+@property (readwrite, retain) NSString * office_code;
+@property (readwrite, retain) NSString * name;
+@property (readwrite, retain) NSString * address;
+@property (readwrite, retain) NSString * phone_number;
+@property (readwrite, retain) NSString * email;
+@property (readwrite, retain) NSSet *scheduled;
+@property (readwrite, retain) NSSet *ticket;
 
 - (void)addScheduledObject:(Schedule *)value;
 - (void)removeScheduledObject:(Schedule *)value;

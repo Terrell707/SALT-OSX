@@ -13,10 +13,10 @@
 
 @implementation Schedule
 
-@dynamic emp_id;
-@dynamic office_code;
-@dynamic work_date;
-@dynamic empScheduled;
-@dynamic atSite;
+@synthesize emp_id;
+@synthesize office_code;
+@synthesize work_date;
+@synthesize empScheduled;
+@synthesize atSite;
 
 @end

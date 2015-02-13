@@ -7,16 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
 @class Employee, Site;
 
-@interface Schedule : NSManagedObject
+@interface Schedule : NSObject
 
-@property (nonatomic, retain) NSNumber * emp_id;
-@property (nonatomic, retain) NSString * office_code;
-@property (nonatomic, retain) NSDate * work_date;
-@property (nonatomic, retain) Employee *empScheduled;
-@property (nonatomic, retain) Site *atSite;
+@property (readwrite, retain) NSNumber * emp_id;
+@property (readwrite, retain) NSString * office_code;
+@property (readwrite, retain) NSDate * work_date;
+@property (readwrite, retain) Employee *empScheduled;
+@property (readwrite, retain) Site *atSite;
 
 @end

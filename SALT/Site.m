@@ -13,12 +13,12 @@
 
 @implementation Site
 
-@dynamic office_code;
-@dynamic name;
-@dynamic address;
-@dynamic phone_number;
-@dynamic email;
-@dynamic scheduled;
-@dynamic ticket;
+@synthesize office_code;
+@synthesize name;
+@synthesize address;
+@synthesize phone_number;
+@synthesize email;
+@synthesize scheduled;
+@synthesize ticket;
 
 @end
