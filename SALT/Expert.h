@@ -18,4 +18,6 @@
 @property (readwrite, retain) NSString * role;
 @property (readwrite, retain) Witness *worked;
 
+- (id)initWithData:(NSDictionary *)data;
+
 @end

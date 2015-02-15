@@ -9,7 +9,6 @@
 #import "Expert.h"
 #import "Witness.h"
 
-
 @implementation Expert
 
 @synthesize expert_id;
@@ -17,5 +16,21 @@
 @synthesize last_name;
 @synthesize role;
 @synthesize worked;
+
+- (id)initWithData:(NSDictionary *)data
+{
+    self = [super init];
+    if (self) {
+        
+        // Creates an employee out of a json object.
+        NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
+        
+        expert_id = [numFormat numberFromString:data[@"expert_id"]];
+        first_name = data[@"first_name"];
+        last_name = data[@"last_name"];
+        role = data[@"role"];
+    }
+    return self;
+}
 
 @end
