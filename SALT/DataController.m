@@ -13,6 +13,7 @@
 - (void)grabEmployeeData;
 - (void)grabJudgeData;
 - (void)grabTicketData;
+- (void)grabExpertData;
 - (BOOL)checkStatus:(NSInteger)status;
 @end
 
@@ -41,6 +42,7 @@ static DataController *sharedDataController = nil;
         _employees = [[NSMutableArray alloc] init];
         _judges = [[NSMutableArray alloc] init];
         _sites = [[NSMutableArray alloc] init];
+        _experts = [[NSMutableArray alloc] init];
         _tickets = [[NSMutableArray alloc] init];
     }
     return self;
@@ -56,6 +58,7 @@ static DataController *sharedDataController = nil;
     [self grabJudgeData];
     [self grabSiteData];
     [self grabTicketData];
+    [self grabExpertData];
     [self hearingTicketInformation];
 }
 
@@ -125,6 +128,22 @@ static DataController *sharedDataController = nil;
             NSDictionary *data = [ticketData objectAtIndex:x];
             Ticket *ticket = [[Ticket alloc] initWithData:data];
             [_tickets addObject:ticket];
+        }
+    }
+}
+
+- (void)grabExpertData
+{
+    // Query the database and get the response.
+    NSArray *expertData = [mySQL grabInfoFromFile:@"queries/experts.php"];
+    NSInteger status = [statusChecker checkStatus:expertData];
+    
+    // If there were no errors, array will be filled with data.
+    if ([self checkStatus:status]) {
+        for (int x = 0; x < [expertData count]; x++) {
+            NSDictionary *data = [expertData objectAtIndex:x];
+            Expert *expert = [[Expert alloc] initWithData:data];
+            [_experts addObject:expert];
         }
     }
 }

@@ -13,6 +13,7 @@
 #import "Employee.h"
 #import "Site.h"
 #import "Judge.h"
+#import "Expert.h"
 #import "Ticket.h"
 
 @interface DataController : NSObject {
@@ -27,6 +28,7 @@
 @property (readwrite, copy) NSMutableArray *employees;
 @property (readwrite, copy) NSMutableArray *sites;
 @property (readwrite, copy) NSMutableArray *judges;
+@property (readwrite, copy) NSMutableArray *experts;
 @property (readwrite, copy) NSMutableArray *tickets;
 
 @end
