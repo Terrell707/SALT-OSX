@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
 
-@interface InsertTicketViewController : NSViewController {
+@interface InsertTicketViewController : NSViewController <NSTextFieldDelegate> {
+    BOOL lastNameFirst;
     NSMutableArray *hearingStatus;
     NSMutableArray *employees;
     NSMutableArray *sites;
     NSMutableArray *judges;
+    NSMutableArray *experts;
 }
 
 @property (weak) IBOutlet NSDatePicker *orderDatePicker;
@@ -31,6 +33,11 @@
 @property (weak) IBOutlet NSComboBox *workedByCombo;
 @property (weak) IBOutlet NSComboBox *judgePresidingCombo;
 @property (weak) IBOutlet NSComboBox *officeCombo;
+@property (weak) IBOutlet NSComboBox *repCombo;
+@property (weak) IBOutlet NSComboBox *vocationalCombo;
+@property (weak) IBOutlet NSComboBox *medicalCombo;
+@property (weak) IBOutlet NSComboBox *otherCombo;
+@property (weak) IBOutlet NSButton *interpreterCheck;
 
 - (IBAction)clearBtn:(NSButton *)sender;
 - (IBAction)dismissBtn:(NSButton *)sender;
