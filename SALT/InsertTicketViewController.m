@@ -74,5 +74,13 @@
 }
 
 - (IBAction)submitBtn:(NSButton *)sender {
+    if ([[_ticketNumberField stringValue] length] < 8) {
+        NSAlert *alert = [NSAlert alertWithMessageText: @"Invalid Ticket Number!"
+                                         defaultButton:@"OK"
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"Ticket Number needs to be exactly 8 digits long."];
+        [alert runModal];
+    }
 }
 @end

@@ -20,6 +20,7 @@
     // When the application first loads, a login screen will be presented.
     NSString *storyboardName = @"Main";
     NSString *loginWindowName = @"LoginWindowController";
+    NSString *mainWindowName = @"MainWindowController";
     
     // Grabs the login window controller and presents it.
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:storyboardName bundle:nil];
@@ -32,6 +33,8 @@
     if (loggedIn == YES) {
         [[_controller window] close];
         [[DataController sharedDataController] loadData];
+        _controller = [storyboard instantiateControllerWithIdentifier:mainWindowName];
+        [_controller showWindow:self];
     } else {
         [NSApp terminate:self];
     }
