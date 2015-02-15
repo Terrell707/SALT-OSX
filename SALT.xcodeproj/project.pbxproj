@@ -28,6 +28,7 @@
 		3AFD098C1A8AB507001D8688 /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD098B1A8AB507001D8688 /* Employee.m */; };
 		3AFD098F1A8AB507001D8688 /* Clerk.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD098E1A8AB507001D8688 /* Clerk.m */; };
 		3AFD099E1A8D56CF001D8688 /* DataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD099D1A8D56CF001D8688 /* DataController.m */; };
+		3AFD09A11A902FDA001D8688 /* InsertTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		3AFD098E1A8AB507001D8688 /* Clerk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Clerk.m; sourceTree = "<group>"; };
 		3AFD099C1A8D56CF001D8688 /* DataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataController.h; sourceTree = "<group>"; };
 		3AFD099D1A8D56CF001D8688 /* DataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataController.m; sourceTree = "<group>"; };
+		3AFD099F1A902FDA001D8688 /* InsertTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertTicketViewController.h; sourceTree = "<group>"; };
+		3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertTicketViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +187,8 @@
 				3AFD09581A898AE8001D8688 /* EmployeeViewController.m */,
 				3AFD099C1A8D56CF001D8688 /* DataController.h */,
 				3AFD099D1A8D56CF001D8688 /* DataController.m */,
+				3AFD099F1A902FDA001D8688 /* InsertTicketViewController.h */,
+				3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 				3AFD09831A8AB507001D8688 /* Judge.m in Sources */,
 				3AFD09861A8AB507001D8688 /* Site.m in Sources */,
 				3AFD098C1A8AB507001D8688 /* Employee.m in Sources */,
+				3AFD09A11A902FDA001D8688 /* InsertTicketViewController.m in Sources */,
 				3AFD09891A8AB507001D8688 /* User.m in Sources */,
 				3AFD09801A8AB507001D8688 /* Expert.m in Sources */,
 				3AFD098F1A8AB507001D8688 /* Clerk.m in Sources */,

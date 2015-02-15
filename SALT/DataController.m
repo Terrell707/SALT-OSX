@@ -9,6 +9,7 @@
 #import "DataController.h"
 
 @interface DataController ()
+- (void)grabHearingStatusData;
 - (void)grabEmployeeData;
 - (void)grabJudgeData;
 - (void)grabTicketData;
@@ -31,10 +32,15 @@ static DataController *sharedDataController = nil;
 {
     self = [super init];
     if (self) {
+        // Initialize utility objects.
         mySQL = [[MySQL alloc] init];
         statusChecker = [[StatusCodes alloc] init];
+        
+        // Initalize data arrays.
+        _hearingStatus = [[NSMutableArray alloc] init];
         _employees = [[NSMutableArray alloc] init];
         _judges = [[NSMutableArray alloc] init];
+        _sites = [[NSMutableArray alloc] init];
         _tickets = [[NSMutableArray alloc] init];
     }
     return self;
@@ -44,14 +50,19 @@ static DataController *sharedDataController = nil;
 {
     NSLog(@"Data Controller loadData");
     
+    // Populate the data arrays with the data from the mysql database.
+    [self grabHearingStatusData];
     [self grabEmployeeData];
     [self grabJudgeData];
+    [self grabSiteData];
     [self grabTicketData];
     [self hearingTicketInformation];
-    
-    for (Ticket *t in [[_judges objectAtIndex:0] worked]) {
-        NSLog(@"Judge worked Ticket = %@", t);
-    }
+}
+
+- (void)grabHearingStatusData
+{
+    NSArray *statuses = [NSArray arrayWithObjects:@"ALPO", @"POST", @"UNWR", @"RTS", nil];
+    _hearingStatus = [NSMutableArray arrayWithArray:statuses];
 }
 
 - (void)grabEmployeeData

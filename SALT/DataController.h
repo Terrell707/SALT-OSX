@@ -23,6 +23,7 @@
 + (DataController *)sharedDataController;
 - (void)loadData;
 
+@property (readwrite, copy) NSMutableArray *hearingStatus;
 @property (readwrite, copy) NSMutableArray *employees;
 @property (readwrite, copy) NSMutableArray *sites;
 @property (readwrite, copy) NSMutableArray *judges;
