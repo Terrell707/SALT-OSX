@@ -42,7 +42,7 @@
     NSString *searchText = [[searchField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
     // Updates the filtered array to the original array.
-    tickets = (NSMutableArray *)ticketsBeforeFilter;
+    [self setTickets:(NSMutableArray *)ticketsBeforeFilter];
     
     // Returns if nothing was typed into the search field.
     if ([searchText length] == 0) {
