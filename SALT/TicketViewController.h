@@ -9,11 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
 
-@interface TicketViewController : NSViewController <NSTableViewDataSource> {
-    NSMutableArray *employees;
-    NSMutableArray *tickets;
+@interface TicketViewController : NSViewController {
+    NSArray *ticketsBeforeFilter;
+    NSPredicate *searchPredicate;
 }
 
+@property (readwrite, copy) NSMutableArray *tickets;
 @property (weak) IBOutlet NSTableView *ticketTable;
 
 @end

@@ -1060,7 +1060,7 @@ DQ
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.0028368794326241137" horizontal="YES" id="hBg-0i-oxq">
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="hBg-0i-oxq">
                                     <rect key="frame" x="1" y="117.99995332956314" width="238" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1100,10 +1100,33 @@ DQ
                                     <segue destination="CKN-Tc-EU8" kind="modal" id="1f3-ko-eMZ"/>
                                 </connections>
                             </button>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hja-2h-0mH">
+                                <rect key="frame" x="20" y="25" width="289" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="289" id="kaa-i9-EJO"/>
+                                </constraints>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="FAZ-TS-w84">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="QUM-jv-1NT" id="GR5-th-gNn"/>
+                                </connections>
+                            </searchField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vox-Rh-VCB">
+                                <rect key="frame" x="410" y="28" width="38" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="OZq-XD-wPK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="trailing" secondItem="9pw-sc-kc2" secondAttribute="trailing" id="19c-WD-fja"/>
                             <constraint firstItem="9pw-sc-kc2" firstAttribute="top" secondItem="n7c-nL-PKC" secondAttribute="top" id="1sF-QV-6Bj"/>
+                            <constraint firstItem="Hja-2h-0mH" firstAttribute="leading" secondItem="nvm-xB-Lih" secondAttribute="leading" id="2nt-bk-MOg"/>
                             <constraint firstItem="9pw-sc-kc2" firstAttribute="baseline" secondItem="n7c-nL-PKC" secondAttribute="baseline" id="6y4-Mv-kbC"/>
                             <constraint firstAttribute="bottom" secondItem="n7c-nL-PKC" secondAttribute="bottom" constant="20" id="8bH-6f-yyW"/>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="top" secondItem="wsx-da-Vmz" secondAttribute="top" constant="20" symbolic="YES" id="8ip-W0-6e7"/>
@@ -1111,6 +1134,7 @@ DQ
                             <constraint firstAttribute="bottom" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="61" id="TgF-wy-xYr"/>
                             <constraint firstItem="n7c-nL-PKC" firstAttribute="top" secondItem="nvm-xB-Lih" secondAttribute="bottom" constant="8" symbolic="YES" id="Wnn-P3-d2F"/>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="leading" secondItem="wsx-da-Vmz" secondAttribute="leading" constant="20" symbolic="YES" id="aC2-0L-glG"/>
+                            <constraint firstItem="Hja-2h-0mH" firstAttribute="centerY" secondItem="n7c-nL-PKC" secondAttribute="centerY" id="qPh-cg-Yyv"/>
                             <constraint firstItem="9pw-sc-kc2" firstAttribute="leading" secondItem="n7c-nL-PKC" secondAttribute="trailing" constant="8" symbolic="YES" id="vBA-rN-sst"/>
                         </constraints>
                     </view>
@@ -1120,11 +1144,8 @@ DQ
                 </viewController>
                 <customObject id="HPV-nW-0MA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController objectClassName="Ticket" id="HHH-Fn-eU5" userLabel="TicketArrayController">
-                    <declaredKeys>
-                        <string>ticket_no</string>
-                    </declaredKeys>
                     <connections>
-                        <binding destination="QUM-jv-1NT" name="contentArray" keyPath="tickets" id="cir-zV-bOz"/>
+                        <binding destination="QUM-jv-1NT" name="contentArray" keyPath="tickets" id="G45-IS-fJS"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="kIy-Ck-0hF"/>
@@ -1725,7 +1746,7 @@ DQ
                 </viewController>
                 <customObject id="wcz-Vd-SSl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536" y="1167"/>
+            <point key="canvasLocation" x="2116" y="802"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="tzZ-4a-tOc">
@@ -1743,7 +1764,7 @@ DQ
                 </windowController>
                 <customObject id="cAW-Ut-JlA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832" y="1173"/>
+            <point key="canvasLocation" x="1562" y="672"/>
         </scene>
     </scenes>
 </document>
