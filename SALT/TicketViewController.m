@@ -27,6 +27,7 @@
     
     NSLog(@"Ticket View Controller viewDidAppear");
     
+    // Populates the table with tickets returned from the server.
     [self willChangeValueForKey:@"tickets"];
     [self setTickets:[[DataController sharedDataController] tickets]];
     ticketsBeforeFilter = tickets;
@@ -53,15 +54,45 @@
     NSArray *searchTokens = [searchText componentsSeparatedByString:@" "];
     NSLog(@"Tokens=%@", searchTokens);
     
-    NSString *filter = @"%K CONTAINS[cd] %@ || %K CONTAINS[cd] %@ || %K CONTAINS[cd] %@ || %K CONTAINS[cd] %@";
+    // An array of keys that will be compared against.
+    NSArray *keys = @[@"ticket_no.stringValue", @"first_name", @"last_name",
+                      @"hearing_time", @"status", @"workedBy.first_name", @"workedBy.last_name"];
+    
+    // A filter created based on the keys above.
+    NSString *filter = [self filterForKeys:keys];
+    
     for (NSString *token in searchTokens) {
-        NSArray *args = @[@"first_name", token, @"last_name", token,
-                          @"workedBy.first_name", token, @"workedBy.last_name", token];
+        // Inserts the token to compare against in between each of the above keys.
+        NSArray *args = [self insertToken:token forKeys:keys];
         searchPredicate = [NSPredicate predicateWithFormat:filter argumentArray:args];
         [self setTickets:(NSMutableArray *)[tickets filteredArrayUsingPredicate:searchPredicate]];
     }
+}
+
+- (NSString *)filterForKeys:(NSArray *)keys
+{
+    NSMutableString *filter = [[NSMutableString alloc] init];
     
-    NSLog(@"Search Result=%@", tickets);
+    // Creates a a number of key compares depending on the number of keys passed in.
+    for (int x = 0; x < [keys count]; x++) {
+        if (x > 0)
+            [filter appendString:@" || "];
+        [filter appendString:@"%K CONTAINS[cd] %@"];
+    }
+    
+    return filter;
+}
+
+- (NSArray *)insertToken:(NSString *)token forKeys:(NSArray *)keys
+{
+    NSMutableArray *args = [[NSMutableArray alloc] init];
+    
+    for (int x = 0; x < [keys count]; x++) {
+        [args addObject:[keys objectAtIndex:x]];
+        [args addObject:token];
+    }
+    
+    return args;
 }
 
 @end
