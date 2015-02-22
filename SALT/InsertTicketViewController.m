@@ -72,6 +72,7 @@
 
 - (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
 {
+    // Fills a combo box with all the items in the array.
     for (int x = 0; x < [items count]; x++) {
         NSString *first = [[items objectAtIndex:x] valueForKey:@"first_name"];
         NSString *last = [[items objectAtIndex:x] valueForKey:@"last_name"];
@@ -91,25 +92,6 @@
     
     return name;
 }
-
-//- (void)controlTextDidChange:(NSNotification *)notification {
-//    NSTextField *textField = [notification object];
-//    if ([notification object] == _orderNumberField) {
-//        [_orderNumberField setStringValue:[self formatCallOrderNumber:[_orderNumberField stringValue]]];
-//    }
-//    NSLog(@"controlTextDidChange: %@", [textField stringValue]);
-//}
-//
-//- (NSString *)formatCallOrderNumber:(NSString *)text
-//{
-//    if (text.length == 5 || text.length == 8) {
-//        NSString *beforeHyphen = [text substringToIndex:(text.length - 1)];
-//        NSString *afterHyphen = [text substringFromIndex:(text.length - 1)];
-//        return [NSString stringWithFormat:@"%@-%@", beforeHyphen, afterHyphen];
-//    }
-//    
-//    return text;
-//}
 
 - (IBAction)clearBtn:(NSButton *)sender {
     // Resets all the fields to their default values.
@@ -140,12 +122,14 @@
 
 - (IBAction)submitBtn:(NSButton *)sender {
     if ([[_ticketNumberField stringValue] length] < 8) {
-        NSAlert *alert = [NSAlert alertWithMessageText: @"Invalid Ticket Number!"
-                                         defaultButton:@"OK"
-                                       alternateButton:nil
-                                           otherButton:nil
-                             informativeTextWithFormat:@"Ticket Number needs to be exactly 8 digits long."];
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Invalid Ticket Number!"];
+        [alert setInformativeText:@"Ticket Number must be exactly 8 numbers long!"];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert addButtonWithTitle:@"OK"];
         [alert runModal];
+        
+        return;
     }
 }
 @end

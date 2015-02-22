@@ -50,7 +50,7 @@
         
         // Creates an employee out of a json object.
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
-        
+
         database_id = [numFormat numberFromString:data[@"id"]];
         emp_id = [numFormat numberFromString:data[@"emp_id"]];
         first_name = data[@"first_name"];

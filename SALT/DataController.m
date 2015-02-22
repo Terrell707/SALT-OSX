@@ -166,7 +166,7 @@ static DataController *sharedDataController = nil;
         // Finds the judge that presided over the hearing and add the judge's information to the ticket.
         NSPredicate *judgePresided = [NSPredicate predicateWithFormat:@"judge_id == %@", ticket.judge_presided];
         arr = [_judges filteredArrayUsingPredicate:judgePresided];
-        NSLog(@"Judge=%@", ticket.judge_presided);
+
         if ([arr count] > 0) {
             Judge *judge = arr[0];
             [ticket setJudgePresided:judge];
