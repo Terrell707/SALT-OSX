@@ -803,7 +803,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="" headerView="hu9-4l-4AB" id="FFU-hr-HCC">
-                                            <rect key="frame" x="0.0" y="0.0" width="1300" height="19"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1372" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1242,7 +1242,7 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pch-Lj-H9X">
+                            <textField identifier="ticket_no_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pch-Lj-H9X">
                                 <rect key="frame" x="180" y="457" width="75" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="0cC-PP-HdE"/>
@@ -1253,6 +1253,7 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="e3H-Tm-oHD"/>
                                     <outlet property="nextKeyView" destination="4oS-ds-IBY" id="FQ0-Nq-2q2"/>
                                 </connections>
                             </textField>
@@ -1270,7 +1271,7 @@ DQ
                                     <outlet property="nextKeyView" destination="bF2-lC-XfR" id="Zj5-py-ZRJ"/>
                                 </connections>
                             </datePicker>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gxg-wT-y6L">
+                            <textField identifier="claimant_first_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gxg-wT-y6L">
                                 <rect key="frame" x="180" y="507" width="175" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="qck-Fh-uC0"/>
@@ -1281,10 +1282,11 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="acu-NM-ws0"/>
                                     <outlet property="nextKeyView" destination="Qts-IB-OKL" id="B5z-1r-ncR"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qts-IB-OKL">
+                            <textField identifier="claimant_last_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qts-IB-OKL">
                                 <rect key="frame" x="180" y="482" width="175" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="tlu-Rd-EzV">
                                     <font key="font" metaFont="system"/>
@@ -1292,10 +1294,11 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="WSY-cF-CP6"/>
                                     <outlet property="nextKeyView" destination="Pch-Lj-H9X" id="H2n-Mw-d5k"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4oS-ds-IBY">
+                            <textField identifier="bpa_no_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4oS-ds-IBY">
                                 <rect key="frame" x="180" y="432" width="117" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="e83-IH-417">
                                     <font key="font" metaFont="system"/>
@@ -1303,10 +1306,11 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="uu6-cR-sXP"/>
                                     <outlet property="nextKeyView" destination="Lq8-B7-SiB" id="FXx-5X-LWG"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lq8-B7-SiB">
+                            <textField identifier="can_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lq8-B7-SiB">
                                 <rect key="frame" x="180" y="408" width="67" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="67" id="OuN-El-fqb"/>
@@ -1317,10 +1321,11 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="yjz-Lx-VFn"/>
                                     <outlet property="nextKeyView" destination="C09-9s-YP8" id="PLf-II-8PP"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C09-9s-YP8">
+                            <textField identifier="tin_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C09-9s-YP8">
                                 <rect key="frame" x="180" y="383" width="100" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="bNi-kV-SYG"/>
@@ -1331,10 +1336,11 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="bDq-XP-tKg"/>
                                     <outlet property="nextKeyView" destination="3Da-KV-aPl" id="MjQ-RU-3ri"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Da-KV-aPl">
+                            <textField identifier="soc_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Da-KV-aPl">
                                 <rect key="frame" x="181" y="358" width="42" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="yA8-Ad-6ON"/>
@@ -1345,6 +1351,7 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="ZhC-67-7wK"/>
                                     <outlet property="nextKeyView" destination="6wr-h7-qSc" id="ugx-FW-8nZ"/>
                                 </connections>
                             </textField>
@@ -1477,7 +1484,7 @@ DQ
                                     <outlet property="nextKeyView" destination="gPK-DX-nBd" id="41J-1d-y3p"/>
                                 </connections>
                             </comboBox>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bF2-lC-XfR">
+                            <textField identifier="call_order_no_field" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bF2-lC-XfR">
                                 <rect key="frame" x="180" y="532" width="123" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="mGQ-ph-upA"/>
@@ -1488,6 +1495,7 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <outlet property="delegate" destination="Jq6-7Z-swb" id="i7g-BV-arm"/>
                                     <outlet property="nextKeyView" destination="Gxg-wT-y6L" id="psH-Tb-MHG"/>
                                 </connections>
                             </textField>

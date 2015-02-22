@@ -9,6 +9,11 @@
 #import "InsertTicketViewController.h"
 
 @interface InsertTicketViewController ()
+- (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items;
+- (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last;
+- (NSString *)callOrderBpaFormat:(NSString *)text;
+- (NSString *)tinFormat:(NSString *)text;
+- (void)controlTextDidChange:(NSNotification *)notification;
 
 @end
 
@@ -132,4 +137,122 @@
         return;
     }
 }
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    NSTextField *field = [notification object];
+    NSString *identifer = [field identifier];
+    NSString *text = [field stringValue];
+    
+    NSString *formatted;
+    NSInteger maxLength;
+    
+    NSLog(@"Identifer=%@", identifer);
+    
+    // Formats the string within the specified fields by adding a hyphen after so many characters. Will also
+    //  limit the number of characters that are allowed in the text field.
+    if ([identifer isEqualToString:@"call_order_no_field"]) {
+        maxLength = 15;
+        formatted = [self callOrderBpaFormat:text];
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"bpa_no_field"]) {
+        maxLength = 13;
+        formatted = [self callOrderBpaFormat:text];
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"tin_field"])
+    {
+        maxLength = 11;
+        formatted = [self tinFormat:text];
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"ticket_no_field"])
+    {
+        maxLength = 8;
+        formatted = text;
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"claimant_first_field"])
+    {
+        maxLength = 20;
+        formatted = text;
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"claimant_last_field"])
+    {
+        maxLength = 20;
+        formatted = text;
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"can_field"])
+    {
+        maxLength = 7;
+        formatted = text;
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    else if ([identifer isEqualToString:@"soc_field"])
+    {
+        maxLength = 4;
+        formatted = text;
+        if ([formatted length] > maxLength) {
+            formatted = [formatted substringToIndex:maxLength];
+        }
+    }
+    
+    [field setStringValue:formatted];
+}
+
+- (NSString *)callOrderBpaFormat:(NSString *)text
+{
+    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    // Adds a '-' after every 4th and 7th character.
+    NSMutableString *formatted = [[NSMutableString alloc] init];
+    
+    for (int x = 0; x < [text length]; x++) {
+        if (x == 4 || x == 6) {
+            [formatted appendString:@"-"];
+        }
+        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
+        [formatted appendString:nextChar];
+    }
+    
+    NSLog(@"Format=%@", formatted);
+    return formatted;
+}
+
+- (NSString *)tinFormat:(NSString *)text
+{
+    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    // Adds a '-' after the 4th character.
+    NSMutableString *formatted = [[NSMutableString alloc] init];
+    
+    for (int x = 0; x < [text length]; x++) {
+        if (x == 4) {
+            [formatted appendString:@"-"];
+        }
+        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
+        [formatted appendString:nextChar];
+    }
+    
+    NSLog(@"Format=%@", formatted);
+    return formatted;
+}
+             
 @end
