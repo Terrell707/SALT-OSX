@@ -52,10 +52,20 @@
         // Creates a ticket out of data from a json object.
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-mm-dd"];
+        [dateFormat setDateFormat:@"yyyy-MM-dd"];
+        NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+        [timeFormat setDateFormat:@"HH:mm:ss"];
         
-        ticket_no = [numFormat numberFromString:data[@"ticket_no"]];
-        order_date = [dateFormat dateFromString:data[@"order_date"]];
+        // Formats the dates and times.
+        NSDate *orderDate = [dateFormat dateFromString:data[@"order_date"]];
+        NSDate *hearingDate = [dateFormat dateFromString:data[@"hearing_date"]];
+        NSDate *hearingTime = [timeFormat dateFromString:data[@"hearing_time"]];
+        
+        NSLog(@"Data Time=%@", data[@"hearing_time"]);
+        NSLog(@"Time=%@", hearingTime);
+        
+        ticket_no = data[@"ticket_no"];
+        order_date = orderDate;
         call_order_no = data[@"call_order_no"];
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
@@ -63,8 +73,8 @@
         can = [numFormat numberFromString:data[@"can"]];
         tin = data[@"tin"];
         soc = data[@"soc"];
-        hearing_date = [dateFormat dateFromString:data[@"hearing_date"]];
-        hearing_time =  data[@"hearing_time"];
+        hearing_date = hearingDate;
+        hearing_time = hearingTime;
         status = data[@"status"];
         emp_worked = [numFormat numberFromString:data[@"emp_worked"]];
         judge_presided = [numFormat numberFromString:data[@"judge_presided"]];
@@ -72,5 +82,14 @@
     }
     
     return self;
+}
+
+- (NSArray *)propsForDatabase
+{
+    NSArray *props = [NSArray arrayWithObjects:@"ticket_no", @"order_date", @"call_order_no", @"first_name",
+                           @"last_name", @"bpa_no", @"can", @"tin", @"soc", @"hearing_date", @"hearing_time",
+                           @"status", @"emp_worked", @"judge_presided", @"at_site", nil];
+    
+    return props;
 }
 @end

@@ -29,6 +29,7 @@
 @property (readwrite, retain) NSMutableSet *scheduled;
 
 - (id)initWithData:(NSDictionary *)data;
+- (NSArray *)properties;
 
 - (void)addWorkedObject:(Ticket *)value;
 - (void)removeWorkedObject:(Ticket *)value;

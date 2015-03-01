@@ -22,7 +22,7 @@
 @property (readwrite, retain) NSString * tin;
 @property (readwrite, retain) NSString * soc;
 @property (readwrite, retain) NSDate * hearing_date;
-@property (readwrite, retain) NSString * hearing_time;
+@property (readwrite, retain) NSDate * hearing_time;
 @property (readwrite, retain) NSString * status;
 @property (readwrite, retain) NSNumber * emp_worked;
 @property (readwrite, retain) NSNumber * judge_presided;
@@ -33,6 +33,7 @@
 @property (readwrite, retain) NSSet *helpedBy;
 
 - (id)initWithData:(NSDictionary *)data;
+- (NSArray *)propsForDatabase;
 
 - (void)addHelpedByObject:(Witness *)value;
 - (void)removeHelpedByObject:(Witness *)value;

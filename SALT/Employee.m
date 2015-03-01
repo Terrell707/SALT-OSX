@@ -67,6 +67,13 @@
     return self;
 }
 
+- (NSArray *)propsForDatabase
+{
+    NSArray *props = [NSArray arrayWithObjects:@"database_id", @"emp_id", @"first_name", @"middle_init",
+                      @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay", nil];
+    return props;
+}
+
 #pragma Worked Objects
 - (void)addWorkedObject:(Ticket *)value
 {
