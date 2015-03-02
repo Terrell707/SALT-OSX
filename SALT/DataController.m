@@ -175,20 +175,72 @@ static DataController *sharedDataController = nil;
     }
 }
 
+- (BOOL)insertTicket:(Ticket *)ticket
+{
+    // Creates formatters that will be needed.
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"HH:mm"];
+    
+    // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Ticket
+    //  to the database.
+    NSArray *keys = [ticket propsForDatabase];
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    for (NSString *key in keys) {
+        if ([key isEqualToString:@"order_date"] || [key isEqualToString:@"hearing_date"]) {
+            [values addObject:[dateFormat stringFromDate:[ticket valueForKey:key]]];
+        }
+        else if ([key isEqualToString:@"hearing_time"]) {
+            [values addObject:[timeFormat stringFromDate:[ticket valueForKey:key]]];
+        }
+        else if ([key isEqualToString:@"ticket_no"] || [key isEqualToString:@"emp_worked"]
+                 || [key isEqualToString:@"judge_presided"]) {
+            [values addObject:[[ticket valueForKey:key] stringValue]];
+        }
+        else {
+            [values addObject:[ticket valueForKey:key]];
+        }
+    }
+    NSDictionary *ticketInfo = [NSDictionary dictionaryWithObjects:values
+                                                           forKeys:keys];
+    
+    // Insert into the database and get the response.
+    NSArray *ticketData = [mySQL grabInfoFromFile:@"inserts/ticket.php" withItems:ticketInfo];
+    NSInteger status = [statusChecker checkStatus:ticketData];
+    
+    NSLog(@"Status=%ld", status);
+    // If there were no errors, add the ticket to the list of tickets and return a success.
+    if ([self checkStatus:status]) {
+        [_tickets addObject:ticket];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)checkStatus:(NSInteger)status
 {
     BOOL noError = NO;
     
     switch (status) {
+        case SUCCESS:
+            NSLog(@"Success!");
+            noError = YES;
+            break;
+        case ERROR:
+            NSLog(@"Something went wrong with the query!");
+            break;
         case QUERY_FAILED:
-            NSLog(@"Ticket Query Failed for some reason!");
+            NSLog(@"Query Failed for some reason!");
             break;
         case MYSQL_CONNECTION:
         case NOT_LOGGED_IN:
             NSLog(@"Lost connection to MySQL Database!");
             break;
         default:
-            noError = YES;
+            NSLog(@"Nothing was returned from the query.");
+            noError = NO;
             break;
     }
     

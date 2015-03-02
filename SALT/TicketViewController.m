@@ -56,7 +56,7 @@
     
     // An array of keys that will be compared against.
     NSArray *keys = @[@"ticket_no.stringValue", @"first_name", @"last_name",
-                      @"hearing_time", @"status", @"workedBy.first_name", @"workedBy.last_name"];
+                      @"status", @"workedBy.first_name", @"workedBy.last_name"];
     
     // A filter created based on the keys above.
     NSString *filter = [self filterForKeys:keys];
