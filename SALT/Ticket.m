@@ -64,13 +64,13 @@
         NSLog(@"Data Time=%@", data[@"hearing_time"]);
         NSLog(@"Time=%@", hearingTime);
         
-        ticket_no = data[@"ticket_no"];
+        ticket_no = [numFormat numberFromString:data[@"ticket_no"]];
         order_date = orderDate;
         call_order_no = data[@"call_order_no"];
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
         bpa_no = data[@"bpa_no"];
-        can = [numFormat numberFromString:data[@"can"]];
+        can = data[@"can"];
         tin = data[@"tin"];
         soc = data[@"soc"];
         hearing_date = hearingDate;
