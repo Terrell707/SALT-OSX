@@ -15,6 +15,5 @@
 // Calls the php script containing the query needed and returns the results.
 - (NSArray *)grabInfoFromFile:(NSString *)fileName;
 - (NSArray *)grabInfoFromFile:(NSString *)fileName withItems:(NSDictionary *)items;
-- (NSArray *)insertIntoFile:(NSString *)fileName withItems:(NSDictionary *)items;
 
 @end
