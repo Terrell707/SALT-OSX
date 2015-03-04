@@ -61,9 +61,7 @@
         NSDate *hearingDate = [dateFormat dateFromString:data[@"hearing_date"]];
         NSDate *hearingTime = [timeFormat dateFromString:data[@"hearing_time"]];
         
-        NSLog(@"Data Time=%@", data[@"hearing_time"]);
-        NSLog(@"Time=%@", hearingTime);
-        
+        // Places the data in the appropriate properties.
         ticket_no = [numFormat numberFromString:data[@"ticket_no"]];
         order_date = orderDate;
         call_order_no = data[@"call_order_no"];
@@ -92,4 +90,13 @@
     
     return props;
 }
+
+- (NSArray *)properties
+{
+    NSArray *propsForDatabase = [self propsForDatabase];
+    NSArray *props = [NSArray arrayWithObjects:@"workedBy", @"judgePresided", @"heldAt", @"helpedBy", nil];
+    
+    return [propsForDatabase arrayByAddingObjectsFromArray:props];
+}
+
 @end

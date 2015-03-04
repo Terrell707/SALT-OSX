@@ -34,6 +34,7 @@
 
 - (id)initWithData:(NSDictionary *)data;
 - (NSArray *)propsForDatabase;
+- (NSArray *)properties;
 
 - (void)addHelpedByObject:(Witness *)value;
 - (void)removeHelpedByObject:(Witness *)value;
