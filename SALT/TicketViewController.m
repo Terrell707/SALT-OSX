@@ -34,7 +34,7 @@
                                                context:NULL];
     ticketsBeforeFilter = tickets;
 
-    [_ticketTable reloadData];
+    [ticketTable reloadData];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -43,16 +43,24 @@
     
     if ([keyPath isEqualToString:@"tickets"]) {
         [self setTickets:[[DataController sharedDataController] tickets]];
-        [_ticketTable reloadData];
+        ticketsBeforeFilter = tickets;
+        [self searchTickets];
+        [ticketTable reloadData];
     }
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {
-    // Grabs search text from the search field.
-    NSSearchField *searchField = [notification object];
-    NSString *searchText = [[searchField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([notification object] == searchField) {
+        [self searchTickets];
+    }
+}
 
+- (void)searchTickets
+{
+    // Grab the search string from the search field.
+    NSString *searchText = [[searchField stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     // Updates the filtered array to the original array.
     [self setTickets:(NSMutableArray *)ticketsBeforeFilter];
     

@@ -12,9 +12,11 @@
 @interface TicketViewController : NSViewController {
     NSArray *ticketsBeforeFilter;
     NSPredicate *searchPredicate;
+    
+    IBOutlet NSTableView *ticketTable;
+    IBOutlet NSSearchField *searchField;
 }
 
 @property (readwrite, copy) NSMutableArray *tickets;
-@property (weak) IBOutlet NSTableView *ticketTable;
 
 @end

@@ -1151,6 +1151,7 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchField" destination="Hja-2h-0mH" id="u6X-eg-pKr"/>
                         <outlet property="ticketTable" destination="FFU-hr-HCC" id="c87-5q-qdf"/>
                     </connections>
                 </viewController>
