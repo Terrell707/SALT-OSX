@@ -18,7 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[[self view] window] makeFirstResponder:_ticketTable];
 }
 
 - (void)viewDidAppear
@@ -28,12 +27,24 @@
     NSLog(@"Ticket View Controller viewDidAppear");
     
     // Populates the table with tickets returned from the server.
-    [self willChangeValueForKey:@"tickets"];
     [self setTickets:[[DataController sharedDataController] tickets]];
+    [[DataController sharedDataController] addObserver:self
+                                            forKeyPath:@"tickets"
+                                               options:NSKeyValueObservingOptionNew
+                                               context:NULL];
     ticketsBeforeFilter = tickets;
-    [self didChangeValueForKey:@"tickets"];
 
     [_ticketTable reloadData];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"Change is good");
+    
+    if ([keyPath isEqualToString:@"tickets"]) {
+        [self setTickets:[[DataController sharedDataController] tickets]];
+        [_ticketTable reloadData];
+    }
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification

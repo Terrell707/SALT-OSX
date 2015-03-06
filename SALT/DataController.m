@@ -127,7 +127,9 @@ static DataController *sharedDataController = nil;
         for (int x = 0; x < [ticketData count]; x++) {
             NSDictionary *data = [ticketData objectAtIndex:x];
             Ticket *ticket = [[Ticket alloc] initWithData:data];
+            [self willChangeValueForKey:@"tickets"];
             [_tickets addObject:ticket];
+            [self didChangeValueForKey:@"tickets"];
         }
     }
 }
@@ -212,7 +214,9 @@ static DataController *sharedDataController = nil;
     NSLog(@"Status=%ld", status);
     // If there were no errors, add the ticket to the list of tickets and return a success.
     if ([self checkStatus:status]) {
+        [self willChangeValueForKey:@"tickets"];
         [_tickets addObject:ticket];
+        [self didChangeValueForKey:@"tickets"];
         return YES;
     } else {
         return NO;

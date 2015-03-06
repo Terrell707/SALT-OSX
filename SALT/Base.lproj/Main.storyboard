@@ -679,7 +679,7 @@
                 </windowController>
                 <customObject id="6FQ-vA-YaT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-623" y="256"/>
+            <point key="canvasLocation" x="-559" y="250"/>
         </scene>
         <!--Login-->
         <scene sceneID="9OC-uV-K4f">
@@ -765,7 +765,7 @@ DQ
                 </viewController>
                 <customObject id="cAe-t6-a0B" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-622.5" y="652"/>
+            <point key="canvasLocation" x="-558.5" y="665"/>
         </scene>
         <!--SALT-->
         <scene sceneID="HSw-vu-zS6">
@@ -1424,10 +1424,9 @@ DQ
                                 <rect key="frame" x="181" y="305" width="119" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="Vbd-Pi-6Kc">
                                     <font key="font" metaFont="system"/>
-                                    <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
-                                        <!--1982-02-12 16:00:00 +0000-->
-                                        <timeZone key="timeZone" name="US/Pacific"/>
-                                    </calendarDate>
+                                    <date key="date" timeIntervalSinceReferenceDate="-595927800">
+                                        <!--1982-02-12 16:30:00 +0000-->
+                                    </date>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>

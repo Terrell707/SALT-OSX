@@ -9,12 +9,7 @@
 #import "InsertTicketViewController.h"
 
 @interface InsertTicketViewController ()
-- (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items;
-- (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last;
-- (NSDictionary *)unformatName:(NSString *)name;
-- (NSString *)callOrderBpaFormat:(NSString *)text;
-- (NSString *)tinFormat:(NSString *)text;
-- (void)controlTextDidChange:(NSNotification *)notification;
+
 @end
 
 @implementation InsertTicketViewController
@@ -32,10 +27,9 @@
     experts = [[DataController sharedDataController] experts];
     sites = [[DataController sharedDataController] sites];
     
-    // Sets defaults for the date and time pickers.
+    // Sets defaults for the date pickers.
     [_orderDatePicker setDateValue:[NSDate date]];
     [_hearingDatePicker setDateValue:[NSDate date]];
-    [_hearingTimePicker setStringValue:@"8:30 AM"];
     
     // Fill in the "status" combo box.
     for (int x = 0; x < [hearingStatus count]; x++) {
@@ -86,23 +80,23 @@
 - (IBAction)submitBtn:(NSButton *)sender {
     // Checks to make sure needed information is populated.
     if ([[_ticketNumberField stringValue] length] < 8) {
-        [self ticketAlert];
+        [self createAlertWithMessage:@"Invalid Ticket Number!" informative:@"Ticket Number must be exactly 8 numbers long!"];
         return;
     }
     if ([_workedByCombo indexOfSelectedItem] == -1) {
-        [self employeeAlert];
+        [self createAlertWithMessage:@"Invalid Selection in Worked By!" informative:@"Need to select an employee from the 'Worked By' drop down list!"];
         return;
     }
     if ([_judgePresidingCombo indexOfSelectedItem] == -1) {
-        [self judgeAlert];
+        [self createAlertWithMessage:@"Invalid Selection in Judge Presided!" informative:@"Need to select a judge from the 'Judge Presided' drop down list!"];
         return;
     }
     if ([_statusCombo indexOfSelectedItem] == -1) {
-        [self statusAlert];
+        [self createAlertWithMessage:@"Invalid Status!" informative:@"Need to select a status from the 'Status' drop down list!"];
         return;
     }
     if ([_officeCombo indexOfSelectedItem] == -1) {
-        [self officeAlert];
+        [self createAlertWithMessage:@"Invalid Office!" informative:@"Need to select a office from the 'Held At Office' drop down list!"];
         return;
     }
     
@@ -140,7 +134,7 @@
     // Find the employee that was typed in and get his/her id number. If they don't exist, throw an error.
     NSArray *empResult = [self findInfoFromList:employees forCombo:_workedByCombo];
     if ([empResult count] <= 0) {
-        [self employeeAlert];
+        NSLog(@"Couldn't find the selected employee!");
         return;
     }
     [newTicket setEmp_worked:[empResult[0] database_id]];
@@ -149,7 +143,7 @@
     // Find the judge that was typed in and get his/her id number. If they don't exist, throw an error.
     NSArray *judgeResult = [self findInfoFromList:judges forCombo:_judgePresidingCombo];
     if ([judgeResult count] <= 0) {
-        [self judgeAlert];
+        NSLog(@"Couldn't find the selected judge!");
         return;
     }
     [newTicket setJudge_presided:[judgeResult[0] judge_id]];
@@ -164,20 +158,21 @@
         
     }
     
-    [self willChangeValueForKey:@"tickets"];
     BOOL inserted = [[DataController sharedDataController] insertTicket:newTicket];
     if (inserted) {
         NSLog(@"It went through");
+        [self createAlertWithMessage:@"Success!" informative:@"Ticket successfully added!"];
+        [self clearForm];
     } else {
         NSLog(@"It did not go through");
+        [self createAlertWithMessage:@"Error!" informative:@"There was an error in adding this ticket!"];
     }
-    [self didChangeValueForKey:@"tickets"];
-    
-    [self clearForm];
+
 }
 
 - (NSArray *)findInfoFromList:(NSArray *)list forCombo:(NSComboBox *)combo
 {
+    // Searchs the passed in list for the name selected in the passed in combobox.
     NSDictionary *name = [self unformatName:[combo stringValue]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"first_name == %@ && last_name == %@",
                                    name[@"first_name"], name[@"last_name"]];
@@ -194,8 +189,6 @@
     
     NSString *formatted;
     NSInteger maxLength;
-    
-    NSLog(@"Identifer=%@", identifer);
     
     // Formats the string within the specified fields by adding a hyphen after so many characters. Will also
     //  limit the number of characters that are allowed in the text field.
@@ -285,6 +278,8 @@
 //    [_vocationalCombo setStringValue:@""];
     [_medicalCombo setStringValue:@""];
     [_otherCombo setStringValue:@""];
+    
+    [[[self view] window] makeFirstResponder:_orderDatePicker];
 }
 
 - (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
@@ -350,7 +345,6 @@
         [formatted appendString:nextChar];
     }
     
-    NSLog(@"Format=%@", formatted);
     return formatted;
 }
 
@@ -369,58 +363,17 @@
         [formatted appendString:nextChar];
     }
     
-    NSLog(@"Format=%@", formatted);
     return formatted;
 }
 
-- (void)employeeAlert
+- (void)createAlertWithMessage:(NSString *)message informative:(NSString *)info
 {
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Invalid Selection in Worked By!"];
-    [alert setInformativeText:@"Need to select an employee from the 'Worked By' drop down list!"];
+    [alert setMessageText:message];
+    [alert setInformativeText:info];
     [alert setAlertStyle:NSWarningAlertStyle];
     [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
-}
-
-- (void)judgeAlert
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Invalid Selection in Judge Presided!"];
-    [alert setInformativeText:@"Need to select a judge from the 'Judge Presided' drop down list!"];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
-}
-
-- (void)ticketAlert
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Invalid Ticket Number!"];
-    [alert setInformativeText:@"Ticket Number must be exactly 8 numbers long!"];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
-}
-
-- (void)statusAlert
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Invalid Status!"];
-    [alert setInformativeText:@"Need to select a status from the 'Status' drop down list!"];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
-}
-
-- (void)officeAlert
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Invalid Office!"];
-    [alert setInformativeText:@"Need to select a office from the 'Held At Office' drop down list!"];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
+    [alert beginSheetModalForWindow:[[self view] window] completionHandler:nil];
 }
 
 @end
