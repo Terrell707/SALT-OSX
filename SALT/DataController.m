@@ -223,6 +223,28 @@ static DataController *sharedDataController = nil;
     }
 }
 
+- (BOOL)removeTicket:(Ticket *)ticket
+{
+    NSDictionary *ticketInfo = [NSDictionary dictionaryWithObjectsAndKeys:[[ticket ticket_no] stringValue], @"ticket_no", nil];
+    
+    NSLog(@"Ticket_info = %@", ticketInfo);
+    
+    NSArray *ticketData = [mySQL grabInfoFromFile:@"remove/ticket.php" withItems:ticketInfo];
+    NSInteger status = [statusChecker checkStatus:ticketData];
+    
+    NSLog(@"Status=%ld", status);
+    
+    // If there were no errors, remove the ticket from the list of tickets and return success.
+    if ([self checkStatus:status]) {
+        [self willChangeValueForKey:@"tickets"];
+        [_tickets removeObject:ticket];
+        [self didChangeValueForKey:@"tickets"];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)checkStatus:(NSInteger)status
 {
     BOOL noError = NO;

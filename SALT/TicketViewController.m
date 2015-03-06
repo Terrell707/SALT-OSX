@@ -28,10 +28,17 @@
     
     // Populates the table with tickets returned from the server.
     [self setTickets:[[DataController sharedDataController] tickets]];
+    
+    // Observes the DataController for any new tickets that were added.
     [[DataController sharedDataController] addObserver:self
                                             forKeyPath:@"tickets"
                                                options:NSKeyValueObservingOptionNew
                                                context:NULL];
+    
+    // Observes our own tickets for any tickets that were removed.
+//    [self addObserver:self forKeyPath:@"tickets" options:NSKeyValueObservingOptionOld context:NULL];
+    
+    // Keeps a copy of the tickets so that they are not overwritten by searching.
     ticketsBeforeFilter = tickets;
 
     [ticketTable reloadData];
@@ -39,9 +46,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    NSLog(@"Change is good");
-    
-    if ([keyPath isEqualToString:@"tickets"]) {
+    // Will reload the table with new tickets that were added.
+    if ([keyPath isEqualToString:@"tickets"] && object != self) {
         [self setTickets:[[DataController sharedDataController] tickets]];
         ticketsBeforeFilter = tickets;
         [self searchTickets];
@@ -51,8 +57,43 @@
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {
+    // Will update the search whenever something is typed into the search field.
     if ([notification object] == searchField) {
         [self searchTickets];
+    }
+}
+
+- (IBAction)removeButton:(id)sender {
+    NSUInteger count = [[ticketController selectedObjects] count];
+    NSString *infoMessage = [NSString stringWithFormat:@"You are about to delete %ld ticket(s)! Are you sure you want to delete?", count];
+    
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Delete Ticket(s)!"];
+    [alert setInformativeText:infoMessage];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert addButtonWithTitle:@"Delete"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert beginSheetModalForWindow:[[self view] window] completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self removeTicket];
+        }
+    }];
+}
+
+- (void)removeTicket
+{
+    NSArray *selected = [ticketController selectedObjects];
+    NSLog(@"Selected = %@", selected);
+    
+    if ([[DataController sharedDataController] removeTicket:[selected objectAtIndex:0]]) {
+        NSLog(@"Ticket was removed");
+        [self setTickets:[[DataController sharedDataController] tickets]];
+        ticketsBeforeFilter = tickets;
+        [self searchTickets];
+        [ticketTable reloadData];
+    }
+    else {
+        NSLog(@"Failure removing ticket!");
     }
 }
 
@@ -112,6 +153,17 @@
     }
     
     return args;
+}
+
+- (void)createAlertWithMessage:(NSString *)message informative:(NSString *)info
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:message];
+    [alert setInformativeText:info];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert addButtonWithTitle:@"Delete"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert beginSheetModalForWindow:[[self view] window] completionHandler:nil];
 }
 
 @end

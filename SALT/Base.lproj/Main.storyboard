@@ -1083,7 +1083,7 @@ DQ
                                     <font key="font" metaFont="system" size="15"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="remove:" target="HHH-Fn-eU5" id="QB5-ek-WM9"/>
+                                    <action selector="removeButton:" target="QUM-jv-1NT" id="suo-l8-Tcx"/>
                                     <binding destination="HHH-Fn-eU5" name="enabled" keyPath="canRemove" id="rQU-zt-RbM"/>
                                 </connections>
                             </button>
@@ -1152,6 +1152,7 @@ DQ
                     </view>
                     <connections>
                         <outlet property="searchField" destination="Hja-2h-0mH" id="u6X-eg-pKr"/>
+                        <outlet property="ticketController" destination="HHH-Fn-eU5" id="Hpp-dp-FnV"/>
                         <outlet property="ticketTable" destination="FFU-hr-HCC" id="c87-5q-qdf"/>
                     </connections>
                 </viewController>

@@ -23,6 +23,7 @@
 
 + (DataController *)sharedDataController;
 - (BOOL)insertTicket:(Ticket *)ticket;
+- (BOOL)removeTicket:(Ticket *)ticket;
 - (void)loadData;
 
 @property (readwrite, copy) NSMutableArray *hearingStatus;

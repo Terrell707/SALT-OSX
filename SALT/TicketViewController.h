@@ -15,8 +15,11 @@
     
     IBOutlet NSTableView *ticketTable;
     IBOutlet NSSearchField *searchField;
+    IBOutlet NSArrayController *ticketController;
 }
 
 @property (readwrite, copy) NSMutableArray *tickets;
+
+- (IBAction)removeButton:(id)sender;
 
 @end
