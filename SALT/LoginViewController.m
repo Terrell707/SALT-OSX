@@ -56,8 +56,9 @@
             break;
         case SUCCESS:
             [_statusLabel setStringValue:@""];
-            [NSApp stopModalWithCode:1];
-            [[[self view] window] close];
+            [[DataController sharedDataController] logginStatus:YES forUser:user];
+            [[DataController sharedDataController] loadData];
+//            [[[self view] window] close];
     }
 }
 

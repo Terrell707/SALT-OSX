@@ -24,6 +24,8 @@
 {
     [super viewDidAppear];
     
+    NSLog(@"Window Name from TicketViewController=%@", [[self view] window]);
+    
     NSLog(@"Ticket View Controller viewDidAppear");
     
     // Populates the table with tickets returned from the server.

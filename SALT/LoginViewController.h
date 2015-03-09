@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MySQL.h"
 #import "StatusCodes.h"
+#import "DataController.h"
 
 @interface LoginViewController : NSViewController {
     MySQL *mySQL;

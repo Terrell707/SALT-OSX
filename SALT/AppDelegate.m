@@ -15,32 +15,20 @@
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
-    // When the application first loads, a login screen will be presented.
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    // When the application first loads, the main window will be presented.
     NSString *storyboardName = @"Main";
-    NSString *loginWindowName = @"LoginWindowController";
     NSString *mainWindowName = @"MainWindowController";
     
-    // Grabs the login window controller and presents it.
+    // Grabs the main window controller and presents it.
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:storyboardName bundle:nil];
-    _controller = [storyboard instantiateControllerWithIdentifier:loginWindowName];
-    
-    // Grabs the status of the login.
-    BOOL loggedIn = [NSApp runModalForWindow:[_controller window]];
-    NSLog(@"Logged in: %d", loggedIn);
-    
-    if (loggedIn == YES) {
-        [[_controller window] close];
-        [[DataController sharedDataController] loadData];
-        _controller = [storyboard instantiateControllerWithIdentifier:mainWindowName];
-        [_controller showWindow:self];
-    } else {
-        [NSApp terminate:self];
-    }
+    _controller = [storyboard instantiateControllerWithIdentifier:mainWindowName];
+    [_controller showWindow:self];
 }
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
     // Insert code here to tear down your application
     NSLog(@"Terminating");
 }

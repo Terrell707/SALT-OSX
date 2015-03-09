@@ -22,9 +22,13 @@
 }
 
 + (DataController *)sharedDataController;
+- (void)logginStatus:(BOOL)login forUser:(NSString *)username;
 - (BOOL)insertTicket:(Ticket *)ticket;
 - (BOOL)removeTicket:(Ticket *)ticket;
 - (void)loadData;
+
+@property (readonly) BOOL loggedIn;
+@property (readonly) NSString *user;
 
 @property (readwrite, copy) NSMutableArray *hearingStatus;
 @property (readwrite, copy) NSMutableArray *employees;

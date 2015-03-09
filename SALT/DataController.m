@@ -44,6 +44,9 @@ static DataController *sharedDataController = nil;
         _sites = [[NSMutableArray alloc] init];
         _experts = [[NSMutableArray alloc] init];
         _tickets = [[NSMutableArray alloc] init];
+        
+        // Start the user as logged out.
+        _loggedIn = NO;
     }
     return self;
 }
@@ -70,6 +73,8 @@ static DataController *sharedDataController = nil;
 
 - (void)grabEmployeeData
 {
+    [_employees removeAllObjects];
+    
     NSArray *employeeData = [mySQL grabInfoFromFile:@"queries/employees.php"];
     NSInteger status = [statusChecker checkStatus:employeeData];
     
@@ -84,6 +89,8 @@ static DataController *sharedDataController = nil;
 
 - (void)grabJudgeData
 {
+    [_judges removeAllObjects];
+    
     NSArray *judgeData = [mySQL grabInfoFromFile:@"queries/judges.php"];
     NSInteger status = [statusChecker checkStatus:judgeData];
     
@@ -98,6 +105,8 @@ static DataController *sharedDataController = nil;
 
 - (void)grabSiteData
 {
+    [_sites removeAllObjects];
+    
     NSArray *siteData = [mySQL grabInfoFromFile:@"queries/sites.php"];
     NSInteger status = [statusChecker checkStatus:siteData];
     
@@ -112,6 +121,8 @@ static DataController *sharedDataController = nil;
 
 - (void)grabTicketData
 {
+    [_tickets removeAllObjects];
+    
     // Limits the number of results we recieve.
     NSArray *keys = [NSArray arrayWithObjects:@"limit", nil];
     NSArray *values = [NSArray arrayWithObjects:@"50", nil];
@@ -136,6 +147,8 @@ static DataController *sharedDataController = nil;
 
 - (void)grabExpertData
 {
+    [_experts removeAllObjects];
+    
     // Query the database and get the response.
     NSArray *expertData = [mySQL grabInfoFromFile:@"queries/experts.php"];
     NSInteger status = [statusChecker checkStatus:expertData];
@@ -175,6 +188,17 @@ static DataController *sharedDataController = nil;
             [judge addWorkedObject:ticket];
         }
     }
+}
+
+- (void)logginStatus:(BOOL)login forUser:(NSString *)username
+{
+    // Updates the logged in status for the specified user.
+    [self willChangeValueForKey:@"loggedIn"];
+    [self willChangeValueForKey:@"user"];
+    _loggedIn = login;
+    _user = username;
+    [self didChangeValueForKey:@"loggedIn"];
+    [self didChangeValueForKey:@"user"];
 }
 
 - (BOOL)insertTicket:(Ticket *)ticket

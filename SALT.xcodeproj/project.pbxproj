@@ -29,6 +29,7 @@
 		3AFD098F1A8AB507001D8688 /* Clerk.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD098E1A8AB507001D8688 /* Clerk.m */; };
 		3AFD099E1A8D56CF001D8688 /* DataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD099D1A8D56CF001D8688 /* DataController.m */; };
 		3AFD09A11A902FDA001D8688 /* InsertTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */; };
+		3AFD09E51AAC0A51001D8688 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09E41AAC0A51001D8688 /* MainWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		3AFD099D1A8D56CF001D8688 /* DataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataController.m; sourceTree = "<group>"; };
 		3AFD099F1A902FDA001D8688 /* InsertTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertTicketViewController.h; sourceTree = "<group>"; };
 		3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertTicketViewController.m; sourceTree = "<group>"; };
+		3AFD09E31AAC0A51001D8688 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		3AFD09E41AAC0A51001D8688 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +192,8 @@
 				3AFD099D1A8D56CF001D8688 /* DataController.m */,
 				3AFD099F1A902FDA001D8688 /* InsertTicketViewController.h */,
 				3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */,
+				3AFD09E31AAC0A51001D8688 /* MainWindowController.h */,
+				3AFD09E41AAC0A51001D8688 /* MainWindowController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				3AFD097A1A8AB507001D8688 /* Schedule.m in Sources */,
 				3AFD09771A8AB506001D8688 /* Witness.m in Sources */,
 				3AFD09421A883793001D8688 /* MySQL.m in Sources */,
+				3AFD09E51AAC0A51001D8688 /* MainWindowController.m in Sources */,
 				3AFD09831A8AB507001D8688 /* Judge.m in Sources */,
 				3AFD09861A8AB507001D8688 /* Site.m in Sources */,
 				3AFD098C1A8AB507001D8688 /* Employee.m in Sources */,
