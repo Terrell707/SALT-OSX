@@ -30,6 +30,9 @@
 @synthesize username;
 @synthesize scheduled;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)init
 {
     self = [super init];
@@ -42,7 +45,7 @@
 
 - (id)initWithData:(NSDictionary *)data
 {
-    self = [super init];
+    self = [self init];
     if (self) {
         // Initializes the sets.
         worked = [[NSMutableSet alloc] init];
@@ -67,6 +70,9 @@
     return self;
 }
 
+//-----------------------------------------------
+// Methods for Employee
+//-----------------------------------------------
 - (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"database_id", @"emp_id", @"first_name", @"middle_init",
@@ -74,7 +80,17 @@
     return props;
 }
 
-#pragma Worked Objects
+- (NSArray *)properties
+{
+    NSArray *props = [self propsForDatabase];
+    NSArray *sets = [NSArray arrayWithObjects:@"worked", @"username", @"scheduled", nil];
+    
+    return [props arrayByAddingObject:sets];
+}
+
+//-----------------------------------------------
+// Worked Object Methods
+//-----------------------------------------------
 - (void)addWorkedObject:(Ticket *)value
 {
     [worked addObject:value];
@@ -98,7 +114,9 @@
     }
 }
 
-#pragma Scheduled Objects
+//-----------------------------------------------
+// Schedule Object Methods
+//-----------------------------------------------
 - (void)addScheduledObject:(Schedule *)value
 {
     [scheduled addObject:value];

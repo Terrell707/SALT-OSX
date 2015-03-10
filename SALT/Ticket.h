@@ -30,12 +30,22 @@
 @property (readwrite, retain) Employee *workedBy;
 @property (readwrite, retain) Judge *judgePresided;
 @property (readwrite, retain) Site *heldAt;
-@property (readwrite, retain) NSSet *helpedBy;
+@property (readwrite, retain) NSMutableSet *helpedBy;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data;
+
+//-----------------------------------------------
+// Methods for Ticket
+//-----------------------------------------------
 - (NSArray *)propsForDatabase;
 - (NSArray *)properties;
 
+//-----------------------------------------------
+// HelpedBy Methods
+//-----------------------------------------------
 - (void)addHelpedByObject:(Witness *)value;
 - (void)removeHelpedByObject:(Witness *)value;
 - (void)addHelpedBy:(NSSet *)values;

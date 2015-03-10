@@ -17,16 +17,25 @@
 @property (readwrite, retain) NSString * address;
 @property (readwrite, retain) NSString * phone_number;
 @property (readwrite, retain) NSString * email;
-@property (readwrite, retain) NSSet *scheduled;
-@property (readwrite, retain) NSSet *ticket;
+@property (readwrite, retain) NSMutableSet *scheduled;
+@property (readwrite, retain) NSMutableSet *tickets;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data;
 
+//-----------------------------------------------
+// Schedule Object Methods
+//-----------------------------------------------
 - (void)addScheduledObject:(Schedule *)value;
 - (void)removeScheduledObject:(Schedule *)value;
 - (void)addScheduled:(NSSet *)values;
 - (void)removeScheduled:(NSSet *)values;
 
+//-----------------------------------------------
+// Ticket Object Methods
+//-----------------------------------------------
 - (void)addTicketObject:(Ticket *)value;
 - (void)removeTicketObject:(Ticket *)value;
 - (void)addTicket:(NSSet *)values;

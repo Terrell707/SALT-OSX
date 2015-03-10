@@ -28,14 +28,28 @@
 @property (readwrite, retain) User *username;
 @property (readwrite, retain) NSMutableSet *scheduled;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data;
+
+//-----------------------------------------------
+// Methods for Employee
+//-----------------------------------------------
+- (NSArray *)propsForDatabase;
 - (NSArray *)properties;
 
+//-----------------------------------------------
+// Worked Object Methods
+//-----------------------------------------------
 - (void)addWorkedObject:(Ticket *)value;
 - (void)removeWorkedObject:(Ticket *)value;
 - (void)addWorked:(NSSet *)values;
 - (void)removeWorked:(NSSet *)values;
 
+//-----------------------------------------------
+// Schedule Object Methods
+//-----------------------------------------------
 - (void)addScheduledObject:(Schedule *)value;
 - (void)removeScheduledObject:(Schedule *)value;
 - (void)addScheduled:(NSSet *)values;

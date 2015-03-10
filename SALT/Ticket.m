@@ -35,11 +35,13 @@
 @synthesize heldAt;
 @synthesize helpedBy;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)init {
     self = [super init];
     if (self) {
-        // Sets defaults for newly created Tickets.
-        hearing_date = [NSDate date];
+        helpedBy = [[NSMutableSet alloc] init];
     }
     
     return self;
@@ -47,7 +49,7 @@
 
 - (id)initWithData:(NSDictionary *)data
 {
-    self = [super init];
+    self = [self init];
     if (self) {;
         // Creates a ticket out of data from a json object.
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
@@ -82,6 +84,9 @@
     return self;
 }
 
+//-----------------------------------------------
+// Methods for Ticket
+//-----------------------------------------------
 - (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"ticket_no", @"order_date", @"call_order_no", @"first_name",
@@ -97,6 +102,33 @@
     NSArray *props = [NSArray arrayWithObjects:@"workedBy", @"judgePresided", @"heldAt", @"helpedBy", nil];
     
     return [propsForDatabase arrayByAddingObjectsFromArray:props];
+}
+
+//-----------------------------------------------
+// HelpedBy Methods
+//-----------------------------------------------
+- (void)addHelpedByObject:(Witness *)value
+{
+    [helpedBy addObject:value];
+}
+
+- (void)removeHelpedByObject:(Witness *)value
+{
+    [helpedBy removeObject:value];
+}
+
+- (void)addHelpedBy:(NSSet *)values
+{
+    for (Witness *witness in values) {
+        [helpedBy addObject:witness];
+    }
+}
+
+- (void)removeHelpedBy:(NSSet *)values
+{
+    for (Witness *witness in values) {
+        [helpedBy removeObject:witness];
+    }
 }
 
 @end

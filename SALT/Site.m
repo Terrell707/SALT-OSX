@@ -19,11 +19,25 @@
 @synthesize phone_number;
 @synthesize email;
 @synthesize scheduled;
-@synthesize ticket;
+@synthesize tickets;
+
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        scheduled = [[NSMutableSet alloc] init];
+        tickets = [[NSMutableSet alloc] init];
+    }
+    
+    return self;
+}
 
 - (id)initWithData:(NSDictionary *)data
 {
-    self = [super init];
+    self = [self init];
     if (self) {
         office_code = data[@"office_code"];
         name = data[@"name"];
@@ -32,6 +46,60 @@
         email = data[@"email"];
     }
     return self;
+}
+
+//-----------------------------------------------
+// Ticket Object Methods
+//-----------------------------------------------
+- (void)addTicketObject:(Ticket *)value
+{
+    [tickets addObject:value];
+}
+
+- (void)removeTicketObject:(Ticket *)value
+{
+    [tickets removeObject:value];
+}
+
+- (void)addTicket:(NSSet *)values
+{
+    for (Ticket *ticket in values) {
+        [tickets addObject:ticket];
+    }
+}
+
+- (void)removeTicket:(NSSet *)values
+{
+    for (Ticket *ticket in values) {
+        [tickets removeObject:ticket];
+    }
+}
+
+//-----------------------------------------------
+// Schedule Object Methods
+//-----------------------------------------------
+- (void)addScheduledObject:(Schedule *)value
+{
+    [scheduled addObject:value];
+}
+
+- (void)removeScheduledObject:(Schedule *)value
+{
+    [scheduled removeObject:value];
+}
+
+- (void)addScheduled:(NSSet *)values
+{
+    for (Schedule *schedule in values) {
+        [scheduled removeObject:schedule];
+    }
+}
+
+- (void)removeScheduled:(NSSet *)values
+{
+    for (Schedule *schedule in values) {
+        [scheduled removeObject:schedule];
+    }
 }
 
 @end
