@@ -837,7 +837,7 @@ DQ
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="" headerView="hu9-4l-4AB" id="FFU-hr-HCC">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" autosaveName="" headerView="hu9-4l-4AB" id="FFU-hr-HCC">
                                             <rect key="frame" x="0.0" y="0.0" width="1372" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -845,7 +845,7 @@ DQ
                                             <tableViewGridLines key="gridStyleMask" vertical="YES" dashed="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="ticket_no" width="90" minWidth="40" maxWidth="1000" id="2S2-iq-3Zd">
+                                                <tableColumn identifier="ticket_no" editable="NO" width="90" minWidth="40" maxWidth="1000" id="2S2-iq-3Zd">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Ticket Number">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -863,7 +863,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.ticket_no" id="GkP-px-MC3"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="order_date" width="75" minWidth="40" maxWidth="1000" id="573-R7-hcY">
+                                                <tableColumn identifier="order_date" editable="NO" width="75" minWidth="40" maxWidth="1000" id="573-R7-hcY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Order Date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -881,7 +881,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.order_date" id="G2E-6X-mGE"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="call_order_no" width="115" minWidth="10" maxWidth="3.4028234663852886e+38" id="qZ1-oA-y5D" userLabel="Call Order No.">
+                                                <tableColumn identifier="call_order_no" editable="NO" width="115" minWidth="10" maxWidth="3.4028234663852886e+38" id="qZ1-oA-y5D" userLabel="Call Order No.">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Call Order No.">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -898,7 +898,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.call_order_no" id="icT-rD-gjC"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="first_name" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="VyW-pI-F28" userLabel="First Name">
+                                                <tableColumn identifier="first_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="VyW-pI-F28" userLabel="First Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant First Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -915,7 +915,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.first_name" id="mzk-YS-Fop"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="last_name" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="xUa-SY-Zyc" userLabel="Last Name">
+                                                <tableColumn identifier="last_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="xUa-SY-Zyc" userLabel="Last Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant Last Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -932,7 +932,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.last_name" id="W3S-Nv-4c0"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="bpa_no" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="1Kc-F0-aDX" userLabel="BPA No.">
+                                                <tableColumn identifier="bpa_no" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="1Kc-F0-aDX" userLabel="BPA No.">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="BPA No.">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -949,7 +949,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.bpa_no" id="3KF-6V-RZK"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="can" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="3Ag-Te-aeW" userLabel="CAN">
+                                                <tableColumn identifier="can" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="3Ag-Te-aeW" userLabel="CAN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="CAN">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -971,7 +971,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.can" id="H5B-2g-BpR"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="tin" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="zVz-3o-qJZ" userLabel="TIN">
+                                                <tableColumn identifier="tin" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="zVz-3o-qJZ" userLabel="TIN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="TIN">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -988,7 +988,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.tin" id="3Pb-Ah-tCy"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="soc" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="PmC-rC-Wz7" userLabel="SOC">
+                                                <tableColumn identifier="soc" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="PmC-rC-Wz7" userLabel="SOC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="SOC">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1005,7 +1005,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.soc" id="3uK-oi-1Ko"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="hearing_date" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="h9d-wo-dsn" userLabel="Hearing Date">
+                                                <tableColumn identifier="hearing_date" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="h9d-wo-dsn" userLabel="Hearing Date">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Hearing Date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1023,7 +1023,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.hearing_date" id="kdf-Jz-Dba"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="hearing_time" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="yze-Z5-YvU" userLabel="Hearing Time">
+                                                <tableColumn identifier="hearing_time" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="yze-Z5-YvU" userLabel="Hearing Time">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Hearing Time">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1041,7 +1041,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.hearing_time" id="poJ-ew-6ac"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="status" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
+                                                <tableColumn identifier="status" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1058,7 +1058,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.status" id="MHc-Fg-Dk0"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="emp_first" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="FlJ-ak-WE4" userLabel="Emp First Name">
+                                                <tableColumn identifier="emp_first" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="FlJ-ak-WE4" userLabel="Emp First Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Employee First">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1074,7 +1074,7 @@ DQ
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.workedBy.first_name" id="p8J-E2-qGK"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="emp_last" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="qNa-jY-cls" userLabel="Emp Last Name">
+                                                <tableColumn identifier="emp_last" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="qNa-jY-cls" userLabel="Emp Last Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Employee Last">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1260,14 +1260,18 @@ DQ
                                             </textFieldCell>
                                         </textField>
                                         <textField identifier="soc_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8A-q5-8va">
-                                            <rect key="frame" x="373" y="165" width="42" height="22"/>
+                                            <rect key="frame" x="373" y="165" width="43" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zFl-Ru-jYy">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.soc" id="ODz-5g-9dO"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.soc" id="FeY-vL-epb">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="MRI-9G-ycD"/>
                                                 <outlet property="nextKeyView" destination="6wr-h7-qSc" id="rWU-SQ-1rM"/>
                                             </connections>
@@ -1281,14 +1285,18 @@ DQ
                                             </textFieldCell>
                                         </textField>
                                         <textField identifier="bpa_no_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MrO-Z1-0SW">
-                                            <rect key="frame" x="419" y="195" width="117" height="22"/>
+                                            <rect key="frame" x="420" y="195" width="120" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="eqA-y5-ZBw">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.bpa_no" id="ERd-P5-BZK"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.bpa_no" id="E6M-dK-tMB">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XXXX-XX-XXXXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="Ypr-3i-3LX"/>
                                                 <outlet property="nextKeyView" destination="Lq8-B7-SiB" id="XmL-SH-McP"/>
                                             </connections>
@@ -1301,13 +1309,17 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.tin" id="bjS-CU-Rid"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.tin" id="iBb-Fx-Leg">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XX-XXXXXXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="muz-hW-5Kd"/>
                                                 <outlet property="nextKeyView" destination="n8A-q5-8va" id="3uS-Mj-K59"/>
                                             </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uKl-dz-uoL">
-                                            <rect key="frame" x="63" y="198" width="124" height="17"/>
+                                            <rect key="frame" x="60" y="198" width="124" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Call Order Number:" id="yrp-ST-wMK">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1323,7 +1335,7 @@ DQ
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZP-EQ-1rZ">
-                                            <rect key="frame" x="542" y="198" width="37" height="17"/>
+                                            <rect key="frame" x="545" y="198" width="37" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CAN:" id="qed-fG-aOV">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1369,20 +1381,28 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.can" id="TcO-S9-Usc"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.can" id="ubf-UM-ygS">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XXXXXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="HXS-EH-aSj"/>
                                                 <outlet property="nextKeyView" destination="Xdp-2g-S3N" id="hZv-wb-HTA"/>
                                             </connections>
                                         </textField>
                                         <textField identifier="ticket_no_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paa-t9-fcG">
-                                            <rect key="frame" x="156" y="225" width="75" height="22"/>
+                                            <rect key="frame" x="156" y="225" width="77" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="N2g-wR-ObP">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.ticket_no.stringValue" id="dQ5-sx-W1c"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.ticket_no.stringValue" id="1F3-nI-0dB">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XXXXXXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="CLX-hN-uB0"/>
                                                 <outlet property="nextKeyView" destination="MrO-Z1-0SW" id="Gk7-7k-ye3"/>
                                             </connections>
@@ -1412,25 +1432,28 @@ DQ
                                             </textFieldCell>
                                         </textField>
                                         <textField identifier="call_order_no_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ks6-1E-jGW">
-                                            <rect key="frame" x="195" y="195" width="123" height="22"/>
+                                            <rect key="frame" x="192" y="195" width="130" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hRG-0Z-nQl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.call_order_no" id="QuZ-EB-WBD"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.call_order_no" id="jf8-b5-U68">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XXXX-XX-XXXXXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="Kq5-fO-kEN"/>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQO-Uh-oUZ">
-                                            <rect key="frame" x="324" y="198" width="87" height="17"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BPA Number:" id="EZa-Lq-M74">
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HrX-aC-kUf">
+                                            <rect key="frame" x="621" y="7" width="86" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fqM-gw-6Ie">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
+                                            </buttonCell>
+                                        </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5HJ-XD-d5D">
                                             <rect key="frame" x="262" y="258" width="89" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hearing Date:" id="82A-5J-Z4Q">
@@ -1463,27 +1486,22 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="displayPatternValue1" keyPath="selection.first_name" id="qIj-te-eBk">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayPattern">%{value2}@, %{value1}@</string>
-                                                    </dictionary>
-                                                </binding>
-                                                <binding destination="HHH-Fn-eU5" name="displayPatternValue2" keyPath="selection.last_name" previousBinding="qIj-te-eBk" id="W5E-x1-5bL">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayPattern">%{value2}@, %{value1}@</string>
-                                                    </dictionary>
-                                                </binding>
+                                                <outlet property="delegate" destination="QUM-jv-1NT" id="JNC-eh-Qok"/>
                                             </connections>
                                         </textField>
                                         <textField identifier="can_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8dQ-45-TmC">
-                                            <rect key="frame" x="475" y="165" width="53" height="22"/>
+                                            <rect key="frame" x="475" y="165" width="50" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Vlg-Jx-2jL">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.status" id="V1O-Af-iIZ"/>
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.status" id="u3g-VH-Pk1">
+                                                    <dictionary key="options">
+                                                        <string key="NSMultipleValuesPlaceholder">XXXX</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="qey-ey-433"/>
                                                 <outlet property="nextKeyView" destination="Xdp-2g-S3N" id="bbv-cm-zZz"/>
                                             </connections>
@@ -1496,16 +1514,7 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="displayPatternValue1" keyPath="selection.workedBy.first_name" id="F0U-6i-rm1">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayPattern">%{value2}@, %{value1}@</string>
-                                                    </dictionary>
-                                                </binding>
-                                                <binding destination="HHH-Fn-eU5" name="displayPatternValue2" keyPath="selection.workedBy.last_name" previousBinding="F0U-6i-rm1" id="B7R-gU-rN9">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayPattern">%{value2}@, %{value1}@</string>
-                                                    </dictionary>
-                                                </binding>
+                                                <outlet property="delegate" destination="QUM-jv-1NT" id="xaY-tJ-9hk"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2tg-rR-aOF">
@@ -1516,16 +1525,7 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="displayPatternValue1" keyPath="selection.judgePresided.first_name" id="uMB-W4-SxG">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayPattern">%{value2}@, %{value1}@</string>
-                                                    </dictionary>
-                                                </binding>
-                                                <binding destination="HHH-Fn-eU5" name="displayPatternValue2" keyPath="selection.judgePresided.last_name" previousBinding="uMB-W4-SxG" id="hjV-F4-HMa">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayPattern">%{value2}@, %{value1}@</string>
-                                                    </dictionary>
-                                                </binding>
+                                                <outlet property="delegate" destination="QUM-jv-1NT" id="5u3-ZB-kRz"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lb9-as-uXs">
@@ -1535,6 +1535,9 @@ DQ
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="QUM-jv-1NT" id="6rE-Ox-lfa"/>
+                                            </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jud-ez-deR">
                                             <rect key="frame" x="479" y="92" width="201" height="22"/>
@@ -1568,13 +1571,14 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HrX-aC-kUf">
-                                            <rect key="frame" x="621" y="7" width="86" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fqM-gw-6Ie">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQO-Uh-oUZ">
+                                            <rect key="frame" x="328" y="198" width="87" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BPA Number:" id="EZa-Lq-M74">
                                                 <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                 </view>
                                 <constraints>
@@ -1604,9 +1608,16 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="claimantNameField" destination="Hfc-Ds-93l" id="DPW-Hd-wMT"/>
+                        <outlet property="judgePresidingField" destination="2tg-rR-aOF" id="6jb-bI-Psm"/>
+                        <outlet property="medNameField" destination="4Iu-Q4-R4c" id="9ph-Hs-Kcv"/>
+                        <outlet property="otherNameField" destination="Ph1-5I-4Gb" id="aTF-TT-R74"/>
+                        <outlet property="repNameField" destination="Jud-ez-deR" id="Xe2-Tk-SlQ"/>
                         <outlet property="searchField" destination="Hja-2h-0mH" id="u6X-eg-pKr"/>
                         <outlet property="ticketController" destination="HHH-Fn-eU5" id="Hpp-dp-FnV"/>
                         <outlet property="ticketTable" destination="FFU-hr-HCC" id="c87-5q-qdf"/>
+                        <outlet property="vocNameField" destination="gvh-df-eM4" id="UJy-Mm-mB4"/>
+                        <outlet property="workedByField" destination="RdK-6X-eaO" id="Rhc-7a-NWx"/>
                     </connections>
                 </viewController>
                 <customObject id="HPV-nW-0MA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

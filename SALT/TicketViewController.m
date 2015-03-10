@@ -25,8 +25,9 @@
     [super viewDidAppear];
     
     NSLog(@"Window Name from TicketViewController=%@", [[self view] window]);
-    
     NSLog(@"Ticket View Controller viewDidAppear");
+    
+    lastNameFirst = YES;
     
     // Populates the table with tickets returned from the server.
     [self setTickets:[[DataController sharedDataController] tickets]];
@@ -37,23 +38,28 @@
                                                options:NSKeyValueObservingOptionNew
                                                context:NULL];
     
-    // Observes our own tickets for any tickets that were removed.
-//    [self addObserver:self forKeyPath:@"tickets" options:NSKeyValueObservingOptionOld context:NULL];
+    // Observes the TicketController for any time the selection is changed.
+    [ticketController addObserver:self forKeyPath:@"selectionIndex" options:NSKeyValueObservingOptionNew context:nil];
     
     // Keeps a copy of the tickets so that they are not overwritten by searching.
     ticketsBeforeFilter = tickets;
-
+    
     [ticketTable reloadData];
+    [self updateFields];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     // Will reload the table with new tickets that were added.
-    if ([keyPath isEqualToString:@"tickets"] && object != self) {
+    if ([keyPath isEqualToString:@"tickets"]) {
         [self setTickets:[[DataController sharedDataController] tickets]];
         ticketsBeforeFilter = tickets;
         [self searchTickets];
         [ticketTable reloadData];
+    }
+    
+    if ([keyPath isEqualToString:@"selectionIndex"]) {
+        [self updateFields];
     }
 }
 
@@ -62,6 +68,9 @@
     // Will update the search whenever something is typed into the search field.
     if ([notification object] == searchField) {
         [self searchTickets];
+    }
+    else {
+        NSLog(@"Yee");
     }
 }
 
@@ -96,6 +105,20 @@
     }
     else {
         NSLog(@"Failure removing ticket!");
+    }
+}
+
+- (void)updateFields
+{
+    NSUInteger selection = [ticketController selectionIndex];
+    
+    if (lastNameFirst) {
+        [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [tickets[selection] last_name], [tickets[selection] first_name]]];
+        [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] workedBy] last_name], [[tickets[selection] workedBy] first_name]]];
+    }
+    else {
+        [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [tickets[selection] first_name], [tickets[selection] last_name]]];
+        [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] workedBy] first_name], [[tickets[selection] workedBy] last_name]]];
     }
 }
 
@@ -155,17 +178,6 @@
     }
     
     return args;
-}
-
-- (void)createAlertWithMessage:(NSString *)message informative:(NSString *)info
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:message];
-    [alert setInformativeText:info];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert addButtonWithTitle:@"Delete"];
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert beginSheetModalForWindow:[[self view] window] completionHandler:nil];
 }
 
 @end
