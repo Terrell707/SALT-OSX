@@ -172,7 +172,7 @@ static DataController *sharedDataController = nil;
         NSArray *arr = [_employees filteredArrayUsingPredicate:workedByEmployee];
         // If there was an employee that worked the ticket, then their information is added to the ticket and the
         //  ticket is added to the employee.
-        if ([arr count] > 0) {
+        if (arr.count > 0) {
             Employee *emp = arr[0];
             [ticket setWorkedBy:emp];
             [emp addWorkedObject:ticket];
@@ -181,11 +181,22 @@ static DataController *sharedDataController = nil;
         // Finds the judge that presided over the hearing and add the judge's information to the ticket.
         NSPredicate *judgePresided = [NSPredicate predicateWithFormat:@"judge_id == %@", ticket.judge_presided];
         arr = [_judges filteredArrayUsingPredicate:judgePresided];
-
-        if ([arr count] > 0) {
+        // If there was a judge that presided over the hearing of the ticket, then their information is added to the
+        //  ticket and the ticket is added to the judge.
+        if (arr.count > 0) {
             Judge *judge = arr[0];
             [ticket setJudgePresided:judge];
             [judge addWorkedObject:ticket];
+        }
+        
+        NSPredicate *heldAtSite = [NSPredicate predicateWithFormat:@"office_code == %@", ticket.at_site];
+        arr = [_sites filteredArrayUsingPredicate:heldAtSite];
+        // If the site the hearing was held at was recorded for the ticket, then the office info is added to the
+        //  ticket and the ticket is added to the office.
+        if (arr.count > 0) {
+            Site *site = arr[0];
+            [ticket setHeldAt:site];
+            [site addTicketObject:ticket];
         }
     }
 }
