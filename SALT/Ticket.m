@@ -81,7 +81,6 @@
         at_site = data[@"at_site"];
     }
     
-    NSLog(@"Soc = %@", soc);
     return self;
 }
 
