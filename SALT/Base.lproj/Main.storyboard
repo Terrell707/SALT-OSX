@@ -1058,6 +1058,9 @@ DQ
                                                     </connections>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <binding destination="HHH-Fn-eU5" name="selectionIndexes" keyPath="selectionIndexes" id="2xe-cA-wdl"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1234,9 +1237,10 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.soc" id="FeY-vL-epb">
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.soc" id="8rT-b6-AjA">
                                                     <dictionary key="options">
                                                         <string key="NSMultipleValuesPlaceholder">XXXX</string>
+                                                        <string key="NSNoSelectionPlaceholder">N/A</string>
                                                     </dictionary>
                                                 </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="MRI-9G-ycD"/>
@@ -1314,9 +1318,10 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.can" id="ubf-UM-ygS">
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.can" id="XqU-Gd-1J5">
                                                     <dictionary key="options">
                                                         <string key="NSMultipleValuesPlaceholder">XXXXXXX</string>
+                                                        <string key="NSNoSelectionPlaceholder">N/A</string>
                                                     </dictionary>
                                                 </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="HXS-EH-aSj"/>
@@ -1330,9 +1335,10 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.ticket_no.stringValue" id="1F3-nI-0dB">
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.ticket_no.stringValue" id="o3k-wv-Qnr">
                                                     <dictionary key="options">
                                                         <string key="NSMultipleValuesPlaceholder">XXXXXXXX</string>
+                                                        <string key="NSNoSelectionPlaceholder">N/A</string>
                                                     </dictionary>
                                                 </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="CLX-hN-uB0"/>
@@ -1362,9 +1368,10 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.call_order_no" id="jf8-b5-U68">
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.call_order_no" id="a7b-Tm-uHA">
                                                     <dictionary key="options">
                                                         <string key="NSMultipleValuesPlaceholder">XXXX-XX-XXXXXXX</string>
+                                                        <string key="NSNoSelectionPlaceholder">N/A</string>
                                                     </dictionary>
                                                 </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="Kq5-fO-kEN"/>
@@ -1413,9 +1420,10 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.status" id="u3g-VH-Pk1">
+                                                <binding destination="HHH-Fn-eU5" name="value" keyPath="selection.status" id="6fF-N6-1JC">
                                                     <dictionary key="options">
                                                         <string key="NSMultipleValuesPlaceholder">XXXX</string>
+                                                        <string key="NSNoSelectionPlaceholder">N/A</string>
                                                     </dictionary>
                                                 </binding>
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="qey-ey-433"/>
@@ -1525,6 +1533,7 @@ DQ
                         <outlet property="claimantNameField" destination="Hfc-Ds-93l" id="DPW-Hd-wMT"/>
                         <outlet property="judgePresidingField" destination="2tg-rR-aOF" id="6jb-bI-Psm"/>
                         <outlet property="medNameField" destination="4Iu-Q4-R4c" id="9ph-Hs-Kcv"/>
+                        <outlet property="officeField" destination="Lb9-as-uXs" id="hMR-Zi-4Rl"/>
                         <outlet property="otherNameField" destination="Ph1-5I-4Gb" id="aTF-TT-R74"/>
                         <outlet property="repNameField" destination="Jud-ez-deR" id="Xe2-Tk-SlQ"/>
                         <outlet property="searchField" destination="Hja-2h-0mH" id="u6X-eg-pKr"/>

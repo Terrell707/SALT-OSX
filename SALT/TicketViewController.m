@@ -45,7 +45,9 @@
     ticketsBeforeFilter = tickets;
     
     [ticketTable reloadData];
+    NSLog(@"Calling Update Fields!");
     [self updateFields];
+    [self.view.window makeFirstResponder:ticketTable];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -59,6 +61,7 @@
     }
     
     if ([keyPath isEqualToString:@"selectionIndex"]) {
+        NSLog(@"Selection = %ld", [ticketController selectionIndex]);
         [self updateFields];
     }
 }
@@ -70,7 +73,6 @@
         [self searchTickets];
     }
     else {
-        NSLog(@"Yee");
         [self changeTicketInfoFromField:[notification object]];
     }
 }
@@ -113,28 +115,51 @@
 {
     NSUInteger selection = [ticketController selectionIndex];
     
-    if ([[ticketController selectedObjects] count] > 1) {
-        [_claimantNameField setStringValue:@""];
-        [_claimantNameField setPlaceholderString:@"Multiple Values"];
-        [_claimantNameField setEditable:NO];
-        [_workedByField setStringValue:@""];
-        [_workedByField setPlaceholderString:@"Multiple Values"];
-        [_workedByField setEditable:NO];
+    NSArray *nameFields = [NSArray arrayWithObjects:_claimantNameField, _workedByField, _judgePresidingField, _officeField,
+                       _repNameField, _vocNameField, _medNameField, _otherNameField, nil];
+    
+    // Blank out all fields.
+    for (NSTextField *field in nameFields) {
+        [field setStringValue:@""];
+    }
+    
+    if (selection == -1 || selection > [tickets count]) {
+        // Nothing is selected, so fill each of the fields with "No Selection" and make the field unedittable.
+        for (NSTextField *field in nameFields) {
+            [field setPlaceholderString:@"No Selection"];
+            [field setEditable:NO];
+        }
+        return;
+    }
+    else if ([[ticketController selectedObjects] count] > 1) {
+        // More than one thing was selected, so fill each of the fields with "Multiple Values" and make the fields
+        //  unedittable.
+        for (NSTextField *field in nameFields) {
+            [field setPlaceholderString:@"Multiple Values"];
+            [field setEditable:NO];
+        }
         return;
     }
     else {
-        [_claimantNameField setEditable:YES];
-        [_workedByField setEditable:YES];
+        // Only one thing is selected, so make all the fields edittable.
+        for (NSTextField *field in nameFields) {
+            [field setPlaceholderString:@""];
+            [field setEditable:YES];
+        }
     }
     
     if (lastNameFirst) {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [tickets[selection] last_name], [tickets[selection] first_name]]];
         [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] workedBy] last_name], [[tickets[selection] workedBy] first_name]]];
+        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] judgePresided] last_name], [[tickets[selection] judgePresided] first_name]]];
     }
     else {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [tickets[selection] first_name], [tickets[selection] last_name]]];
         [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] workedBy] first_name], [[tickets[selection] workedBy] last_name]]];
+        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] judgePresided] first_name], [[tickets[selection] judgePresided] last_name]]];
     }
+    
+    [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] heldAt] name], [[tickets[selection] heldAt] office_code]]];
 }
 
 - (void)changeTicketInfoFromField:(NSTextField *)field
@@ -189,7 +214,7 @@
     NSLog(@"Tokens=%@", searchTokens);
     
     // An array of keys that will be compared against.
-    NSArray *keys = @[@"ticket_no.stringValue", @"first_name", @"last_name",
+    NSArray *keys = @[@"ticket_no.stringValue", @"first_name", @"last_name", @"heldAt.office_code", @"heldAt.name",
                       @"status", @"workedBy.first_name", @"workedBy.last_name"];
     
     // A filter created based on the keys above.
@@ -199,7 +224,16 @@
         // Inserts the token to compare against in between each of the above keys.
         NSArray *args = [self insertToken:token forKeys:keys];
         searchPredicate = [NSPredicate predicateWithFormat:filter argumentArray:args];
-        [self setTickets:(NSMutableArray *)[tickets filteredArrayUsingPredicate:searchPredicate]];
+        
+        // Work around. If the filtered array is empty, ticketController will through an error because selection index
+        //  is outside the bounds of the tickets array. This will update the selection index manually.
+        NSMutableArray *filteredArray = (NSMutableArray *)[tickets filteredArrayUsingPredicate:searchPredicate];
+//        if (filteredArray.count <= 0) {
+//            [ticketController setSelectionIndex:0];
+//        }
+        [self setTickets:filteredArray];
+        
+        NSLog(@"Selection Index After Search = %ld", [ticketController selectionIndex]);
     }
 }
 

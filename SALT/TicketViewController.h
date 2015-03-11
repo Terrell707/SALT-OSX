@@ -23,6 +23,7 @@
 @property (weak) IBOutlet NSTextField *claimantNameField;
 @property (weak) IBOutlet NSTextField *workedByField;
 @property (weak) IBOutlet NSTextField *judgePresidingField;
+@property (weak) IBOutlet NSTextField *officeField;
 @property (weak) IBOutlet NSTextField *repNameField;
 @property (weak) IBOutlet NSTextField *vocNameField;
 @property (weak) IBOutlet NSTextField *medNameField;
