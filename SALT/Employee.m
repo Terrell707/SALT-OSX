@@ -26,6 +26,7 @@
 @synthesize state;
 @synthesize zip;
 @synthesize pay;
+@synthesize active;
 @synthesize worked;
 @synthesize username;
 @synthesize scheduled;
@@ -66,6 +67,7 @@
         state = data[@"state"];
         zip = data[@"zip"];
         pay = [numFormat numberFromString:data[@"pay"]];
+        active = [data[@"active"] boolValue];
     }
     return self;
 }
@@ -76,7 +78,7 @@
 - (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"database_id", @"emp_id", @"first_name", @"middle_init",
-                      @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay", nil];
+                      @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay", @"active", nil];
     return props;
 }
 

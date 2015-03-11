@@ -15,6 +15,7 @@
 @synthesize first_name;
 @synthesize last_name;
 @synthesize role;
+@synthesize active;
 @synthesize worked;
 
 - (id)initWithData:(NSDictionary *)data
@@ -29,6 +30,7 @@
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
         role = data[@"role"];
+        active = [data[@"active"] boolValue];
     }
     return self;
 }

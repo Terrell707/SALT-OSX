@@ -56,6 +56,7 @@ static DataController *sharedDataController = nil;
     NSLog(@"Data Controller loadData");
     
     // Populate the data arrays with the data from the mysql database.
+    [self grabBusinessData];
     [self grabHearingStatusData];
     [self grabEmployeeData];
     [self grabJudgeData];
@@ -63,6 +64,22 @@ static DataController *sharedDataController = nil;
     [self grabTicketData];
     [self grabExpertData];
     [self hearingTicketInformation];
+}
+
+- (void)grabBusinessData
+{
+    if (_business != nil)
+        return;
+    
+    NSArray *businessData = [mySQL grabInfoFromFile:@"queries/business.php"];
+    NSInteger status = [statusChecker checkStatus:businessData];
+    
+    if ([self checkStatus:status]) {
+        for (int x = 0; x < [businessData count]; x++) {
+            NSDictionary *data = [businessData objectAtIndex:x];
+            _business = [[Business alloc] initWithData:data];
+        }
+    }
 }
 
 - (void)grabHearingStatusData
@@ -197,6 +214,8 @@ static DataController *sharedDataController = nil;
             Site *site = arr[0];
             [ticket setHeldAt:site];
             [site addTicketObject:ticket];
+            
+            [ticket setCan:site.can];
         }
     }
 }

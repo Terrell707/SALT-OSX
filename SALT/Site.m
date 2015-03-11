@@ -18,6 +18,9 @@
 @synthesize address;
 @synthesize phone_number;
 @synthesize email;
+@synthesize can;
+@synthesize pay;
+@synthesize active;
 @synthesize scheduled;
 @synthesize tickets;
 
@@ -39,11 +42,17 @@
 {
     self = [self init];
     if (self) {
+        // Creates a site out of a json object.
+        NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
+        
         office_code = data[@"office_code"];
         name = data[@"name"];
         address = data[@"address"];
         phone_number = data[@"phone_number"];
         email = data[@"email"];
+        can = data[@"can"];
+        pay = [numFormat numberFromString:data[@"pay"]];
+        active = [data[@"active"] boolValue];
     }
     return self;
 }

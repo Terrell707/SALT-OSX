@@ -20,9 +20,9 @@
 @synthesize call_order_no;
 @synthesize first_name;
 @synthesize last_name;
-@synthesize bpa_no;
+//@synthesize bpa_no;
 @synthesize can;
-@synthesize tin;
+//@synthesize tin;
 @synthesize soc;
 @synthesize hearing_date;
 @synthesize hearing_time;
@@ -69,9 +69,9 @@
         call_order_no = data[@"call_order_no"];
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
-        bpa_no = data[@"bpa_no"];
+//        bpa_no = data[@"bpa_no"];
         can = data[@"can"];
-        tin = data[@"tin"];
+//        tin = data[@"tin"];
         soc = data[@"soc"];
         hearing_date = hearingDate;
         hearing_time = hearingTime;
@@ -81,6 +81,7 @@
         at_site = data[@"at_site"];
     }
     
+    NSLog(@"Soc = %@", soc);
     return self;
 }
 
@@ -90,7 +91,7 @@
 - (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"ticket_no", @"order_date", @"call_order_no", @"first_name",
-                           @"last_name", @"bpa_no", @"can", @"tin", @"soc", @"hearing_date", @"hearing_time",
+                           @"last_name", @"soc", @"hearing_date", @"hearing_time",
                            @"status", @"emp_worked", @"judge_presided", @"at_site", nil];
     
     return props;
@@ -130,5 +131,4 @@
         [helpedBy removeObject:witness];
     }
 }
-
 @end

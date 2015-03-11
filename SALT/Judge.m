@@ -17,6 +17,7 @@
 @synthesize office;
 @synthesize first_name;
 @synthesize last_name;
+@synthesize active;
 @synthesize assistedBy;
 @synthesize worked;
 
@@ -31,6 +32,7 @@
         office = data[@"office"];
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
+        active = [data[@"active"] boolValue];
     }
     return self;
 }

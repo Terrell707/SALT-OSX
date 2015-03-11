@@ -24,6 +24,7 @@
 @property (readwrite, retain) NSString * state;
 @property (readwrite, retain) NSString * zip;
 @property (readwrite, retain) NSNumber * pay;
+@property (readwrite) BOOL active;
 @property (readwrite, retain) NSMutableSet *worked;
 @property (readwrite, retain) User *username;
 @property (readwrite, retain) NSMutableSet *scheduled;

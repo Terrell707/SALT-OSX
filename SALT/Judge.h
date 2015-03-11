@@ -16,6 +16,7 @@
 @property (readwrite, retain) NSString * office;
 @property (readwrite, retain) NSString * first_name;
 @property (readwrite, retain) NSString * last_name;
+@property (readwrite) BOOL active;
 @property (readwrite, retain) Clerk *assistedBy;
 @property (readwrite, retain) NSMutableSet *worked;
 

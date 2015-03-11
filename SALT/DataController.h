@@ -10,6 +10,7 @@
 #import "MySQL.h"
 #import "StatusCodes.h"
 
+#import "Business.h"
 #import "Employee.h"
 #import "Site.h"
 #import "Judge.h"
@@ -30,6 +31,7 @@
 @property (readonly) BOOL loggedIn;
 @property (readonly) NSString *user;
 
+@property (readwrite, copy) Business *business;
 @property (readwrite, copy) NSMutableArray *hearingStatus;
 @property (readwrite, copy) NSMutableArray *employees;
 @property (readwrite, copy) NSMutableArray *sites;

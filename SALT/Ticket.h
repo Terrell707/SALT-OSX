@@ -17,9 +17,9 @@
 @property (readwrite, retain) NSString * call_order_no;
 @property (readwrite, retain) NSString * first_name;
 @property (readwrite, retain) NSString * last_name;
-@property (readwrite, retain) NSString * bpa_no;
+//@property (readwrite, retain) NSString * bpa_no;
 @property (readwrite, retain) NSString * can;
-@property (readwrite, retain) NSString * tin;
+//@property (readwrite, retain) NSString * tin;
 @property (readwrite, retain) NSString * soc;
 @property (readwrite, retain) NSDate * hearing_date;
 @property (readwrite, retain) NSDate * hearing_time;

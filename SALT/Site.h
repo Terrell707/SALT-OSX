@@ -17,6 +17,9 @@
 @property (readwrite, retain) NSString * address;
 @property (readwrite, retain) NSString * phone_number;
 @property (readwrite, retain) NSString * email;
+@property (readwrite, retain) NSString * can;
+@property (readwrite, retain) NSNumber * pay;
+@property (readwrite) BOOL active;
 @property (readwrite, retain) NSMutableSet *scheduled;
 @property (readwrite, retain) NSMutableSet *tickets;
 

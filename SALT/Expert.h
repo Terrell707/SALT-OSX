@@ -16,6 +16,7 @@
 @property (readwrite, retain) NSString * first_name;
 @property (readwrite, retain) NSString * last_name;
 @property (readwrite, retain) NSString * role;
+@property (readwrite) BOOL active;
 @property (readwrite, retain) Witness *worked;
 
 - (id)initWithData:(NSDictionary *)data;
