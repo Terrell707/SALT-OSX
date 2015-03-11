@@ -123,9 +123,9 @@
     [newTicket setFirst_name:[_firstNameField stringValue]];
     [newTicket setLast_name:[_lastNameField stringValue]];
     [newTicket setTicket_no:[numFormat numberFromString:[_ticketNumberField stringValue]]];
-    [newTicket setBpa_no:[_bpaNumberField stringValue]];
-    [newTicket setCan:[_canField stringValue]];
-    [newTicket setTin:[_tinField stringValue]];
+//    [newTicket setBpa_no:[_bpaNumberField stringValue]];
+//    [newTicket setCan:[_canField stringValue]];
+//    [newTicket setTin:[_tinField stringValue]];
     [newTicket setSoc:[_socField stringValue]];
     [newTicket setHearing_date:[dateFormat dateFromString:hearingDate]];
     [newTicket setHearing_time:[timeFormat dateFromString:hearingTime]];

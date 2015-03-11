@@ -71,6 +71,7 @@
     }
     else {
         NSLog(@"Yee");
+        [self changeTicketInfoFromField:[notification object]];
     }
 }
 
@@ -112,6 +113,20 @@
 {
     NSUInteger selection = [ticketController selectionIndex];
     
+    if ([[ticketController selectedObjects] count] > 1) {
+        [_claimantNameField setStringValue:@""];
+        [_claimantNameField setPlaceholderString:@"Multiple Values"];
+        [_claimantNameField setEditable:NO];
+        [_workedByField setStringValue:@""];
+        [_workedByField setPlaceholderString:@"Multiple Values"];
+        [_workedByField setEditable:NO];
+        return;
+    }
+    else {
+        [_claimantNameField setEditable:YES];
+        [_workedByField setEditable:YES];
+    }
+    
     if (lastNameFirst) {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [tickets[selection] last_name], [tickets[selection] first_name]]];
         [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] workedBy] last_name], [[tickets[selection] workedBy] first_name]]];
@@ -119,6 +134,40 @@
     else {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [tickets[selection] first_name], [tickets[selection] last_name]]];
         [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] workedBy] first_name], [[tickets[selection] workedBy] last_name]]];
+    }
+}
+
+- (void)changeTicketInfoFromField:(NSTextField *)field
+{
+    NSArray *nameSplit;
+    NSDictionary *name;
+    NSUInteger selection = [ticketController selectionIndex];
+    
+    if (lastNameFirst) {
+        nameSplit = [[field stringValue] componentsSeparatedByString:@", "];
+        name = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[1], @"first_name", nameSplit[0], @"last_name", nil];
+    }
+    else {
+        nameSplit = [[field stringValue] componentsSeparatedByString:@" "];
+        name = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[0], @"first_name", nameSplit[1], @"last_name", nil];
+    }
+    
+    NSLog(@"Selected Ticket = %@", [tickets objectAtIndex:selection]);
+    
+    if (field == _claimantNameField) {
+        
+    }
+    else if (field == _repNameField) {
+        
+    }
+    else if (field == _vocNameField) {
+        
+    }
+    else if (field == _medNameField) {
+        
+    }
+    else if (field == _otherNameField) {
+        
     }
 }
 
