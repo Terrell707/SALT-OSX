@@ -23,9 +23,9 @@
 @property (weak) IBOutlet NSTextField *firstNameField;
 @property (weak) IBOutlet NSTextField *lastNameField;
 @property (weak) IBOutlet NSTextField *ticketNumberField;
-@property (weak) IBOutlet NSTextField *bpaNumberField;
+//@property (weak) IBOutlet NSTextField *bpaNumberField;
 @property (weak) IBOutlet NSTextField *canField;
-@property (weak) IBOutlet NSTextField *tinField;
+//@property (weak) IBOutlet NSTextField *tinField;
 @property (weak) IBOutlet NSTextField *socField;
 @property (weak) IBOutlet NSDatePicker *hearingDatePicker;
 @property (weak) IBOutlet NSDatePicker *hearingTimePicker;
@@ -38,6 +38,7 @@
 @property (weak) IBOutlet NSComboBox *medicalCombo;
 @property (weak) IBOutlet NSComboBox *otherCombo;
 @property (weak) IBOutlet NSButton *interpreterCheck;
+@property (weak) IBOutlet NSTextField *statusLabel;
 
 - (IBAction)clearBtn:(NSButton *)sender;
 - (IBAction)dismissBtn:(NSButton *)sender;

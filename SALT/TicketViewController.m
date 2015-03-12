@@ -148,6 +148,7 @@
         }
     }
     
+    // Decides whether to display: "Last Name, First Name" or "First Name Last Name".
     if (lastNameFirst) {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [tickets[selection] last_name], [tickets[selection] first_name]]];
         [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] workedBy] last_name], [[tickets[selection] workedBy] first_name]]];
@@ -159,6 +160,7 @@
         [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] judgePresided] first_name], [[tickets[selection] judgePresided] last_name]]];
     }
     
+    // Add the office to the text field.
     [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] heldAt] name], [[tickets[selection] heldAt] office_code]]];
 }
 

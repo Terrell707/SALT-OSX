@@ -78,26 +78,109 @@
 }
 
 - (IBAction)submitBtn:(NSButton *)sender {
+    BOOL fieldError = NO;
+    NSMutableString *errorDescription = [[NSMutableString alloc] init];
+    
     // Checks to make sure needed information is populated.
     if ([[_ticketNumberField stringValue] length] < 8) {
-        [self createAlertWithMessage:@"Invalid Ticket Number!" informative:@"Ticket Number must be exactly 8 numbers long!"];
-        return;
+        fieldError = YES;
+        
+        // Add the error description to the string.
+        [errorDescription appendString:@"Ticket Number must be exactly 8 numbers long"];
+
+        // Will highlight the field in a slight red.
+        [self setErrorBackground:_ticketNumberField];
+        
+        // Moves the focus to the ticket number field.
+        [self.view.window makeFirstResponder:_ticketNumberField];
     }
-    if ([_workedByCombo indexOfSelectedItem] == -1) {
-        [self createAlertWithMessage:@"Invalid Selection in Worked By!" informative:@"Need to select an employee from the 'Worked By' drop down list!"];
-        return;
+    else {
+        [self clearErrorBackground:_ticketNumberField];
     }
-    if ([_judgePresidingCombo indexOfSelectedItem] == -1) {
-        [self createAlertWithMessage:@"Invalid Selection in Judge Presided!" informative:@"Need to select a judge from the 'Judge Presided' drop down list!"];
-        return;
-    }
+    
     if ([_statusCombo indexOfSelectedItem] == -1) {
-        [self createAlertWithMessage:@"Invalid Status!" informative:@"Need to select a status from the 'Status' drop down list!"];
+        if (fieldError == YES) {
+            // Append a new line so that the label expands.
+            [errorDescription appendString:@"\n"];
+        }
+        else {
+            // Otherwise, set the error value to true and move the user to the status combo.
+            fieldError = YES;
+            [self.view.window makeFirstResponder:_statusCombo];
+        }
+        // Add the error description to the string and highlight the combo box.
+        [errorDescription appendString:@"A status must be selected from the 'Status' drop down"];
+        [self setErrorBackground:_statusCombo];
+    }
+    else {
+        [self clearErrorBackground:_statusCombo];
+    }
+    
+    if ([_workedByCombo indexOfSelectedItem] == -1) {
+        if (fieldError == YES) {
+            // Append a new line so that the label expands.
+            [errorDescription appendString:@"\n"];
+        }
+        else {
+            // Otherwise, set the error value to true and move the user to the worked by combo.
+            fieldError = YES;
+            [self.view.window makeFirstResponder:_workedByCombo];
+        }
+        // Display the error label.
+        [errorDescription appendString:@"An employee must be selected from the 'Worked By' drop down!"];
+        [self setErrorBackground:_workedByCombo];
+    }
+    else {
+        [self clearErrorBackground:_workedByCombo];
+    }
+    
+    if ([_judgePresidingCombo indexOfSelectedItem] == -1) {
+        if (fieldError == YES) {
+            // Append a new line so that the label expands.
+            [errorDescription appendString:@"\n"];
+        }
+        else {
+            // Otherwise, set the error value to true and move the user to judge combo.
+            fieldError = YES;
+            [self.view.window makeFirstResponder:_judgePresidingCombo];
+        }
+        // Add the error description to the string and highlight the combo box.
+        [errorDescription appendString:@"A judge must be selected from the 'Judge Presided' drop down list"];
+        [self setErrorBackground:_judgePresidingCombo];
+    }
+    else {
+        [self clearErrorBackground:_judgePresidingCombo];
+    }
+    
+    if ([_officeCombo indexOfSelectedItem] == -1) {
+        if (fieldError == YES) {
+            // Append a new line so that the label expands.
+            [errorDescription appendString:@"\n"];
+        }
+        else {
+            // Otherwise, set the error value to true and move the user to office combo.
+            fieldError = YES;
+            [self.view.window makeFirstResponder:_officeCombo];
+        }
+        // Add the error description to the string and highlight the combo box.
+        [errorDescription appendString:@"A office must be selected from the 'Held At Office' drop down list"];
+        [self setErrorBackground:_officeCombo];
+    }
+    else {
+        [self clearErrorBackground:_officeCombo];
+    }
+    
+    // Sets the error description and shows it. Otherwise, it clears the error label.
+    if (fieldError) {
+        [_statusLabel setStringValue:errorDescription];
+        [_statusLabel setTextColor:[NSColor redColor]];
+        [_statusLabel setHidden:NO];
+        
         return;
     }
-    if ([_officeCombo indexOfSelectedItem] == -1) {
-        [self createAlertWithMessage:@"Invalid Office!" informative:@"Need to select a office from the 'Held At Office' drop down list!"];
-        return;
+    else {
+        [_statusLabel setHidden:YES];
+        [_statusLabel setStringValue:@""];
     }
     
     // Creates the formatters that we will need.
@@ -161,13 +244,16 @@
     BOOL inserted = [[DataController sharedDataController] insertTicket:newTicket];
     if (inserted) {
         NSLog(@"It went through");
-        [self createAlertWithMessage:@"Success!" informative:@"Ticket successfully added!"];
+        [_statusLabel setStringValue:@"Ticket Successfully Added!"];
+        [_statusLabel setTextColor:[NSColor blueColor]];
+        [_statusLabel setHidden:NO];
         [self clearForm];
     } else {
         NSLog(@"It did not go through");
-        [self createAlertWithMessage:@"Error!" informative:@"There was an error in adding this ticket!"];
+        [_statusLabel setStringValue:@"Error: Ticket did not go through!"];
+        [_statusLabel setTextColor:[NSColor redColor]];
+        [_statusLabel setHidden:NO];
     }
-
 }
 
 - (NSArray *)findInfoFromList:(NSArray *)list forCombo:(NSComboBox *)combo
@@ -183,6 +269,11 @@
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {
+    if ([_statusLabel.stringValue isEqualToString:@"Ticket Successfully Added!"]) {
+        [_statusLabel setStringValue:@""];
+        [_statusLabel setHidden:YES];
+    }
+    
     NSTextField *field = [notification object];
     NSString *identifer = [field identifier];
     NSString *text = [field stringValue];
@@ -265,9 +356,9 @@
     [_firstNameField setStringValue:@""];
     [_lastNameField setStringValue:@""];
     [_ticketNumberField setStringValue:@""];
-    [_bpaNumberField setStringValue:@""];
+//    [_bpaNumberField setStringValue:@""];
     [_canField setStringValue:@""];
-    [_tinField setStringValue:@""];
+//    [_tinField setStringValue:@""];
     [_socField setStringValue:@""];
     [_statusCombo setStringValue:@""];
     [_interpreterCheck setState:0];
@@ -279,6 +370,14 @@
     [_medicalCombo setStringValue:@""];
     [_otherCombo setStringValue:@""];
     
+    // Clears all errors on the form.
+    [self clearErrorBackground:_ticketNumberField];
+    [self clearErrorBackground:_statusCombo];
+    [self clearErrorBackground:_workedByCombo];
+    [self clearErrorBackground:_judgePresidingCombo];
+    [self clearErrorBackground:_officeCombo];
+    
+    // Moves the focus to the date picker.
     [[[self view] window] makeFirstResponder:_orderDatePicker];
 }
 
@@ -366,14 +465,26 @@
     return formatted;
 }
 
-- (void)createAlertWithMessage:(NSString *)message informative:(NSString *)info
+//- (void)createAlertWithMessage:(NSString *)message informative:(NSString *)info
+//{
+//    NSAlert *alert = [[NSAlert alloc] init];
+//    [alert setMessageText:message];
+//    [alert setInformativeText:info];
+//    [alert setAlertStyle:NSWarningAlertStyle];
+//    [alert addButtonWithTitle:@"OK"];
+//    [alert beginSheetModalForWindow:[[self view] window] completionHandler:nil];
+//}
+
+- (void)setErrorBackground:(id)field
 {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:message];
-    [alert setInformativeText:info];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert beginSheetModalForWindow:[[self view] window] completionHandler:nil];
+    // Sets the field's background to a slight red so that the user knows there is an error.
+    [field setBackgroundColor:[NSColor colorWithRed:1 green:0 blue:0 alpha:0.20]];
+}
+
+- (void)clearErrorBackground:(id)field
+{
+    // Reverts field to normal color.
+    [field setBackgroundColor:[NSColor colorWithRed:0 green:0 blue:0 alpha:0]];
 }
 
 @end
