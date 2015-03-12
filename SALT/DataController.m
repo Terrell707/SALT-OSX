@@ -261,6 +261,8 @@ static DataController *sharedDataController = nil;
     NSDictionary *ticketInfo = [NSDictionary dictionaryWithObjects:values
                                                            forKeys:keys];
     
+    NSLog(@"Inserted Ticket = %@", ticketInfo);
+    
     // Insert into the database and get the response.
     NSArray *ticketData = [mySQL grabInfoFromFile:@"inserts/ticket.php" withItems:ticketInfo];
     NSInteger status = [statusChecker checkStatus:ticketData];
