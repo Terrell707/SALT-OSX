@@ -24,7 +24,6 @@
 
 - (IBAction)cancelButton:(id)sender {
     NSLog(@"Cancel Button Clicked");
-    [NSApp stopModalWithCode:0];
     [[[self view] window] close];
 }
 
@@ -46,7 +45,7 @@
     NSArray *login = [mySQL grabInfoFromFile:@"user_info/login.php" withItems:userInfo];
     
     // Checks to see the status given back by the server.
-    NSInteger status = [statusChecker checkStatus:login];
+    NSInteger status = [statusChecker grabStatusFromJson:login];
     
     switch (status) {
         case INVALID_USER:
@@ -58,7 +57,6 @@
             [_statusLabel setStringValue:@""];
             [[DataController sharedDataController] logginStatus:YES forUser:user];
             [[DataController sharedDataController] loadData];
-//            [[[self view] window] close];
     }
 }
 
