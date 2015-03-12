@@ -23,6 +23,6 @@ typedef NS_ENUM(NSInteger, StatusCode) {
 };
 
 // Takes a json array and return an integer representing the status.
-- (NSInteger) checkStatus:(NSArray *)data;
+- (NSInteger)grabStatusFromJson:(NSArray *)data;
 
 @end
