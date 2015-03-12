@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A5045AC1AAFDC070069D27E /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5045AB1AAFDC070069D27E /* Business.m */; };
 		3AFD09191A8836C4001D8688 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09181A8836C4001D8688 /* AppDelegate.m */; };
 		3AFD091B1A8836C4001D8688 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091A1A8836C4001D8688 /* main.m */; };
 		3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091F1A8836C4001D8688 /* SALT.xcdatamodeld */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A5045AA1AAFDC070069D27E /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Business.h; sourceTree = "<group>"; };
+		3A5045AB1AAFDC070069D27E /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Business.m; sourceTree = "<group>"; };
 		3AFD09121A8836C4001D8688 /* SALT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SALT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFD09161A8836C4001D8688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AFD09171A8836C4001D8688 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 		3AFD09561A8986AA001D8688 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A5045AA1AAFDC070069D27E /* Business.h */,
+				3A5045AB1AAFDC070069D27E /* Business.m */,
 				3AFD098D1A8AB507001D8688 /* Clerk.h */,
 				3AFD098E1A8AB507001D8688 /* Clerk.m */,
 				3AFD098A1A8AB507001D8688 /* Employee.h */,
@@ -333,6 +338,7 @@
 				3AFD097A1A8AB507001D8688 /* Schedule.m in Sources */,
 				3AFD09771A8AB506001D8688 /* Witness.m in Sources */,
 				3AFD09421A883793001D8688 /* MySQL.m in Sources */,
+				3A5045AC1AAFDC070069D27E /* Business.m in Sources */,
 				3AFD09E51AAC0A51001D8688 /* MainWindowController.m in Sources */,
 				3AFD09831A8AB507001D8688 /* Judge.m in Sources */,
 				3AFD09861A8AB507001D8688 /* Site.m in Sources */,
