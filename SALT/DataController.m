@@ -56,7 +56,6 @@ static DataController *sharedDataController = nil;
     NSLog(@"Data Controller loadData");
     
     // Populate the data arrays with the data from the mysql database.
-    [self grabBusinessData];
     [self grabHearingStatusData];
     [self grabEmployeeData];
     [self grabJudgeData];
@@ -64,6 +63,8 @@ static DataController *sharedDataController = nil;
     [self grabTicketData];
     [self grabExpertData];
     [self hearingTicketInformation];
+    
+    [self grabBusinessData];
 }
 
 - (void)grabBusinessData
@@ -80,6 +81,8 @@ static DataController *sharedDataController = nil;
             _business = [[Business alloc] initWithData:data];
         }
     }
+    
+    [self businessInformation];
 }
 
 - (void)grabHearingStatusData
@@ -177,6 +180,16 @@ static DataController *sharedDataController = nil;
             Expert *expert = [[Expert alloc] initWithData:data];
             [_experts addObject:expert];
         }
+    }
+}
+
+- (void)businessInformation
+{
+    // Places the appropriate employee as the contractor of the business object.
+    NSPredicate *contractor = [NSPredicate predicateWithFormat:@"database_id == %@", _business.contractor_id];
+    NSArray *arr = [_employees filteredArrayUsingPredicate:contractor];
+    if (arr.count == 1) {
+        [_business setContractor:arr[0]];
     }
 }
 

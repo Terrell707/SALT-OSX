@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Employee.h"
 
 @interface Business : NSObject
 
@@ -16,6 +17,7 @@
 @property (readwrite, retain) NSString *bpa_no;
 @property (readwrite, retain) NSString *duns_no;
 @property (readwrite, retain) NSNumber *contractor_id;
+@property (readwrite, retain) Employee *contractor;
 
 - (id)initWithData:(NSDictionary *)data;
 
