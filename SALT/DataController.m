@@ -72,7 +72,7 @@ static DataController *sharedDataController = nil;
         return;
     
     NSArray *businessData = [mySQL grabInfoFromFile:@"queries/business.php"];
-    NSInteger status = [statusChecker checkStatus:businessData];
+    NSInteger status = [statusChecker grabStatusFromJson:businessData];
     
     if ([self checkStatus:status]) {
         for (int x = 0; x < [businessData count]; x++) {
@@ -93,7 +93,7 @@ static DataController *sharedDataController = nil;
     [_employees removeAllObjects];
     
     NSArray *employeeData = [mySQL grabInfoFromFile:@"queries/employees.php"];
-    NSInteger status = [statusChecker checkStatus:employeeData];
+    NSInteger status = [statusChecker grabStatusFromJson:employeeData];
     
     if ([self checkStatus:status]) {
         for (int x = 0; x < [employeeData count]; x++) {
@@ -109,7 +109,7 @@ static DataController *sharedDataController = nil;
     [_judges removeAllObjects];
     
     NSArray *judgeData = [mySQL grabInfoFromFile:@"queries/judges.php"];
-    NSInteger status = [statusChecker checkStatus:judgeData];
+    NSInteger status = [statusChecker grabStatusFromJson:judgeData];
     
     if ([self checkStatus:status]) {
         for (int x = 0; x < [judgeData count]; x++) {
@@ -125,7 +125,7 @@ static DataController *sharedDataController = nil;
     [_sites removeAllObjects];
     
     NSArray *siteData = [mySQL grabInfoFromFile:@"queries/sites.php"];
-    NSInteger status = [statusChecker checkStatus:siteData];
+    NSInteger status = [statusChecker grabStatusFromJson:siteData];
     
     if ([self checkStatus:status]) {
         for (int x = 0; x < [siteData count]; x++) {
@@ -148,7 +148,7 @@ static DataController *sharedDataController = nil;
     
     // Query the database and get the response.
     NSArray *ticketData = [mySQL grabInfoFromFile:@"queries/tickets.php" withItems:limit];
-    NSInteger status = [statusChecker checkStatus:ticketData];
+    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
@@ -168,7 +168,7 @@ static DataController *sharedDataController = nil;
     
     // Query the database and get the response.
     NSArray *expertData = [mySQL grabInfoFromFile:@"queries/experts.php"];
-    NSInteger status = [statusChecker checkStatus:expertData];
+    NSInteger status = [statusChecker grabStatusFromJson:expertData];
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
@@ -265,7 +265,7 @@ static DataController *sharedDataController = nil;
     
     // Insert into the database and get the response.
     NSArray *ticketData = [mySQL grabInfoFromFile:@"inserts/ticket.php" withItems:ticketInfo];
-    NSInteger status = [statusChecker checkStatus:ticketData];
+    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
     
     NSLog(@"Status=%ld", status);
     // If there were no errors, add the ticket to the list of tickets and return a success.
@@ -286,7 +286,7 @@ static DataController *sharedDataController = nil;
     NSLog(@"Ticket_info = %@", ticketInfo);
     
     NSArray *ticketData = [mySQL grabInfoFromFile:@"remove/ticket.php" withItems:ticketInfo];
-    NSInteger status = [statusChecker checkStatus:ticketData];
+    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
     
     NSLog(@"Status=%ld", status);
     
@@ -307,21 +307,28 @@ static DataController *sharedDataController = nil;
     
     switch (status) {
         case SUCCESS:
-            NSLog(@"Success!");
+            NSLog(@"Success! Status=%ld", status);
             noError = YES;
             break;
         case ERROR:
-            NSLog(@"Something went wrong with the query!");
+            NSLog(@"Something went wrong with the query! Status=%ld", status);
             break;
         case QUERY_FAILED:
-            NSLog(@"Query Failed for some reason!");
+            NSLog(@"Query Failed for some reason! Status=%ld", status);
             break;
         case MYSQL_CONNECTION:
+            NSLog(@"Lost connection to MySQL Database! Status=%ld", status);
+            break;
         case NOT_LOGGED_IN:
-            NSLog(@"Lost connection to MySQL Database!");
+            NSLog(@"User Not Logged In! Status=%ld", status);
+            [self logginStatus:NO forUser:_user];
+            break;
+        case TIMED_OUT:
+            NSLog(@"User timed out! Status=%ld", status);
+            [self logginStatus:NO forUser:_user];
             break;
         default:
-            NSLog(@"Nothing was returned from the query.");
+            NSLog(@"Nothing was returned from the query. Status=%ld", status);
             noError = NO;
             break;
     }
