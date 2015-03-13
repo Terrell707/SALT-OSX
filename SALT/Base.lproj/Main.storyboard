@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
@@ -689,8 +689,8 @@
                                                 <outlet property="nextKeyView" destination="6Gh-5M-Xnz" id="6QV-tu-TCx"/>
                                             </connections>
                                         </textField>
-                                        <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAx-TI-30n">
-                                            <rect key="frame" x="36" y="16" width="85" height="41"/>
+                                        <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAx-TI-30n">
+                                            <rect key="frame" x="36" y="16" width="85" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="73" id="M0Y-gO-vbb"/>
                                             </constraints>
@@ -1511,13 +1511,25 @@ DQ
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eqq-G3-5Ue">
+                                <rect key="frame" x="464" y="275" width="115" height="32"/>
+                                <buttonCell key="cell" type="push" title="Print Report" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uau-Bu-y1u">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="printButton:" target="QUM-jv-1NT" id="POP-zK-Ylc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="top" secondItem="Hja-2h-0mH" secondAttribute="bottom" constant="10" id="Hdx-du-uAQ"/>
                             <constraint firstAttribute="trailing" secondItem="nvm-xB-Lih" secondAttribute="trailing" constant="20" symbolic="YES" id="KrH-jk-XlZ"/>
                             <constraint firstItem="Hja-2h-0mH" firstAttribute="top" secondItem="wsx-da-Vmz" secondAttribute="top" constant="20" symbolic="YES" id="PKT-4F-aTE"/>
+                            <constraint firstItem="eqq-G3-5Ue" firstAttribute="leading" secondItem="wsx-da-Vmz" secondAttribute="leading" constant="470" id="RnU-gw-Gk2"/>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="trailing" secondItem="m8i-4l-NJX" secondAttribute="trailing" id="SR1-lx-EGD"/>
                             <constraint firstItem="Jhb-zH-O3i" firstAttribute="baseline" secondItem="m8i-4l-NJX" secondAttribute="baseline" id="Wxv-yK-rWm"/>
+                            <constraint firstItem="Es6-UP-Brg" firstAttribute="top" secondItem="eqq-G3-5Ue" secondAttribute="bottom" constant="1" id="hTz-BH-pQL"/>
                             <constraint firstItem="Es6-UP-Brg" firstAttribute="top" secondItem="m8i-4l-NJX" secondAttribute="bottom" constant="1" id="jRb-6S-HgP"/>
                             <constraint firstItem="nvm-xB-Lih" firstAttribute="leading" secondItem="vox-Rh-VCB" secondAttribute="leading" id="nch-R4-QMt"/>
                             <constraint firstAttribute="bottom" secondItem="Es6-UP-Brg" secondAttribute="bottom" constant="20" id="rnH-hb-YzJ"/>
