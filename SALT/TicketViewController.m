@@ -50,6 +50,24 @@
     [self.view.window makeFirstResponder:ticketTable];
 }
 
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"Segue=%@", [segue identifier]);
+    
+    id controller = segue.destinationController;
+    
+    NSLog(@"Segue End Destination = %@", controller);
+    
+    if ([segue.identifier isEqualToString:@"InsertTicketSegue"]) {
+        [controller setTitleString:@"Create Hearing Ticket"];
+        [controller setClearBtnString:@"Clear"];
+    }
+    if ([segue.identifier isEqualToString:@"UpdateTicketSegue"]) {
+        [controller setTitleString:@"Update Hearing Ticket"];
+        [controller setClearBtnString:@"Revert"];
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     // Will reload the table with new tickets that were added.
@@ -115,15 +133,23 @@
 {
     NSUInteger selection = [ticketController selectionIndex];
     
+    NSArray *numberFields = [NSArray arrayWithObjects:_ticketNumberField, _callNumberField, _socField, _canField, _statusField, nil];
     NSArray *nameFields = [NSArray arrayWithObjects:_claimantNameField, _workedByField, _judgePresidingField, _officeField,
                        _repNameField, _vocNameField, _medNameField, _otherNameField, nil];
     
     // Blank out all fields.
+    for (NSTextField *field in numberFields) {
+        [field setStringValue:@""];
+    }
     for (NSTextField *field in nameFields) {
         [field setStringValue:@""];
     }
     
     if (selection == -1 || selection > [tickets count]) {
+        // Nothing is selected, so fill each of the fields with "XXX" and make the field unedittable.
+        for (NSTextField *field in numberFields) {
+
+        }
         // Nothing is selected, so fill each of the fields with "No Selection" and make the field unedittable.
         for (NSTextField *field in nameFields) {
             [field setPlaceholderString:@"No Selection"];

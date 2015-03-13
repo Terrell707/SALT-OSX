@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
+#import "InsertTicketViewController.h"
 
 @interface TicketViewController : NSViewController {
     BOOL lastNameFirst;
@@ -20,7 +21,17 @@
 }
 
 @property (readwrite, copy) NSMutableArray *tickets;
+
+@property (weak) IBOutlet NSDatePicker *orderDatePicker;
+@property (weak) IBOutlet NSDatePicker *hearingDatePicker;
+@property (weak) IBOutlet NSDatePicker *hearingTimePicker;
+@property (weak) IBOutlet NSTextField *ticketNumberField;
 @property (weak) IBOutlet NSTextField *claimantNameField;
+@property (weak) IBOutlet NSTextField *callNumberField;
+@property (weak) IBOutlet NSTextField *socField;
+@property (weak) IBOutlet NSTextField *statusField;
+@property (weak) IBOutlet NSTextField *canField;
+
 @property (weak) IBOutlet NSTextField *workedByField;
 @property (weak) IBOutlet NSTextField *judgePresidingField;
 @property (weak) IBOutlet NSTextField *officeField;

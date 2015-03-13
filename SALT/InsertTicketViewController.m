@@ -69,6 +69,20 @@
     [self fillComboBox:_otherCombo withItems:experts];
 }
 
+- (void)viewDidAppear
+{
+    // Changes the view based on how this view is presented.
+    if (_titleString == nil) {
+        [self setTitleString:@"Create Hearing Ticket"];
+    }
+    if (_clearBtnString == nil) {
+        [self setClearBtnString:@"Clear"];
+    }
+    
+    [_titleLabel setStringValue:_titleString];
+    [_clearBtn setTitle:_clearBtnString];
+}
+
 - (IBAction)clearBtn:(NSButton *)sender {
     [self clearForm];
 }
@@ -206,9 +220,6 @@
     [newTicket setFirst_name:[_firstNameField stringValue]];
     [newTicket setLast_name:[_lastNameField stringValue]];
     [newTicket setTicket_no:[numFormat numberFromString:[_ticketNumberField stringValue]]];
-//    [newTicket setBpa_no:[_bpaNumberField stringValue]];
-//    [newTicket setCan:[_canField stringValue]];
-//    [newTicket setTin:[_tinField stringValue]];
     [newTicket setSoc:[_socField stringValue]];
     [newTicket setHearing_date:[dateFormat dateFromString:hearingDate]];
     [newTicket setHearing_time:[timeFormat dateFromString:hearingTime]];
@@ -244,10 +255,10 @@
     BOOL inserted = [[DataController sharedDataController] insertTicket:newTicket];
     if (inserted) {
         NSLog(@"It went through");
+        [self clearForm];
         [_statusLabel setStringValue:@"Ticket Successfully Added!"];
         [_statusLabel setTextColor:[NSColor blueColor]];
         [_statusLabel setHidden:NO];
-        [self clearForm];
     } else {
         NSLog(@"It did not go through");
         [_statusLabel setStringValue:@"Error: Ticket did not go through!"];
@@ -356,17 +367,11 @@
     [_firstNameField setStringValue:@""];
     [_lastNameField setStringValue:@""];
     [_ticketNumberField setStringValue:@""];
-//    [_bpaNumberField setStringValue:@""];
     [_canField setStringValue:@""];
-//    [_tinField setStringValue:@""];
     [_socField setStringValue:@""];
     [_statusCombo setStringValue:@""];
     [_interpreterCheck setState:0];
-//    [_workedByCombo setStringValue:@""];
-//    [_judgePresidingCombo setStringValue:@""];
-//    [_officeCombo setStringValue:@""];
     [_repCombo setStringValue:@""];
-//    [_vocationalCombo setStringValue:@""];
     [_medicalCombo setStringValue:@""];
     [_otherCombo setStringValue:@""];
     
@@ -379,6 +384,10 @@
     
     // Moves the focus to the date picker.
     [[[self view] window] makeFirstResponder:_orderDatePicker];
+    
+    // Clears the status label.
+    [_statusLabel setStringValue:@""];
+    [_statusLabel setHidden:YES];
 }
 
 - (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
@@ -464,16 +473,6 @@
     
     return formatted;
 }
-
-//- (void)createAlertWithMessage:(NSString *)message informative:(NSString *)info
-//{
-//    NSAlert *alert = [[NSAlert alloc] init];
-//    [alert setMessageText:message];
-//    [alert setInformativeText:info];
-//    [alert setAlertStyle:NSWarningAlertStyle];
-//    [alert addButtonWithTitle:@"OK"];
-//    [alert beginSheetModalForWindow:[[self view] window] completionHandler:nil];
-//}
 
 - (void)setErrorBackground:(id)field
 {
