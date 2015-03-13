@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
 #import "InsertTicketViewController.h"
+#import "TicketPrintView.h"
 
 @interface TicketViewController : NSViewController {
     BOOL lastNameFirst;
@@ -41,5 +42,6 @@
 @property (weak) IBOutlet NSTextField *otherNameField;
 
 - (IBAction)removeButton:(id)sender;
+- (IBAction)printButton:(id)sender;
 
 @end
