@@ -19,7 +19,7 @@
         tickets = [t copy];
         // The attributes of the text to be printed.
         attributes = [[NSMutableDictionary alloc] init];
-        NSFont *font = [NSFont fontWithName:@"Monaco" size:12.0];
+        NSFont *font = [NSFont fontWithName:@"Monaco" size:11.0];
         lineHeight = [font capHeight] * 1.7;
         [attributes setObject:font forKey:NSFontAttributeName];
     }
@@ -58,7 +58,7 @@
 
 - (NSRect)rectForPage:(NSInteger)page
 {
-    // Note teh current page.
+    // Note the current page.
     currentPage = page - 1;
     
     // Return the same page rect everytime
@@ -76,6 +76,20 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
+    NSRect invoiceTitle;
+    NSRect bpaNumber;
+    NSRect companyName;
+    NSRect contractor;
+    NSRect invoiceNumber;
+    NSRect contractorStreet;
+    NSRect contractorCity;
+    NSRect contractorPhoneNumber;
+    NSRect contractorEmail;
+    NSRect reportPrintDate;
+    NSRect taxID;
+    NSRect dunsNumber;
+    NSRect toSite;
+    
     NSRect callOrderRect;
     NSRect ticketNumberRect;
     NSRect claimantNameRect;
@@ -92,12 +106,12 @@
     amountClaimedRect.size.height = lineHeight;
     
     // Defines the width of each of the rectangles.
-    callOrderRect.size.width = 100.0;
+    callOrderRect.size.width = 125.0;
     ticketNumberRect.size.width = 100.0;
-    claimantNameRect.size.width = 200.0;
-    orderDateRect.size.width = 50.0;
-    serviceDateRect.size.width = 50.0;
-    amountClaimedRect.size.width = 25.0;
+    claimantNameRect.size.width = 150.0;
+    orderDateRect.size.width = 100.0;
+    serviceDateRect.size.width = 100.0;
+    amountClaimedRect.size.width = 50.0;
     
     // Places each of the rectangles side by side.
     callOrderRect.origin.x = pageRect.origin.x;
