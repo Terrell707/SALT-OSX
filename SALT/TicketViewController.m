@@ -44,6 +44,11 @@
     // Keeps a copy of the tickets so that they are not overwritten by searching.
     ticketsBeforeFilter = tickets;
     
+    // Displays the title for each details box.
+    [_ticketInfoBox setTitle:@"Ticket Details"];
+    [_hearingInfoBox setTitle:@"Hearing Details"];
+    
+    // Populates the ticket table.
     [ticketTable reloadData];
     NSLog(@"Calling Update Fields!");
     [self updateFields];
@@ -154,12 +159,13 @@
 {
     NSUInteger selection = [ticketController selectionIndex];
     
-    NSArray *numberFields = [NSArray arrayWithObjects:_ticketNumberField, _callNumberField, _socField, _canField, _statusField, nil];
+    NSArray *dateFields = [NSArray arrayWithObjects:_orderDateField, _hearingDateField, _hearingTimeField, nil];
+    NSArray *fields = [NSArray arrayWithObjects:_ticketNumberField, _callNumberField, _socField, _canField, _statusField, nil];
     NSArray *nameFields = [NSArray arrayWithObjects:_claimantNameField, _workedByField, _judgePresidingField, _officeField,
-                       _repNameField, _vocNameField, _medNameField, _otherNameField, nil];
+                       _repField, _vocField, _meField, _otherField, nil];
     
     // Blank out all fields.
-    for (NSTextField *field in numberFields) {
+    for (NSTextField *field in fields) {
         [field setStringValue:@""];
     }
     for (NSTextField *field in nameFields) {
@@ -167,48 +173,81 @@
     }
     
     if (selection == -1 || selection > [tickets count]) {
-        // Nothing is selected, so fill each of the fields with "XXX" and make the field unedittable.
-        for (NSTextField *field in numberFields) {
-
+        // Nothing is selected so unenable the Remove Button and the Update Button.
+        [_removeButton setEnabled:NO];
+        [_updateButton setEnabled:NO];
+        
+        // Nothing is selected, so fill each of the date fields with "XX/XX/XXXX"
+        for (NSTextField *field in dateFields) {
+            [field setStringValue:@"XX/XX/XXXX"];
         }
-        // Nothing is selected, so fill each of the fields with "No Selection" and make the field unedittable.
+        // Nothing is selected, so fill each of the fields with "XXX".
+        for (NSTextField *field in fields) {
+            [field setStringValue:@"XXXX"];
+        }
+        // Nothing is selected, so fill each of the fields with "No Selection".
         for (NSTextField *field in nameFields) {
-            [field setPlaceholderString:@"No Selection"];
-            [field setEditable:NO];
+            [field setStringValue:@"No Selection"];
         }
+        
+        [_claimantNameField sizeToFit];
         return;
     }
     else if ([[ticketController selectedObjects] count] > 1) {
+        // Something is selected so enable the Remove button.
+        [_removeButton setEnabled:YES];
+        
+        // More than one thing is selected so unenable the Update button.
+        [_updateButton setEnabled:NO];
+        
         // More than one thing was selected, so fill each of the fields with "Multiple Values" and make the fields
         //  unedittable.
-        for (NSTextField *field in nameFields) {
-            [field setPlaceholderString:@"Multiple Values"];
-            [field setEditable:NO];
+        for (NSTextField *field in dateFields) {
+            [field setStringValue:@"XX/XX/XXXX"];
         }
+        for (NSTextField *field in fields) {
+            [field setStringValue:@"XXXX"];
+        }
+        for (NSTextField *field in nameFields) {
+            [field setStringValue:@"Multiple Values"];
+        }
+        
+        [_claimantNameField sizeToFit];
         return;
     }
     else {
-        // Only one thing is selected, so make all the fields edittable.
-        for (NSTextField *field in nameFields) {
-            [field setPlaceholderString:@""];
-            [field setEditable:YES];
-        }
+        // Something is selected so enable the Remove button.
+        [_removeButton setEnabled:YES];
+        
+        // Only one thing is selected so enable the update button
+        [_updateButton setEnabled:YES];
     }
+    
+    // Grabs the selected ticket.
+    Ticket *ticket = tickets[selection];
     
     // Decides whether to display: "Last Name, First Name" or "First Name Last Name".
     if (lastNameFirst) {
-        [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [tickets[selection] last_name], [tickets[selection] first_name]]];
-        [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] workedBy] last_name], [[tickets[selection] workedBy] first_name]]];
-        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] judgePresided] last_name], [[tickets[selection] judgePresided] first_name]]];
+        [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [ticket last_name], [ticket first_name]]];
+        [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket workedBy] last_name], [[ticket workedBy] first_name]]];
+        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket judgePresided] last_name], [[ticket judgePresided] first_name]]];
     }
     else {
-        [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [tickets[selection] first_name], [tickets[selection] last_name]]];
-        [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] workedBy] first_name], [[tickets[selection] workedBy] last_name]]];
-        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[tickets[selection] judgePresided] first_name], [[tickets[selection] judgePresided] last_name]]];
+        [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [ticket first_name], [ticket last_name]]];
+        [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket workedBy] first_name], [[ticket workedBy] last_name]]];
+        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket judgePresided] first_name], [[ticket judgePresided] last_name]]];
     }
     
-    // Add the office to the text field.
-    [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[tickets[selection] heldAt] name], [[tickets[selection] heldAt] office_code]]];
+    [_claimantNameField sizeToFit];
+    
+    // Update the other fields that do not need any formatting.
+    [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket heldAt] name], [[ticket heldAt] office_code]]];
+    [_callNumberField setStringValue:[ticket call_order_no]];
+    [_ticketNumberField setStringValue:[[ticket ticket_no] stringValue]];
+    [_socField setStringValue:[ticket soc]];
+    [_canField setStringValue:[[ticket heldAt] can]];
+    [_statusField setStringValue:[ticket status]];
+
 }
 
 - (void)changeTicketInfoFromField:(NSTextField *)field
@@ -231,16 +270,16 @@
     if (field == _claimantNameField) {
         
     }
-    else if (field == _repNameField) {
+    else if (field == _repField) {
         
     }
-    else if (field == _vocNameField) {
+    else if (field == _vocField) {
         
     }
-    else if (field == _medNameField) {
+    else if (field == _meField) {
         
     }
-    else if (field == _otherNameField) {
+    else if (field == _otherField) {
         
     }
 }
@@ -277,9 +316,6 @@
         // Work around. If the filtered array is empty, ticketController will through an error because selection index
         //  is outside the bounds of the tickets array. This will update the selection index manually.
         NSMutableArray *filteredArray = (NSMutableArray *)[tickets filteredArrayUsingPredicate:searchPredicate];
-//        if (filteredArray.count <= 0) {
-//            [ticketController setSelectionIndex:0];
-//        }
         [self setTickets:filteredArray];
         
         NSLog(@"Selection Index After Search = %ld", [ticketController selectionIndex]);

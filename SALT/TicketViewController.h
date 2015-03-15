@@ -23,25 +23,33 @@
 
 @property (readwrite, copy) NSMutableArray *tickets;
 
-@property (weak) IBOutlet NSDatePicker *orderDatePicker;
-@property (weak) IBOutlet NSDatePicker *hearingDatePicker;
-@property (weak) IBOutlet NSDatePicker *hearingTimePicker;
+@property (weak) IBOutlet NSTextField *orderDateField;
+@property (weak) IBOutlet NSTextField *hearingDateField;
+@property (weak) IBOutlet NSTextField *hearingTimeField;
+@property (weak) IBOutlet NSTextField *callNumberField;
 @property (weak) IBOutlet NSTextField *ticketNumberField;
 @property (weak) IBOutlet NSTextField *claimantNameField;
-@property (weak) IBOutlet NSTextField *callNumberField;
 @property (weak) IBOutlet NSTextField *socField;
-@property (weak) IBOutlet NSTextField *statusField;
 @property (weak) IBOutlet NSTextField *canField;
+@property (weak) IBOutlet NSTextField *statusField;
+@property (weak) IBOutlet NSButton *onRecordCheckBox;
 
+@property (weak) IBOutlet NSTextField *officeField;
 @property (weak) IBOutlet NSTextField *workedByField;
 @property (weak) IBOutlet NSTextField *judgePresidingField;
-@property (weak) IBOutlet NSTextField *officeField;
-@property (weak) IBOutlet NSTextField *repNameField;
-@property (weak) IBOutlet NSTextField *vocNameField;
-@property (weak) IBOutlet NSTextField *medNameField;
-@property (weak) IBOutlet NSTextField *otherNameField;
+@property (weak) IBOutlet NSTextField *repField;
+@property (weak) IBOutlet NSTextField *vocField;
+@property (weak) IBOutlet NSTextField *meField;
+@property (weak) IBOutlet NSTextField *otherField;
+@property (weak) IBOutlet NSButton *interpreterCheckBox;
+
+@property (weak) IBOutlet NSBox *ticketInfoBox;
+@property (weak) IBOutlet NSBox *hearingInfoBox;
 
 - (IBAction)removeButton:(id)sender;
 - (IBAction)printButton:(id)sender;
+
+@property (weak) IBOutlet NSButton *removeButton;
+@property (weak) IBOutlet NSButton *updateButton;
 
 @end
