@@ -13,6 +13,7 @@
 
 @interface TicketViewController : NSViewController {
     BOOL lastNameFirst;
+    
     NSArray *ticketsBeforeFilter;
     NSPredicate *searchPredicate;
     

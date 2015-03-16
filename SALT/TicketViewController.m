@@ -18,6 +18,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Observes the DataController for any new tickets that were added.
+    [[DataController sharedDataController] addObserver:self
+                                            forKeyPath:@"tickets"
+                                               options:NSKeyValueObservingOptionNew
+                                               context:NULL];
+    
+    // Observes the TicketController for any time the selection is changed.
+    [ticketController addObserver:self forKeyPath:@"selectionIndex" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewDidAppear
@@ -31,15 +40,6 @@
     
     // Populates the table with tickets returned from the server.
     [self setTickets:[[DataController sharedDataController] tickets]];
-    
-    // Observes the DataController for any new tickets that were added.
-    [[DataController sharedDataController] addObserver:self
-                                            forKeyPath:@"tickets"
-                                               options:NSKeyValueObservingOptionNew
-                                               context:NULL];
-    
-    // Observes the TicketController for any time the selection is changed.
-    [ticketController addObserver:self forKeyPath:@"selectionIndex" options:NSKeyValueObservingOptionNew context:nil];
     
     // Keeps a copy of the tickets so that they are not overwritten by searching.
     ticketsBeforeFilter = tickets;
@@ -70,6 +70,22 @@
     if ([segue.identifier isEqualToString:@"UpdateTicketSegue"]) {
         [controller setTitleString:@"Update Hearing Ticket"];
         [controller setClearBtnString:@"Revert"];
+        
+        NSUInteger selection = [ticketController selectionIndex];
+        Ticket *ticket = tickets[selection];
+        
+        [controller setTicketNumber:[[ticket ticket_no] stringValue]];
+        [controller setCallOrderNumber:[ticket call_order_no]];
+        [controller setClaimantFirstName:[ticket first_name]];
+        [controller setClaimantLastName:[ticket last_name]];
+        [controller setSoc:[ticket soc]];
+        [controller setCan:[[ticket heldAt] can]];
+        [controller setStatusText:[ticket status]];
+//        [controller setOnTheRecord:[ticket onTheRecord]];
+        
+        [controller setWorkedBy:[ticket workedBy]];
+        [controller setJudgePresided:[ticket judgePresided]];
+        [controller setHeldAt:[ticket heldAt]];
     }
 }
 
@@ -180,17 +196,19 @@
         // Nothing is selected, so fill each of the date fields with "XX/XX/XXXX"
         for (NSTextField *field in dateFields) {
             [field setStringValue:@"XX/XX/XXXX"];
+            [field sizeToFit];
         }
         // Nothing is selected, so fill each of the fields with "XXX".
         for (NSTextField *field in fields) {
             [field setStringValue:@"XXXX"];
+            [field sizeToFit];
         }
         // Nothing is selected, so fill each of the fields with "No Selection".
         for (NSTextField *field in nameFields) {
             [field setStringValue:@"No Selection"];
+            [field sizeToFit];
         }
         
-        [_claimantNameField sizeToFit];
         return;
     }
     else if ([[ticketController selectedObjects] count] > 1) {
@@ -204,15 +222,17 @@
         //  unedittable.
         for (NSTextField *field in dateFields) {
             [field setStringValue:@"XX/XX/XXXX"];
+            [field sizeToFit];
         }
         for (NSTextField *field in fields) {
             [field setStringValue:@"XXXX"];
+            [field sizeToFit];
         }
         for (NSTextField *field in nameFields) {
             [field setStringValue:@"Multiple Values"];
+            [field sizeToFit];
         }
         
-        [_claimantNameField sizeToFit];
         return;
     }
     else {
@@ -229,25 +249,57 @@
     // Decides whether to display: "Last Name, First Name" or "First Name Last Name".
     if (lastNameFirst) {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [ticket last_name], [ticket first_name]]];
-        [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket workedBy] last_name], [[ticket workedBy] first_name]]];
-        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket judgePresided] last_name], [[ticket judgePresided] first_name]]];
+        
+        if ([ticket workedBy] != nil) [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket workedBy] last_name], [[ticket workedBy] first_name]]];
+        else [_workedByField setStringValue:@""];
+        
+        if ([ticket judge_presided] != nil) [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket judgePresided] last_name], [[ticket judgePresided] first_name]]];
+        else [_judgePresidingField setStringValue:@""];
     }
     else {
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [ticket first_name], [ticket last_name]]];
-        [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket workedBy] first_name], [[ticket workedBy] last_name]]];
-        [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket judgePresided] first_name], [[ticket judgePresided] last_name]]];
+        
+        if ([ticket workedBy] != nil) [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket workedBy] first_name], [[ticket workedBy] last_name]]];
+        else [_workedByField setStringValue:@""];
+        
+        if ([ticket workedBy] != nil) [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket judgePresided] first_name], [[ticket judgePresided] last_name]]];
+        else [_workedByField setStringValue:@""];
     }
     
+    // Sizes the field to fit the text inside of it.
     [_claimantNameField sizeToFit];
+    [_workedByField sizeToFit];
+    [_judgePresidingField sizeToFit];
     
     // Update the other fields that do not need any formatting.
     [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket heldAt] name], [[ticket heldAt] office_code]]];
     [_callNumberField setStringValue:[ticket call_order_no]];
     [_ticketNumberField setStringValue:[[ticket ticket_no] stringValue]];
     [_socField setStringValue:[ticket soc]];
-    [_canField setStringValue:[[ticket heldAt] can]];
     [_statusField setStringValue:[ticket status]];
-
+    if ([ticket heldAt] != nil) [_canField setStringValue:[[ticket heldAt] can]];
+    else [_canField setStringValue:@""];
+    
+    // Creates the formats for the dates and times.
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    [timeFormat setDateFormat:@"h:mm a"];
+    
+    [_orderDateField setStringValue:[dateFormat stringFromDate:[ticket order_date]]];
+    [_hearingDateField setStringValue:[dateFormat stringFromDate:[ticket hearing_date]]];
+    [_hearingTimeField setStringValue:[timeFormat stringFromDate:[ticket hearing_time]]];
+    
+    // Makes sure the label is big enough to fit everything inside it.
+    for (NSTextField *field in dateFields) {
+        [field sizeToFit];
+    }
+    for (NSTextField *field in fields) {
+        [field sizeToFit];
+    }
+    for (NSTextField *field in nameFields) {
+        [field sizeToFit];
+    }
 }
 
 - (void)changeTicketInfoFromField:(NSTextField *)field

@@ -79,12 +79,20 @@
         [self setClearBtnString:@"Clear"];
     }
     
+    // Sets the title of the view and the button that erases the fields.
     [_titleLabel setStringValue:_titleString];
     [_clearBtn setTitle:_clearBtnString];
+    
+    // Populates each of the fields if "Update" was clicked and there is information for that field.
+    [self revertForm];
 }
 
 - (IBAction)clearBtn:(NSButton *)sender {
-    [self clearForm];
+    if ([[_clearBtn title] isEqualToString:@"Clear"])
+        [self clearForm];
+    else
+        [self clearForm];
+        [self revertForm];
 }
 
 - (IBAction)dismissBtn:(NSButton *)sender {
@@ -123,7 +131,10 @@
             [self.view.window makeFirstResponder:_statusCombo];
         }
         // Add the error description to the string and highlight the combo box.
-        [errorDescription appendString:@"A status must be selected from the 'Status' drop down"];
+        if ([_statusCombo.stringValue isEqualToString:@""])
+            [errorDescription appendString:@"A status must be selected from the 'Status' drop down"];
+        else
+            [errorDescription appendString:@"The entered status doesn't exist as a possible choice. Select one from the 'Status' drop down"];
         [self setErrorBackground:_statusCombo];
     }
     else {
@@ -141,7 +152,10 @@
             [self.view.window makeFirstResponder:_workedByCombo];
         }
         // Display the error label.
-        [errorDescription appendString:@"An employee must be selected from the 'Worked By' drop down!"];
+        if ([_workedByCombo.stringValue isEqualToString:@""])
+            [errorDescription appendString:@"An employee must be selected from the 'Worked By' drop down"];
+        else
+            [errorDescription appendString:@"The entered employee doesn't exist as a possible choice. Select one from the 'Worked By' drop down"];
         [self setErrorBackground:_workedByCombo];
     }
     else {
@@ -159,7 +173,10 @@
             [self.view.window makeFirstResponder:_judgePresidingCombo];
         }
         // Add the error description to the string and highlight the combo box.
-        [errorDescription appendString:@"A judge must be selected from the 'Judge Presided' drop down list"];
+        if ([_judgePresidingCombo.stringValue isEqualToString:@""])
+            [errorDescription appendString:@"A judge must be selected from the 'Judge Presided' drop down list"];
+        else
+            [errorDescription appendString:@"The entered judge doesn't exist as a possible choice. Select one from the 'Judge Presided' drop down list"];
         [self setErrorBackground:_judgePresidingCombo];
     }
     else {
@@ -177,7 +194,10 @@
             [self.view.window makeFirstResponder:_officeCombo];
         }
         // Add the error description to the string and highlight the combo box.
-        [errorDescription appendString:@"A office must be selected from the 'Held At Office' drop down list"];
+        if ([_officeCombo.stringValue isEqualToString:@""])
+            [errorDescription appendString:@"A office must be selected from the 'Held At Office' drop down list"];
+        else
+            [errorDescription appendString:@"The entered office doesn't exist as a possible choice. Select one from the 'Held At Office' drop down list"];
         [self setErrorBackground:_officeCombo];
     }
     else {
@@ -388,6 +408,43 @@
     // Clears the status label.
     [_statusLabel setStringValue:@""];
     [_statusLabel setHidden:YES];
+}
+
+- (void)revertForm
+{
+    NSArray *comboboxes = [NSArray arrayWithObjects:_statusCombo, _workedByCombo, _officeCombo, _judgePresidingCombo, _repCombo,
+                           _vocationalCombo, _medicalCombo, _otherCombo, nil];
+    
+    // Sets each of the fields to what is currently present in the ticket.
+    if (_ticketNumber != nil) [_ticketNumberField setStringValue:_ticketNumber];
+    if (_callOrderNumber != nil) [_orderNumberField setStringValue:_callOrderNumber];
+    if (_claimantFirstName != nil) [_firstNameField setStringValue:_claimantFirstName];
+    if (_claimantLastName != nil) [_lastNameField setStringValue:_claimantLastName];
+    if (_soc != nil) [_socField setStringValue:_soc];
+    if (_can != nil) [_canField setStringValue:_can];
+    if (_statusText != nil) [_statusCombo setStringValue:_statusText];
+    
+    if (_workedBy != nil) [_workedByCombo setStringValue:[self formatFirstName:[_workedBy first_name] lastName:[_workedBy last_name]]];
+    if (_heldAt != nil) [_officeCombo setStringValue:[NSString stringWithFormat:@"%@, %@", _heldAt.name, _heldAt.office_code]];
+    if (_judgePresided != nil) [_judgePresidingCombo setStringValue:[self formatFirstName:[_judgePresided first_name] lastName:[_judgePresided last_name]]];
+    if (_rep != nil) [_repCombo setStringValue:[self formatFirstName:[_rep first_name] lastName:[_rep last_name]]];
+    if (_voc != nil) [_vocationalCombo setStringValue:[self formatFirstName:[_voc first_name] lastName:[_voc last_name]]];
+    if (_me != nil) [_medicalCombo setStringValue:[self formatFirstName:[_me first_name] lastName:[_me last_name]]];
+    if (_other != nil) [_otherCombo setStringValue:[self formatFirstName:[_other first_name] lastName:[_other last_name]]];
+    [_interpreterCheck setState:_interpreter];
+    
+    // Will make sure the selected index matches that of the string value inside the combo. If the string value does not have
+    //  a corresponding index, then the selection will remain at -1.
+    for (NSComboBox *combo in comboboxes) {
+        NSInteger index = 0;
+        for (NSString *value in [combo objectValues]) {
+            if ([value isEqualToString:[combo stringValue]]) {
+                [combo selectItemAtIndex:index];
+                break;
+            }
+            index++;
+        }
+    }
 }
 
 - (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
