@@ -20,9 +20,7 @@
 @synthesize call_order_no;
 @synthesize first_name;
 @synthesize last_name;
-//@synthesize bpa_no;
 @synthesize can;
-//@synthesize tin;
 @synthesize soc;
 @synthesize hearing_date;
 @synthesize hearing_time;
@@ -56,7 +54,7 @@
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd"];
         NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-        [timeFormat setDateFormat:@"HH:mm:ss"];
+        [timeFormat setDateFormat:@"hh:mm:ss"];
         
         // Formats the dates and times.
         NSDate *orderDate = [dateFormat dateFromString:data[@"order_date"]];
@@ -69,9 +67,7 @@
         call_order_no = data[@"call_order_no"];
         first_name = data[@"first_name"];
         last_name = data[@"last_name"];
-//        bpa_no = data[@"bpa_no"];
         can = data[@"can"];
-//        tin = data[@"tin"];
         soc = data[@"soc"];
         hearing_date = hearingDate;
         hearing_time = hearingTime;
