@@ -154,8 +154,6 @@
         if ([[DataController sharedDataController] removeTicket:ticket]) {
             NSLog(@"Ticket was removed");
             [self setTickets:[[DataController sharedDataController] tickets]];
-//            ticketsBeforeFilter = tickets;
-//            [self searchTickets];
             [ticketTable reloadData];
         }
         else {
@@ -163,6 +161,8 @@
         }
     }
     
+    // Updates the search with the modified list of tickets.
+    ticketsBeforeFilter = tickets;
     [self searchTickets];
     [ticketTable reloadData];
 }
@@ -248,20 +248,26 @@
     
     // Decides whether to display: "Last Name, First Name" or "First Name Last Name".
     if (lastNameFirst) {
+        // Formats Claimant Name.
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@, %@", [ticket last_name], [ticket first_name]]];
         
+        // Formats the employee who worked this ticket.
         if ([ticket workedBy] != nil) [_workedByField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket workedBy] last_name], [[ticket workedBy] first_name]]];
         else [_workedByField setStringValue:@""];
         
+        // Formats the judge who presided over this ticket.
         if ([ticket judge_presided] != nil) [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket judgePresided] last_name], [[ticket judgePresided] first_name]]];
         else [_judgePresidingField setStringValue:@""];
     }
     else {
+        // Formats Claimant Name.
         [_claimantNameField setStringValue:[NSString stringWithFormat:@"%@ %@", [ticket first_name], [ticket last_name]]];
         
+        // Formats the employee who worked this ticket.
         if ([ticket workedBy] != nil) [_workedByField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket workedBy] first_name], [[ticket workedBy] last_name]]];
         else [_workedByField setStringValue:@""];
         
+        // Formats the judge who presided over this ticket.
         if ([ticket workedBy] != nil) [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket judgePresided] first_name], [[ticket judgePresided] last_name]]];
         else [_workedByField setStringValue:@""];
     }
