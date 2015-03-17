@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Sets the colors that will be used for "Success" and "Error".
+    successColor = [NSColor blueColor];
+    errorColor = [NSColor redColor];
+    
     // If true, name is formatted "last, first". Otherwise it is "first last".
     lastNameFirst = YES;
     
@@ -71,6 +75,8 @@
 
 - (void)viewDidAppear
 {
+    NSLog(@"Update Boolean = %d", _updateTicket);
+    
     // Changes the view based on how this view is presented.
     if (_titleString == nil) {
         [self setTitleString:@"Create Hearing Ticket"];
@@ -88,11 +94,15 @@
 }
 
 - (IBAction)clearBtn:(NSButton *)sender {
-    if ([[_clearBtn title] isEqualToString:@"Clear"])
-        [self clearForm];
-    else
+    // If the "Update" button was clicked, set all the fields to what the ticket contains.
+    if (_updateTicket) {
         [self clearForm];
         [self revertForm];
+    }
+    // Otherwise, present a clear form.
+    else {
+        [self clearForm];
+    }
 }
 
 - (IBAction)dismissBtn:(NSButton *)sender {
@@ -207,7 +217,7 @@
     // Sets the error description and shows it. Otherwise, it clears the error label.
     if (fieldError) {
         [_statusLabel setStringValue:errorDescription];
-        [_statusLabel setTextColor:[NSColor redColor]];
+        [_statusLabel setTextColor:errorColor];
         [_statusLabel setHidden:NO];
         
         return;
@@ -264,26 +274,55 @@
     [newTicket setJudgePresided:judgeResult[0]];
     
     // Grabs the office code from the 'Worked At' combo box.
-    NSArray *office = [[_officeCombo stringValue] componentsSeparatedByString:@", "];
-    [newTicket setAt_site:office[1]];
+    NSArray *officeResult = [self findOfficeFromList:sites forCombo:_officeCombo];
+    if ([officeResult count] <= 0) {
+        NSLog(@"Couldn't find the selected office!");
+        return;
+    }
+    [newTicket setAt_site:[officeResult[0] office_code]];
+    [newTicket setHeldAt:officeResult[0]];
     
     // Find the vocational expert that was typed in.
     if ([_vocationalCombo indexOfSelectedItem] != -1) {
         
     }
     
-    BOOL inserted = [[DataController sharedDataController] insertTicket:newTicket];
-    if (inserted) {
-        NSLog(@"It went through");
-        [self clearForm];
-        [_statusLabel setStringValue:@"Ticket Successfully Added!"];
-        [_statusLabel setTextColor:[NSColor blueColor]];
-        [_statusLabel setHidden:NO];
-    } else {
-        NSLog(@"It did not go through");
-        [_statusLabel setStringValue:@"Error: Ticket did not go through!"];
-        [_statusLabel setTextColor:[NSColor redColor]];
-        [_statusLabel setHidden:NO];
+    // If the user clicked the "Add" button, this will create a new hearing Ticket.
+    if (_updateTicket == NO) {
+        BOOL inserted = [[DataController sharedDataController] insertTicket:newTicket];
+        if (inserted) {
+            NSLog(@"It went through");
+            [self clearForm];
+            [_statusLabel setStringValue:@"Ticket Successfully Added!"];
+            [_statusLabel setTextColor:successColor];
+            [_statusLabel setHidden:NO];
+        } else {
+            NSLog(@"It did not go through");
+            [_statusLabel setStringValue:@"Error: Ticket did not go through!"];
+            [_statusLabel setTextColor:errorColor];
+            [_statusLabel setHidden:NO];
+        }
+    }
+    // Otherwise, we will update the old ticket.
+    else {
+        BOOL updated = [[DataController sharedDataController] updateTicket:_oldTicket withChanges:newTicket];
+        if (updated) {
+            NSLog(@"Ticket was updated.");
+            // Sets the old ticket to the updated ticket.
+            _oldTicket = newTicket;
+            // Updates all the fields to the new updated ticket.
+            [self clearForm];
+            [self revertForm];
+            
+            [_statusLabel setStringValue:@"Ticket Successfully Updated!"];
+            [_statusLabel setTextColor:successColor];
+            [_statusLabel setHidden:NO];
+        } else {
+            NSLog(@"Ticket was not successfully updated!");
+            [_statusLabel setStringValue:@"Error: Ticket was not updated!"];
+            [_statusLabel setTextColor:errorColor];
+            [_statusLabel setHidden:NO];
+        }
     }
 }
 
@@ -298,9 +337,20 @@
     return result;
 }
 
+- (NSArray *)findOfficeFromList:(NSArray *)list forCombo:(NSComboBox *)combo
+{
+    // Searchs the passed in list for the office selected in the passed in combobox.
+    NSArray *office = [[_officeCombo stringValue] componentsSeparatedByString:@", "];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@ && office_code == %@",
+                              office[0], office[1]];
+    NSArray *result = [list filteredArrayUsingPredicate:predicate];
+    
+    return result;
+}
+
 - (void)controlTextDidChange:(NSNotification *)notification
 {
-    if ([_statusLabel.stringValue isEqualToString:@"Ticket Successfully Added!"]) {
+    if (_statusLabel.textColor == successColor) {
         [_statusLabel setStringValue:@""];
         [_statusLabel setHidden:YES];
     }
@@ -416,17 +466,19 @@
                            _vocationalCombo, _medicalCombo, _otherCombo, nil];
     
     // Sets each of the fields to what is currently present in the ticket.
-    if (_ticketNumber != nil) [_ticketNumberField setStringValue:_ticketNumber];
-    if (_callOrderNumber != nil) [_orderNumberField setStringValue:_callOrderNumber];
-    if (_claimantFirstName != nil) [_firstNameField setStringValue:_claimantFirstName];
-    if (_claimantLastName != nil) [_lastNameField setStringValue:_claimantLastName];
-    if (_soc != nil) [_socField setStringValue:_soc];
-    if (_can != nil) [_canField setStringValue:_can];
-    if (_statusText != nil) [_statusCombo setStringValue:_statusText];
+    if ([_oldTicket ticket_no] != nil) [_ticketNumberField setStringValue:[[_oldTicket ticket_no] stringValue]];
+    if ([_oldTicket call_order_no] != nil) [_orderNumberField setStringValue:[_oldTicket call_order_no]];
+    if ([_oldTicket first_name] != nil) [_firstNameField setStringValue:[_oldTicket first_name]];
+    if ([_oldTicket last_name] != nil) [_lastNameField setStringValue:[_oldTicket last_name]];
+    if ([_oldTicket soc] != nil) [_socField setStringValue:[_oldTicket soc]];
+    if ([_oldTicket heldAt] != nil) [_canField setStringValue:[[_oldTicket heldAt] can]];
+    if ([_oldTicket status] != nil) [_statusCombo setStringValue:[_oldTicket status]];
     
-    if (_workedBy != nil) [_workedByCombo setStringValue:[self formatFirstName:[_workedBy first_name] lastName:[_workedBy last_name]]];
-    if (_heldAt != nil) [_officeCombo setStringValue:[NSString stringWithFormat:@"%@, %@", _heldAt.name, _heldAt.office_code]];
-    if (_judgePresided != nil) [_judgePresidingCombo setStringValue:[self formatFirstName:[_judgePresided first_name] lastName:[_judgePresided last_name]]];
+    if ([_oldTicket workedBy] != nil) [_workedByCombo setStringValue:[self formatFirstName:[[_oldTicket workedBy] first_name] lastName:[[_oldTicket workedBy] last_name]]];
+    if ([_oldTicket heldAt] != nil) [_officeCombo setStringValue:[NSString stringWithFormat:@"%@, %@", [[_oldTicket heldAt] name], [[_oldTicket heldAt] office_code]]];
+    if ([_oldTicket judge_presided] != nil) [_judgePresidingCombo setStringValue:[self formatFirstName:[[_oldTicket judgePresided] first_name] lastName:[[_oldTicket judgePresided] last_name]]];
+    
+    // TODO: NEED TO FIGURE OUT HOW EXPERTS, WITNESSES, AND TICKETS WILL BE TIED TOGETHER.
     if (_rep != nil) [_repCombo setStringValue:[self formatFirstName:[_rep first_name] lastName:[_rep last_name]]];
     if (_voc != nil) [_vocationalCombo setStringValue:[self formatFirstName:[_voc first_name] lastName:[_voc last_name]]];
     if (_me != nil) [_medicalCombo setStringValue:[self formatFirstName:[_me first_name] lastName:[_me last_name]]];

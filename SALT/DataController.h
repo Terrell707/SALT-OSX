@@ -23,14 +23,29 @@
 }
 
 + (DataController *)sharedDataController;
+
+// -------------------------------------------------------------------
+// Methods dealing with User Login.
+// -------------------------------------------------------------------
 - (void)logginStatus:(BOOL)login forUser:(NSString *)username;
+
+// -------------------------------------------------------------------
+// Methods dealing with Tickets.
+// -------------------------------------------------------------------
 - (BOOL)insertTicket:(Ticket *)ticket;
+- (BOOL)updateTicket:(Ticket *)oldTicket withChanges:(Ticket *)ticket;
 - (BOOL)removeTicket:(Ticket *)ticket;
 - (void)loadData;
 
+// -------------------------------------------------------------------
+// Properties dealing with Login Status.
+// -------------------------------------------------------------------
 @property (readonly) BOOL loggedIn;
 @property (readonly) NSString *user;
 
+// -------------------------------------------------------------------
+// Objects used throughout the application.
+// -------------------------------------------------------------------
 @property (readwrite, copy) Business *business;
 @property (readwrite, copy) NSMutableArray *hearingStatus;
 @property (readwrite, copy) NSMutableArray *employees;

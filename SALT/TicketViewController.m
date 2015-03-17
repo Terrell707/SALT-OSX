@@ -63,29 +63,36 @@
     
     NSLog(@"Segue End Destination = %@", controller);
     
+    // Presents the View for a user to insert a ticket.
     if ([segue.identifier isEqualToString:@"InsertTicketSegue"]) {
         [controller setTitleString:@"Create Hearing Ticket"];
         [controller setClearBtnString:@"Clear"];
+        [controller setUpdateTicket:NO];
     }
+    
+    // Presents the View for a user to update a ticket.
     if ([segue.identifier isEqualToString:@"UpdateTicketSegue"]) {
         [controller setTitleString:@"Update Hearing Ticket"];
         [controller setClearBtnString:@"Revert"];
+        [controller setUpdateTicket:YES];
         
         NSUInteger selection = [ticketController selectionIndex];
         Ticket *ticket = tickets[selection];
         
-        [controller setTicketNumber:[[ticket ticket_no] stringValue]];
-        [controller setCallOrderNumber:[ticket call_order_no]];
-        [controller setClaimantFirstName:[ticket first_name]];
-        [controller setClaimantLastName:[ticket last_name]];
-        [controller setSoc:[ticket soc]];
-        [controller setCan:[[ticket heldAt] can]];
-        [controller setStatusText:[ticket status]];
-//        [controller setOnTheRecord:[ticket onTheRecord]];
+        [controller setOldTicket:ticket];
         
-        [controller setWorkedBy:[ticket workedBy]];
-        [controller setJudgePresided:[ticket judgePresided]];
-        [controller setHeldAt:[ticket heldAt]];
+//        [controller setTicketNumber:[[ticket ticket_no] stringValue]];
+//        [controller setCallOrderNumber:[ticket call_order_no]];
+//        [controller setClaimantFirstName:[ticket first_name]];
+//        [controller setClaimantLastName:[ticket last_name]];
+//        [controller setSoc:[ticket soc]];
+//        [controller setCan:[[ticket heldAt] can]];
+//        [controller setStatusText:[ticket status]];
+////        [controller setOnTheRecord:[ticket onTheRecord]];
+//        
+//        [controller setWorkedBy:[ticket workedBy]];
+//        [controller setJudgePresided:[ticket judgePresided]];
+//        [controller setHeldAt:[ticket heldAt]];
     }
 }
 
@@ -99,8 +106,8 @@
         [ticketTable reloadData];
     }
     
-    if ([keyPath isEqualToString:@"selectionIndex"]) {
-        NSLog(@"Selection = %ld", [ticketController selectionIndex]);
+    if ([keyPath isEqualToString:@"selectionIndex"] && change[@"new"] != nil) {
+        NSLog(@"Selection = %ld Change = %@", [ticketController selectionIndex], change);
         [self updateFields];
     }
 }
@@ -110,9 +117,6 @@
     // Will update the search whenever something is typed into the search field.
     if ([notification object] == searchField) {
         [self searchTickets];
-    }
-    else {
-        [self changeTicketInfoFromField:[notification object]];
     }
 }
 
@@ -171,6 +175,7 @@
     }
 }
 
+// Updates all the fields with the currently selected ticket's information.
 - (void)updateFields
 {
     NSUInteger selection = [ticketController selectionIndex];
@@ -299,40 +304,6 @@
     }
     for (NSTextField *field in nameFields) {
         [field sizeToFit];
-    }
-}
-
-- (void)changeTicketInfoFromField:(NSTextField *)field
-{
-    NSArray *nameSplit;
-    NSDictionary *name;
-    NSUInteger selection = [ticketController selectionIndex];
-    
-    if (lastNameFirst) {
-        nameSplit = [[field stringValue] componentsSeparatedByString:@", "];
-        name = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[1], @"first_name", nameSplit[0], @"last_name", nil];
-    }
-    else {
-        nameSplit = [[field stringValue] componentsSeparatedByString:@" "];
-        name = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[0], @"first_name", nameSplit[1], @"last_name", nil];
-    }
-    
-    NSLog(@"Selected Ticket = %@", [tickets objectAtIndex:selection]);
-    
-    if (field == _claimantNameField) {
-        
-    }
-    else if (field == _repField) {
-        
-    }
-    else if (field == _vocField) {
-        
-    }
-    else if (field == _meField) {
-        
-    }
-    else if (field == _otherField) {
-        
     }
 }
 

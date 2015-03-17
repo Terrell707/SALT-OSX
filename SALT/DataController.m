@@ -250,7 +250,7 @@ static DataController *sharedDataController = nil;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-    [timeFormat setDateFormat:@"HH:mm"];
+    [timeFormat setDateFormat:@"hh:mm"];
     
     // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Ticket
     //  to the database.
@@ -285,6 +285,61 @@ static DataController *sharedDataController = nil;
     if ([self checkStatus:status]) {
         [self willChangeValueForKey:@"tickets"];
         [_tickets addObject:ticket];
+        [self didChangeValueForKey:@"tickets"];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)updateTicket:(Ticket *)oldTicket withChanges:(Ticket *)ticket
+{
+    // Creates formatters that will be needed.
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"hh:mm"];
+    
+    // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Ticket
+    //  to the database.
+    NSArray *keys = [ticket propsForDatabase];
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    for (NSString *key in keys) {
+        if ([key isEqualToString:@"order_date"] || [key isEqualToString:@"hearing_date"]) {
+            [values addObject:[dateFormat stringFromDate:[ticket valueForKey:key]]];
+        }
+        else if ([key isEqualToString:@"hearing_time"]) {
+            [values addObject:[timeFormat stringFromDate:[ticket valueForKey:key]]];
+        }
+        else if ([key isEqualToString:@"ticket_no"] || [key isEqualToString:@"emp_worked"]
+                 || [key isEqualToString:@"judge_presided"]) {
+            [values addObject:[[ticket valueForKey:key] stringValue]];
+        }
+        else {
+            [values addObject:[ticket valueForKey:key]];
+        }
+    }
+    
+    // Update the ticket that has (or had) this ticket number.
+    keys = [keys arrayByAddingObject:@"ref_ticket_no"];
+    [values addObject:[[oldTicket ticket_no] stringValue]];
+    
+    NSDictionary *ticketInfo = [NSDictionary dictionaryWithObjects:values
+                                                           forKeys:keys];
+    
+    NSLog(@"Updated Ticket = %@", ticketInfo);
+    
+    // Insert into the database and get the response.
+    NSArray *ticketData = [mySQL grabInfoFromFile:@"updates/ticket.php" withItems:ticketInfo];
+    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
+    
+    NSLog(@"Status=%ld", status);
+    // If there were no errors, replace the old ticket with the updated one.
+    if ([self checkStatus:status]) {
+        [self willChangeValueForKey:@"tickets"];
+        NSUInteger index = [_tickets indexOfObject:oldTicket];
+        [_tickets insertObject:ticket atIndex:index];
+        [_tickets removeObject:oldTicket];
         [self didChangeValueForKey:@"tickets"];
         return YES;
     } else {

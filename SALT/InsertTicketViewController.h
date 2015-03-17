@@ -17,6 +17,9 @@
     NSMutableArray *sites;
     NSMutableArray *judges;
     NSMutableArray *experts;
+    
+    NSColor *successColor;
+    NSColor *errorColor;
 }
 
 // --------------------------------------------------------------
@@ -24,6 +27,8 @@
 // --------------------------------------------------------------
 @property (readwrite, copy) NSString *titleString;
 @property (readwrite, copy) NSString *clearBtnString;
+@property (readwrite) BOOL updateTicket;    // Whether this view is being presented from the "Update" or "Add" button.
+@property (readwrite) Ticket *oldTicket;    // The ticket before changes happen to it.
 
 @property (readwrite, copy) NSString *ticketNumber;
 @property (readwrite, copy) NSString *callOrderNumber;
