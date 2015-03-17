@@ -24,9 +24,6 @@
                                             forKeyPath:@"tickets"
                                                options:NSKeyValueObservingOptionNew
                                                context:NULL];
-    
-    // Observes the TicketController for any time the selection is changed.
-    [ticketController addObserver:self forKeyPath:@"selectionIndex" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewDidAppear
@@ -80,19 +77,6 @@
         Ticket *ticket = tickets[selection];
         
         [controller setOldTicket:ticket];
-        
-//        [controller setTicketNumber:[[ticket ticket_no] stringValue]];
-//        [controller setCallOrderNumber:[ticket call_order_no]];
-//        [controller setClaimantFirstName:[ticket first_name]];
-//        [controller setClaimantLastName:[ticket last_name]];
-//        [controller setSoc:[ticket soc]];
-//        [controller setCan:[[ticket heldAt] can]];
-//        [controller setStatusText:[ticket status]];
-////        [controller setOnTheRecord:[ticket onTheRecord]];
-//        
-//        [controller setWorkedBy:[ticket workedBy]];
-//        [controller setJudgePresided:[ticket judgePresided]];
-//        [controller setHeldAt:[ticket heldAt]];
     }
 }
 
@@ -105,11 +89,12 @@
         [self searchTickets];
         [ticketTable reloadData];
     }
-    
-    if ([keyPath isEqualToString:@"selectionIndex"] && change[@"new"] != nil) {
-        NSLog(@"Selection = %ld Change = %@", [ticketController selectionIndex], change);
-        [self updateFields];
-    }
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+    // Watches to see if the user changed rows, if so, update the fields with the selected ticket.
+    [self updateFields];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification
@@ -178,6 +163,9 @@
 // Updates all the fields with the currently selected ticket's information.
 - (void)updateFields
 {
+    // If the user clicked a column to sort the data, this will get the most current sort.
+    NSArray *arrangedTickets = [ticketController arrangedObjects];
+    
     NSUInteger selection = [ticketController selectionIndex];
     
     NSArray *dateFields = [NSArray arrayWithObjects:_orderDateField, _hearingDateField, _hearingTimeField, nil];
@@ -249,7 +237,7 @@
     }
     
     // Grabs the selected ticket.
-    Ticket *ticket = tickets[selection];
+    Ticket *ticket = arrangedTickets[selection];
     
     // Decides whether to display: "Last Name, First Name" or "First Name Last Name".
     if (lastNameFirst) {

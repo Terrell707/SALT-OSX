@@ -1060,6 +1060,7 @@ DQ
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="HHH-Fn-eU5" name="selectionIndexes" keyPath="selectionIndexes" id="2xe-cA-wdl"/>
+                                                <outlet property="delegate" destination="QUM-jv-1NT" id="JWz-NL-1l8"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
