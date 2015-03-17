@@ -73,8 +73,10 @@
         [controller setClearBtnString:@"Revert"];
         [controller setUpdateTicket:YES];
         
+        // Grabs the sorted tickets if the user clicked a column to sort the table.
+        NSArray *arrangedTickets = [ticketController arrangedObjects];
         NSUInteger selection = [ticketController selectionIndex];
-        Ticket *ticket = tickets[selection];
+        Ticket *ticket = arrangedTickets[selection];
         
         [controller setOldTicket:ticket];
     }
@@ -148,16 +150,21 @@
     NSArray *selected = [ticketController selectedObjects];
     NSLog(@"Selected = %@", selected);
     
-    if ([[DataController sharedDataController] removeTicket:[selected objectAtIndex:0]]) {
-        NSLog(@"Ticket was removed");
-        [self setTickets:[[DataController sharedDataController] tickets]];
-        ticketsBeforeFilter = tickets;
-        [self searchTickets];
-        [ticketTable reloadData];
+    for (Ticket *ticket in selected) {
+        if ([[DataController sharedDataController] removeTicket:ticket]) {
+            NSLog(@"Ticket was removed");
+            [self setTickets:[[DataController sharedDataController] tickets]];
+//            ticketsBeforeFilter = tickets;
+//            [self searchTickets];
+            [ticketTable reloadData];
+        }
+        else {
+            NSLog(@"Failure removing ticket!");
+        }
     }
-    else {
-        NSLog(@"Failure removing ticket!");
-    }
+    
+    [self searchTickets];
+    [ticketTable reloadData];
 }
 
 // Updates all the fields with the currently selected ticket's information.
