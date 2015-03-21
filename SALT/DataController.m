@@ -145,7 +145,7 @@ static DataController *sharedDataController = nil;
     
     // Limits the number of results we recieve.
     NSArray *keys = [NSArray arrayWithObjects:@"limit", nil];
-    NSArray *values = [NSArray arrayWithObjects:@"50", nil];
+    NSArray *values = [NSArray arrayWithObjects:@"150", nil];
     NSDictionary *limit = [NSDictionary dictionaryWithObjects:values
                                                       forKeys:keys];
     

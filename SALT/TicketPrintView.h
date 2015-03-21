@@ -12,6 +12,7 @@
 #import "DataController.h"
 
 @interface TicketPrintView : NSView {
+    BOOL printTitle;
     Business *business;
     NSArray *tickets;
     NSMutableDictionary *attributes;
