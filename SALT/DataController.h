@@ -46,12 +46,12 @@
 // -------------------------------------------------------------------
 // Objects used throughout the application.
 // -------------------------------------------------------------------
-@property (readwrite, copy) Business *business;
-@property (readwrite, copy) NSMutableArray *hearingStatus;
-@property (readwrite, copy) NSMutableArray *employees;
-@property (readwrite, copy) NSMutableArray *sites;
-@property (readwrite, copy) NSMutableArray *judges;
-@property (readwrite, copy) NSMutableArray *experts;
-@property (readwrite, copy) NSMutableArray *tickets;
+@property (readonly, copy) Business *business;
+@property (readonly, copy) NSMutableArray *hearingStatus;
+@property (readonly, copy) NSMutableArray *employees;
+@property (readonly, copy) NSMutableArray *sites;
+@property (readonly, copy) NSMutableArray *judges;
+@property (readonly, copy) NSMutableArray *experts;
+@property (readonly, copy) NSMutableArray *tickets;
 
 @end
