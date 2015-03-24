@@ -12,15 +12,25 @@
 #import "DataController.h"
 
 @interface TicketPrintView : NSView {
-    BOOL printTitle;
+    Site *office;
     Business *business;
+    NSString *invoiceTitle;
+    NSString *invoiceNumber;
+    NSUInteger combinedTotal;
+    
     NSArray *tickets;
     NSMutableDictionary *attributes;
     float lineHeight;
     NSRect pageRect;
     NSInteger linesPerPage;
     NSInteger currentPage;
+    NSInteger maxPages;
 }
 
-- (id)initWithTickets:(NSArray *)array;
+- (id)initWithTickets:(NSArray *)t;
+- (id)initWithTickets:(NSArray *)t
+             fromSite:(Site *)s
+            withTitle:(NSString *)title
+            andNumber:(NSString *)number;
+
 @end

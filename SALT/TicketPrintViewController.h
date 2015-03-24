@@ -7,7 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TicketPrintView.h"
 
-@interface TicketPrintViewController : NSViewController
+@interface TicketPrintViewController : NSViewController <NSComboBoxDelegate> {
+    NSArray *sites;
+}
+
+@property (weak) IBOutlet NSTextField *invoiceTitleField;
+@property (weak) IBOutlet NSDatePicker *fromDatePicker;
+@property (weak) IBOutlet NSDatePicker *toDatePicker;
+@property (weak) IBOutlet NSComboBox *officeCombo;
+@property (weak) IBOutlet NSTextField *invoiceNumField;
+
+- (IBAction)printBtn:(id)sender;
+- (IBAction)dismissBtn:(id)sender;
 
 @end

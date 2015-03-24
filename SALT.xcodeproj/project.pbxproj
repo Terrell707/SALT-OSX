@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A5045AC1AAFDC070069D27E /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5045AB1AAFDC070069D27E /* Business.m */; };
 		3A654A1A1AB39223001899A6 /* TicketPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A654A191AB39223001899A6 /* TicketPrintView.m */; };
+		3A729C151ABF69980089FE2A /* TicketPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A729C141ABF69980089FE2A /* TicketPrintViewController.m */; };
 		3AFD09191A8836C4001D8688 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09181A8836C4001D8688 /* AppDelegate.m */; };
 		3AFD091B1A8836C4001D8688 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091A1A8836C4001D8688 /* main.m */; };
 		3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091F1A8836C4001D8688 /* SALT.xcdatamodeld */; };
@@ -49,6 +50,8 @@
 		3A5045AB1AAFDC070069D27E /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Business.m; sourceTree = "<group>"; };
 		3A654A181AB39223001899A6 /* TicketPrintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketPrintView.h; sourceTree = "<group>"; };
 		3A654A191AB39223001899A6 /* TicketPrintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketPrintView.m; sourceTree = "<group>"; };
+		3A729C131ABF69980089FE2A /* TicketPrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketPrintViewController.h; sourceTree = "<group>"; };
+		3A729C141ABF69980089FE2A /* TicketPrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketPrintViewController.m; sourceTree = "<group>"; };
 		3AFD09121A8836C4001D8688 /* SALT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SALT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFD09161A8836C4001D8688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AFD09171A8836C4001D8688 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				3AFD09A01A902FDA001D8688 /* InsertTicketViewController.m */,
 				3AFD09E31AAC0A51001D8688 /* MainWindowController.h */,
 				3AFD09E41AAC0A51001D8688 /* MainWindowController.m */,
+				3A729C131ABF69980089FE2A /* TicketPrintViewController.h */,
+				3A729C141ABF69980089FE2A /* TicketPrintViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				3AFD098C1A8AB507001D8688 /* Employee.m in Sources */,
 				3AFD09A11A902FDA001D8688 /* InsertTicketViewController.m in Sources */,
 				3AFD09891A8AB507001D8688 /* User.m in Sources */,
+				3A729C151ABF69980089FE2A /* TicketPrintViewController.m in Sources */,
 				3AFD09801A8AB507001D8688 /* Expert.m in Sources */,
 				3AFD098F1A8AB507001D8688 /* Clerk.m in Sources */,
 				3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */,
