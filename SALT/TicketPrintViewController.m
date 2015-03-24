@@ -53,12 +53,15 @@
 
 - (IBAction)printBtn:(id)sender {
     
+    // Gets all the tickets.
     NSArray *tickets = [[DataController sharedDataController] tickets];
     
+    // Finds all the tickets that were took place at the selected office.
     NSArray *officeInfo = [[_officeCombo stringValue] componentsSeparatedByString:@", "];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"at_site == %@", officeInfo[1]];
-//    tickets = [tickets filteredArrayUsingPredicate:predicate];
+    tickets = [tickets filteredArrayUsingPredicate:predicate];
     
+    // Finds the selected office in the list of offices.
     predicate = [NSPredicate predicateWithFormat:@"name == %@ && office_code == %@",
                               officeInfo[0], officeInfo[1]];
     NSArray *office = [sites filteredArrayUsingPredicate:predicate];
@@ -66,6 +69,7 @@
     NSLog(@"Selected Office = %@", office[0]);
     NSLog(@"Tickets=%ld", [tickets count]);
     
+    // Passes the list of tickets to be printed.
     [self printWithTickets:tickets fromSite:office[0]];
 }
 
@@ -115,12 +119,12 @@
     [printInfo setRightMargin:3.0];
     
     NSLog(@"Tickets Again =%ld", [tickets count]);
-//    TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:tickets
-//                                                            fromSite:office
-//                                                           withTitle:invoiceTitle
-//                                                           andNumber:invoiceNumber];
+    TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:tickets
+                                                            fromSite:office
+                                                           withTitle:invoiceTitle
+                                                           andNumber:invoiceNumber];
     
-    TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:tickets];
+//    TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:tickets];
     printOp = [NSPrintOperation printOperationWithView:view
                                              printInfo:printInfo];
     
