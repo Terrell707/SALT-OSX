@@ -48,7 +48,6 @@
 @property (weak) IBOutlet NSBox *hearingInfoBox;
 
 - (IBAction)removeButton:(id)sender;
-- (IBAction)printButton:(id)sender;
 
 @property (weak) IBOutlet NSButton *removeButton;
 @property (weak) IBOutlet NSButton *updateButton;

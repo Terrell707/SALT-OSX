@@ -124,27 +124,6 @@
     }];
 }
 
-- (IBAction)printButton:(id)sender {
-    [self print];
-}
-
-- (void)print
-{
-    NSPrintInfo *printInfo;
-    NSPrintInfo *sharedInfo;
-    NSPrintOperation *printOp;
-    
-    sharedInfo = [NSPrintInfo sharedPrintInfo];
-    printInfo = [[NSPrintInfo alloc] initWithDictionary:[NSMutableDictionary dictionaryWithDictionary:[sharedInfo dictionary]]];
-    
-    TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:(NSArray *)tickets];
-    printOp = [NSPrintOperation printOperationWithView:view
-                                             printInfo:printInfo];
-    
-    [printOp setShowsPrintPanel:YES];
-    [printOp runOperation];
-}
-
 - (void)removeTicket
 {
     NSArray *selected = [ticketController selectedObjects];
