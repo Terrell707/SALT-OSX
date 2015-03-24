@@ -77,20 +77,16 @@
 {
     NSLog(@"Update Boolean = %d", _updateTicket);
     
-    // Changes the view based on how this view is presented.
-    if (_titleString == nil) {
-        [self setTitleString:@"Create Hearing Ticket"];
+    if (_updateTicket) {
+        // Populates each of the fields if "Update" was clicked and there is information for that field.
+        [_titleLabel setStringValue:@"Update Hearing Ticket"];
+        [_clearBtn setTitle:@"Revert"];
+        [self revertForm];
     }
-    if (_clearBtnString == nil) {
-        [self setClearBtnString:@"Clear"];
+    else {
+        [_titleLabel setStringValue:@"Create Hearing Ticket"];
+        [_clearBtn setTitle:@"Clear"];
     }
-    
-    // Sets the title of the view and the button that erases the fields.
-    [_titleLabel setStringValue:_titleString];
-    [_clearBtn setTitle:_clearBtnString];
-    
-    // Populates each of the fields if "Update" was clicked and there is information for that field.
-    [self revertForm];
 }
 
 - (IBAction)clearBtn:(NSButton *)sender {
@@ -462,10 +458,14 @@
 
 - (void)revertForm
 {
-    NSArray *comboboxes = [NSArray arrayWithObjects:_statusCombo, _workedByCombo, _officeCombo, _judgePresidingCombo, _repCombo,
-                           _vocationalCombo, _medicalCombo, _otherCombo, nil];
+    NSArray *comboboxes = [NSArray arrayWithObjects:_statusCombo, _workedByCombo, _officeCombo,
+                           _judgePresidingCombo, _repCombo, _vocationalCombo, _medicalCombo, _otherCombo, nil];
     
     // Sets each of the fields to what is currently present in the ticket.
+    if ([_oldTicket order_date] != nil) [_orderDatePicker setDateValue:[_oldTicket order_date]];
+    if ([_oldTicket hearing_date] != nil) [_hearingDatePicker setDateValue:[_oldTicket hearing_date]];
+    if ([_oldTicket hearing_time] != nil) [_hearingTimePicker setDateValue:[_oldTicket hearing_time]];
+    
     if ([_oldTicket ticket_no] != nil) [_ticketNumberField setStringValue:[[_oldTicket ticket_no] stringValue]];
     if ([_oldTicket call_order_no] != nil) [_orderNumberField setStringValue:[_oldTicket call_order_no]];
     if ([_oldTicket first_name] != nil) [_firstNameField setStringValue:[_oldTicket first_name]];
