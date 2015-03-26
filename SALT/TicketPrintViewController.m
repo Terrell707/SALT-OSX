@@ -113,11 +113,6 @@
     sharedInfo = [NSPrintInfo sharedPrintInfo];
     printInfo = [[NSPrintInfo alloc] initWithDictionary:[NSMutableDictionary dictionaryWithDictionary:[sharedInfo dictionary]]];
     
-    [printInfo setTopMargin:3.0];
-    [printInfo setBottomMargin:3.0];
-    [printInfo setLeftMargin:3.0];
-    [printInfo setRightMargin:3.0];
-    
     NSLog(@"Tickets Again =%ld", [tickets count]);
     TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:tickets
                                                             fromSite:office
@@ -125,8 +120,7 @@
                                                            andNumber:invoiceNumber];
     
 //    TicketPrintView *view = [[TicketPrintView alloc] initWithTickets:tickets];
-    printOp = [NSPrintOperation printOperationWithView:view
-                                             printInfo:printInfo];
+    printOp = [NSPrintOperation printOperationWithView:view];
     
     [printOp setShowsPrintPanel:YES];
     [printOp runOperation];

@@ -68,7 +68,7 @@
     newFrame.origin = NSZeroPoint;
     newFrame.size = [printInfo paperSize];
     [self setFrame:newFrame];
-    
+
     // How many lines per page?
     linesPerPage = pageRect.size.height / lineHeight;
     
@@ -137,6 +137,7 @@
     NSRect dunsNumber;
     NSRect toFinance;
     NSRect toSite;
+    NSRect locationRect;
     
     NSRect callOrderHeader;
     NSRect ticketNumberHeader;
@@ -151,6 +152,7 @@
     NSRect orderDateRect;
     NSRect serviceDateRect;
     NSRect amountClaimedRect;
+    NSRect pageTotalRect;
     
     NSRect combinedTotalRect;
     NSRect submitOriginalRect;
@@ -162,8 +164,10 @@
     NSRect nameTitleRect;
     NSRect nameTitleSignatureRect;
     
+    NSUInteger pageTotal = 0;
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    [dateFormatter setDateFormat:@"MM/dd/yy"];
     
     // If the first page, print title, headers, etc.
     if (currentPage == 0) {
@@ -295,9 +299,17 @@
         NSString *address = [NSString stringWithFormat:@"%@\n%@\n%@\n%@, %@", orderingOffice, socialSecurity, siteAddress[0], siteAddress[1], siteAddress[2]];
         [address drawInRect:toSite withAttributes:attributes];
         
+        locationRect.origin.x = toSite.origin.x;
+        locationRect.origin.y = NSMaxY(toSite);
+        locationRect.size.width = pageRect.size.width;
+        locationRect.size.height = lineHeight;
+        NSString *location = [NSString stringWithFormat:@"Location: %@; CAN: %@", [office office_code], [office can]];
+        [location drawInRect:locationRect withAttributes:attributes];
+        
         // Twelveth line is a blank line.
         blank.origin.x = pageRect.origin.x;
-        blank.origin.y = NSMaxY(toFinance);
+        blank.origin.y = NSMaxY(locationRect);
+        blank.size.width = pageRect.size.width;
         blank.size.height = lineHeight;
         
         // Eleventh line is the header.
@@ -379,7 +391,6 @@
         }
         
         Ticket *t = [tickets objectAtIndex:index];
-        NSLog(@"Printing Ticket Number: %@", [t ticket_no]);
         
         // Draw each of the needed components of the ticket into the rectangle.
         callOrderRect.origin.y = NSMaxY(callOrderRect);
@@ -414,14 +425,41 @@
         
         // Keeps the running total of amount claimed.
         combinedTotal += [amountClaimed integerValue];
+        pageTotal += [amountClaimed integerValue];
     }
     
+    // Places a blank line beneath the last ticket.
+    blank.size.width = pageRect.size.width;
+    blank.size.height = lineHeight;
+    blank.origin.x = pageRect.origin.x;
+    blank.origin.y = NSMaxY(amountClaimedRect);
+
+    // Prints the page total at the bottom of each page.
+//    if (maxPages > 1) {
+//        // Lines the text "Page X Total:" up with the service date.
+//        pageTotalRect.size.width = serviceDateRect.size.width;
+//        pageTotalRect.size.height = lineHeight;
+//        pageTotalRect.origin.x = serviceDateRect.origin.x;
+//        pageTotalRect.origin.y = NSMaxY(blank);
+//        NSString *pageClaimed = [NSString stringWithFormat:@"Page %ld Total:", currentPage+1];
+//        [pageClaimed drawInRect:pageTotalRect withAttributes:attributes];
+//        
+//        // Lines the actual dollar amount total up with amount claimed.
+//        pageTotalRect.size.width = amountClaimedRect.size.width;
+//        pageTotalRect.origin.x = amountClaimedRect.origin.x;
+//        NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
+//        [numFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+//        NSString *formattedTotal = [numFormatter stringFromNumber:[NSNumber numberWithInteger:pageTotal]];
+//        [formattedTotal drawInRect:pageTotalRect withAttributes:attributes];
+//        
+//        // Places a blank line beneath the last ticket.
+//        blank.size.width = pageRect.size.width;
+//        blank.size.height = lineHeight;
+//        blank.origin.x = pageRect.origin.x;
+//        blank.origin.y = NSMaxY(pageTotalRect);
+//    }
+    
     if (currentPage == maxPages-1) {
-        // Places a blank line beneath the last ticket.
-        blank.size.width = pageRect.size.width;
-        blank.size.height = lineHeight;
-        blank.origin.x = pageRect.origin.x;
-        blank.origin.y = NSMaxY(amountClaimedRect);
         
         // Lines the text "Combined Total:" up with the service date.
         combinedTotalRect.size.width = serviceDateRect.size.width;
@@ -437,17 +475,19 @@
         [numFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         NSString *formattedTotal = [numFormatter stringFromNumber:[NSNumber numberWithInteger:combinedTotal]];
         [formattedTotal drawInRect:combinedTotalRect withAttributes:attributes];
-        
+
         // Places a blank line beneath the combined total.
+        blank.size.width = pageRect.size.width;
+        blank.size.height = lineHeight;
         blank.origin.x = pageRect.origin.x;
         blank.origin.y = NSMaxY(combinedTotalRect);
-        
+
         submitOriginalRect.origin.x = pageRect.origin.x;
         submitOriginalRect.origin.y = NSMaxY(blank);
         submitOriginalRect.size.width = pageRect.size.width;
-        submitOriginalRect.size.width = lineHeight;
+        submitOriginalRect.size.height = lineHeight;
         [@"SUBMIT ORIGINAL TO SSA/ODAR OFFICE. Complete Continuation Sheet if additonal space is needed." drawInRect:submitOriginalRect withAttributes:attributes];
-        
+
         // Places two blank lines beneath the "Submit Original" line.
         blank.origin.x = pageRect.origin.x;
         blank.origin.y = NSMaxY(submitOriginalRect);
@@ -522,5 +562,6 @@
         [@"SIGNATURE:" drawInRect:nameTitleSignatureRect withAttributes:attributes];
     }
 }
+
 
 @end
