@@ -1194,7 +1194,20 @@ Gw
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.call_order_no" id="icT-rD-gjC"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="first_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="VyW-pI-F28" userLabel="First Name">
+                                                <tableColumn identifier="clmt_full_name" editable="NO" width="250" minWidth="10" maxWidth="3.4028234663852886e+38" id="fOw-nl-nLm">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant Full Name">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="pm6-X2-9VZ">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                                <tableColumn identifier="first_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="VyW-pI-F28" userLabel="First Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant First Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1211,7 +1224,7 @@ Gw
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.first_name" id="mzk-YS-Fop"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="last_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="xUa-SY-Zyc" userLabel="Last Name">
+                                                <tableColumn identifier="last_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="xUa-SY-Zyc" userLabel="Last Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Claimant Last Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1303,7 +1316,7 @@ Gw
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.hearing_time" id="poJ-ew-6ac"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="status" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
+                                                <tableColumn identifier="status" editable="NO" width="227" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1319,6 +1332,77 @@ Gw
                                                     <connections>
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.status" id="MHc-Fg-Dk0"/>
                                                     </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="office_full_info" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="uc3-Va-Yxu">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Office Full Info.">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="0yB-Ef-z9N">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="heldAt.name"/>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="displayPatternValue1" keyPath="arrangedObjects.heldAt.name" id="VE6-x7-OzM">
+                                                            <dictionary key="options">
+                                                                <string key="NSDisplayPattern">%{value1}@, %{value2}@</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                        <binding destination="HHH-Fn-eU5" name="displayPatternValue2" keyPath="arrangedObjects.heldAt.office_code" previousBinding="VE6-x7-OzM" id="rB4-ti-kVM">
+                                                            <dictionary key="options">
+                                                                <string key="NSDisplayPattern">%{value1}@, %{value2}@</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="S86-ML-G6s">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Office Code">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="FmK-gV-tLY">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.heldAt.office_code" id="cwm-Yl-fhh"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="uKP-gT-NYP">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Office Name">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="hVv-PE-tg4">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.heldAt.name" id="TJq-q7-1Hv"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="emp_full_name" editable="NO" width="250" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="qAO-cC-7BT" userLabel="Emp Full Name">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Employee Full Name">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="gkh-ml-1Mv">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
                                                 <tableColumn identifier="emp_first" editable="NO" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="FlJ-ak-WE4" userLabel="Emp First Name">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Employee First">
@@ -1351,6 +1435,51 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <connections>
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.workedBy.last_name" id="OuY-d3-kak"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn identifier="judge_full_name" editable="NO" width="250" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="e4w-qE-STu">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Judge Full Name">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="vEX-Pp-miu">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="gdk-U0-ibb">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Judge First Name">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="3zD-JR-3Xh">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.judgePresided.first_name" id="t4q-Lr-ony"/>
+                                                    </connections>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="78y-0g-XDH">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Judge Last Name">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="TPK-F1-Dgk">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <connections>
+                                                        <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.judgePresided.last_name" id="Q6b-18-hoJ"/>
                                                     </connections>
                                                 </tableColumn>
                                             </tableColumns>

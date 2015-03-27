@@ -48,9 +48,16 @@
     
     // Populates the ticket table.
     [ticketTable reloadData];
+    [self firstLastNameOrder];
     NSLog(@"Calling Update Fields!");
+    
+    // Displays the information for the initial selected ticket.
     [self updateFields];
+    
+    // Populates the context menu with all of the column names.
     [self fillHeaderMenu:ticketTable];
+    
+    // Moves focus to the ticket table.
     [self.view.window makeFirstResponder:ticketTable];
 }
 
@@ -108,6 +115,41 @@
     if ([notification object] == searchField) {
         [self searchTickets];
     }
+}
+
+- (void)firstLastNameOrder
+{
+    NSTableColumn *clmtNameColumn = [ticketTable tableColumnWithIdentifier:@"clmt_full_name"];
+    NSTableColumn *empNameColumn = [ticketTable tableColumnWithIdentifier:@"emp_full_name"];
+    NSTableColumn *judgeNameColumn = [ticketTable tableColumnWithIdentifier:@"judge_full_name"];
+    
+    [self bindFullNameColumn:clmtNameColumn withFirst:@"first_name" andLast:@"last_name"];
+    [self bindFullNameColumn:empNameColumn withFirst:@"workedBy.first_name" andLast:@"workedBy.last_name"];
+    [self bindFullNameColumn:judgeNameColumn withFirst:@"judgePresided.first_name" andLast:@"judgePresided.last_name"];
+}
+
+- (void)bindFullNameColumn:(NSTableColumn *)col withFirst:(NSString *)first andLast:(NSString *)last
+{
+    NSString *namePattern;
+    if (lastNameFirst) {
+        namePattern = @"%{value2}@, %{value1}@";
+    }
+    else {
+        namePattern = @"%{value1}@ %{value2}@";
+    }
+    
+    NSString *value1 = [NSString stringWithFormat:@"arrangedObjects.%@", first];
+    NSString *value2 = [NSString stringWithFormat:@"arrangedObjects.%@", last];
+    
+    [col bind:@"displayPatternValue1"
+                toObject:ticketController
+             withKeyPath:value1
+                 options:@{NSDisplayPatternBindingOption : namePattern}];
+    
+    [col bind:@"displayPatternValue2"
+                toObject:ticketController
+             withKeyPath:value2
+                 options:@{NSDisplayPatternBindingOption : namePattern}];
 }
 
 #pragma mark NSMenu Methods
