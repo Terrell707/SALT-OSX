@@ -263,6 +263,7 @@ static DataController *sharedDataController = nil;
     _ticketHearingDateTo = to;
     
     [self grabTicketData];
+    [self hearingTicketInformation];
 }
 
 - (BOOL)insertTicket:(Ticket *)ticket
