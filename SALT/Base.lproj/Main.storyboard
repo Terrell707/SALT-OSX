@@ -827,21 +827,13 @@ DQ
         <!--Tickets Settings-->
         <scene sceneID="XfD-4K-9q5">
             <objects>
-                <viewController title="Tickets Settings" showSeguePresentationStyle="single" id="OSE-As-hP6" sceneMemberID="viewController">
+                <viewController title="Tickets Settings" showSeguePresentationStyle="single" id="OSE-As-hP6" customClass="TicketSettingsViewController" sceneMemberID="viewController">
                     <view key="view" id="vFS-qg-CRk">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="258"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u58-Uz-0gJ">
-                                <rect key="frame" x="206" y="263" width="38" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="oHv-wk-bPf">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ge9-ex-XKC">
-                                <rect key="frame" x="18" y="238" width="132" height="17"/>
+                                <rect key="frame" x="18" y="221" width="132" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hearing Date Range:" id="1sJ-rd-Rva">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -849,7 +841,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m3M-nA-CjY">
-                                <rect key="frame" x="104" y="207" width="104" height="27"/>
+                                <rect key="frame" x="104" y="190" width="104" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="88P-if-Qfn">
                                     <font key="font" metaFont="system"/>
                                     <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -861,7 +853,7 @@ DQ
                                 </datePickerCell>
                             </datePicker>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNE-PI-m6t">
-                                <rect key="frame" x="213" y="210" width="25" height="17"/>
+                                <rect key="frame" x="213" y="193" width="25" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="To" id="nfI-iC-dVJ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -869,7 +861,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jd-E0-1ke">
-                                <rect key="frame" x="245" y="207" width="104" height="27"/>
+                                <rect key="frame" x="245" y="190" width="104" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="F2y-0u-eDN">
                                     <font key="font" metaFont="system"/>
                                     <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -881,7 +873,7 @@ DQ
                                 </datePickerCell>
                             </datePicker>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P87-6I-Y71">
-                                <rect key="frame" x="18" y="182" width="112" height="17"/>
+                                <rect key="frame" x="18" y="165" width="112" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Display Columns:" id="Mda-JD-XlZ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -889,95 +881,125 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5G-ty-rO2">
-                                <rect key="frame" x="84" y="158" width="61" height="18"/>
+                                <rect key="frame" x="84" y="141" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zKN-d3-Kdu">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CkT-9O-SOT">
-                                <rect key="frame" x="84" y="138" width="61" height="18"/>
+                                <rect key="frame" x="84" y="121" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mtA-23-ojt">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfq-QJ-vb0">
-                                <rect key="frame" x="84" y="118" width="61" height="18"/>
+                                <rect key="frame" x="84" y="101" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oUn-0V-cVG">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZAJ-Ze-sdS">
-                                <rect key="frame" x="84" y="98" width="61" height="18"/>
+                                <rect key="frame" x="84" y="81" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VTj-20-Jza">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTr-5G-ujP">
-                                <rect key="frame" x="195" y="158" width="61" height="18"/>
+                                <rect key="frame" x="195" y="141" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7cO-xz-eKr">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QKY-Ef-qhH">
-                                <rect key="frame" x="195" y="138" width="61" height="18"/>
+                                <rect key="frame" x="195" y="121" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="x14-Bq-uFQ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgP-tf-97P">
-                                <rect key="frame" x="195" y="118" width="61" height="18"/>
+                                <rect key="frame" x="195" y="101" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lke-Oj-iwr">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZF-K8-NwT">
-                                <rect key="frame" x="195" y="98" width="61" height="18"/>
+                                <rect key="frame" x="195" y="81" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2mh-zj-NBD">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUC-zF-OEq">
-                                <rect key="frame" x="298" y="158" width="61" height="18"/>
+                                <rect key="frame" x="298" y="141" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LIy-wR-9kr">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQ8-mQ-zNe">
-                                <rect key="frame" x="298" y="138" width="61" height="18"/>
+                                <rect key="frame" x="298" y="121" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OPu-ai-Viz">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wpq-hs-LAL">
-                                <rect key="frame" x="298" y="118" width="61" height="18"/>
+                                <rect key="frame" x="298" y="101" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rWa-6L-hC7">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nea-lG-fx4">
-                                <rect key="frame" x="298" y="98" width="61" height="18"/>
+                                <rect key="frame" x="298" y="81" width="61" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="D1j-bJ-Z57">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pkO-Hc-yLG">
+                                <rect key="frame" x="274" y="13" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="Confirm" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sK4-NF-6lp">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="confirmBtn:" target="OSE-As-hP6" id="BdD-ge-pn2"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0at-pj-yqB">
+                                <rect key="frame" x="185" y="13" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="Dismiss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1MM-IT-Wxc">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="OSE-As-hP6" id="xQH-sP-54z"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="fromDatePicker" destination="m3M-nA-CjY" id="c7L-pQ-aVB"/>
+                        <outlet property="toDatePicker" destination="0Jd-E0-1ke" id="WLN-gq-Cnt"/>
+                    </connections>
                 </viewController>
                 <customObject id="WBx-Ov-TAI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="569"/>
+            <point key="canvasLocation" x="707" y="1449"/>
         </scene>
         <!--Tickets-->
         <scene sceneID="M0Z-If-YPG">
@@ -1226,7 +1248,7 @@ DQ
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="812" id="gdu-jz-vBf"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="227" id="ubF-Ip-kz8"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="hBg-0i-oxq">
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.00088967971530249106" horizontal="YES" id="hBg-0i-oxq">
                                     <rect key="frame" x="1" y="117.99995332956314" width="238" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1640,6 +1662,9 @@ DQ
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="OSE-As-hP6" kind="popover" popoverAnchorView="xk5-rm-7Oc" popoverBehavior="t" preferredEdge="maxX" id="pV4-Qr-Mkw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -1736,7 +1761,7 @@ DQ
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="dismissBtn:" target="86N-eo-WUu" id="Twz-vF-Btg"/>
+                                    <action selector="dismissController:" target="86N-eo-WUu" id="Wwh-vo-F15"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2CV-eH-46e">
@@ -1850,7 +1875,7 @@ DQ
                 </viewController>
                 <customObject id="rxI-q8-4SF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="997" y="1444.5"/>
+            <point key="canvasLocation" x="1198" y="1421.5"/>
         </scene>
         <!--Create A Hearing Ticket-->
         <scene sceneID="HES-DI-WsX">

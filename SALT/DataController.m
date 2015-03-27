@@ -37,6 +37,14 @@ static DataController *sharedDataController = nil;
         mySQL = [[MySQL alloc] init];
         statusChecker = [[StatusCodes alloc] init];
         
+        // Initialize date objects to today's date and some months prior.
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [[NSDateComponents alloc] init];
+        comps.month = -3;
+        
+        _ticketHearingDateTo = [NSDate date];
+        _ticketHearingDateFrom = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
+        
         // Initalize data arrays.
         _hearingStatus = [[NSMutableArray alloc] init];
         _employees = [[NSMutableArray alloc] init];
@@ -76,7 +84,7 @@ static DataController *sharedDataController = nil;
     NSInteger status = [statusChecker grabStatusFromJson:businessData];
     
     if ([self checkStatus:status]) {
-        for (int x = 0; x < [businessData count]; x++) {
+        for (int x = 1; x < [businessData count]; x++) {
             NSDictionary *data = [businessData objectAtIndex:x];
             _business = [[Business alloc] initWithData:data];
         }
@@ -99,7 +107,7 @@ static DataController *sharedDataController = nil;
     NSInteger status = [statusChecker grabStatusFromJson:employeeData];
     
     if ([self checkStatus:status]) {
-        for (int x = 0; x < [employeeData count]; x++) {
+        for (int x = 1; x < [employeeData count]; x++) {
             NSDictionary *data = [employeeData objectAtIndex:x];
             Employee *employee = [[Employee alloc] initWithData:data];
             [_employees addObject:employee];
@@ -115,7 +123,7 @@ static DataController *sharedDataController = nil;
     NSInteger status = [statusChecker grabStatusFromJson:judgeData];
     
     if ([self checkStatus:status]) {
-        for (int x = 0; x < [judgeData count]; x++) {
+        for (int x = 1; x < [judgeData count]; x++) {
             NSDictionary *data = [judgeData objectAtIndex:x];
             Judge *judge = [[Judge alloc] initWithData:data];
             [_judges addObject:judge];
@@ -131,7 +139,7 @@ static DataController *sharedDataController = nil;
     NSInteger status = [statusChecker grabStatusFromJson:siteData];
     
     if ([self checkStatus:status]) {
-        for (int x = 0; x < [siteData count]; x++) {
+        for (int x = 1; x < [siteData count]; x++) {
             NSDictionary *data = [siteData objectAtIndex:x];
             Site *site = [[Site alloc] initWithData:data];
             [_sites addObject:site];
@@ -143,9 +151,14 @@ static DataController *sharedDataController = nil;
 {
     [_tickets removeAllObjects];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *from = [dateFormatter stringFromDate:_ticketHearingDateFrom];
+    NSString *to = [dateFormatter stringFromDate:_ticketHearingDateTo];
+    
     // Limits the number of results we recieve.
-    NSArray *keys = [NSArray arrayWithObjects:@"limit", nil];
-    NSArray *values = [NSArray arrayWithObjects:@"150", nil];
+    NSArray *keys = [NSArray arrayWithObjects:@"from", @"to", nil];
+    NSArray *values = [NSArray arrayWithObjects:from, to, nil];
     NSDictionary *limit = [NSDictionary dictionaryWithObjects:values
                                                       forKeys:keys];
     
@@ -155,7 +168,7 @@ static DataController *sharedDataController = nil;
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
-        for (int x = 0; x < [ticketData count]; x++) {
+        for (int x = 1; x < [ticketData count]; x++) {
             NSDictionary *data = [ticketData objectAtIndex:x];
             Ticket *ticket = [[Ticket alloc] initWithData:data];
             [self willChangeValueForKey:@"tickets"];
@@ -242,6 +255,14 @@ static DataController *sharedDataController = nil;
     _user = username;
     [self didChangeValueForKey:@"loggedIn"];
     [self didChangeValueForKey:@"user"];
+}
+
+- (void)hearingDateRangeFrom:(NSDate *)from To:(NSDate *)to
+{
+    _ticketHearingDateFrom = from;
+    _ticketHearingDateTo = to;
+    
+    [self grabTicketData];
 }
 
 - (BOOL)insertTicket:(Ticket *)ticket

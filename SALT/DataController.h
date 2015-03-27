@@ -32,6 +32,7 @@
 // -------------------------------------------------------------------
 // Methods dealing with Tickets.
 // -------------------------------------------------------------------
+- (void)hearingDateRangeFrom:(NSDate *)from To:(NSDate *)to;
 - (BOOL)insertTicket:(Ticket *)ticket;
 - (BOOL)updateTicket:(Ticket *)oldTicket withChanges:(Ticket *)ticket;
 - (BOOL)removeTicket:(Ticket *)ticket;
@@ -46,6 +47,9 @@
 // -------------------------------------------------------------------
 // Objects used throughout the application.
 // -------------------------------------------------------------------
+@property (readonly) NSDate *ticketHearingDateFrom;
+@property (readonly) NSDate *ticketHearingDateTo;
+
 @property (readonly, copy) Business *business;
 @property (readonly, copy) NSMutableArray *hearingStatus;
 @property (readonly, copy) NSMutableArray *employees;

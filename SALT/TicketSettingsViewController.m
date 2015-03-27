@@ -16,7 +16,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    
+    NSDate *from = [[DataController sharedDataController] ticketHearingDateFrom];
+    NSDate *to = [[DataController sharedDataController] ticketHearingDateTo];
+    
+    [_fromDatePicker setDateValue:from];
+    [_toDatePicker setDateValue:to];
+    
+}
+
+- (IBAction)confirmBtn:(id)sender {
+    NSDate *fromDate = [_fromDatePicker dateValue];
+    NSDate *toDate = [_toDatePicker dateValue];
+    
+    [[DataController sharedDataController] hearingDateRangeFrom:fromDate To:toDate];
+    [self dismissViewController:self];
 }
 
 @end

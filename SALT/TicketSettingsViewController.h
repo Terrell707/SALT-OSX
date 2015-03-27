@@ -7,7 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "DataController.h"
 
 @interface TicketSettingsViewController : NSViewController
+
+@property (weak) IBOutlet NSDatePicker *fromDatePicker;
+@property (weak) IBOutlet NSDatePicker *toDatePicker;
+
+- (IBAction)confirmBtn:(id)sender;
 
 @end
