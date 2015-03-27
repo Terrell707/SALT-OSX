@@ -225,6 +225,11 @@
     // Grabs the selected ticket.
     Ticket *ticket = arrangedTickets[selection];
     
+    // If nothing is selected, then return.
+    if (ticket == nil) {
+        return;
+    }
+    
     // Decides whether to display: "Last Name, First Name" or "First Name Last Name".
     if (lastNameFirst) {
         // Formats Claimant Name.
