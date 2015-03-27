@@ -47,10 +47,6 @@
     [_toDatePicker setDateValue:endLastMonth];
 }
 
-- (IBAction)dismissBtn:(id)sender {
-    [[[self view] window] close];
-}
-
 - (IBAction)printBtn:(id)sender {
     
     // Gets all the tickets.

@@ -20,6 +20,5 @@
 @property (weak) IBOutlet NSTextField *invoiceNumField;
 
 - (IBAction)printBtn:(id)sender;
-- (IBAction)dismissBtn:(id)sender;
 
 @end
