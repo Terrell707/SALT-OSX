@@ -45,6 +45,8 @@
     NSURL *url = [components URL];
     NSData *dataURL = [NSData dataWithContentsOfURL:url];
     
+    NSLog(@"URL=%@", url);
+    
     // Tries to parse the json into a dictionary.
     NSError *error = nil;
     NSArray *json = [NSJSONSerialization JSONObjectWithData:dataURL

@@ -22,14 +22,16 @@
         NSLog(@"NOTHING WAS RETURNED FROM THE SERVER!");
     }
     
-    // Checks that the json data has an error code key. If not, then no error was returned.
+    // Checks that the json data has an error code key. If not, then return an error was returned.
     if ([[data objectAtIndex:0] valueForKey:@"error_code"] == nil) {
-        return SUCCESS;
+        return ERROR;
     }
     
     // Grabs the error code value from the array and returns it.
     NSInteger code = [[[data objectAtIndex:0] valueForKey:@"error_code"] integerValue];
-    NSLog(@"Error: %@", [[data objectAtIndex:0] valueForKey:@"error_message"]);
+    NSLog(@"Status From JSON: %@", [[data objectAtIndex:0] valueForKey:@"error_message"]);
+    
+    data = [NSArray arrayWithArray:data];
     return code;
 }
 
