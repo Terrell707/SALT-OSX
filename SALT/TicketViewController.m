@@ -15,6 +15,7 @@
 @implementation TicketViewController
 @synthesize tickets;
 
+#pragma mark View Controller methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,9 +50,11 @@
     [ticketTable reloadData];
     NSLog(@"Calling Update Fields!");
     [self updateFields];
+    [self fillHeaderMenu:ticketTable];
     [self.view.window makeFirstResponder:ticketTable];
 }
 
+#pragma mark Observing methods
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
 {
     NSLog(@"Segue=%@", [segue identifier]);
@@ -107,6 +110,32 @@
     }
 }
 
+#pragma mark NSMenu Methods
+- (void)fillHeaderMenu:(NSTableView *)table
+{
+    // Creates a context menu.
+    NSMenu *menu = [[table headerView] menu];
+    
+    // Grabs each of the column names and adds it to the menu.
+    for (NSTableColumn *column in [table tableColumns]) {
+        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:[column.headerCell stringValue]
+                                                          action:@selector(toggleColumn:)
+                                                   keyEquivalent:@""];
+        [menuItem setTarget:self];
+        [menuItem setRepresentedObject:column];
+        [menu addItem:menuItem];
+    }
+}
+
+- (void)menuNeedsUpdate:(NSMenu *)menu
+{
+    for (NSMenuItem *menuItem in [menu itemArray]){
+        NSTableColumn *column = [menuItem representedObject];
+        [menuItem setState:column.isHidden ? NSOffState : NSOnState];
+    }
+}
+
+#pragma mark Action Methods
 - (IBAction)removeButton:(id)sender {
     NSUInteger count = [[ticketController selectedObjects] count];
     NSString *infoMessage = [NSString stringWithFormat:@"You are about to delete %ld ticket(s)! Are you sure you want to delete?", count];
@@ -124,6 +153,13 @@
     }];
 }
 
+- (void)toggleColumn:(id)sender
+{
+    NSTableColumn *col = [sender representedObject];
+    [col setHidden:![col isHidden]];
+}
+
+#pragma mark Data Modification methods
 - (void)removeTicket
 {
     NSArray *selected = [ticketController selectedObjects];
@@ -330,6 +366,7 @@
     }
 }
 
+#pragma mark Helper Methods
 - (NSString *)filterForKeys:(NSArray *)keys
 {
     NSMutableString *filter = [[NSMutableString alloc] init];

@@ -11,7 +11,7 @@
 #import "InsertTicketViewController.h"
 #import "TicketPrintView.h"
 
-@interface TicketViewController : NSViewController <NSTableViewDelegate> {
+@interface TicketViewController : NSViewController <NSTableViewDelegate, NSMenuDelegate> {
     BOOL lastNameFirst;
     
     NSArray *ticketsBeforeFilter;

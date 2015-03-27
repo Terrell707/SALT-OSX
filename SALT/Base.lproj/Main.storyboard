@@ -1303,7 +1303,7 @@ Gw
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.hearing_time" id="poJ-ew-6ac"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="status" editable="NO" width="786" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
+                                                <tableColumn identifier="status" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" id="OLb-rW-Ccu" userLabel="Status">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1366,7 +1366,7 @@ Gw
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="812" id="gdu-jz-vBf"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="227" id="ubF-Ip-kz8"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.00088967971530249106" horizontal="YES" id="hBg-0i-oxq">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hBg-0i-oxq">
                                     <rect key="frame" x="1" y="117.99995332956314" width="238" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1377,6 +1377,9 @@ Gw
                                 <tableHeaderView key="headerView" id="hu9-4l-4AB">
                                     <rect key="frame" x="0.0" y="0.0" width="10000" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <connections>
+                                        <outlet property="menu" destination="xgS-af-QA5" id="1Am-eB-m2e"/>
+                                    </connections>
                                 </tableHeaderView>
                             </scrollView>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hja-2h-0mH">
@@ -1848,6 +1851,11 @@ Gw
                     </connections>
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="kIy-Ck-0hF"/>
+                <menu title="Ticket Columns" id="xgS-af-QA5">
+                    <connections>
+                        <outlet property="delegate" destination="QUM-jv-1NT" id="sY3-Wy-07r"/>
+                    </connections>
+                </menu>
             </objects>
             <point key="canvasLocation" x="997" y="796"/>
         </scene>
