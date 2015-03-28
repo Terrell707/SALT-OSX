@@ -93,7 +93,8 @@
     
     // Presents the View for a user to change settings on the table.
     if ([segue.identifier isEqualToString:@"TicketSettingsSegue"]) {
-        [controller setTableColumns:[ticketTable tableColumns]];
+        [controller setTicketTable:ticketTable];
+        [controller setLastNameFirst:&(lastNameFirst)];
     }
 }
 

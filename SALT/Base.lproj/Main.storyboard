@@ -829,11 +829,11 @@ DQ
             <objects>
                 <viewController title="Tickets Settings" showSeguePresentationStyle="single" id="OSE-As-hP6" customClass="TicketSettingsViewController" sceneMemberID="viewController">
                     <view key="view" id="vFS-qg-CRk">
-                        <rect key="frame" x="0.0" y="0.0" width="497" height="484"/>
+                        <rect key="frame" x="0.0" y="0.0" width="497" height="536"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ge9-ex-XKC">
-                                <rect key="frame" x="18" y="447" width="132" height="17"/>
+                                <rect key="frame" x="18" y="499" width="132" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hearing Date Range:" id="1sJ-rd-Rva">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -841,7 +841,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m3M-nA-CjY">
-                                <rect key="frame" x="104" y="416" width="104" height="27"/>
+                                <rect key="frame" x="104" y="468" width="104" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="88P-if-Qfn">
                                     <font key="font" metaFont="system"/>
                                     <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -853,7 +853,7 @@ DQ
                                 </datePickerCell>
                             </datePicker>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNE-PI-m6t">
-                                <rect key="frame" x="213" y="419" width="25" height="17"/>
+                                <rect key="frame" x="213" y="471" width="25" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="To" id="nfI-iC-dVJ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -861,7 +861,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jd-E0-1ke">
-                                <rect key="frame" x="245" y="416" width="104" height="27"/>
+                                <rect key="frame" x="245" y="468" width="104" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="F2y-0u-eDN">
                                     <font key="font" metaFont="system"/>
                                     <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
@@ -873,7 +873,7 @@ DQ
                                 </datePickerCell>
                             </datePicker>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P87-6I-Y71">
-                                <rect key="frame" x="18" y="391" width="112" height="17"/>
+                                <rect key="frame" x="18" y="443" width="112" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Display Columns:" id="Mda-JD-XlZ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -881,70 +881,63 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Ticket Information" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="2mv-8X-AWD">
-                                <rect key="frame" x="62" y="289" width="372" height="94"/>
+                                <rect key="frame" x="62" y="341" width="372" height="94"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="370" height="78"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5G-ty-rO2">
+                                        <button identifier="ticket_no" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5G-ty-rO2">
                                             <rect key="frame" x="16" y="52" width="113" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Ticket Number" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zKN-d3-Kdu">
+                                            <buttonCell key="cell" type="check" title="Ticket Number" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="zKN-d3-Kdu">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nea-lG-fx4">
-                                            <rect key="frame" x="16" y="12" width="96" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Site Held At" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="D1j-bJ-Z57">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfq-QJ-vb0">
+                                        <button identifier="hearing_date" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfq-QJ-vb0">
                                             <rect key="frame" x="16" y="32" width="103" height="18"/>
                                             <buttonCell key="cell" type="check" title="Hearing Date" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oUn-0V-cVG">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTr-5G-ujP">
+                                        <button identifier="order_date" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTr-5G-ujP">
                                             <rect key="frame" x="133" y="52" width="90" height="18"/>
                                             <buttonCell key="cell" type="check" title="Order Date" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7cO-xz-eKr">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUC-zF-OEq">
+                                        <button identifier="call_order_no" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUC-zF-OEq">
                                             <rect key="frame" x="244" y="52" width="110" height="18"/>
                                             <buttonCell key="cell" type="check" title="Call Order No." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LIy-wR-9kr">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wpq-hs-LAL">
+                                        <button identifier="status" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wpq-hs-LAL">
                                             <rect key="frame" x="244" y="32" width="62" height="18"/>
                                             <buttonCell key="cell" type="check" title="Status" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rWa-6L-hC7">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H8H-A8-e3i">
-                                            <rect key="frame" x="133" y="12" width="96" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Full Amount" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ZTM-ST-eAY">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgP-tf-97P">
+                                        <button identifier="hearing_time" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgP-tf-97P">
                                             <rect key="frame" x="133" y="32" width="104" height="18"/>
                                             <buttonCell key="cell" type="check" title="Hearing Time" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lke-Oj-iwr">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQ8-mQ-zNe">
-                                            <rect key="frame" x="244" y="12" width="61" height="18"/>
-                                            <buttonCell key="cell" type="check" title="SOC" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OPu-ai-Viz">
+                                        <button identifier="can" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQ8-mQ-zNe">
+                                            <rect key="frame" x="16" y="12" width="61" height="18"/>
+                                            <buttonCell key="cell" type="check" title="CAN" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OPu-ai-Viz">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button identifier="soc" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syf-20-VH8">
+                                            <rect key="frame" x="133" y="12" width="61" height="18"/>
+                                            <buttonCell key="cell" type="check" title="SOC" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IXK-uL-PSD">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -955,7 +948,7 @@ DQ
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pkO-Hc-yLG">
-                                <rect key="frame" x="348" y="13" width="89" height="32"/>
+                                <rect key="frame" x="348" y="14" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Confirm" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sK4-NF-6lp">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -968,7 +961,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0at-pj-yqB">
-                                <rect key="frame" x="259" y="13" width="89" height="32"/>
+                                <rect key="frame" x="259" y="14" width="89" height="32"/>
                                 <buttonCell key="cell" type="push" title="Dismiss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1MM-IT-Wxc">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -981,26 +974,26 @@ Gw
                                 </connections>
                             </button>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Claimant Name" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="IRv-8P-Qce">
-                                <rect key="frame" x="62" y="231" width="372" height="54"/>
+                                <rect key="frame" x="62" y="283" width="372" height="54"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="370" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RZG-9g-aQ5">
+                                        <button identifier="clmt_full_name" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RZG-9g-aQ5">
                                             <rect key="frame" x="16" y="12" width="84" height="18"/>
                                             <buttonCell key="cell" type="check" title="Full Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="S9h-vi-I7U">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWO-ST-lSb">
+                                        <button identifier="last_name" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWO-ST-lSb">
                                             <rect key="frame" x="244" y="12" width="89" height="18"/>
                                             <buttonCell key="cell" type="check" title="Last Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9IY-HT-mOC">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qch-gF-6HH">
+                                        <button identifier="first_name" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qch-gF-6HH">
                                             <rect key="frame" x="133" y="12" width="89" height="18"/>
                                             <buttonCell key="cell" type="check" title="First Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="paU-9p-TrK">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1013,26 +1006,26 @@ Gw
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Employee Name" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="8Mj-dM-ycb">
-                                <rect key="frame" x="62" y="173" width="372" height="54"/>
+                                <rect key="frame" x="62" y="225" width="372" height="54"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="370" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fRy-oO-jNl">
+                                        <button identifier="emp_full_name" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fRy-oO-jNl">
                                             <rect key="frame" x="16" y="12" width="84" height="18"/>
                                             <buttonCell key="cell" type="check" title="Full Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Scx-a8-44f">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7c8-iH-QIb">
+                                        <button identifier="emp_last" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7c8-iH-QIb">
                                             <rect key="frame" x="244" y="12" width="89" height="18"/>
                                             <buttonCell key="cell" type="check" title="Last Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oEH-sJ-jGU">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-EM-U2U">
+                                        <button identifier="emp_first" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-EM-U2U">
                                             <rect key="frame" x="133" y="12" width="89" height="18"/>
                                             <buttonCell key="cell" type="check" title="First Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dME-bn-6YE">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1045,26 +1038,26 @@ Gw
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Judge Name" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="hUq-ch-IBr">
-                                <rect key="frame" x="62" y="115" width="372" height="54"/>
+                                <rect key="frame" x="62" y="167" width="372" height="54"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="370" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gkr-fi-Ans">
+                                        <button identifier="judge_full_name" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gkr-fi-Ans">
                                             <rect key="frame" x="16" y="12" width="84" height="18"/>
                                             <buttonCell key="cell" type="check" title="Full Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5YA-9s-f9t">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-nD-V96">
+                                        <button identifier="judge_last" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-nD-V96">
                                             <rect key="frame" x="244" y="12" width="89" height="18"/>
                                             <buttonCell key="cell" type="check" title="Last Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iHR-nd-Dsd">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yC4-A2-BFI">
+                                        <button identifier="judge_first" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yC4-A2-BFI">
                                             <rect key="frame" x="133" y="12" width="89" height="18"/>
                                             <buttonCell key="cell" type="check" title="First Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SpK-Go-Lnv">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1077,26 +1070,26 @@ Gw
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Site Information" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="oNM-hC-sk4">
-                                <rect key="frame" x="62" y="57" width="372" height="54"/>
+                                <rect key="frame" x="62" y="109" width="372" height="54"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="370" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vlA-D6-10j">
+                                        <button identifier="office_full_info" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vlA-D6-10j">
                                             <rect key="frame" x="16" y="12" width="76" height="18"/>
                                             <buttonCell key="cell" type="check" title="Full Info." bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oSu-9e-XCu">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MPU-nB-AEJ">
+                                        <button identifier="office_name" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MPU-nB-AEJ">
                                             <rect key="frame" x="244" y="12" width="98" height="18"/>
                                             <buttonCell key="cell" type="check" title="Office Name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Xwm-xb-Q3k">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cf-84-5oz">
+                                        <button identifier="office_code" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cf-84-5oz">
                                             <rect key="frame" x="133" y="12" width="95" height="18"/>
                                             <buttonCell key="cell" type="check" title="Office Code" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8z4-70-HrG">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1108,16 +1101,72 @@ Gw
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFF-Kh-rzF">
+                                <rect key="frame" x="18" y="88" width="109" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Full Name Order:" id="pBO-0e-UdP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R9a-Mk-dle">
+                                <rect key="frame" x="65" y="62" width="178" height="18"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                <size key="cellSize" width="87" height="18"/>
+                                <size key="intercellSpacing" width="4" height="2"/>
+                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="KCc-Lg-7H3">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <cells>
+                                    <column>
+                                        <buttonCell type="radio" title="John Doe" imagePosition="left" alignment="left" state="on" inset="2" id="Zp4-bg-8ve">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </column>
+                                    <column>
+                                        <buttonCell type="radio" title="Doe, John" imagePosition="left" alignment="left" tag="1" inset="2" id="zsh-hc-WHX">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </column>
+                                </cells>
+                                <connections>
+                                    <action selector="nameOrderButtons:" target="OSE-As-hP6" id="DMB-2h-bOU"/>
+                                </connections>
+                            </matrix>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="callOrderBtn" destination="mUC-zF-OEq" id="Vi3-2o-Z8V"/>
+                        <outlet property="canBtn" destination="hQ8-mQ-zNe" id="FDQ-nN-fTE"/>
+                        <outlet property="clmtFirstBtn" destination="qch-gF-6HH" id="m3z-Hd-Ix6"/>
+                        <outlet property="clmtFullBtn" destination="RZG-9g-aQ5" id="zfb-za-x4n"/>
+                        <outlet property="clmtLastBtn" destination="cWO-ST-lSb" id="Ama-iV-Aqt"/>
+                        <outlet property="empFirstBtn" destination="kmx-EM-U2U" id="h6B-Z6-XQI"/>
+                        <outlet property="empFullBtn" destination="fRy-oO-jNl" id="aIk-Lm-3p9"/>
+                        <outlet property="empLastBtn" destination="7c8-iH-QIb" id="Dgq-DX-FO1"/>
                         <outlet property="fromDatePicker" destination="m3M-nA-CjY" id="c7L-pQ-aVB"/>
+                        <outlet property="hearingDateBtn" destination="Gfq-QJ-vb0" id="MPk-Bo-fML"/>
+                        <outlet property="hearingTimeBtn" destination="SgP-tf-97P" id="Oeq-Qc-a9K"/>
+                        <outlet property="judgeFirstBtn" destination="yC4-A2-BFI" id="sSB-Xn-uYh"/>
+                        <outlet property="judgeFullBtn" destination="Gkr-fi-Ans" id="VLR-UW-Lc1"/>
+                        <outlet property="judgeLastBtn" destination="Dtr-nD-V96" id="sKh-6p-WTh"/>
+                        <outlet property="nameOrderRadio" destination="R9a-Mk-dle" id="Svy-DC-vlf"/>
+                        <outlet property="orderDateBtn" destination="fTr-5G-ujP" id="PUm-jY-YSb"/>
+                        <outlet property="siteCodeBtn" destination="5cf-84-5oz" id="1jt-aF-NAu"/>
+                        <outlet property="siteFullBtn" destination="vlA-D6-10j" id="luJ-p0-Mo4"/>
+                        <outlet property="siteNameBtn" destination="MPU-nB-AEJ" id="Vya-xV-Qy9"/>
+                        <outlet property="socBtn" destination="syf-20-VH8" id="my4-WY-06Q"/>
+                        <outlet property="statusBtn" destination="Wpq-hs-LAL" id="Nvj-S9-9vD"/>
+                        <outlet property="ticketNumber" destination="O5G-ty-rO2" id="RFr-cT-xUf"/>
                         <outlet property="toDatePicker" destination="0Jd-E0-1ke" id="WLN-gq-Cnt"/>
                     </connections>
                 </viewController>
                 <customObject id="WBx-Ov-TAI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="611.5" y="1562"/>
+            <point key="canvasLocation" x="615.5" y="1601"/>
         </scene>
         <!--Tickets-->
         <scene sceneID="M0Z-If-YPG">
@@ -1134,7 +1183,7 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" autosaveName="" headerView="hu9-4l-4AB" id="FFU-hr-HCC">
-                                            <rect key="frame" x="0.0" y="0.0" width="1372" height="19"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="810" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1359,7 +1408,7 @@ Gw
                                                         </binding>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="S86-ML-G6s">
+                                                <tableColumn identifier="office_code" editable="NO" width="75" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="S86-ML-G6s">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Office Code">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1375,7 +1424,7 @@ Gw
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.heldAt.office_code" id="cwm-Yl-fhh"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="uKP-gT-NYP">
+                                                <tableColumn identifier="office_name" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="uKP-gT-NYP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Office Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1450,7 +1499,7 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="gdk-U0-ibb">
+                                                <tableColumn identifier="judge_first" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="gdk-U0-ibb">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Judge First Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1466,7 +1515,7 @@ Gw
                                                         <binding destination="HHH-Fn-eU5" name="value" keyPath="arrangedObjects.judgePresided.first_name" id="t4q-Lr-ony"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="78y-0g-XDH">
+                                                <tableColumn identifier="judge_last" editable="NO" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" hidden="YES" id="78y-0g-XDH">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Judge Last Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1499,7 +1548,7 @@ Gw
                                     <rect key="frame" x="1" y="117.99995332956314" width="238" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="e7b-cv-9UB">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="e7b-cv-9UB">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1986,7 +2035,7 @@ Gw
                     </connections>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="997" y="796"/>
+            <point key="canvasLocation" x="992" y="806"/>
         </scene>
         <!--Ticket Print View Controller-->
         <scene sceneID="4vo-4m-hwR">
@@ -2130,7 +2179,7 @@ DQ
                 </viewController>
                 <customObject id="rxI-q8-4SF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1198" y="1421.5"/>
+            <point key="canvasLocation" x="1199" y="1434.5"/>
         </scene>
         <!--Create A Hearing Ticket-->
         <scene sceneID="HES-DI-WsX">
