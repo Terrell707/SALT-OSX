@@ -75,6 +75,7 @@
         [controller setTitleString:@"Create Hearing Ticket"];
         [controller setClearBtnString:@"Clear"];
         [controller setUpdateTicket:NO];
+        [controller setLastNameFirst:&(lastNameFirst)];
     }
     
     // Presents the View for a user to update a ticket.
@@ -89,6 +90,7 @@
         Ticket *ticket = arrangedTickets[selection];
         
         [controller setOldTicket:ticket];
+        [controller setLastNameFirst:&(lastNameFirst)];
     }
     
     // Presents the View for a user to change settings on the table.

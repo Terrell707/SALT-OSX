@@ -22,7 +22,7 @@
     errorColor = [NSColor redColor];
     
     // If true, name is formatted "last, first". Otherwise it is "first last".
-    lastNameFirst = YES;
+    lastNameFirst = *_lastNameFirst;
     
     // Grabs the needed information from the Data controller.
     hearingStatus = [[DataController sharedDataController] hearingStatus];

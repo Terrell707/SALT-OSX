@@ -39,6 +39,8 @@
 @property (readwrite) Expert *other;
 @property (readwrite) BOOL interpreter;
 
+@property BOOL *lastNameFirst;
+
 // --------------------------------------------------------------
 // Fields that are part of this view.
 // --------------------------------------------------------------
