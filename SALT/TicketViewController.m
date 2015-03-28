@@ -105,8 +105,11 @@
         [self setTickets:[[DataController sharedDataController] tickets]];
         ticketsBeforeFilter = tickets;
         [self searchTickets];
+        [self firstLastNameOrder];
+        [self updateFields];
         [ticketTable reloadData];
     }
+    
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
@@ -336,8 +339,8 @@
         else [_workedByField setStringValue:@""];
         
         // Formats the judge who presided over this ticket.
-        if ([ticket workedBy] != nil) [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket judgePresided] first_name], [[ticket judgePresided] last_name]]];
-        else [_workedByField setStringValue:@""];
+        if ([ticket judgePresided] != nil) [_judgePresidingField setStringValue:[NSString stringWithFormat:@"%@ %@", [[ticket judgePresided] first_name], [[ticket judgePresided] last_name]]];
+        else [_judgePresidingField setStringValue:@""];
     }
     
     // Sizes the field to fit the text inside of it.
@@ -346,13 +349,18 @@
     [_judgePresidingField sizeToFit];
     
     // Update the other fields that do not need any formatting.
-    [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket heldAt] name], [[ticket heldAt] office_code]]];
+    if ([ticket heldAt] != nil) {
+        [_officeField setStringValue:[NSString stringWithFormat:@"%@, %@", [[ticket heldAt] name], [[ticket heldAt] office_code]]];
+        [_canField setStringValue:[[ticket heldAt] can]];
+    }
+    else {
+        [_officeField setStringValue:@""];
+        [_canField setStringValue:@""];
+    }
     [_callNumberField setStringValue:[ticket call_order_no]];
     [_ticketNumberField setStringValue:[[ticket ticket_no] stringValue]];
     [_socField setStringValue:[ticket soc]];
     [_statusField setStringValue:[ticket status]];
-    if ([ticket heldAt] != nil) [_canField setStringValue:[[ticket heldAt] can]];
-    else [_canField setStringValue:@""];
     
     // Creates the formats for the dates and times.
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

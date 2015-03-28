@@ -38,8 +38,8 @@
 
 @property (weak) IBOutlet NSMatrix *nameOrderRadio;
 
-@property (readwrite) NSTableView *ticketTable;
-@property (readwrite) BOOL *lastNameFirst;
+@property NSTableView *ticketTable;
+@property BOOL *lastNameFirst;
 
 - (IBAction)confirmBtn:(id)sender;
 

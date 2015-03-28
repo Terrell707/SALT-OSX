@@ -19,7 +19,7 @@
     
     NSDate *from = [[DataController sharedDataController] ticketHearingDateFrom];
     NSDate *to = [[DataController sharedDataController] ticketHearingDateTo];
-    NSInteger tag = *(_lastNameFirst);
+    NSInteger tag = *_lastNameFirst;
     
     [_fromDatePicker setDateValue:from];
     [_toDatePicker setDateValue:to];
@@ -31,11 +31,12 @@
     NSDate *fromDate = [_fromDatePicker dateValue];
     NSDate *toDate = [_toDatePicker dateValue];
     
+    // Updates the lastNameFirst boolean value.
+    *_lastNameFirst = [[_nameOrderRadio selectedCell] tag];
+    NSLog(@"Last Name First = %d", *_lastNameFirst);
+    
     // Grabs the tickets that are in this date range.
     [[DataController sharedDataController] hearingDateRangeFrom:fromDate To:toDate];
-    
-    // Updates the lastNameFirst boolean value.
-    *(_lastNameFirst) = [[_nameOrderRadio selectedCell] tag];
     
     // Shows/Hides columns that are checked/unchecked and then dismisses the view.
     [self showHideTableColumns];

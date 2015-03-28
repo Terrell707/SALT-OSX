@@ -23,7 +23,7 @@
     IBOutlet NSArrayController *ticketController;
 }
 
-@property (readwrite, copy) NSMutableArray *tickets;
+@property NSMutableArray *tickets;
 
 @property (weak) IBOutlet NSTextField *orderDateField;
 @property (weak) IBOutlet NSTextField *hearingDateField;

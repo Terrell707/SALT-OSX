@@ -259,11 +259,14 @@ static DataController *sharedDataController = nil;
 
 - (void)hearingDateRangeFrom:(NSDate *)from To:(NSDate *)to
 {
+    // Changes the date range of the tickets to grab from the server.
     _ticketHearingDateFrom = from;
     _ticketHearingDateTo = to;
     
+    [self willChangeValueForKey:@"tickets"];
     [self grabTicketData];
     [self hearingTicketInformation];
+    [self didChangeValueForKey:@"tickets"];
 }
 
 - (BOOL)insertTicket:(Ticket *)ticket

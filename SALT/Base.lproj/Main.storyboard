@@ -1132,9 +1132,6 @@ Gw
                                         </buttonCell>
                                     </column>
                                 </cells>
-                                <connections>
-                                    <action selector="nameOrderButtons:" target="OSE-As-hP6" id="DMB-2h-bOU"/>
-                                </connections>
                             </matrix>
                         </subviews>
                     </view>
