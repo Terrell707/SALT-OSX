@@ -70,8 +70,13 @@ static DataController *sharedDataController = nil;
     [self grabSiteData];
     [self grabTicketData];
     [self grabExpertData];
-    [self hearingTicketInformation];
+    [self grabWitnessData];
     
+    // Merges data together.
+    [self hearingTicketInformation];
+    [self witnessInformation];
+    
+    // Grabs the information for the business.
     [self grabBusinessData];
 }
 
@@ -159,11 +164,11 @@ static DataController *sharedDataController = nil;
     // Limits the number of results we recieve.
     NSArray *keys = [NSArray arrayWithObjects:@"from", @"to", nil];
     NSArray *values = [NSArray arrayWithObjects:from, to, nil];
-    NSDictionary *limit = [NSDictionary dictionaryWithObjects:values
+    NSDictionary *dateRange = [NSDictionary dictionaryWithObjects:values
                                                       forKeys:keys];
     
     // Query the database and get the response.
-    NSArray *ticketData = [mySQL grabInfoFromFile:@"queries/tickets.php" withItems:limit];
+    NSArray *ticketData = [mySQL grabInfoFromFile:@"queries/tickets.php" withItems:dateRange];
     NSInteger status = [statusChecker grabStatusFromJson:ticketData];
     
     // If there were no errors, array will be filled with data.
@@ -188,10 +193,40 @@ static DataController *sharedDataController = nil;
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
-        for (int x = 0; x < [expertData count]; x++) {
+        for (int x = 1; x < [expertData count]; x++) {
             NSDictionary *data = [expertData objectAtIndex:x];
             Expert *expert = [[Expert alloc] initWithData:data];
             [_experts addObject:expert];
+        }
+    }
+}
+
+- (void)grabWitnessData
+{
+    [_witnesses removeAllObjects];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *from = [dateFormatter stringFromDate:_ticketHearingDateFrom];
+    NSString *to = [dateFormatter stringFromDate:_ticketHearingDateTo];
+    
+    // Limits the number of results we recieve.
+    NSArray *keys = [NSArray arrayWithObjects:@"from", @"to", nil];
+    NSArray *values = [NSArray arrayWithObjects:from, to, nil];
+    NSDictionary *dateRange = [NSDictionary dictionaryWithObjects:values
+                                                          forKeys:keys];
+    
+    // Query the database and get the response.
+    NSArray *witnessData = [mySQL grabInfoFromFile:@"queries/witnesses.php" withItems:dateRange];
+    NSInteger status = [statusChecker grabStatusFromJson:witnessData];
+    
+    // If there were no errors, array will be filled with data.
+    if ([self checkStatus:status]) {
+        for (int x = 1; x < [witnessData count]; x++) {
+            NSDictionary *data = [witnessData objectAtIndex:x];
+            Witness *witness = [[Witness alloc] initWithData:data];
+            [_witnesses addObject:witness];
+            NSLog(@"Witness: Expert=%@, Ticket=%@", [witness expert_id], [witness ticket_no]);
         }
     }
 }
@@ -240,7 +275,6 @@ static DataController *sharedDataController = nil;
             Site *site = arr[0];
             [ticket setHeldAt:site];
             [site addTicketObject:ticket];
-            
             [ticket setCan:site.can];
         }
     }
@@ -248,7 +282,21 @@ static DataController *sharedDataController = nil;
 
 - (void)witnessInformation
 {
-    
+    for (Witness *witness in _witnesses) {
+        // Finds the ticket that matches the ticket_no of the Witness Object.
+        NSPredicate *witnessTicket = [NSPredicate predicateWithFormat:@"ticket_no == %@", witness.ticket_no];
+        NSArray *ticketResults = [_tickets filteredArrayUsingPredicate:witnessTicket];
+        // Finds the ticket that matches the expert_id of the Witness Object.
+        NSPredicate *expertWhoHelped = [NSPredicate predicateWithFormat:@"expert_id == %@", witness.expert_id];
+        NSArray *expertResults = [_experts filteredArrayUsingPredicate:expertWhoHelped];
+        
+        // Places the expert within the "HelpedBy" set in the specified ticket.
+        if (ticketResults.count > 0 && expertResults.count > 0) {
+            Ticket *ticket = ticketResults[0];
+            Expert *expert = expertResults[0];
+            [ticket addHelpedByObject:expert];
+        }
+    }
 }
 
 - (void)logginStatus:(BOOL)login forUser:(NSString *)username

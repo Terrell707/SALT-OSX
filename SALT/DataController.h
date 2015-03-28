@@ -16,6 +16,7 @@
 #import "Judge.h"
 #import "Expert.h"
 #import "Ticket.h"
+#import "Witness.h"
 
 @interface DataController : NSObject {
     MySQL *mySQL;
@@ -57,5 +58,6 @@
 @property (readonly, copy) NSMutableArray *judges;
 @property (readonly, copy) NSMutableArray *experts;
 @property (readonly, copy) NSMutableArray *tickets;
+@property (readonly, copy) NSMutableArray *witnesses;
 
 @end
