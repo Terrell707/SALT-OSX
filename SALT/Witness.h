@@ -12,19 +12,20 @@
 
 @interface Witness : NSObject
 
-@property (readwrite, retain) NSNumber * expert_id;
-@property (readwrite, retain) NSNumber * ticket_no;
-@property (readwrite, retain) NSSet *testified;
-@property (readwrite, retain) NSSet *ticket;
+@property (readwrite, retain) NSNumber *expert_id;
+@property (readwrite, retain) NSNumber *ticket_no;
+@property (readwrite, retain) Expert *expert;
+@property (readwrite, retain) Ticket *ticket;
 
-- (void)addTestifiedObject:(Expert *)value;
-- (void)removeTestifiedObject:(Expert *)value;
-- (void)addTestified:(NSSet *)values;
-- (void)removeTestified:(NSSet *)values;
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
+- (id)initWithData:(NSDictionary *)data;
 
-- (void)addTicketObject:(Ticket *)value;
-- (void)removeTicketObject:(Ticket *)value;
-- (void)addTicket:(NSSet *)values;
-- (void)removeTicket:(NSSet *)values;
+//-----------------------------------------------
+// Methods for Witness
+//-----------------------------------------------
+- (NSArray *)propsForDatabase;
+- (NSArray *)properties;
 
 @end

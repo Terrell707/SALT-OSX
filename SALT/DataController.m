@@ -246,6 +246,11 @@ static DataController *sharedDataController = nil;
     }
 }
 
+- (void)witnessInformation
+{
+    
+}
+
 - (void)logginStatus:(BOOL)login forUser:(NSString *)username
 {
     // Updates the logged in status for the specified user.

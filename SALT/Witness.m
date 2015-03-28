@@ -15,7 +15,42 @@
 
 @synthesize expert_id;
 @synthesize ticket_no;
-@synthesize testified;
+@synthesize expert;
 @synthesize ticket;
+
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
+- (id)initWithData:(NSDictionary *)data
+{
+    self = [super init];
+    if (self) {
+        
+        NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
+        
+        expert_id = [numFormat numberFromString:data[@"expert_id"]];
+        ticket_no = [numFormat numberFromString:data[@"ticket_no"]];
+    }
+    
+    return self;
+}
+
+//-----------------------------------------------
+// Methods for Witness
+//-----------------------------------------------
+- (NSArray *)propsForDatabase
+{
+    NSArray *props = [NSArray arrayWithObjects:@"expert_id", @"ticket_no", nil];
+    
+    return props;
+}
+
+- (NSArray *)properties
+{
+    NSArray *propsForDatabase = [self propsForDatabase];
+    NSArray *props = [NSArray arrayWithObjects:@"expert", @"ticket", nil];
+    
+    return [propsForDatabase arrayByAddingObjectsFromArray:props];
+}
 
 @end
