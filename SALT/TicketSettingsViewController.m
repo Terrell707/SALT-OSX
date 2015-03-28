@@ -23,6 +23,8 @@
     [_fromDatePicker setDateValue:from];
     [_toDatePicker setDateValue:to];
     
+    NSLog(@"Table Columns = %@", _tableColumns);
+    
 }
 
 - (IBAction)confirmBtn:(id)sender {

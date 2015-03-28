@@ -90,6 +90,11 @@
         
         [controller setOldTicket:ticket];
     }
+    
+    // Presents the View for a user to change settings on the table.
+    if ([segue.identifier isEqualToString:@"TicketSettingsSegue"]) {
+        [controller setTableColumns:[ticketTable tableColumns]];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

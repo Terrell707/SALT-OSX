@@ -1913,7 +1913,7 @@ Gw
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="OSE-As-hP6" kind="popover" popoverAnchorView="xk5-rm-7Oc" popoverBehavior="t" preferredEdge="maxX" id="pV4-Qr-Mkw"/>
+                                    <segue destination="OSE-As-hP6" kind="popover" identifier="TicketSettingsSegue" popoverAnchorView="xk5-rm-7Oc" popoverBehavior="t" preferredEdge="maxX" id="pV4-Qr-Mkw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1967,14 +1967,14 @@ Gw
                         <outlet property="ticketController" destination="HHH-Fn-eU5" id="Hpp-dp-FnV"/>
                         <outlet property="ticketInfoBox" destination="Es6-UP-Brg" id="Hl9-OP-z1o"/>
                         <outlet property="ticketNumberField" destination="F4s-tf-ANE" id="PH3-Xy-xtc"/>
-                        <outlet property="ticketTable" destination="FFU-hr-HCC" id="c87-5q-qdf"/>
+                        <outlet property="ticketTable" destination="FFU-hr-HCC" id="Hon-qI-vFV"/>
                         <outlet property="updateButton" destination="KWZ-cz-aKs" id="WRx-Mq-QfE"/>
                         <outlet property="vocField" destination="anx-8d-eEk" id="cXS-Ys-FMv"/>
                         <outlet property="workedByField" destination="3aL-7w-FJG" id="GEe-6c-0BB"/>
                     </connections>
                 </viewController>
                 <customObject id="HPV-nW-0MA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController objectClassName="Ticket" id="HHH-Fn-eU5" userLabel="TicketArrayController">
+                <arrayController objectClassName="Ticket" editable="NO" id="HHH-Fn-eU5" userLabel="TicketArrayController">
                     <connections>
                         <binding destination="QUM-jv-1NT" name="contentArray" keyPath="tickets" id="G45-IS-fJS"/>
                     </connections>

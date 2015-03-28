@@ -14,6 +14,8 @@
 @property (weak) IBOutlet NSDatePicker *fromDatePicker;
 @property (weak) IBOutlet NSDatePicker *toDatePicker;
 
+@property (readwrite, copy) NSArray *tableColumns;
+
 - (IBAction)confirmBtn:(id)sender;
 
 @end

@@ -10,6 +10,7 @@
 #import "DataController.h"
 #import "InsertTicketViewController.h"
 #import "TicketPrintView.h"
+#import "TicketSettingsViewController.h"
 
 @interface TicketViewController : NSViewController <NSTableViewDelegate, NSMenuDelegate> {
     BOOL lastNameFirst;
