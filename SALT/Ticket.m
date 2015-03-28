@@ -103,12 +103,12 @@
 //-----------------------------------------------
 // HelpedBy Methods
 //-----------------------------------------------
-- (void)addHelpedByObject:(Witness *)value
+- (void)addHelpedByObject:(Expert *)value
 {
     [helpedBy addObject:value];
 }
 
-- (void)removeHelpedByObject:(Witness *)value
+- (void)removeHelpedByObject:(Expert *)value
 {
     [helpedBy removeObject:value];
 }

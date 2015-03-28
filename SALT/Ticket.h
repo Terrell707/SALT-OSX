@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Employee, Judge, Site, Witness;
+@class Employee, Judge, Site, Witness, Expert;
 
 @interface Ticket : NSObject
 
@@ -44,8 +44,8 @@
 //-----------------------------------------------
 // HelpedBy Methods
 //-----------------------------------------------
-- (void)addHelpedByObject:(Witness *)value;
-- (void)removeHelpedByObject:(Witness *)value;
+- (void)addHelpedByObject:(Expert *)value;
+- (void)removeHelpedByObject:(Expert *)value;
 - (void)addHelpedBy:(NSSet *)values;
 - (void)removeHelpedBy:(NSSet *)values;
 
