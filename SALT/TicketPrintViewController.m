@@ -49,10 +49,22 @@
 
 - (IBAction)printBtn:(id)sender {
     
-    // Gets all the tickets.
-    NSArray *tickets = [[DataController sharedDataController] tickets];
+    // Saves the current date range.
+    NSDate *oldTo = [[DataController sharedDataController] ticketHearingDateTo];
+    NSDate *oldFrom = [[DataController sharedDataController] ticketHearingDateFrom];
     
-    // Finds all the tickets that were took place at the selected office.
+    // Gets the date range for the report.
+    NSDate *to = [_toDatePicker dateValue];
+    NSDate *from = [_fromDatePicker dateValue];
+    
+    // Grabs the tickets that are in the report date range and makes a copy of them.
+    [[DataController sharedDataController] hearingDateRangeFrom:from To:to];
+    NSArray *tickets = [[[DataController sharedDataController] tickets] copy];
+    
+    // Reverts the date range to what it was before.
+    [[DataController sharedDataController] hearingDateRangeFrom:oldFrom To:oldTo];
+    
+    // Finds all the tickets that took place at the selected office.
     NSArray *officeInfo = [[_officeCombo stringValue] componentsSeparatedByString:@", "];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"at_site == %@", officeInfo[1]];
     tickets = [tickets filteredArrayUsingPredicate:predicate];

@@ -420,7 +420,12 @@
         [serviceDate drawInRect:serviceDateRect withAttributes:attributes];
         
         amountClaimedRect.origin.y = serviceDateRect.origin.y;
-        NSString *amountClaimed = [NSString stringWithFormat:@"%@", t.heldAt.pay];
+        // If full pay is true, we recieve the full amount, otherwise its $5.
+        NSString *amountClaimed;
+        if (t.full_pay)
+            amountClaimed = [NSString stringWithFormat:@"%@", t.heldAt.pay];
+        else
+            amountClaimed = [NSString stringWithFormat:@"%@", @"5"];
         [amountClaimed drawInRect:amountClaimedRect withAttributes:attributes];
         
         // Keeps the running total of amount claimed.
