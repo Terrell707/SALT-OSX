@@ -91,6 +91,8 @@
         
         [controller setOldTicket:ticket];
         [controller setLastNameFirst:&(lastNameFirst)];
+        
+        NSDictionary *experts = [Expert findExpertsForTicket:ticket];
     }
     
     // Presents the View for a user to change settings on the table.
@@ -320,7 +322,7 @@
     }
     
     // Places the experts with their associated roles in a dictionary.
-    NSDictionary *experts = [self findExpertsForTicket:ticket];
+    NSDictionary *experts = [Expert findExpertsForTicket:ticket];
     NSArray *roles = [NSArray arrayWithObjects:@"REP", @"VE", @"ME", @"OTHER", @"INS", nil];
     NSArray *expertFields = [NSArray arrayWithObjects:_repField, _vocField, _meField, _otherField, _interpreterField, nil];
     NSDictionary *fieldsByRole = [NSDictionary dictionaryWithObjects:expertFields forKeys:roles];
@@ -450,32 +452,6 @@
 }
 
 #pragma mark Helper Methods
-- (NSDictionary *)findExpertsForTicket:(Ticket *)ticket
-{
-    // Can't place nils into objects, so will place "nulls" instead.
-    NSNull *nothing = [NSNull null];
-    // Makes a dictionary with keys that represent the possible roles for experts.
-    NSArray *roles = [NSArray arrayWithObjects:@"REP", @"VE", @"ME", @"OTHER", @"INS", nil];
-    NSArray *values = [NSArray arrayWithObjects:nothing, nothing, nothing, nothing, nothing, nil];
-    NSMutableDictionary *experts = [NSMutableDictionary dictionaryWithObjects:values forKeys:roles];
-    
-    // Goes through each of the possible roles.
-    for (NSString *role in roles) {
-        // Looks for any expert(s) with the current role.
-        NSPredicate *expertWithRole = [NSPredicate predicateWithFormat:@"role == %@", role];
-        NSSet *expertResult = [ticket.helpedBy filteredSetUsingPredicate:expertWithRole];
-        // If any are found, we will iterate over all of them.
-        if (expertResult.count > 0) {
-            for (Expert *expert in expertResult) {
-                // If the role is already filled with an expert, then we will place the second expert in other.
-                if ([experts valueForKey:role] != nothing) [experts setObject:expert forKey:@"OTHER"];
-                else [experts setObject:expert forKey:role];
-            }
-        }
-    }
-    
-    return experts;
-}
 
 - (NSString *)filterForKeys:(NSArray *)keys
 {

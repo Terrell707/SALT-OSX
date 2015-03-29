@@ -2535,9 +2535,6 @@ DQ
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </comboBoxCell>
-                                            <connections>
-                                                <outlet property="nextKeyView" destination="pcF-5V-QVj" id="g1M-3b-4jn"/>
-                                            </connections>
                                         </comboBox>
                                         <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jXT-OU-4Jv">
                                             <rect key="frame" x="141" y="137" width="192" height="26"/>
@@ -2569,18 +2566,8 @@ DQ
                                                 <outlet property="nextKeyView" destination="T1V-Ug-aGA" id="ObH-Yc-CR9"/>
                                             </connections>
                                         </comboBox>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-5V-QVj">
-                                            <rect key="frame" x="139" y="13" width="18" height="18"/>
-                                            <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" alignment="left" inset="2" id="F7p-VE-fEv">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <outlet property="nextKeyView" destination="oLm-ft-9r1" id="ZvH-ER-7PZ"/>
-                                            </connections>
-                                        </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WzT-Jg-uaw">
-                                            <rect key="frame" x="59" y="14" width="73" height="17"/>
+                                            <rect key="frame" x="59" y="13" width="73" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Interpreter:" id="DbH-x3-sXs">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2624,6 +2611,14 @@ DQ
                                             <connections>
                                                 <outlet property="nextKeyView" destination="crI-Lw-HZo" id="UDu-Ay-76C"/>
                                             </connections>
+                                        </comboBox>
+                                        <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7EU-TO-j9I">
+                                            <rect key="frame" x="141" y="7" width="192" height="26"/>
+                                            <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" numberOfVisibleItems="5" id="0dN-Yz-Pin">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </comboBoxCell>
                                         </comboBox>
                                     </subviews>
                                 </view>
@@ -2670,7 +2665,7 @@ DQ
                         <outlet property="fullAmountBtn" destination="nJC-aA-70v" id="rub-vv-qJ9"/>
                         <outlet property="hearingDatePicker" destination="DIS-OC-Y5W" id="BeN-2U-TbR"/>
                         <outlet property="hearingTimePicker" destination="WYb-XJ-Haa" id="437-68-gTk"/>
-                        <outlet property="interpreterCheck" destination="pcF-5V-QVj" id="mdG-o5-ZFA"/>
+                        <outlet property="interpreterCombo" destination="7EU-TO-j9I" id="Ix7-Qv-ZIr"/>
                         <outlet property="judgePresidingCombo" destination="crI-Lw-HZo" id="hTh-Ek-tT3"/>
                         <outlet property="lastNameField" destination="wL2-Lq-YT1" id="dqC-Ua-DB1"/>
                         <outlet property="medicalCombo" destination="at8-Cw-ehc" id="6Mr-17-pbi"/>

@@ -342,6 +342,8 @@
     return result;
 }
 
+
+
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     if (_statusLabel.textColor == successColor) {
@@ -434,7 +436,7 @@
     [_canField setStringValue:@""];
     [_socField setStringValue:@""];
     [_statusCombo setStringValue:@""];
-    [_interpreterCheck setState:0];
+    [_interpreterCombo setStringValue:@""];
     [_repCombo setStringValue:@""];
     [_medicalCombo setStringValue:@""];
     [_otherCombo setStringValue:@""];
@@ -478,12 +480,19 @@
     if ([_oldTicket heldAt] != nil) [_officeCombo setStringValue:[NSString stringWithFormat:@"%@, %@", [[_oldTicket heldAt] name], [[_oldTicket heldAt] office_code]]];
     if ([_oldTicket judge_presided] != nil) [_judgePresidingCombo setStringValue:[self formatFirstName:[[_oldTicket judgePresided] first_name] lastName:[[_oldTicket judgePresided] last_name]]];
     
-    // TODO: NEED TO FIGURE OUT HOW EXPERTS, WITNESSES, AND TICKETS WILL BE TIED TOGETHER.
-    if (_rep != nil) [_repCombo setStringValue:[self formatFirstName:[_rep first_name] lastName:[_rep last_name]]];
-    if (_voc != nil) [_vocationalCombo setStringValue:[self formatFirstName:[_voc first_name] lastName:[_voc last_name]]];
-    if (_me != nil) [_medicalCombo setStringValue:[self formatFirstName:[_me first_name] lastName:[_me last_name]]];
-    if (_other != nil) [_otherCombo setStringValue:[self formatFirstName:[_other first_name] lastName:[_other last_name]]];
-    [_interpreterCheck setState:_interpreter];
+    // Places the correct expert for each expert combo box.
+    NSDictionary *expertsForTicket = [Expert findExpertsForTicket:_oldTicket];
+    NSArray *roles = [NSArray arrayWithObjects:@"REP", @"VE", @"ME", @"OTHER", @"INS", nil];
+    NSArray *expertFields = [NSArray arrayWithObjects:_repCombo, _vocationalCombo, _medicalCombo, _otherCombo, _interpreterCombo, nil];
+    NSDictionary *fieldsByRole = [NSDictionary dictionaryWithObjects:expertFields forKeys:roles];
+    
+    // Formats each expert and places them in their field.
+    for (NSString *role in roles) {
+        NSComboBox *combo = [fieldsByRole valueForKey:role];
+        Expert *expert = ([expertsForTicket valueForKey:role] != [NSNull null]) ? [expertsForTicket valueForKey:role] : nil;
+        if (expert != nil) [combo setStringValue:[self formatFirstName:[expert first_name] lastName:[expert last_name]]];
+        else [combo setStringValue:@""];
+    }
     
     // Will make sure the selected index matches that of the string value inside the combo. If the string value does not have
     //  a corresponding index, then the selection will remain at -1.
@@ -513,7 +522,7 @@
 - (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last
 {
     NSString *name;
-    if (_lastNameFirst == YES) {
+    if (*_lastNameFirst == YES) {
         name = [NSString stringWithFormat:@"%@, %@", last, first];
     } else {
         name = [NSString stringWithFormat:@"%@ %@", first, last];
@@ -532,7 +541,7 @@
         return nameDict;
     }
     
-    if (_lastNameFirst == YES) {
+    if (*_lastNameFirst == YES) {
         nameSplit = [name componentsSeparatedByString:@", "];
         nameDict = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[0], @"last_name",
                     nameSplit[1], @"first_name", nil];

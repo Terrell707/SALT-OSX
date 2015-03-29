@@ -28,14 +28,14 @@
 @property (readwrite) BOOL updateTicket;    // Whether this view is being presented from the "Update" or "Add" button.
 @property (readwrite) Ticket *oldTicket;    // The ticket before changes are applied to it.
 
-@property (readwrite) Employee *workedBy;
-@property (readwrite) Site *heldAt;
-@property (readwrite) Judge *judgePresided;
-@property (readwrite) Expert *rep;
-@property (readwrite) Expert *voc;
-@property (readwrite) Expert *me;
-@property (readwrite) Expert *other;
-@property (readwrite) BOOL interpreter;
+//@property (readwrite) Employee *workedBy;
+//@property (readwrite) Site *heldAt;
+//@property (readwrite) Judge *judgePresided;
+//@property (readwrite) Expert *rep;
+//@property (readwrite) Expert *voc;
+//@property (readwrite) Expert *me;
+//@property (readwrite) Expert *other;
+//@property (readwrite) BOOL interpreter;
 
 @property BOOL *lastNameFirst;
 
@@ -61,7 +61,7 @@
 @property (weak) IBOutlet NSComboBox *vocationalCombo;
 @property (weak) IBOutlet NSComboBox *medicalCombo;
 @property (weak) IBOutlet NSComboBox *otherCombo;
-@property (weak) IBOutlet NSButton *interpreterCheck;
+@property (weak) IBOutlet NSComboBox *interpreterCombo;
 
 @property (weak) IBOutlet NSTextField *titleLabel;
 @property (weak) IBOutlet NSTextField *statusLabel;
