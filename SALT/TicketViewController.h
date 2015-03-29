@@ -34,7 +34,7 @@
 @property (weak) IBOutlet NSTextField *socField;
 @property (weak) IBOutlet NSTextField *canField;
 @property (weak) IBOutlet NSTextField *statusField;
-@property (weak) IBOutlet NSButton *onRecordCheckBox;
+@property (weak) IBOutlet NSButton *fullAmountBtn;
 
 @property (weak) IBOutlet NSTextField *officeField;
 @property (weak) IBOutlet NSTextField *workedByField;

@@ -385,6 +385,7 @@
     [_ticketNumberField setStringValue:[[ticket ticket_no] stringValue]];
     [_socField setStringValue:[ticket soc]];
     [_statusField setStringValue:[ticket status]];
+    [_fullAmountBtn setState:[ticket full_pay]];
     
     // Creates the formats for the dates and times.
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -407,7 +408,7 @@
         [field sizeToFit];
     }
     
-    NSLog(@"Tickets Helped By: %@", [ticket helpedBy]);
+    NSLog(@"Tickets Full Pay: %d", [ticket full_pay]);
 }
 
 - (void)searchTickets

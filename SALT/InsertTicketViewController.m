@@ -21,9 +21,6 @@
     successColor = [NSColor blueColor];
     errorColor = [NSColor redColor];
     
-    // If true, name is formatted "last, first". Otherwise it is "first last".
-    lastNameFirst = *_lastNameFirst;
-    
     // Grabs the needed information from the Data controller.
     hearingStatus = [[DataController sharedDataController] hearingStatus];
     employees = [[DataController sharedDataController] employees];
@@ -250,6 +247,7 @@
     [newTicket setHearing_date:[dateFormat dateFromString:hearingDate]];
     [newTicket setHearing_time:[timeFormat dateFromString:hearingTime]];
     [newTicket setStatus:[_statusCombo stringValue]];
+    [newTicket setFull_pay:[_fullAmountBtn state]];
     
     // Find the employee that was typed in and get his/her id number. If they don't exist, throw an error.
     NSArray *empResult = [self findInfoFromList:employees forCombo:_workedByCombo];
@@ -440,6 +438,7 @@
     [_repCombo setStringValue:@""];
     [_medicalCombo setStringValue:@""];
     [_otherCombo setStringValue:@""];
+    [_fullAmountBtn setState:1];
     
     // Clears all errors on the form.
     [self clearErrorBackground:_ticketNumberField];
@@ -473,6 +472,7 @@
     if ([_oldTicket soc] != nil) [_socField setStringValue:[_oldTicket soc]];
     if ([_oldTicket heldAt] != nil) [_canField setStringValue:[[_oldTicket heldAt] can]];
     if ([_oldTicket status] != nil) [_statusCombo setStringValue:[_oldTicket status]];
+    [_fullAmountBtn setState:[_oldTicket full_pay]];
     
     if ([_oldTicket workedBy] != nil) [_workedByCombo setStringValue:[self formatFirstName:[[_oldTicket workedBy] first_name] lastName:[[_oldTicket workedBy] last_name]]];
     if ([_oldTicket heldAt] != nil) [_officeCombo setStringValue:[NSString stringWithFormat:@"%@, %@", [[_oldTicket heldAt] name], [[_oldTicket heldAt] office_code]]];
@@ -513,7 +513,7 @@
 - (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last
 {
     NSString *name;
-    if (lastNameFirst == YES) {
+    if (_lastNameFirst == YES) {
         name = [NSString stringWithFormat:@"%@, %@", last, first];
     } else {
         name = [NSString stringWithFormat:@"%@ %@", first, last];
@@ -532,7 +532,7 @@
         return nameDict;
     }
     
-    if (lastNameFirst == YES) {
+    if (_lastNameFirst == YES) {
         nameSplit = [name componentsSeparatedByString:@", "];
         nameDict = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[0], @"last_name",
                     nameSplit[1], @"first_name", nil];

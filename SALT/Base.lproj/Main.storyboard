@@ -1793,7 +1793,6 @@ Gw
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="printButton:" target="QUM-jv-1NT" id="POP-zK-Ylc"/>
                                     <segue destination="86N-eo-WUu" kind="popover" popoverAnchorView="eqq-G3-5Ue" popoverBehavior="t" preferredEdge="minY" id="6IG-yk-hGl"/>
                                 </connections>
                             </button>
@@ -1993,6 +1992,7 @@ Gw
                         <outlet property="callNumberField" destination="TNc-qI-Lfw" id="XhT-iv-6dr"/>
                         <outlet property="canField" destination="s29-30-VpU" id="eOu-h8-O1g"/>
                         <outlet property="claimantNameField" destination="AK7-xY-fc0" id="ht6-RV-PPG"/>
+                        <outlet property="fullAmountBtn" destination="l0p-tF-yh6" id="wlH-rb-8Fv"/>
                         <outlet property="hearingDateField" destination="ToQ-ix-jBB" id="E7v-HA-tFT"/>
                         <outlet property="hearingInfoBox" destination="vBi-oX-UAO" id="n17-oG-s56"/>
                         <outlet property="hearingTimeField" destination="fw4-e8-U66" id="u36-Vh-ypq"/>
@@ -2000,7 +2000,6 @@ Gw
                         <outlet property="judgePresidingField" destination="aIR-Zo-roH" id="keT-nw-Ha4"/>
                         <outlet property="meField" destination="6bq-aN-SBb" id="pIW-qo-cOb"/>
                         <outlet property="officeField" destination="q8K-sd-aXe" id="H9Q-6T-Wu3"/>
-                        <outlet property="onRecordCheckBox" destination="l0p-tF-yh6" id="kxK-ji-00g"/>
                         <outlet property="orderDateField" destination="OfH-5l-yei" id="cZK-cB-Pv9"/>
                         <outlet property="otherField" destination="X8Z-aB-inb" id="wal-0p-P5y"/>
                         <outlet property="removeButton" destination="m8i-4l-NJX" id="NAV-BR-u9z"/>
@@ -2668,6 +2667,7 @@ DQ
                     <connections>
                         <outlet property="clearBtn" destination="b4i-78-MX6" id="loC-Bz-yIS"/>
                         <outlet property="firstNameField" destination="mKI-oR-cPb" id="G80-4n-7mb"/>
+                        <outlet property="fullAmountBtn" destination="nJC-aA-70v" id="rub-vv-qJ9"/>
                         <outlet property="hearingDatePicker" destination="DIS-OC-Y5W" id="BeN-2U-TbR"/>
                         <outlet property="hearingTimePicker" destination="WYb-XJ-Haa" id="437-68-gTk"/>
                         <outlet property="interpreterCheck" destination="pcF-5V-QVj" id="mdG-o5-ZFA"/>

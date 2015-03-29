@@ -10,8 +10,6 @@
 #import "DataController.h"
 
 @interface InsertTicketViewController : NSViewController <NSTextFieldDelegate> {
-    BOOL lastNameFirst;
-    
     NSMutableArray *hearingStatus;
     NSMutableArray *employees;
     NSMutableArray *sites;
@@ -54,6 +52,7 @@
 @property (weak) IBOutlet NSDatePicker *hearingDatePicker;
 @property (weak) IBOutlet NSDatePicker *hearingTimePicker;
 @property (weak) IBOutlet NSComboBox *statusCombo;
+@property (weak) IBOutlet NSButton *fullAmountBtn;
 
 @property (weak) IBOutlet NSComboBox *workedByCombo;
 @property (weak) IBOutlet NSComboBox *judgePresidingCombo;
