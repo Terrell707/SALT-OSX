@@ -52,6 +52,7 @@ static DataController *sharedDataController = nil;
         _sites = [[NSMutableArray alloc] init];
         _experts = [[NSMutableArray alloc] init];
         _tickets = [[NSMutableArray alloc] init];
+        _witnesses = [[NSMutableArray alloc] init];
         
         // Start the user as logged out.
         _loggedIn = NO;
@@ -318,7 +319,9 @@ static DataController *sharedDataController = nil;
     
     [self willChangeValueForKey:@"tickets"];
     [self grabTicketData];
+    [self grabWitnessData];
     [self hearingTicketInformation];
+    [self witnessInformation];
     [self didChangeValueForKey:@"tickets"];
 }
 

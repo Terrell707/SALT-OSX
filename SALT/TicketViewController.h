@@ -43,7 +43,7 @@
 @property (weak) IBOutlet NSTextField *vocField;
 @property (weak) IBOutlet NSTextField *meField;
 @property (weak) IBOutlet NSTextField *otherField;
-@property (weak) IBOutlet NSButton *interpreterCheckBox;
+@property (weak) IBOutlet NSTextField *interpreterField;
 
 @property (weak) IBOutlet NSBox *ticketInfoBox;
 @property (weak) IBOutlet NSBox *hearingInfoBox;
