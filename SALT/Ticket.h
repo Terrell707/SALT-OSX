@@ -22,6 +22,7 @@
 @property (readwrite, retain) NSDate * hearing_date;
 @property (readwrite, retain) NSDate * hearing_time;
 @property (readwrite, retain) NSString * status;
+@property (readwrite) BOOL full_pay;
 @property (readwrite, retain) NSNumber * emp_worked;
 @property (readwrite, retain) NSNumber * judge_presided;
 @property (readwrite, retain) NSString * at_site;

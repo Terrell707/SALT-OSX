@@ -25,6 +25,7 @@
 @synthesize hearing_date;
 @synthesize hearing_time;
 @synthesize status;
+@synthesize full_pay;
 @synthesize emp_worked;
 @synthesize judge_presided;
 @synthesize at_site;
@@ -72,6 +73,7 @@
         hearing_date = hearingDate;
         hearing_time = hearingTime;
         status = data[@"status"];
+        full_pay = [data[@"full_pay"] boolValue];
         emp_worked = [numFormat numberFromString:data[@"emp_worked"]];
         judge_presided = [numFormat numberFromString:data[@"judge_presided"]];
         at_site = data[@"at_site"];
@@ -87,7 +89,7 @@
 {
     NSArray *props = [NSArray arrayWithObjects:@"ticket_no", @"order_date", @"call_order_no", @"first_name",
                            @"last_name", @"soc", @"hearing_date", @"hearing_time",
-                           @"status", @"emp_worked", @"judge_presided", @"at_site", nil];
+                           @"status", @"full_pay", @"emp_worked", @"judge_presided", @"at_site", nil];
     
     return props;
 }
