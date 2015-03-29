@@ -18,7 +18,20 @@
 @property (readwrite, retain) NSString * role;
 @property (readwrite) BOOL active;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data;
+
+//-----------------------------------------------
+// Methods for Witness
+//-----------------------------------------------
+- (NSArray *)propsForDatabase;
+- (NSArray *)properties;
+
+//-----------------------------------------------
+// Static Methods for Witness
+//-----------------------------------------------
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket;
 
 @end

@@ -34,6 +34,24 @@
     return self;
 }
 
+//-----------------------------------------------
+// Methods for Witness
+//-----------------------------------------------
+- (NSArray *)propsForDatabase
+{
+    NSArray *props = [NSArray arrayWithObjects:@"expert_id", @"first_name", @"last_name", @"role", @"active", nil];
+    
+    return props;
+}
+
+- (NSArray *)properties
+{
+    return [self propsForDatabase];
+}
+
+//-----------------------------------------------
+// Static Methods for Witness
+//-----------------------------------------------
 // Static Method that will find every expert for every role within a ticket and return it as a dictionary.
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket
 {
