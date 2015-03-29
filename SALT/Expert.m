@@ -7,7 +7,7 @@
 //
 
 #import "Expert.h"
-#import "Witness.h"
+#import "Ticket.h"
 
 @implementation Expert
 
@@ -16,7 +16,6 @@
 @synthesize last_name;
 @synthesize role;
 @synthesize active;
-@synthesize worked;
 
 - (id)initWithData:(NSDictionary *)data
 {
@@ -33,6 +32,34 @@
         active = [data[@"active"] boolValue];
     }
     return self;
+}
+
+// Static Method that will find every expert for every role within a ticket and return it as a dictionary.
++ (NSDictionary *)findExpertsForTicket:(Ticket *)ticket
+{
+    // Can't place nils into objects, so will place "nulls" instead.
+    NSNull *nothing = [NSNull null];
+    // Makes a dictionary with keys that represent the possible roles for experts.
+    NSArray *roles = [NSArray arrayWithObjects:@"REP", @"VE", @"ME", @"OTHER", @"INS", nil];
+    NSArray *values = [NSArray arrayWithObjects:nothing, nothing, nothing, nothing, nothing, nil];
+    NSMutableDictionary *experts = [NSMutableDictionary dictionaryWithObjects:values forKeys:roles];
+    
+    // Goes through each of the possible roles.
+    for (NSString *r in roles) {
+        // Looks for any expert(s) with the current role.
+        NSPredicate *expertWithRole = [NSPredicate predicateWithFormat:@"role == %@", r];
+        NSSet *expertResult = [ticket.helpedBy filteredSetUsingPredicate:expertWithRole];
+        // If any are found, we will iterate over all of them.
+        if (expertResult.count > 0) {
+            for (Expert *expert in expertResult) {
+                // If the role is already filled with an expert, then we will place the second expert in other.
+                if ([experts valueForKey:r] != nothing) [experts setObject:expert forKey:@"OTHER"];
+                else [experts setObject:expert forKey:r];
+            }
+        }
+    }
+    
+    return experts;
 }
 
 @end

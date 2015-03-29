@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Witness;
+@class Witness, Ticket;
 
 @interface Expert : NSObject
 
@@ -17,8 +17,8 @@
 @property (readwrite, retain) NSString * last_name;
 @property (readwrite, retain) NSString * role;
 @property (readwrite) BOOL active;
-@property (readwrite, retain) Witness *worked;
 
 - (id)initWithData:(NSDictionary *)data;
++ (NSDictionary *)findExpertsForTicket:(Ticket *)ticket;
 
 @end
