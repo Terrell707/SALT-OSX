@@ -23,6 +23,7 @@
     StatusCodes *statusChecker;
 }
 
+- (void)loadData;
 + (DataController *)sharedDataController;
 
 // -------------------------------------------------------------------
@@ -31,13 +32,24 @@
 - (void)logginStatus:(BOOL)login forUser:(NSString *)username;
 
 // -------------------------------------------------------------------
+// Methods dealing with Experts.
+// -------------------------------------------------------------------
+- (BOOL)insertExpert:(Expert *)expert;
+- (BOOL)updateExpert:(Expert *)before withChanges:(Expert *)after;
+
+// -------------------------------------------------------------------
 // Methods dealing with Tickets.
 // -------------------------------------------------------------------
 - (void)hearingDateRangeFrom:(NSDate *)from To:(NSDate *)to;
 - (BOOL)insertTicket:(Ticket *)ticket;
 - (BOOL)updateTicket:(Ticket *)oldTicket withChanges:(Ticket *)ticket;
 - (BOOL)removeTicket:(Ticket *)ticket;
-- (void)loadData;
+
+// -------------------------------------------------------------------
+// Methods dealing with Witness.
+// -------------------------------------------------------------------
+- (BOOL)insertWitness:(Witness *)witness;
+- (BOOL)updateWitness:(Witness *)before withChanges:(Witness *)after;
 
 // -------------------------------------------------------------------
 // Properties dealing with Login Status.

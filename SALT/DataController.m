@@ -242,6 +242,55 @@ static DataController *sharedDataController = nil;
     }
 }
 
+- (void)logginStatus:(BOOL)login forUser:(NSString *)username
+{
+    // Updates the logged in status for the specified user.
+    [self willChangeValueForKey:@"loggedIn"];
+    [self willChangeValueForKey:@"user"];
+    _loggedIn = login;
+    _user = username;
+    [self didChangeValueForKey:@"loggedIn"];
+    [self didChangeValueForKey:@"user"];
+}
+
+#pragma mark Expert methods.
+- (BOOL)insertExpert:(Expert *)expert
+{
+    // Creates a dictionary using the properties as keys and each of its corresponding values.
+    NSArray *keys = [expert propsForDatabase];
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    for (NSString *key in keys) {
+        if ([key isEqualToString:@"expert_id"]) {
+            [values addObject:[[expert valueForKey:key] stringValue]];
+        }
+        else {
+            [values addObject:[expert valueForKey:key]];
+        }
+    }
+    NSDictionary *expertInfo = [NSDictionary dictionaryWithObjects:values
+                                                           forKeys:keys];
+    
+    NSLog(@"Inserted Expert = %@", expertInfo);
+    
+    // Insert the Expert into the database and get a response.
+    NSArray *expertData = [mySQL grabInfoFromFile:@"inserts/expert.php" withItems:expertInfo];
+    NSInteger status = [statusChecker grabStatusFromJson:expertData];
+    
+    NSLog(@"Status = %ld", status);
+    // If there were no errors, add the Expert to the list of experts.
+    if ([self checkStatus:status]) {
+        [self willChangeValueForKey:@"experts"];
+        [_experts addObject:expert];
+        [self didChangeValueForKey:@"experts"];
+        return YES;
+    }
+    else {
+        return NO;
+    }
+    
+}
+
+#pragma mark Ticket methods.
 - (void)hearingTicketInformation
 {
     // Populates the relevant information for every ticket object.
@@ -281,36 +330,6 @@ static DataController *sharedDataController = nil;
     }
 }
 
-- (void)witnessInformation
-{
-    for (Witness *witness in _witnesses) {
-        // Finds the ticket that matches the ticket_no of the Witness Object.
-        NSPredicate *witnessTicket = [NSPredicate predicateWithFormat:@"ticket_no == %@", witness.ticket_no];
-        NSArray *ticketResults = [_tickets filteredArrayUsingPredicate:witnessTicket];
-        // Finds the ticket that matches the expert_id of the Witness Object.
-        NSPredicate *expertWhoHelped = [NSPredicate predicateWithFormat:@"expert_id == %@", witness.expert_id];
-        NSArray *expertResults = [_experts filteredArrayUsingPredicate:expertWhoHelped];
-        
-        // Places the expert within the "HelpedBy" set in the specified ticket.
-        if (ticketResults.count > 0 && expertResults.count > 0) {
-            Ticket *ticket = ticketResults[0];
-            Expert *expert = expertResults[0];
-            [ticket addHelpedByObject:expert];
-        }
-    }
-}
-
-- (void)logginStatus:(BOOL)login forUser:(NSString *)username
-{
-    // Updates the logged in status for the specified user.
-    [self willChangeValueForKey:@"loggedIn"];
-    [self willChangeValueForKey:@"user"];
-    _loggedIn = login;
-    _user = username;
-    [self didChangeValueForKey:@"loggedIn"];
-    [self didChangeValueForKey:@"user"];
-}
-
 - (void)hearingDateRangeFrom:(NSDate *)from To:(NSDate *)to
 {
     // Changes the date range of the tickets to grab from the server.
@@ -345,7 +364,7 @@ static DataController *sharedDataController = nil;
             [values addObject:[timeFormat stringFromDate:[ticket valueForKey:key]]];
         }
         else if ([key isEqualToString:@"ticket_no"] || [key isEqualToString:@"emp_worked"]
-                 || [key isEqualToString:@"judge_presided"]) {
+                 || [key isEqualToString:@"judge_presided"] || [key isEqualToString:@"full_pay"]) {
             [values addObject:[[ticket valueForKey:key] stringValue]];
         }
         else {
@@ -393,7 +412,7 @@ static DataController *sharedDataController = nil;
             [values addObject:[timeFormat stringFromDate:[ticket valueForKey:key]]];
         }
         else if ([key isEqualToString:@"ticket_no"] || [key isEqualToString:@"emp_worked"]
-                 || [key isEqualToString:@"judge_presided"]) {
+                 || [key isEqualToString:@"judge_presided"] || [key isEqualToString:@"full_pay"]) {
             [values addObject:[[ticket valueForKey:key] stringValue]];
         }
         else {
@@ -446,6 +465,62 @@ static DataController *sharedDataController = nil;
         [self didChangeValueForKey:@"tickets"];
         return YES;
     } else {
+        return NO;
+    }
+}
+
+#pragma mark Witness methods
+- (void)witnessInformation
+{
+    for (Witness *witness in _witnesses) {
+        [self findInformationForWitness:witness];
+    }
+}
+
+- (void)findInformationForWitness:(Witness *)witness
+{
+    // Finds the ticket that matches the ticket_no of the Witness Object.
+    NSPredicate *witnessTicket = [NSPredicate predicateWithFormat:@"ticket_no == %@", witness.ticket_no];
+    NSArray *ticketResults = [_tickets filteredArrayUsingPredicate:witnessTicket];
+    // Finds the ticket that matches the expert_id of the Witness Object.
+    NSPredicate *expertWhoHelped = [NSPredicate predicateWithFormat:@"expert_id == %@", witness.expert_id];
+    NSArray *expertResults = [_experts filteredArrayUsingPredicate:expertWhoHelped];
+    
+    // Places the expert within the "HelpedBy" set in the specified ticket.
+    if (ticketResults.count > 0 && expertResults.count > 0) {
+        Ticket *ticket = ticketResults[0];
+        Expert *expert = expertResults[0];
+        [ticket addHelpedByObject:expert];
+    }
+}
+
+- (BOOL)insertWitness:(Witness *)witness
+{
+    // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Witness
+    //  to the database.
+    NSArray *keys = [witness propsForDatabase];
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    for (NSString *key in keys) {
+        [values addObject:[[witness valueForKey:key] stringValue]];
+    }
+    NSDictionary *witnessInfo = [NSMutableDictionary dictionaryWithObjects:values
+                                                                   forKeys:keys];
+    
+    NSLog(@"Inserted Witness = %@", witnessInfo);
+    
+    NSArray *witnessData = [mySQL grabInfoFromFile:@"inserts/witness.php" withItems:witnessInfo];
+    NSInteger status = [statusChecker grabStatusFromJson:witnessData];
+    
+    // If there are no errors, add the Witness to the list of witnesses 
+    NSLog(@"Status = %ld", status);
+    if ([self checkStatus:status]) {
+        [self willChangeValueForKey:@"witnesses"];
+        [self findInformationForWitness:witness];
+        [_witnesses addObject:witness];
+        [self didChangeValueForKey:@"witnesses"];
+        return YES;
+    }
+    else {
         return NO;
     }
 }
