@@ -24,13 +24,14 @@
 - (id)initWithData:(NSDictionary *)data;
 
 //-----------------------------------------------
-// Methods for Witness
+// Methods for Expert
 //-----------------------------------------------
+- (void)expertIDFromJSON:(NSDictionary *)data;
 - (NSArray *)propsForDatabase;
 - (NSArray *)properties;
 
 //-----------------------------------------------
-// Static Methods for Witness
+// Static Methods for Expert
 //-----------------------------------------------
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket;
 

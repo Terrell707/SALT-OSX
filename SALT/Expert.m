@@ -35,8 +35,15 @@
 }
 
 //-----------------------------------------------
-// Methods for Witness
+// Methods for Expert
 //-----------------------------------------------
+- (void)expertIDFromJSON:(NSDictionary *)data
+{
+    NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
+    
+    expert_id = [numFormat numberFromString:data[@"expert_id"]];
+}
+
 - (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"expert_id", @"first_name", @"last_name", @"role", @"active", nil];
@@ -50,7 +57,7 @@
 }
 
 //-----------------------------------------------
-// Static Methods for Witness
+// Static Methods for Expert
 //-----------------------------------------------
 // Static Method that will find every expert for every role within a ticket and return it as a dictionary.
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket
