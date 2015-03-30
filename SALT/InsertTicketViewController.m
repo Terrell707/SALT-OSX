@@ -277,8 +277,20 @@
     [newTicket setHeldAt:officeResult[0]];
     
     // Find the vocational expert that was typed in.
-    if ([_vocationalCombo indexOfSelectedItem] != -1) {
-        
+    if ([_vocationalCombo indexOfSelectedItem] == -1) {
+        NSDictionary *name = [self unformatName:_vocationalCombo.stringValue];
+        Expert *voc = [[Expert alloc] init];
+        [voc setExpert_id:[NSNumber numberWithInt:0]];
+        [voc setFirst_name:[name valueForKey:@"first_name"]];
+        [voc setLast_name:[name valueForKey:@"last_name"]];
+        [voc setRole:@"VE"];
+        [voc setActive:YES];
+        BOOL inserted = [[DataController sharedDataController] insertExpert:voc];
+        if (inserted) {
+            NSLog(@"It went through!");
+        } else {
+            NSLog(@"It didn't go through!");
+        }
     }
     
     // If the user clicked the "Add" button, this will create a new hearing Ticket.
@@ -341,8 +353,6 @@
     
     return result;
 }
-
-
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {

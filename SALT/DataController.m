@@ -260,7 +260,7 @@ static DataController *sharedDataController = nil;
     NSArray *keys = [expert propsForDatabase];
     NSMutableArray *values = [[NSMutableArray alloc] init];
     for (NSString *key in keys) {
-        if ([key isEqualToString:@"expert_id"]) {
+        if ([key isEqualToString:@"expert_id"] || [key isEqualToString:@"active"]) {
             [values addObject:[[expert valueForKey:key] stringValue]];
         }
         else {
@@ -280,6 +280,8 @@ static DataController *sharedDataController = nil;
     // If there were no errors, add the Expert to the list of experts.
     if ([self checkStatus:status]) {
         [self willChangeValueForKey:@"experts"];
+        NSDictionary *data = [expertData objectAtIndex:1];
+        [expert expertIDFromJSON:data];
         [_experts addObject:expert];
         [self didChangeValueForKey:@"experts"];
         return YES;
