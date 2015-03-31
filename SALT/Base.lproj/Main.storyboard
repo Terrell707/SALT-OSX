@@ -1609,7 +1609,7 @@ Gw
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="Jq6-7Z-swb" kind="popover" identifier="InsertTicketSegue" popoverAnchorView="Jhb-zH-O3i" popoverBehavior="t" preferredEdge="minX" id="EZn-Ri-VYJ"/>
+                                    <segue destination="Jq6-7Z-swb" kind="modal" identifier="InsertTicketSegue" id="EZn-Ri-VYJ"/>
                                 </connections>
                             </button>
                             <box autoresizesSubviews="NO" title="Ticket Information" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="Es6-UP-Brg">
@@ -1946,7 +1946,7 @@ Gw
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="Jq6-7Z-swb" kind="popover" identifier="UpdateTicketSegue" popoverAnchorView="KWZ-cz-aKs" popoverBehavior="t" preferredEdge="minX" id="0Ku-Ld-06o"/>
+                                    <segue destination="Jq6-7Z-swb" kind="modal" identifier="UpdateTicketSegue" id="0Ku-Ld-06o"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xk5-rm-7Oc">
@@ -2689,6 +2689,6 @@ DQ
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0Ku-Ld-06o"/>
+        <segue reference="EZn-Ri-VYJ"/>
     </inferredMetricsTieBreakers>
 </document>

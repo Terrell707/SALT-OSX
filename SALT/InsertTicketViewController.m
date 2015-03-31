@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // If a user adds a new expert, we need to know so that we can update the combo boxes.
+    [[DataController sharedDataController] addObserver:self
+                                            forKeyPath:@"experts"
+                                               options:NSKeyValueObservingOptionNew
+                                               context:nil];
+    
     // Sets the colors that will be used for "Success" and "Error".
     successColor = [NSColor blueColor];
     errorColor = [NSColor redColor];
@@ -51,23 +57,8 @@
         [_officeCombo addItemWithObjectValue:site];
     }
     
-    // Fill in the "represenative" combo box.
-    NSPredicate *repPredicate = [NSPredicate predicateWithFormat:@"role == \"REP\""];
-    NSArray *reps = [experts filteredArrayUsingPredicate:repPredicate];
-    [self fillComboBox:_repCombo withItems:reps];
-    
-    // Fill in the "vocational" combo box.
-    NSPredicate *vePredicate = [NSPredicate predicateWithFormat:@"role == \"VE\""];
-    NSArray *ves = [experts filteredArrayUsingPredicate:vePredicate];
-    [self fillComboBox:_vocationalCombo withItems:ves];
-    
-    // Fill in the "medical" combo box.
-    NSPredicate *mePredicate = [NSPredicate predicateWithFormat:@"role == \"ME\""];
-    NSArray *mes = [experts filteredArrayUsingPredicate:mePredicate];
-    [self fillComboBox:_medicalCombo withItems:mes];
-    
-    // Fill in the "other" combo box.
-    [self fillComboBox:_otherCombo withItems:experts];
+    // Populates all the expert combo boxes with their relevant data.
+    [self fillExpertComboBoxes];
 }
 
 - (void)viewDidAppear
@@ -83,6 +74,14 @@
     else {
         [_titleLabel setStringValue:@"Create Hearing Ticket"];
         [_clearBtn setTitle:@"Clear"];
+    }
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"experts"]) {
+        [self fillExpertComboBoxes];
     }
 }
 
@@ -239,14 +238,14 @@
     // Creates a new ticket using the entered information.
     Ticket *newTicket = [[Ticket alloc] init];
     [newTicket setOrder_date:[dateFormat dateFromString:orderDate]];
-    [newTicket setCall_order_no:[_orderNumberField stringValue]];
-    [newTicket setFirst_name:[_firstNameField stringValue]];
-    [newTicket setLast_name:[_lastNameField stringValue]];
-    [newTicket setTicket_no:[numFormat numberFromString:[_ticketNumberField stringValue]]];
-    [newTicket setSoc:[_socField stringValue]];
+    [newTicket setCall_order_no:[_orderNumberField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    [newTicket setFirst_name:[_firstNameField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    [newTicket setLast_name:[_lastNameField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    [newTicket setTicket_no:[numFormat numberFromString:[_ticketNumberField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]]];
+    [newTicket setSoc:[_socField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
     [newTicket setHearing_date:[dateFormat dateFromString:hearingDate]];
     [newTicket setHearing_time:[timeFormat dateFromString:hearingTime]];
-    [newTicket setStatus:[_statusCombo stringValue]];
+    [newTicket setStatus:[_statusCombo.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
     [newTicket setFull_pay:[_fullAmountBtn state]];
     
     // Find the employee that was typed in and get his/her id number. If they don't exist, throw an error.
@@ -276,21 +275,42 @@
     [newTicket setAt_site:[officeResult[0] office_code]];
     [newTicket setHeldAt:officeResult[0]];
     
-    // Find the vocational expert that was typed in.
-    if ([_vocationalCombo indexOfSelectedItem] == -1) {
-        NSDictionary *name = [self unformatName:_vocationalCombo.stringValue];
-        Expert *voc = [[Expert alloc] init];
-        [voc setExpert_id:[NSNumber numberWithInt:0]];
-        [voc setFirst_name:[name valueForKey:@"first_name"]];
-        [voc setLast_name:[name valueForKey:@"last_name"]];
-        [voc setRole:@"VE"];
-        [voc setActive:YES];
-        BOOL inserted = [[DataController sharedDataController] insertExpert:voc];
-        if (inserted) {
-            NSLog(@"It went through!");
-        } else {
-            NSLog(@"It didn't go through!");
+    // Find each of the experts that were typed in. If they don't exist, add them to the database.
+    NSArray *expertCombos = [NSArray arrayWithObjects:_repCombo, _vocationalCombo, _medicalCombo, _interpreterCombo, nil];
+    NSArray *expertRoles = [NSArray arrayWithObjects:@"REP", @"VE", @"ME", @"INS", nil];
+    NSDictionary *expertDict = [NSDictionary dictionaryWithObjects:expertCombos forKeys:expertRoles];
+    // Goes through each role's combo box.
+    for (NSString *role in expertRoles) {
+        NSComboBox *combo = [expertDict valueForKey:role];
+        NSString *comboValue = [combo.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        // If nothing was typed into the combobox, skip it.
+        if ([comboValue isEqualToString:@""]) {
+            continue;
         }
+        
+        // Looks for the person typed into the specified role.
+        NSArray *expertResult = [self findInfoFromList:experts forCombo:combo];
+        
+        // If it isn't found, then the user typed an unknown expert into the field so we will try
+        //  to add it to the database and then look for it again in the updated list.
+        Expert *expert;
+        if (expertResult.count <= 0) {
+            NSLog(@"Couldn't find the expert for %@!", role);
+            expert = [self addNewExpertFromCombo:combo withRole:role];
+            if (expert == nil) {
+                [_statusLabel setStringValue:@"Could not add the expert to the database!"];
+                [_statusLabel setTextColor:errorColor];
+                [_statusLabel setHidden:NO];
+                return;
+            }
+        }
+        else {
+            expert = expertResult[0];
+        }
+    
+        // Tie the expert to the ticket.
+        [newTicket addHelpedByObject:expert];
     }
     
     // If the user clicked the "Add" button, this will create a new hearing Ticket.
@@ -352,6 +372,52 @@
     NSArray *result = [list filteredArrayUsingPredicate:predicate];
     
     return result;
+}
+
+- (Expert *)addNewExpertFromCombo:(NSComboBox *)combo withRole:(NSString *)role
+{
+    // Takes the string value from the combobox and trims it.
+    NSString *comboString = combo.stringValue;
+    comboString = [comboString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([comboString isEqualToString:@""]) {
+        return nil;
+    }
+    
+    // Reformats the name so that it is presentable to the user.
+    NSDictionary *unformatted = [self unformatName:combo.stringValue];
+    NSString *name = [self formatFirstName:unformatted[@"first_name"] lastName:unformatted[@"last_name"]];
+    NSString *infoMessage = [NSString stringWithFormat:@"The expert, \"%@\", does not exist! Do you want to add, \"%@\", into the list of experts as a %@?", name, name, role];
+    
+    // Creates a dialog so that the user can decide whether to add the expert or not.
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Add New Expert!"];
+    [alert setInformativeText:infoMessage];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert addButtonWithTitle:@"Add"];
+    [alert addButtonWithTitle:@"Cancel"];
+    NSInteger response = [alert runModal];
+    
+    // If the user clicks "Add" then the expert will be added.
+    if (response == NSAlertFirstButtonReturn) {
+        NSDictionary *name = [self unformatName:combo.stringValue];
+        Expert *expert = [[Expert alloc] init];
+        [expert setExpert_id:[NSNumber numberWithInt:0]];
+        [expert setFirst_name:[name valueForKey:@"first_name"]];
+        [expert setLast_name:[name valueForKey:@"last_name"]];
+        [expert setRole:role];
+        [expert setActive:YES];
+        BOOL inserted = [[DataController sharedDataController] insertExpert:expert];
+        if (inserted) {
+            NSLog(@"It went through!");
+            return expert;
+        } else {
+            NSLog(@"It didn't go through!");
+            return nil;
+        }
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification
@@ -520,6 +586,8 @@
 
 - (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
 {
+    [combo removeAllItems];
+    
     // Fills a combo box with all the items in the array.
     for (int x = 0; x < [items count]; x++) {
         NSString *first = [[items objectAtIndex:x] valueForKey:@"first_name"];
@@ -529,39 +597,120 @@
     }
 }
 
+- (void)fillExpertComboBoxes
+{
+    // Fill in the "represenative" combo box.
+    NSPredicate *repPredicate = [NSPredicate predicateWithFormat:@"role == \"REP\""];
+    NSArray *reps = [experts filteredArrayUsingPredicate:repPredicate];
+    [self fillComboBox:_repCombo withItems:reps];
+    
+    // Fill in the "vocational" combo box.
+    NSPredicate *vePredicate = [NSPredicate predicateWithFormat:@"role == \"VE\""];
+    NSArray *ves = [experts filteredArrayUsingPredicate:vePredicate];
+    [self fillComboBox:_vocationalCombo withItems:ves];
+    
+    // Fill in the "medical" combo box.
+    NSPredicate *mePredicate = [NSPredicate predicateWithFormat:@"role == \"ME\""];
+    NSArray *mes = [experts filteredArrayUsingPredicate:mePredicate];
+    [self fillComboBox:_medicalCombo withItems:mes];
+    
+    // Fill in the "interpreter" combo box.
+    NSPredicate *insPredicate = [NSPredicate predicateWithFormat:@"role == \"INS\""];
+    NSArray *ins = [experts filteredArrayUsingPredicate:insPredicate];
+    [self fillComboBox:_interpreterCombo withItems:ins];
+    
+    // Fill in the "other" combo box.
+    [self fillComboBox:_otherCombo withItems:experts];
+}
+
 - (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last
 {
     NSString *name;
+    
     if (*_lastNameFirst == YES) {
         name = [NSString stringWithFormat:@"%@, %@", last, first];
     } else {
         name = [NSString stringWithFormat:@"%@ %@", first, last];
     }
     
-    return name;
+    return [name capitalizedString];
 }
 
 - (NSDictionary *)unformatName:(NSString *)name
 {
-    NSArray *nameSplit;
-    NSDictionary *nameDict;
+    NSMutableArray *nameSplit;
+    NSArray *keys;
     
-    if (name == nil) {
-        nameDict = [NSDictionary dictionaryWithObjectsAndKeys:@"", @"last_name", @"", @"first_name", nil];
-        return nameDict;
+    // Trims all spaces from beginning and end of name.
+    name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    // Nothing was entered in, so return blanks for first and last name.
+    if ([name isEqualToString:@""]) {
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"", @"first_name", @"", @"last_name", nil];
     }
     
+    // Grabs the first and last name depending on the format.
     if (*_lastNameFirst == YES) {
-        nameSplit = [name componentsSeparatedByString:@", "];
-        nameDict = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[0], @"last_name",
-                    nameSplit[1], @"first_name", nil];
+        nameSplit = (NSMutableArray *)[name componentsSeparatedByString:@","];
+        keys = [NSArray arrayWithObjects:@"last_name", @"first_name", nil];
     }
     else
     {
-        nameSplit = [name componentsSeparatedByString:@" "];
-        nameDict = [NSDictionary dictionaryWithObjectsAndKeys:nameSplit[0], @"last_name",
-                    nameSplit[1], @"first_name", nil];
+        nameSplit = (NSMutableArray *)[name componentsSeparatedByString:@" "];
+        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", nil];
     }
+    
+    // Removes all whitespace at the beginning and end of each name.
+    for (int x = 0; x < nameSplit.count ; x++) {
+        NSString *trimmedName = [nameSplit[x] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        [nameSplit replaceObjectAtIndex:x withObject:trimmedName];
+    }
+    
+    // If there are more than 2 elements, that means the user typed in a middle name as well. We will combine the middle name with the first name.
+    if (nameSplit.count > 2) {
+        NSMutableString *combinedFirstName = [[NSMutableString alloc] init];
+        NSString *lastName;
+        
+        if (*_lastNameFirst == YES) {
+            // Combines all names except the first element. This will make a combined first name.
+            for (int x = 1; x < nameSplit.count; x++) {
+                [combinedFirstName appendString:nameSplit[x]];
+                [combinedFirstName appendString:@" "];
+            }
+            lastName = nameSplit[0];
+            
+            // Removes spaces from the beginning and end of the combined first name.
+            NSString *firstName = [combinedFirstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            // Adds the combined first name and last name into an array in the order that it will be added to the dictionary.
+            [nameSplit removeAllObjects];
+            [nameSplit addObject:lastName];
+            [nameSplit addObject:firstName];
+        }
+        else {
+            // Combined all names except the last element. This will make a combined first name.
+            for (int x = 0; x < nameSplit.count-1; x++) {
+                [combinedFirstName appendString:nameSplit[x]];
+                [combinedFirstName appendString:@" "];
+            }
+            lastName = nameSplit[nameSplit.count-1];
+            
+            // Removes spaces from the beginning and end of the combined first name.
+            NSString *firstName = [combinedFirstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            // Adds the combined first name and last name into an array in the order that it will be added to the dictionary.
+            [nameSplit removeAllObjects];
+            [nameSplit addObject:firstName];
+            [nameSplit addObject:lastName];
+        }
+        
+    }
+    
+    // Adds spaces to the array anywhere there is a missing component.
+    if (nameSplit.count == 1) {
+        [nameSplit addObject:@""];
+    }
+    
+    // Creates a dictionary out of the names.
+    NSDictionary *nameDict = [NSDictionary dictionaryWithObjects:nameSplit forKeys:keys];
     
     return nameDict;
 }
