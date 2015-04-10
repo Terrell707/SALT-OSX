@@ -19,6 +19,8 @@
 @property (weak) IBOutlet NSComboBox *officeCombo;
 @property (weak) IBOutlet NSTextField *invoiceNumField;
 
+@property (weak) IBOutlet NSTextField *statusLabel;
+
 - (IBAction)printBtn:(id)sender;
 
 @end

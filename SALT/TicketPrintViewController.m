@@ -69,6 +69,17 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"at_site == %@", officeInfo[1]];
     tickets = [tickets filteredArrayUsingPredicate:predicate];
     
+    // Checks to make sure there is something to print for this date range and office. Otherwise,
+    //  it'll notify the user that there isn't anything.
+    NSLog(@"Number of tickets to print: %ld", tickets.count);
+    if (tickets.count == 0) {
+        [_statusLabel setStringValue:@"There is nothing to print for this date range and office."];
+        [_statusLabel setTextColor:[NSColor redColor]];
+        [_statusLabel setHidden:NO];
+        return;
+    }
+    [_statusLabel setHidden:YES];
+    
     // Finds the selected office in the list of offices.
     predicate = [NSPredicate predicateWithFormat:@"name == %@ && office_code == %@",
                               officeInfo[0], officeInfo[1]];
