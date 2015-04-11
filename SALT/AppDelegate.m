@@ -31,6 +31,13 @@
 {
     // Insert code here to tear down your application
     NSLog(@"Terminating");
+    [[DataController sharedDataController] logout];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
+{
+    [_controller.window setIsVisible:YES];
+    return YES;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "DataController.h"
 #import "LoginViewController.h"
 
-@interface MainWindowController : NSWindowController {
+@interface MainWindowController : NSWindowController <NSWindowDelegate> {
     NSViewController *currentVC;
 }
 

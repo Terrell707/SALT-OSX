@@ -256,6 +256,13 @@ static DataController *sharedDataController = nil;
     [self didChangeValueForKey:@"user"];
 }
 
+- (void)logout
+{
+    // Logs out the current user.
+    [self logginStatus:NO forUser:_user];
+    _user = @"";
+}
+
 // -------------------------------------------------------------------
 // Methods dealing with Experts.
 // -------------------------------------------------------------------

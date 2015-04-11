@@ -19,17 +19,28 @@
     
     NSLog(@"Window Loaded");
     
+    // Gets notified when main window closes.
+    [self.window setDelegate:self];
+    
+    // Gets notified when user login status changes.
     [[DataController sharedDataController] addObserver:self
                                             forKeyPath:@"loggedIn"
                                                options:NSKeyValueObservingOptionNew
                                                context:NULL];
     
+    // If the window loads and user is not logged in, present the login window.
     if ([[DataController sharedDataController] loggedIn] == NO) {
         NSLog(@"Not Logged in!");
         
         // Displays the login view.
         [self displayLoginView];
     }
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    NSLog(@"Main Window will close!");
+    [[DataController sharedDataController] logout];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
