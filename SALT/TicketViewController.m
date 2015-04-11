@@ -91,8 +91,6 @@
         
         [controller setOldTicket:ticket];
         [controller setLastNameFirst:&(lastNameFirst)];
-        
-        NSDictionary *experts = [Expert findExpertsForTicket:ticket];
     }
     
     // Presents the View for a user to change settings on the table.
@@ -220,7 +218,19 @@
     NSArray *selected = [ticketController selectedObjects];
     NSLog(@"Selected = %@", selected);
     
+    // Goes through each selected ticket and removes it from the database and list.
     for (Ticket *ticket in selected) {
+        // Goes through each expert that is tied to the ticket and removes it from the witness database and list.
+        NSArray *experts = [ticket.helpedBy allObjects];
+        for (Expert *expert in experts) {
+            if ([[DataController sharedDataController] removeExpert:expert forTicket:ticket]) {
+                NSLog(@"Witness was removed");
+            }
+            else {
+                NSLog(@"Witness was not removed!");
+            }
+        }
+        // Finally, deletes the ticket.
         if ([[DataController sharedDataController] removeTicket:ticket]) {
             NSLog(@"Ticket was removed");
             [self setTickets:[[DataController sharedDataController] tickets]];

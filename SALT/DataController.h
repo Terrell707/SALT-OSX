@@ -36,6 +36,7 @@
 // -------------------------------------------------------------------
 - (BOOL)insertExpert:(Expert *)expert;
 - (BOOL)updateExpert:(Expert *)before withChanges:(Expert *)after;
+- (BOOL)removeExpert:(Expert *)expert forTicket:(Ticket *)ticket;
 
 // -------------------------------------------------------------------
 // Methods dealing with Tickets.
@@ -49,7 +50,7 @@
 // Methods dealing with Witness.
 // -------------------------------------------------------------------
 - (BOOL)insertWitness:(Witness *)witness;
-- (BOOL)updateWitness:(Witness *)before withChanges:(Witness *)after;
+- (BOOL)removeWitness:(Witness *)witness;
 
 // -------------------------------------------------------------------
 // Properties dealing with Login Status.

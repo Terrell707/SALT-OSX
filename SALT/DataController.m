@@ -242,6 +242,9 @@ static DataController *sharedDataController = nil;
     }
 }
 
+// -------------------------------------------------------------------
+// Methods dealing with User Login.
+// -------------------------------------------------------------------
 - (void)logginStatus:(BOOL)login forUser:(NSString *)username
 {
     // Updates the logged in status for the specified user.
@@ -253,6 +256,9 @@ static DataController *sharedDataController = nil;
     [self didChangeValueForKey:@"user"];
 }
 
+// -------------------------------------------------------------------
+// Methods dealing with Experts.
+// -------------------------------------------------------------------
 #pragma mark Expert methods.
 - (BOOL)insertExpert:(Expert *)expert
 {
@@ -292,6 +298,24 @@ static DataController *sharedDataController = nil;
     
 }
 
+- (BOOL)removeExpert:(Expert *)expert forTicket:(Ticket *)ticket
+{
+    // Looks for the witness object with the passed in expert's id and passed in ticket's number.
+    NSPredicate *witnessPredicate = [NSPredicate predicateWithFormat:@"expert_id == %@ && ticket_no == %@", expert.expert_id, ticket.ticket_no];
+    NSArray *witnessResult = [_witnesses filteredArrayUsingPredicate:witnessPredicate];
+    
+    // If a witness object was found, delete it from the database and the list of witnesses.
+    if (witnessResult.count != 0) {
+        return [self removeWitness:witnessResult[0]];
+    }
+    else {
+        return NO;
+    }
+}
+
+// -------------------------------------------------------------------
+// Methods dealing with Tickets.
+// -------------------------------------------------------------------
 #pragma mark Ticket methods.
 - (void)hearingTicketInformation
 {
@@ -471,6 +495,9 @@ static DataController *sharedDataController = nil;
     }
 }
 
+// -------------------------------------------------------------------
+// Methods dealing with Witness.
+// -------------------------------------------------------------------
 #pragma mark Witness methods
 - (void)witnessInformation
 {
@@ -516,13 +543,38 @@ static DataController *sharedDataController = nil;
     // If there are no errors, add the Witness to the list of witnesses 
     NSLog(@"Status = %ld", status);
     if ([self checkStatus:status]) {
+        // Adds this witness object to the list of witnesses after finding its associated objects.
         [self willChangeValueForKey:@"witnesses"];
         [self findInformationForWitness:witness];
         [_witnesses addObject:witness];
         [self didChangeValueForKey:@"witnesses"];
+        // Add the witness data to the list of tickets.
+        [self willChangeValueForKey:@"tickets"];
+        [self hearingTicketInformation];
+        [self didChangeValueForKey:@"tickets"];
         return YES;
     }
     else {
+        return NO;
+    }
+}
+
+- (BOOL)removeWitness:(Witness *)witness
+{
+    NSArray *keys = [NSArray arrayWithObjects:@"expert_id", @"ticket_no", nil];
+    NSArray *values = [NSArray arrayWithObjects:[witness.expert_id stringValue], [witness.ticket_no stringValue], nil];
+    NSDictionary *witnessInfo = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+    
+    NSArray *witnessData = [mySQL grabInfoFromFile:@"remove/witness.php" withItems:witnessInfo];
+    NSInteger status = [statusChecker grabStatusFromJson:witnessData];
+    
+    // If there were no errors, then return the status of the removal.
+    if ([self checkStatus:status]) {
+        [self willChangeValueForKey:@"witnesses"];
+        [_witnesses removeObject:witness];
+        [self didChangeValueForKey:@"witnesses"];
+        return YES;
+    } else {
         return NO;
     }
 }

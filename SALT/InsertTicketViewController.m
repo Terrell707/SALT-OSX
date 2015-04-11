@@ -313,6 +313,11 @@
         [newTicket addHelpedByObject:expert];
     }
     
+    NSLog(@"Experts associated with this ticket.");
+    for (Expert *e in newTicket.helpedBy) {
+        NSLog(@"%@", e.first_name);
+    }
+    
     // If the user clicked the "Add" button, this will create a new hearing Ticket.
     if (_updateTicket == NO) {
         BOOL inserted = [[DataController sharedDataController] insertTicket:newTicket];
@@ -327,6 +332,22 @@
             [_statusLabel setStringValue:@"Error: Ticket did not go through!"];
             [_statusLabel setTextColor:errorColor];
             [_statusLabel setHidden:NO];
+        }
+        
+        NSArray *witnesses = [newTicket.helpedBy allObjects];
+        for (Expert *expert in witnesses) {
+            // Creates a new Witness with this current expert and new ticket information to send to the database.
+            Witness *newWitness = [[Witness alloc] init];
+            [newWitness setExpert_id:expert.expert_id];
+            [newWitness setExpert:expert];
+            [newWitness setTicket_no:newTicket.ticket_no];
+            [newWitness setTicket:newTicket];
+            inserted = [[DataController sharedDataController] insertWitness:newWitness];
+            if (inserted) {
+                NSLog(@"Witness %@ %@ went through.", expert.first_name, expert.last_name);
+            } else {
+                NSLog(@"Witness %@ %@ did not go through.", expert.first_name, expert.last_name);
+            }
         }
     }
     // Otherwise, we will update the old ticket.
