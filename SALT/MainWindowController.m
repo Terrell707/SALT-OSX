@@ -70,8 +70,8 @@
     
     // Grabs the login window controller and presents it.
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:storyboardName bundle:nil];
-    NSViewController *controller = [storyboard instantiateControllerWithIdentifier:loginViewName];
-    [self.window setContentView:controller.view];
+    _loginVC = [storyboard instantiateControllerWithIdentifier:loginViewName];
+    [self.window setContentView:_loginVC.view];
     
     NSLog(@"Window Name from MainWindowController=%@", [self window]);
     NSLog(@"Window content view = %@", [self.window contentView]);

@@ -14,4 +14,5 @@
     NSViewController *currentVC;
 }
 
+@property (strong) NSViewController *loginVC;
 @end
