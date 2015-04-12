@@ -21,7 +21,6 @@
 		3AFD09431A883793001D8688 /* StatusCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09401A883793001D8688 /* StatusCodes.m */; };
 		3AFD09491A883A42001D8688 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09481A883A42001D8688 /* LoginViewController.m */; };
 		3AFD09521A89812E001D8688 /* TicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09511A89812E001D8688 /* TicketViewController.m */; };
-		3AFD09591A898AE8001D8688 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09581A898AE8001D8688 /* EmployeeViewController.m */; };
 		3AFD09771A8AB506001D8688 /* Witness.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09761A8AB506001D8688 /* Witness.m */; };
 		3AFD097A1A8AB507001D8688 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09791A8AB507001D8688 /* Schedule.m */; };
 		3AFD097D1A8AB507001D8688 /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD097C1A8AB507001D8688 /* Ticket.m */; };
@@ -74,8 +73,6 @@
 		3AFD09481A883A42001D8688 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3AFD09501A89812E001D8688 /* TicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketViewController.h; sourceTree = "<group>"; };
 		3AFD09511A89812E001D8688 /* TicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketViewController.m; sourceTree = "<group>"; };
-		3AFD09571A898AE8001D8688 /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
-		3AFD09581A898AE8001D8688 /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
 		3AFD09751A8AB506001D8688 /* Witness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Witness.h; sourceTree = "<group>"; };
 		3AFD09761A8AB506001D8688 /* Witness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Witness.m; sourceTree = "<group>"; };
 		3AFD09781A8AB507001D8688 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
@@ -212,8 +209,6 @@
 				3A729C161AC4EA810089FE2A /* Ticket */,
 				3AFD09471A883A42001D8688 /* LoginViewController.h */,
 				3AFD09481A883A42001D8688 /* LoginViewController.m */,
-				3AFD09571A898AE8001D8688 /* EmployeeViewController.h */,
-				3AFD09581A898AE8001D8688 /* EmployeeViewController.m */,
 				3AFD099C1A8D56CF001D8688 /* DataController.h */,
 				3AFD099D1A8D56CF001D8688 /* DataController.m */,
 				3AFD09E31AAC0A51001D8688 /* MainWindowController.h */,
@@ -373,7 +368,6 @@
 				3AFD09801A8AB507001D8688 /* Expert.m in Sources */,
 				3AFD098F1A8AB507001D8688 /* Clerk.m in Sources */,
 				3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */,
-				3AFD09591A898AE8001D8688 /* EmployeeViewController.m in Sources */,
 				3AFD091B1A8836C4001D8688 /* main.m in Sources */,
 				3AFD09491A883A42001D8688 /* LoginViewController.m in Sources */,
 				3AFD09521A89812E001D8688 /* TicketViewController.m in Sources */,
