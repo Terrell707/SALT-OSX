@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A4582D31ADA27B300DF28ED /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4582D21ADA27B300DF28ED /* BusinessViewController.m */; };
 		3A5045AC1AAFDC070069D27E /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5045AB1AAFDC070069D27E /* Business.m */; };
 		3A654A1A1AB39223001899A6 /* TicketPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A654A191AB39223001899A6 /* TicketPrintView.m */; };
 		3A729C151ABF69980089FE2A /* TicketPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A729C141ABF69980089FE2A /* TicketPrintViewController.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A4582D11ADA27B300DF28ED /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessViewController.h; sourceTree = "<group>"; };
+		3A4582D21ADA27B300DF28ED /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessViewController.m; sourceTree = "<group>"; };
 		3A5045AA1AAFDC070069D27E /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Business.h; sourceTree = "<group>"; };
 		3A5045AB1AAFDC070069D27E /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Business.m; sourceTree = "<group>"; };
 		3A654A181AB39223001899A6 /* TicketPrintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketPrintView.h; sourceTree = "<group>"; };
@@ -117,6 +120,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A4582D01ADA279C00DF28ED /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				3A4582D11ADA27B300DF28ED /* BusinessViewController.h */,
+				3A4582D21ADA27B300DF28ED /* BusinessViewController.m */,
+			);
+			name = Business;
+			sourceTree = "<group>";
+		};
 		3A729C161AC4EA810089FE2A /* Ticket */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +218,7 @@
 		3AFD09451A8837B4001D8688 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3A4582D01ADA279C00DF28ED /* Business */,
 				3A729C161AC4EA810089FE2A /* Ticket */,
 				3AFD09471A883A42001D8688 /* LoginViewController.h */,
 				3AFD09481A883A42001D8688 /* LoginViewController.m */,
@@ -359,6 +372,7 @@
 				3A5045AC1AAFDC070069D27E /* Business.m in Sources */,
 				3AFD09E51AAC0A51001D8688 /* MainWindowController.m in Sources */,
 				3A729C191AC4EABA0089FE2A /* TicketSettingsViewController.m in Sources */,
+				3A4582D31ADA27B300DF28ED /* BusinessViewController.m in Sources */,
 				3AFD09831A8AB507001D8688 /* Judge.m in Sources */,
 				3AFD09861A8AB507001D8688 /* Site.m in Sources */,
 				3AFD098C1A8AB507001D8688 /* Employee.m in Sources */,
