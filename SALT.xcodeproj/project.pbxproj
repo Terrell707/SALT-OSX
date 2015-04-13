@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3881701ADC72B7006241BB /* InsertTicketViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A38816F1ADC72B7006241BB /* InsertTicketViewControllerTests.m */; };
+		3A3881731ADC7983006241BB /* FieldFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3881721ADC7983006241BB /* FieldFormatter.m */; };
 		3A4582D31ADA27B300DF28ED /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4582D21ADA27B300DF28ED /* BusinessViewController.m */; };
 		3A5045AC1AAFDC070069D27E /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5045AB1AAFDC070069D27E /* Business.m */; };
 		3A654A1A1AB39223001899A6 /* TicketPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A654A191AB39223001899A6 /* TicketPrintView.m */; };
@@ -47,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A38816F1ADC72B7006241BB /* InsertTicketViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertTicketViewControllerTests.m; sourceTree = "<group>"; };
+		3A3881711ADC7983006241BB /* FieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldFormatter.h; sourceTree = "<group>"; };
+		3A3881721ADC7983006241BB /* FieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldFormatter.m; sourceTree = "<group>"; };
 		3A4582D11ADA27B300DF28ED /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessViewController.h; sourceTree = "<group>"; };
 		3A4582D21ADA27B300DF28ED /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessViewController.m; sourceTree = "<group>"; };
 		3A5045AA1AAFDC070069D27E /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Business.h; sourceTree = "<group>"; };
@@ -120,6 +125,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A38816E1ADC7287006241BB /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				3A38816F1ADC72B7006241BB /* InsertTicketViewControllerTests.m */,
+			);
+			name = Ticket;
+			sourceTree = "<group>";
+		};
 		3A4582D01ADA279C00DF28ED /* Business */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +203,7 @@
 		3AFD092E1A8836C4001D8688 /* SALTTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A38816E1ADC7287006241BB /* Ticket */,
 				3AFD09311A8836C4001D8688 /* SALTTests.m */,
 				3AFD092F1A8836C4001D8688 /* Supporting Files */,
 			);
@@ -211,6 +225,8 @@
 				3AFD093E1A883793001D8688 /* MySQL.m */,
 				3AFD093F1A883793001D8688 /* StatusCodes.h */,
 				3AFD09401A883793001D8688 /* StatusCodes.m */,
+				3A3881711ADC7983006241BB /* FieldFormatter.h */,
+				3A3881721ADC7983006241BB /* FieldFormatter.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -377,6 +393,7 @@
 				3AFD09861A8AB507001D8688 /* Site.m in Sources */,
 				3AFD098C1A8AB507001D8688 /* Employee.m in Sources */,
 				3AFD09A11A902FDA001D8688 /* InsertTicketViewController.m in Sources */,
+				3A3881731ADC7983006241BB /* FieldFormatter.m in Sources */,
 				3AFD09891A8AB507001D8688 /* User.m in Sources */,
 				3A729C151ABF69980089FE2A /* TicketPrintViewController.m in Sources */,
 				3AFD09801A8AB507001D8688 /* Expert.m in Sources */,
@@ -398,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AFD09321A8836C4001D8688 /* SALTTests.m in Sources */,
+				3A3881701ADC72B7006241BB /* InsertTicketViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

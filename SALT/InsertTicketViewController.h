@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
+#import "FieldFormatter.h"
 
 @interface InsertTicketViewController : NSViewController <NSTextFieldDelegate> {
+    FieldFormatter *fieldFormatter;
+    
     NSMutableArray *hearingStatus;
     NSMutableArray *employees;
     NSMutableArray *sites;

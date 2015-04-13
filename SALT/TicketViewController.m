@@ -67,36 +67,39 @@
     NSLog(@"Segue=%@", [segue identifier]);
     
     id controller = segue.destinationController;
-    
+
     NSLog(@"Segue End Destination = %@", controller);
     
     // Presents the View for a user to insert a ticket.
     if ([segue.identifier isEqualToString:@"InsertTicketSegue"]) {
-        [controller setTitleString:@"Create Hearing Ticket"];
-        [controller setClearBtnString:@"Clear"];
-        [controller setUpdateTicket:NO];
-        [controller setLastNameFirst:&(lastNameFirst)];
+        InsertTicketViewController *itvcController = controller;
+        [itvcController setTitleString:@"Create Hearing Ticket"];
+        [itvcController setClearBtnString:@"Clear"];
+        [itvcController setUpdateTicket:NO];
+        [itvcController setLastNameFirst:&(lastNameFirst)];
     }
     
     // Presents the View for a user to update a ticket.
     if ([segue.identifier isEqualToString:@"UpdateTicketSegue"]) {
-        [controller setTitleString:@"Update Hearing Ticket"];
-        [controller setClearBtnString:@"Revert"];
-        [controller setUpdateTicket:YES];
+        InsertTicketViewController *itvcController = controller;
+        [itvcController setTitleString:@"Update Hearing Ticket"];
+        [itvcController setClearBtnString:@"Revert"];
+        [itvcController setUpdateTicket:YES];
         
         // Grabs the sorted tickets if the user clicked a column to sort the table.
         NSArray *arrangedTickets = [ticketController arrangedObjects];
         NSUInteger selection = [ticketController selectionIndex];
         Ticket *ticket = arrangedTickets[selection];
         
-        [controller setOldTicket:ticket];
-        [controller setLastNameFirst:&(lastNameFirst)];
+        [itvcController setOldTicket:ticket];
+        [itvcController setLastNameFirst:&(lastNameFirst)];
     }
     
     // Presents the View for a user to change settings on the table.
     if ([segue.identifier isEqualToString:@"TicketSettingsSegue"]) {
-        [controller setTicketTable:ticketTable];
-        [controller setLastNameFirst:&(lastNameFirst)];
+        TicketSettingsViewController *tsvcController = controller;
+        [tsvcController setTicketTable:ticketTable];
+        [tsvcController setLastNameFirst:&(lastNameFirst)];
     }
 }
 

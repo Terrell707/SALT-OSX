@@ -9,13 +9,14 @@
 #import "InsertTicketViewController.h"
 
 @interface InsertTicketViewController ()
-
 @end
 
 @implementation InsertTicketViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    fieldFormatter = [[FieldFormatter alloc] initWithLastNameFirst:*(_lastNameFirst)];
     
     // If a user adds a new expert, we need to know so that we can update the combo boxes.
     [[DataController sharedDataController] addObserver:self
@@ -44,10 +45,10 @@
     }
     
     // Fill in the "worked by" combo box.
-    [self fillComboBox:_workedByCombo withItems:employees];
+    [fieldFormatter fillComboBox:_workedByCombo withItems:employees];
     
     // Fill in the "judges" combo box.
-    [self fillComboBox:_judgePresidingCombo withItems:judges];
+    [fieldFormatter fillComboBox:_judgePresidingCombo withItems:judges];
     
     // Fill in the "held at office" combo box.
     for (int x = 0; x < [sites count]; x++) {
@@ -113,13 +114,13 @@
         [errorDescription appendString:@"Ticket Number must be exactly 8 numbers long"];
 
         // Will highlight the field in a slight red.
-        [self setErrorBackground:_ticketNumberField];
+        [fieldFormatter setErrorBackground:_ticketNumberField];
         
         // Moves the focus to the ticket number field.
         [self.view.window makeFirstResponder:_ticketNumberField];
     }
     else {
-        [self clearErrorBackground:_ticketNumberField];
+        [fieldFormatter clearErrorBackground:_ticketNumberField];
     }
     
     if ([_statusCombo indexOfSelectedItem] == -1) {
@@ -137,10 +138,10 @@
             [errorDescription appendString:@"A status must be selected from the 'Status' drop down"];
         else
             [errorDescription appendString:@"The entered status doesn't exist as a possible choice. Select one from the 'Status' drop down"];
-        [self setErrorBackground:_statusCombo];
+        [fieldFormatter setErrorBackground:_statusCombo];
     }
     else {
-        [self clearErrorBackground:_statusCombo];
+        [fieldFormatter clearErrorBackground:_statusCombo];
     }
     
     if ([_workedByCombo indexOfSelectedItem] == -1) {
@@ -158,10 +159,10 @@
             [errorDescription appendString:@"An employee must be selected from the 'Worked By' drop down"];
         else
             [errorDescription appendString:@"The entered employee doesn't exist as a possible choice. Select one from the 'Worked By' drop down"];
-        [self setErrorBackground:_workedByCombo];
+        [fieldFormatter setErrorBackground:_workedByCombo];
     }
     else {
-        [self clearErrorBackground:_workedByCombo];
+        [fieldFormatter clearErrorBackground:_workedByCombo];
     }
     
     if ([_judgePresidingCombo indexOfSelectedItem] == -1) {
@@ -179,10 +180,10 @@
             [errorDescription appendString:@"A judge must be selected from the 'Judge Presided' drop down list"];
         else
             [errorDescription appendString:@"The entered judge doesn't exist as a possible choice. Select one from the 'Judge Presided' drop down list"];
-        [self setErrorBackground:_judgePresidingCombo];
+        [fieldFormatter setErrorBackground:_judgePresidingCombo];
     }
     else {
-        [self clearErrorBackground:_judgePresidingCombo];
+        [fieldFormatter clearErrorBackground:_judgePresidingCombo];
     }
     
     if ([_officeCombo indexOfSelectedItem] == -1) {
@@ -200,10 +201,10 @@
             [errorDescription appendString:@"A office must be selected from the 'Held At Office' drop down list"];
         else
             [errorDescription appendString:@"The entered office doesn't exist as a possible choice. Select one from the 'Held At Office' drop down list"];
-        [self setErrorBackground:_officeCombo];
+        [fieldFormatter setErrorBackground:_officeCombo];
     }
     else {
-        [self clearErrorBackground:_officeCombo];
+        [fieldFormatter clearErrorBackground:_officeCombo];
     }
     
     // Sets the error description and shows it. Otherwise, it clears the error label.
@@ -376,7 +377,7 @@
 - (NSArray *)findInfoFromList:(NSArray *)list forCombo:(NSComboBox *)combo
 {
     // Searchs the passed in list for the name selected in the passed in combobox.
-    NSDictionary *name = [self unformatName:[combo stringValue]];
+    NSDictionary *name = [fieldFormatter unformatName:[combo stringValue]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"first_name == %@ && last_name == %@",
                                    name[@"first_name"], name[@"last_name"]];
     NSArray *result = [list filteredArrayUsingPredicate:predicate];
@@ -405,8 +406,8 @@
     }
     
     // Reformats the name so that it is presentable to the user.
-    NSDictionary *unformatted = [self unformatName:combo.stringValue];
-    NSString *name = [self formatFirstName:unformatted[@"first_name"] lastName:unformatted[@"last_name"]];
+    NSDictionary *unformatted = [fieldFormatter unformatName:combo.stringValue];
+    NSString *name = [fieldFormatter formatFirstName:unformatted[@"first_name"] lastName:unformatted[@"last_name"]];
     NSString *infoMessage = [NSString stringWithFormat:@"The expert, \"%@\", does not exist! Do you want to add, \"%@\", into the list of experts as a %@?", name, name, role];
     
     // Creates a dialog so that the user can decide whether to add the expert or not.
@@ -420,7 +421,7 @@
     
     // If the user clicks "Add" then the expert will be added.
     if (response == NSAlertFirstButtonReturn) {
-        NSDictionary *name = [self unformatName:combo.stringValue];
+        NSDictionary *name = [fieldFormatter unformatName:combo.stringValue];
         Expert *expert = [[Expert alloc] init];
         [expert setExpert_id:[NSNumber numberWithInt:0]];
         [expert setFirst_name:[name valueForKey:@"first_name"]];
@@ -459,14 +460,14 @@
     //  limit the number of characters that are allowed in the text field.
     if ([identifer isEqualToString:@"call_order_no_field"]) {
         maxLength = 15;
-        formatted = [self callOrderBpaFormat:text];
+        formatted = [fieldFormatter callOrderBpaFormat:text];
         if ([formatted length] > maxLength) {
             formatted = [formatted substringToIndex:maxLength];
         }
     }
     else if ([identifer isEqualToString:@"bpa_no_field"]) {
         maxLength = 13;
-        formatted = [self callOrderBpaFormat:text];
+        formatted = [fieldFormatter callOrderBpaFormat:text];
         if ([formatted length] > maxLength) {
             formatted = [formatted substringToIndex:maxLength];
         }
@@ -474,7 +475,7 @@
     else if ([identifer isEqualToString:@"tin_field"])
     {
         maxLength = 11;
-        formatted = [self tinFormat:text];
+        formatted = [fieldFormatter tinFormat:text];
         if ([formatted length] > maxLength) {
             formatted = [formatted substringToIndex:maxLength];
         }
@@ -540,11 +541,11 @@
     [_fullAmountBtn setState:1];
     
     // Clears all errors on the form.
-    [self clearErrorBackground:_ticketNumberField];
-    [self clearErrorBackground:_statusCombo];
-    [self clearErrorBackground:_workedByCombo];
-    [self clearErrorBackground:_judgePresidingCombo];
-    [self clearErrorBackground:_officeCombo];
+    [fieldFormatter clearErrorBackground:_ticketNumberField];
+    [fieldFormatter clearErrorBackground:_statusCombo];
+    [fieldFormatter clearErrorBackground:_workedByCombo];
+    [fieldFormatter clearErrorBackground:_judgePresidingCombo];
+    [fieldFormatter clearErrorBackground:_officeCombo];
     
     // Moves the focus to the date picker.
     [[[self view] window] makeFirstResponder:_orderDatePicker];
@@ -573,9 +574,9 @@
     if ([_oldTicket status] != nil) [_statusCombo setStringValue:[_oldTicket status]];
     [_fullAmountBtn setState:[_oldTicket full_pay]];
     
-    if ([_oldTicket workedBy] != nil) [_workedByCombo setStringValue:[self formatFirstName:[[_oldTicket workedBy] first_name] lastName:[[_oldTicket workedBy] last_name]]];
+    if ([_oldTicket workedBy] != nil) [_workedByCombo setStringValue:[fieldFormatter formatFirstName:[[_oldTicket workedBy] first_name] lastName:[[_oldTicket workedBy] last_name]]];
     if ([_oldTicket heldAt] != nil) [_officeCombo setStringValue:[NSString stringWithFormat:@"%@, %@", [[_oldTicket heldAt] name], [[_oldTicket heldAt] office_code]]];
-    if ([_oldTicket judge_presided] != nil) [_judgePresidingCombo setStringValue:[self formatFirstName:[[_oldTicket judgePresided] first_name] lastName:[[_oldTicket judgePresided] last_name]]];
+    if ([_oldTicket judge_presided] != nil) [_judgePresidingCombo setStringValue:[fieldFormatter formatFirstName:[[_oldTicket judgePresided] first_name] lastName:[[_oldTicket judgePresided] last_name]]];
     
     // Places the correct expert for each expert combo box.
     NSDictionary *expertsForTicket = [Expert findExpertsForTicket:_oldTicket];
@@ -587,7 +588,7 @@
     for (NSString *role in roles) {
         NSComboBox *combo = [fieldsByRole valueForKey:role];
         Expert *expert = ([expertsForTicket valueForKey:role] != [NSNull null]) ? [expertsForTicket valueForKey:role] : nil;
-        if (expert != nil) [combo setStringValue:[self formatFirstName:[expert first_name] lastName:[expert last_name]]];
+        if (expert != nil) [combo setStringValue:[fieldFormatter formatFirstName:[expert first_name] lastName:[expert last_name]]];
         else [combo setStringValue:@""];
     }
     
@@ -605,183 +606,183 @@
     }
 }
 
-- (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
-{
-    [combo removeAllItems];
-    
-    // Fills a combo box with all the items in the array.
-    for (int x = 0; x < [items count]; x++) {
-        NSString *first = [[items objectAtIndex:x] valueForKey:@"first_name"];
-        NSString *last = [[items objectAtIndex:x] valueForKey:@"last_name"];
-        NSString *name = [self formatFirstName:first lastName:last];
-        [combo addItemWithObjectValue:name];
-    }
-}
-
+//- (void)fillComboBox:(NSComboBox *)combo withItems:(NSArray *)items
+//{
+//    [combo removeAllItems];
+//    
+//    // Fills a combo box with all the items in the array.
+//    for (int x = 0; x < [items count]; x++) {
+//        NSString *first = [[items objectAtIndex:x] valueForKey:@"first_name"];
+//        NSString *last = [[items objectAtIndex:x] valueForKey:@"last_name"];
+//        NSString *name = [self formatFirstName:first lastName:last];
+//        [combo addItemWithObjectValue:name];
+//    }
+//}
+//
 - (void)fillExpertComboBoxes
 {
     // Fill in the "represenative" combo box.
     NSPredicate *repPredicate = [NSPredicate predicateWithFormat:@"role == \"REP\""];
     NSArray *reps = [experts filteredArrayUsingPredicate:repPredicate];
-    [self fillComboBox:_repCombo withItems:reps];
+    [fieldFormatter fillComboBox:_repCombo withItems:reps];
     
     // Fill in the "vocational" combo box.
     NSPredicate *vePredicate = [NSPredicate predicateWithFormat:@"role == \"VE\""];
     NSArray *ves = [experts filteredArrayUsingPredicate:vePredicate];
-    [self fillComboBox:_vocationalCombo withItems:ves];
+    [fieldFormatter fillComboBox:_vocationalCombo withItems:ves];
     
     // Fill in the "medical" combo box.
     NSPredicate *mePredicate = [NSPredicate predicateWithFormat:@"role == \"ME\""];
     NSArray *mes = [experts filteredArrayUsingPredicate:mePredicate];
-    [self fillComboBox:_medicalCombo withItems:mes];
+    [fieldFormatter fillComboBox:_medicalCombo withItems:mes];
     
     // Fill in the "interpreter" combo box.
     NSPredicate *insPredicate = [NSPredicate predicateWithFormat:@"role == \"INS\""];
     NSArray *ins = [experts filteredArrayUsingPredicate:insPredicate];
-    [self fillComboBox:_interpreterCombo withItems:ins];
+    [fieldFormatter fillComboBox:_interpreterCombo withItems:ins];
     
     // Fill in the "other" combo box.
-    [self fillComboBox:_otherCombo withItems:experts];
+    [fieldFormatter fillComboBox:_otherCombo withItems:experts];
 }
-
-- (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last
-{
-    NSString *name;
-    
-    if (*_lastNameFirst == YES) {
-        name = [NSString stringWithFormat:@"%@, %@", last, first];
-    } else {
-        name = [NSString stringWithFormat:@"%@ %@", first, last];
-    }
-    
-    return [name capitalizedString];
-}
-
-- (NSDictionary *)unformatName:(NSString *)name
-{
-    NSMutableArray *nameSplit;
-    NSArray *keys;
-    
-    // Trims all spaces from beginning and end of name.
-    name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    // Nothing was entered in, so return blanks for first and last name.
-    if ([name isEqualToString:@""]) {
-        return [NSDictionary dictionaryWithObjectsAndKeys:@"", @"first_name", @"", @"last_name", nil];
-    }
-    
-    // Grabs the first and last name depending on the format.
-    if (*_lastNameFirst == YES) {
-        nameSplit = (NSMutableArray *)[name componentsSeparatedByString:@","];
-        keys = [NSArray arrayWithObjects:@"last_name", @"first_name", nil];
-    }
-    else
-    {
-        nameSplit = (NSMutableArray *)[name componentsSeparatedByString:@" "];
-        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", nil];
-    }
-    
-    // Removes all whitespace at the beginning and end of each name.
-    for (int x = 0; x < nameSplit.count ; x++) {
-        NSString *trimmedName = [nameSplit[x] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        [nameSplit replaceObjectAtIndex:x withObject:trimmedName];
-    }
-    
-    // If there are more than 2 elements, that means the user typed in a middle name as well. We will combine the middle name with the first name.
-    if (nameSplit.count > 2) {
-        NSMutableString *combinedFirstName = [[NSMutableString alloc] init];
-        NSString *lastName;
-        
-        if (*_lastNameFirst == YES) {
-            // Combines all names except the first element. This will make a combined first name.
-            for (int x = 1; x < nameSplit.count; x++) {
-                [combinedFirstName appendString:nameSplit[x]];
-                [combinedFirstName appendString:@" "];
-            }
-            lastName = nameSplit[0];
-            
-            // Removes spaces from the beginning and end of the combined first name.
-            NSString *firstName = [combinedFirstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            // Adds the combined first name and last name into an array in the order that it will be added to the dictionary.
-            [nameSplit removeAllObjects];
-            [nameSplit addObject:lastName];
-            [nameSplit addObject:firstName];
-        }
-        else {
-            // Combined all names except the last element. This will make a combined first name.
-            for (int x = 0; x < nameSplit.count-1; x++) {
-                [combinedFirstName appendString:nameSplit[x]];
-                [combinedFirstName appendString:@" "];
-            }
-            lastName = nameSplit[nameSplit.count-1];
-            
-            // Removes spaces from the beginning and end of the combined first name.
-            NSString *firstName = [combinedFirstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            // Adds the combined first name and last name into an array in the order that it will be added to the dictionary.
-            [nameSplit removeAllObjects];
-            [nameSplit addObject:firstName];
-            [nameSplit addObject:lastName];
-        }
-        
-    }
-    
-    // Adds spaces to the array anywhere there is a missing component.
-    if (nameSplit.count == 1) {
-        [nameSplit addObject:@""];
-    }
-    
-    // Creates a dictionary out of the names.
-    NSDictionary *nameDict = [NSDictionary dictionaryWithObjects:nameSplit forKeys:keys];
-    
-    return nameDict;
-}
-
-- (NSString *)callOrderBpaFormat:(NSString *)text
-{
-    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    
-    // Adds a '-' after every 4th and 7th character.
-    NSMutableString *formatted = [[NSMutableString alloc] init];
-    
-    for (int x = 0; x < [text length]; x++) {
-        if (x == 4 || x == 6) {
-            [formatted appendString:@"-"];
-        }
-        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
-        [formatted appendString:nextChar];
-    }
-    
-    return formatted;
-}
-
-- (NSString *)tinFormat:(NSString *)text
-{
-    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    
-    // Adds a '-' after the 4th character.
-    NSMutableString *formatted = [[NSMutableString alloc] init];
-    
-    for (int x = 0; x < [text length]; x++) {
-        if (x == 4) {
-            [formatted appendString:@"-"];
-        }
-        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
-        [formatted appendString:nextChar];
-    }
-    
-    return formatted;
-}
-
-- (void)setErrorBackground:(id)field
-{
-    // Sets the field's background to a slight red so that the user knows there is an error.
-    [field setBackgroundColor:[NSColor colorWithRed:1 green:0 blue:0 alpha:0.20]];
-}
-
-- (void)clearErrorBackground:(id)field
-{
-    // Reverts field to normal color.
-    [field setBackgroundColor:[NSColor colorWithRed:0 green:0 blue:0 alpha:0]];
-}
+//
+//- (NSString *)formatFirstName:(NSString *)first lastName:(NSString *)last
+//{
+//    NSString *name;
+//    
+//    if (*_lastNameFirst == YES) {
+//        name = [NSString stringWithFormat:@"%@, %@", last, first];
+//    } else {
+//        name = [NSString stringWithFormat:@"%@ %@", first, last];
+//    }
+//    
+//    return [name capitalizedString];
+//}
+//
+//- (NSDictionary *)unformatName:(NSString *)name
+//{
+//    NSMutableArray *nameSplit;
+//    NSArray *keys;
+//    
+//    // Trims all spaces from beginning and end of name.
+//    name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    
+//    // Nothing was entered in, so return blanks for first and last name.
+//    if ([name isEqualToString:@""]) {
+//        return [NSDictionary dictionaryWithObjectsAndKeys:@"", @"first_name", @"", @"last_name", nil];
+//    }
+//    
+//    // Grabs the first and last name depending on the format.
+//    if (*_lastNameFirst == YES) {
+//        nameSplit = (NSMutableArray *)[name componentsSeparatedByString:@","];
+//        keys = [NSArray arrayWithObjects:@"last_name", @"first_name", nil];
+//    }
+//    else
+//    {
+//        nameSplit = (NSMutableArray *)[name componentsSeparatedByString:@" "];
+//        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", nil];
+//    }
+//    
+//    // Removes all whitespace at the beginning and end of each name.
+//    for (int x = 0; x < nameSplit.count ; x++) {
+//        NSString *trimmedName = [nameSplit[x] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//        [nameSplit replaceObjectAtIndex:x withObject:trimmedName];
+//    }
+//    
+//    // If there are more than 2 elements, that means the user typed in a middle name as well. We will combine the middle name with the first name.
+//    if (nameSplit.count > 2) {
+//        NSMutableString *combinedFirstName = [[NSMutableString alloc] init];
+//        NSString *lastName;
+//        
+//        if (*_lastNameFirst == YES) {
+//            // Combines all names except the first element. This will make a combined first name.
+//            for (int x = 1; x < nameSplit.count; x++) {
+//                [combinedFirstName appendString:nameSplit[x]];
+//                [combinedFirstName appendString:@" "];
+//            }
+//            lastName = nameSplit[0];
+//            
+//            // Removes spaces from the beginning and end of the combined first name.
+//            NSString *firstName = [combinedFirstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            // Adds the combined first name and last name into an array in the order that it will be added to the dictionary.
+//            [nameSplit removeAllObjects];
+//            [nameSplit addObject:lastName];
+//            [nameSplit addObject:firstName];
+//        }
+//        else {
+//            // Combined all names except the last element. This will make a combined first name.
+//            for (int x = 0; x < nameSplit.count-1; x++) {
+//                [combinedFirstName appendString:nameSplit[x]];
+//                [combinedFirstName appendString:@" "];
+//            }
+//            lastName = nameSplit[nameSplit.count-1];
+//            
+//            // Removes spaces from the beginning and end of the combined first name.
+//            NSString *firstName = [combinedFirstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            // Adds the combined first name and last name into an array in the order that it will be added to the dictionary.
+//            [nameSplit removeAllObjects];
+//            [nameSplit addObject:firstName];
+//            [nameSplit addObject:lastName];
+//        }
+//        
+//    }
+//    
+//    // Adds spaces to the array anywhere there is a missing component.
+//    if (nameSplit.count == 1) {
+//        [nameSplit addObject:@""];
+//    }
+//    
+//    // Creates a dictionary out of the names.
+//    NSDictionary *nameDict = [NSDictionary dictionaryWithObjects:nameSplit forKeys:keys];
+//    
+//    return nameDict;
+//}
+//
+//- (NSString *)callOrderBpaFormat:(NSString *)text
+//{
+//    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+//    
+//    // Adds a '-' after every 4th and 7th character.
+//    NSMutableString *formatted = [[NSMutableString alloc] init];
+//    
+//    for (int x = 0; x < [text length]; x++) {
+//        if (x == 4 || x == 6) {
+//            [formatted appendString:@"-"];
+//        }
+//        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
+//        [formatted appendString:nextChar];
+//    }
+//    
+//    return formatted;
+//}
+//
+//- (NSString *)tinFormat:(NSString *)text
+//{
+//    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+//    
+//    // Adds a '-' after the 4th character.
+//    NSMutableString *formatted = [[NSMutableString alloc] init];
+//    
+//    for (int x = 0; x < [text length]; x++) {
+//        if (x == 4) {
+//            [formatted appendString:@"-"];
+//        }
+//        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
+//        [formatted appendString:nextChar];
+//    }
+//    
+//    return formatted;
+//}
+//
+//- (void)setErrorBackground:(id)field
+//{
+//    // Sets the field's background to a slight red so that the user knows there is an error.
+//    [field setBackgroundColor:[NSColor colorWithRed:1 green:0 blue:0 alpha:0.20]];
+//}
+//
+//- (void)clearErrorBackground:(id)field
+//{
+//    // Reverts field to normal color.
+//    [field setBackgroundColor:[NSColor colorWithRed:0 green:0 blue:0 alpha:0]];
+//}
 
 @end
