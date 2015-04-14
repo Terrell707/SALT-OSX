@@ -219,7 +219,7 @@
         [formatted appendString:nextChar];
     }
     
-    return [self string:formatted withMaxLength:13];
+    return formatted;
 }
 
 
