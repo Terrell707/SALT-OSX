@@ -453,72 +453,41 @@
     NSString *identifer = [field identifier];
     NSString *text = [field stringValue];
     
+    NSLog(@"ID: %@", identifer);
+    
     NSString *formatted;
-    NSInteger maxLength;
     
     // Formats the string within the specified fields by adding a hyphen after so many characters. Will also
     //  limit the number of characters that are allowed in the text field.
     if ([identifer isEqualToString:@"call_order_no_field"]) {
-        maxLength = 15;
-        formatted = [fieldFormatter callOrderBpaFormat:text];
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter callOrderFormat:text];
     }
     else if ([identifer isEqualToString:@"bpa_no_field"]) {
-        maxLength = 13;
-        formatted = [fieldFormatter callOrderBpaFormat:text];
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter bpaFormat:text];
     }
     else if ([identifer isEqualToString:@"tin_field"])
     {
-        maxLength = 11;
         formatted = [fieldFormatter tinFormat:text];
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
     }
     else if ([identifer isEqualToString:@"ticket_no_field"])
     {
-        maxLength = 8;
-        formatted = text;
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter ticketNumberFormat:text];
     }
     else if ([identifer isEqualToString:@"claimant_first_field"])
     {
-        maxLength = 20;
-        formatted = text;
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter nameFormat:text];
     }
     else if ([identifer isEqualToString:@"claimant_last_field"])
     {
-        maxLength = 20;
-        formatted = text;
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter nameFormat:text];
     }
     else if ([identifer isEqualToString:@"can_field"])
     {
-        maxLength = 7;
-        formatted = text;
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter canFormat:text];
     }
     else if ([identifer isEqualToString:@"soc_field"])
     {
-        maxLength = 4;
-        formatted = text;
-        if ([formatted length] > maxLength) {
-            formatted = [formatted substringToIndex:maxLength];
-        }
+        formatted = [fieldFormatter socFormat:text];
     }
     
     [field setStringValue:formatted];

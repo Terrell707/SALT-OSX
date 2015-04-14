@@ -130,22 +130,36 @@
     return nameDict;
 }
 
-- (NSString *)callOrderBpaFormat:(NSString *)text
+- (NSString *)ticketNumberFormat:(NSString *)text
 {
-    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    
-    // Adds a '-' after every 4th and 7th character.
-    NSMutableString *formatted = [[NSMutableString alloc] init];
-    
-    for (int x = 0; x < [text length]; x++) {
-        if (x == 4 || x == 6) {
-            [formatted appendString:@"-"];
-        }
-        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
-        [formatted appendString:nextChar];
-    }
-    
-    return formatted;
+    // Return a truncated ticket number if longer then max length.
+    return [self string:text withMaxLength:8];
+}
+
+- (BOOL)correctTicketNumberLength:(NSString *)text
+{
+    // Returns true if passed in text matches the length ticket number should be.
+    return (text.length == 8);
+}
+
+- (NSString *)callOrderFormat:(NSString *)text
+{
+    // Adds hyphens as appropriate and then truncates the text if longer than max length.
+    text = [self callOrderBpaFormat:text];
+    return [self string:text withMaxLength:15];
+}
+
+- (BOOL)correctCallOrderLength:(NSString *)text
+{
+    // Returns true if passed in text matches the length call order number should be.
+    return (text.length == 15);
+}
+
+- (NSString *)bpaFormat:(NSString *)text
+{
+    // Adds hyphens as appropriate and then truncates the text if longer than max length.
+    text = [self callOrderBpaFormat:text];
+    return [self string:text withMaxLength:13];
 }
 
 - (NSString *)tinFormat:(NSString *)text
@@ -163,7 +177,60 @@
         [formatted appendString:nextChar];
     }
     
-    return formatted;
+    return [self string:formatted withMaxLength:11];
+}
+
+- (NSString *)nameFormat:(NSString *)text
+{
+    // Returns a truncated name if longer then max length.
+    return [self string:text withMaxLength:20];
+}
+
+- (NSString *)canFormat:(NSString *)text
+{
+    // Return a truncated can if longer then max length.
+    return [self string:text withMaxLength:7];
+}
+
+- (NSString *)socFormat:(NSString *)text
+{
+    // Returns a truncated soc if longer then max length.
+    return [self string:text withMaxLength:4];
+}
+
+- (BOOL)correctSOCLength:(NSString *)text
+{
+    // Returns true if passed in text matches the length soc should be.
+    return (text.length == 4);
+}
+
+- (NSString *)callOrderBpaFormat:(NSString *)text
+{
+    text = [text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    // Adds a '-' after every 4th and 7th character.
+    NSMutableString *formatted = [[NSMutableString alloc] init];
+    
+    for (int x = 0; x < [text length]; x++) {
+        if (x == 4 || x == 6) {
+            [formatted appendString:@"-"];
+        }
+        NSString *nextChar = [NSString stringWithFormat:@"%c", [text characterAtIndex:x]];
+        [formatted appendString:nextChar];
+    }
+    
+    return [self string:formatted withMaxLength:13];
+}
+
+
+- (NSString *)string:(NSString *)string withMaxLength:(NSInteger)maxLength
+{
+    if ([string length] > maxLength) {
+        return [string substringToIndex:maxLength];
+    } else {
+        return string;
+    }
+    
 }
 
 - (void)setErrorBackground:(id)field
