@@ -1556,7 +1556,7 @@ Gw
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="812" id="gdu-jz-vBf"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="227" id="ubF-Ip-kz8"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="hBg-0i-oxq">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hBg-0i-oxq">
                                     <rect key="frame" x="1" y="117.99995332956314" width="238" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2340,7 +2340,7 @@ DQ
                                                 <outlet property="delegate" destination="Jq6-7Z-swb" id="dy8-lk-eSf"/>
                                             </connections>
                                         </textField>
-                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKI-oR-cPb">
+                                        <textField identifier="claimant_first_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKI-oR-cPb">
                                             <rect key="frame" x="157" y="182" width="176" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="oMb-LR-3EA">
                                                 <font key="font" metaFont="system"/>
@@ -2348,6 +2348,7 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
+                                                <outlet property="delegate" destination="Jq6-7Z-swb" id="BkB-d9-DDy"/>
                                                 <outlet property="nextKeyView" destination="wL2-Lq-YT1" id="YUy-DJ-oYC"/>
                                             </connections>
                                         </textField>
@@ -2378,13 +2379,16 @@ DQ
                                                 <outlet property="nextKeyView" destination="nJC-aA-70v" id="cKy-ov-VgS"/>
                                             </connections>
                                         </comboBox>
-                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wL2-Lq-YT1">
+                                        <textField identifier="claimant_last_field" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wL2-Lq-YT1">
                                             <rect key="frame" x="157" y="155" width="176" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ZwC-Xt-5qb">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <outlet property="delegate" destination="Jq6-7Z-swb" id="Ror-eH-4bS"/>
+                                            </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DhV-6C-szA">
                                             <rect key="frame" x="16" y="185" width="134" height="17"/>
