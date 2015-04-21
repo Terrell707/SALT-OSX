@@ -8,7 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface StatusCodes : NSObject
+@interface StatusCodes : NSObject {
+    NSInteger code;
+    NSString *message;
+}
+
+// Takes a json array and return an integer representing the status.
+- (NSArray *)grabStatusFromJson:(NSArray *)data;
+
+@property (readonly) NSInteger errorCode;      // Returns the status code for the last operation.
+@property (readonly) NSString *errorMessage;   // Returns the status message for the last operation.
 
 // Constants containing the different statuses.
 typedef NS_ENUM(NSInteger, StatusCode) {
@@ -21,8 +30,5 @@ typedef NS_ENUM(NSInteger, StatusCode) {
     MYSQL_CONNECTION = 125,
     QUERY_FAILED = 126
 };
-
-// Takes a json array and return an integer representing the status.
-- (NSInteger)grabStatusFromJson:(NSArray *)data;
 
 @end
