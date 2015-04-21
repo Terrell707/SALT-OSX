@@ -45,7 +45,8 @@
     NSArray *login = [mySQL grabInfoFromFile:@"user_info/login.php" withItems:userInfo];
     
     // Checks to see the status given back by the server.
-    NSInteger status = [statusChecker grabStatusFromJson:login];
+    login = [statusChecker grabStatusFromJson:login];
+    NSInteger status = [statusChecker errorCode];
     
     switch (status) {
         case INVALID_USER:

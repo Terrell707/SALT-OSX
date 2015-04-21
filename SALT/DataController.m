@@ -87,10 +87,11 @@ static DataController *sharedDataController = nil;
         return;
     
     NSArray *businessData = [mySQL grabInfoFromFile:@"queries/business.php"];
-    NSInteger status = [statusChecker grabStatusFromJson:businessData];
+    businessData = [statusChecker grabStatusFromJson:businessData];
+    NSInteger status = [statusChecker errorCode];
     
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [businessData count]; x++) {
+        for (int x = 0; x < [businessData count]; x++) {
             NSDictionary *data = [businessData objectAtIndex:x];
             _business = [[Business alloc] initWithData:data];
         }
@@ -110,10 +111,11 @@ static DataController *sharedDataController = nil;
     [_employees removeAllObjects];
     
     NSArray *employeeData = [mySQL grabInfoFromFile:@"queries/employees.php"];
-    NSInteger status = [statusChecker grabStatusFromJson:employeeData];
+    employeeData = [statusChecker grabStatusFromJson:employeeData];
+    NSInteger status = [statusChecker errorCode];
     
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [employeeData count]; x++) {
+        for (int x = 0; x < [employeeData count]; x++) {
             NSDictionary *data = [employeeData objectAtIndex:x];
             Employee *employee = [[Employee alloc] initWithData:data];
             [_employees addObject:employee];
@@ -126,10 +128,11 @@ static DataController *sharedDataController = nil;
     [_judges removeAllObjects];
     
     NSArray *judgeData = [mySQL grabInfoFromFile:@"queries/judges.php"];
-    NSInteger status = [statusChecker grabStatusFromJson:judgeData];
+    judgeData = [statusChecker grabStatusFromJson:judgeData];
+    NSInteger status = [statusChecker errorCode];
     
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [judgeData count]; x++) {
+        for (int x = 0; x < [judgeData count]; x++) {
             NSDictionary *data = [judgeData objectAtIndex:x];
             Judge *judge = [[Judge alloc] initWithData:data];
             [_judges addObject:judge];
@@ -142,10 +145,11 @@ static DataController *sharedDataController = nil;
     [_sites removeAllObjects];
     
     NSArray *siteData = [mySQL grabInfoFromFile:@"queries/sites.php"];
-    NSInteger status = [statusChecker grabStatusFromJson:siteData];
+    siteData = [statusChecker grabStatusFromJson:siteData];
+    NSInteger status = [statusChecker errorCode];
     
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [siteData count]; x++) {
+        for (int x = 0; x < [siteData count]; x++) {
             NSDictionary *data = [siteData objectAtIndex:x];
             Site *site = [[Site alloc] initWithData:data];
             [_sites addObject:site];
@@ -170,11 +174,12 @@ static DataController *sharedDataController = nil;
     
     // Query the database and get the response.
     NSArray *ticketData = [mySQL grabInfoFromFile:@"queries/tickets.php" withItems:dateRange];
-    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
+    ticketData = [statusChecker grabStatusFromJson:ticketData];
+    NSInteger status = [statusChecker errorCode];
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [ticketData count]; x++) {
+        for (int x = 0; x < [ticketData count]; x++) {
             NSDictionary *data = [ticketData objectAtIndex:x];
             Ticket *ticket = [[Ticket alloc] initWithData:data];
             [self willChangeValueForKey:@"tickets"];
@@ -190,11 +195,12 @@ static DataController *sharedDataController = nil;
     
     // Query the database and get the response.
     NSArray *expertData = [mySQL grabInfoFromFile:@"queries/experts.php"];
-    NSInteger status = [statusChecker grabStatusFromJson:expertData];
+    expertData = [statusChecker grabStatusFromJson:expertData];
+    NSInteger status = [statusChecker errorCode];
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [expertData count]; x++) {
+        for (int x = 0; x < [expertData count]; x++) {
             NSDictionary *data = [expertData objectAtIndex:x];
             Expert *expert = [[Expert alloc] initWithData:data];
             [_experts addObject:expert];
@@ -219,11 +225,12 @@ static DataController *sharedDataController = nil;
     
     // Query the database and get the response.
     NSArray *witnessData = [mySQL grabInfoFromFile:@"queries/witnesses.php" withItems:dateRange];
-    NSInteger status = [statusChecker grabStatusFromJson:witnessData];
+    witnessData = [statusChecker grabStatusFromJson:witnessData];
+    NSInteger status = [statusChecker errorCode];
     
     // If there were no errors, array will be filled with data.
     if ([self checkStatus:status]) {
-        for (int x = 1; x < [witnessData count]; x++) {
+        for (int x = 0; x < [witnessData count]; x++) {
             NSDictionary *data = [witnessData objectAtIndex:x];
             Witness *witness = [[Witness alloc] initWithData:data];
             [_witnesses addObject:witness];
@@ -287,7 +294,8 @@ static DataController *sharedDataController = nil;
     
     // Insert the Expert into the database and get a response.
     NSArray *expertData = [mySQL grabInfoFromFile:@"inserts/expert.php" withItems:expertInfo];
-    NSInteger status = [statusChecker grabStatusFromJson:expertData];
+    expertData = [statusChecker grabStatusFromJson:expertData];
+    NSInteger status = [statusChecker errorCode];
     
     NSLog(@"Status = %ld", status);
     // If there were no errors, add the Expert to the list of experts.
@@ -411,7 +419,8 @@ static DataController *sharedDataController = nil;
     
     // Insert into the database and get the response.
     NSArray *ticketData = [mySQL grabInfoFromFile:@"inserts/ticket.php" withItems:ticketInfo];
-    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
+    ticketData = [statusChecker grabStatusFromJson:ticketData];
+    NSInteger status = [statusChecker errorCode];
     
     NSLog(@"Status=%ld", status);
     // If there were no errors, add the ticket to the list of tickets and return a success.
@@ -464,7 +473,8 @@ static DataController *sharedDataController = nil;
     
     // Insert into the database and get the response.
     NSArray *ticketData = [mySQL grabInfoFromFile:@"updates/ticket.php" withItems:ticketInfo];
-    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
+    ticketData = [statusChecker grabStatusFromJson:ticketData];
+    NSInteger status = [statusChecker errorCode];
     
     NSLog(@"Status=%ld", status);
     // If there were no errors, replace the old ticket with the updated one.
@@ -487,7 +497,8 @@ static DataController *sharedDataController = nil;
     NSLog(@"Ticket_info = %@", ticketInfo);
     
     NSArray *ticketData = [mySQL grabInfoFromFile:@"remove/ticket.php" withItems:ticketInfo];
-    NSInteger status = [statusChecker grabStatusFromJson:ticketData];
+    ticketData = [statusChecker grabStatusFromJson:ticketData];
+    NSInteger status = [statusChecker errorCode];
     
     NSLog(@"Status=%ld", status);
     
@@ -545,7 +556,8 @@ static DataController *sharedDataController = nil;
     NSLog(@"Inserted Witness = %@", witnessInfo);
     
     NSArray *witnessData = [mySQL grabInfoFromFile:@"inserts/witness.php" withItems:witnessInfo];
-    NSInteger status = [statusChecker grabStatusFromJson:witnessData];
+    witnessData = [statusChecker grabStatusFromJson:witnessData];
+    NSInteger status = [statusChecker errorCode];
     
     // If there are no errors, add the Witness to the list of witnesses 
     NSLog(@"Status = %ld", status);
@@ -573,7 +585,8 @@ static DataController *sharedDataController = nil;
     NSDictionary *witnessInfo = [NSDictionary dictionaryWithObjects:values forKeys:keys];
     
     NSArray *witnessData = [mySQL grabInfoFromFile:@"remove/witness.php" withItems:witnessInfo];
-    NSInteger status = [statusChecker grabStatusFromJson:witnessData];
+    witnessData = [statusChecker grabStatusFromJson:witnessData];
+    NSInteger status = [statusChecker errorCode];
     
     // If there were no errors, then return the status of the removal.
     if ([self checkStatus:status]) {
