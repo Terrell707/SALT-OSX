@@ -48,7 +48,7 @@
     if (selectedIndex == 0) [self setEmployeeTable];
     else if (selectedIndex == 1) [self setSiteTable];
     else if (selectedIndex == 2) [self setJudgeTable];
-    else if (selectedIndex == 3) [self setSiteTable];
+    else if (selectedIndex == 3) [self setClerkTable];
     else if (selectedIndex == 4) [self setExpertTable];
 }
 
@@ -59,8 +59,9 @@
     NSArray *columnIdentifers = [NSArray arrayWithObjects:@"emp_id", @"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay", @"active", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"Emp ID", @"First Name", @"M.I.", @"Last Name", @"Phone Number",
                             @"E-Mail", @"Street", @"City", @"State", @"Zip", @"Pay", @"Active", nil];
+    NSArray *columnWidths = [NSArray arrayWithObjects:@"50.0", @"125.0", @"100.0", @"125.0", @"125.0", @"125.0", @"100.0", @"100.0", @"50.0", @"75.0", @"50.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames boundToData:_employees];
+    [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames withWidths:columnWidths boundToData:_employees withEnitity:@"Employee"];
     
     [_infoBox setTitle:@"Employee Information"];
 }
@@ -71,8 +72,9 @@
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"office_code", @"name", @"address", @"email", @"can", @"pay", @"active", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"Office Code", @"Office Name", @"Address", @"E-Mail", @"CAN No.", @"Pay", @"Active", nil];
+    NSArray *columnWidths = [NSArray arrayWithObjects:@"75.0", @"125.0", @"175.0", @"125.0", @"100.0", @"100.0", @"75.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames boundToData:_sites];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_sites withEnitity:@"Site"];
     
     [_infoBox setTitle:@"Office Information"];
 }
@@ -83,8 +85,9 @@
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"office", @"first_name", @"last_name", @"active", nil];
     NSArray *columnNames  = [NSArray arrayWithObjects:@"Office", @"First Name", @"Last Name", @"Active", nil];
+    NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"125.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames boundToData:_judges];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_judges withEnitity:@"Judge"];
     
     [_infoBox setTitle:@"Judge Information"];
 }
@@ -96,8 +99,9 @@
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"first_name", @"last_name", @"email", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"First Name", @"Last Name", @"E-Mail", nil];
+    NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"125.0", nil];
     
-//    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames boundToData:_clerks];
+//    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames boundToData:_clerks withEnitity:@"Clerk"];
     
     [_infoBox setTitle:@"Clerk Information"];
 }
@@ -108,13 +112,14 @@
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"first_name", @"last_name", @"role", @"active", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"First Name", @"Last Name", @"Role", @"Active", nil];
+    NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"50.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames boundToData:_experts];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_experts withEnitity:@"Expert"];
     
     [_infoBox setTitle:@"Expert Information"];
 }
 
-- (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames boundToData:(NSArray *)data
+- (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames withWidths:(NSArray *)columnWidths boundToData:(NSArray *)data withEnitity:(NSString *)entityName
 {
     // Removes each column from the business table.
     NSArray *columns = [businessTable tableColumns];
@@ -124,16 +129,35 @@
     
     // Binds the data to a controller so that the data will be displayed in the table.
     [controller setContent:data];
+    [controller setEntityName:entityName];
+    [controller setEditable:NO];
     
-    // Creates and adds columns to the table using the employee information.
+    // Binds the controller to the table.
+    [businessTable bind:@"content" toObject:controller withKeyPath:@"arrangedObjects" options:nil];
+    
+    // Creates and adds columns to the table using the data information.
     for (NSInteger x = 0; x < columnIdentifiers.count; x++) {
+        // Creates the column with an identifier and a header name.
         NSTableColumn *column = [[NSTableColumn alloc] initWithIdentifier:columnIdentifiers[x]];
         [column.headerCell setStringValue:columnNames[x]];
         
+        // Binds the column to its specified data in the array controller.
         NSString *keyPath = [NSString stringWithFormat:@"arrangedObjects.%@", columnIdentifiers[x]];
-        
         [column bind:NSValueBinding toObject:controller withKeyPath:keyPath options:nil];
         [column setHidden:NO];
+        [column setEditable:NO];
+        
+        // Sets the column width to the default specified width. If it can not be converted, will give it a different
+        //  default.
+        NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
+        NSNumber *numWidth = [numFormatter numberFromString:columnWidths[x]];
+        if (numWidth == nil) {
+            NSLog(@"Could not convert column width for column identifier: %@.", columnIdentifiers[x]);
+            numWidth = [NSNumber numberWithDouble:100.0];
+        }
+        [column setWidth:[numWidth doubleValue]];
+        
+        // Finally add the column to the table.
         [businessTable addTableColumn:column];
     }
     
