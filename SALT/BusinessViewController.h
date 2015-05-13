@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
 
-@interface BusinessViewController : NSViewController <NSTableViewDelegate> {
+@interface BusinessViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
     IBOutlet NSArrayController *employeeController;
     IBOutlet NSArrayController *controller;
     IBOutlet NSTableView *businessTable;
@@ -24,6 +24,8 @@
 @property (weak) IBOutlet NSComboBox *listOfTables;
 @property (weak) IBOutlet NSTextField *numRowsLabel;
 @property (weak) IBOutlet NSBox *infoBox;
+@property (weak) IBOutlet NSTextField *idLabel;
+@property (weak) IBOutlet NSTextField *numLabel;
 
 - (IBAction)businessCombo:(id)sender;
 

@@ -36,6 +36,7 @@
     //  it loads the default table.
     if (selectedIndex == -1) [self setEmployeeTable];
     else [self selectTable];
+    
 }
 
 - (IBAction)businessCombo:(id)sender {
@@ -61,7 +62,7 @@
                             @"E-Mail", @"Street", @"City", @"State", @"Zip", @"Pay", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"50.0", @"125.0", @"100.0", @"125.0", @"125.0", @"125.0", @"100.0", @"100.0", @"50.0", @"75.0", @"50.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames withWidths:columnWidths boundToData:_employees withEnitity:@"Employee"];
+    [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames withWidths:columnWidths boundToData:_employees];
     
     [_infoBox setTitle:@"Employee Information"];
 }
@@ -74,7 +75,7 @@
     NSArray *columnNames = [NSArray arrayWithObjects:@"Office Code", @"Office Name", @"Address", @"E-Mail", @"CAN No.", @"Pay", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"75.0", @"125.0", @"175.0", @"125.0", @"100.0", @"100.0", @"75.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_sites withEnitity:@"Site"];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_sites];
     
     [_infoBox setTitle:@"Office Information"];
 }
@@ -87,7 +88,7 @@
     NSArray *columnNames  = [NSArray arrayWithObjects:@"Office", @"First Name", @"Last Name", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"125.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_judges withEnitity:@"Judge"];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_judges];
     
     [_infoBox setTitle:@"Judge Information"];
 }
@@ -114,14 +115,15 @@
     NSArray *columnNames = [NSArray arrayWithObjects:@"First Name", @"Last Name", @"Role", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"50.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_experts withEnitity:@"Expert"];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_experts];
     
     [_infoBox setTitle:@"Expert Information"];
 }
 
-- (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames withWidths:(NSArray *)columnWidths boundToData:(NSArray *)data withEnitity:(NSString *)entityName
+- (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames withWidths:(NSArray *)columnWidths boundToData:(NSArray *)data
 {
     // Removes each column from the business table.
+    [businessTable setDelegate:self];
     NSArray *columns = [businessTable tableColumns];
     for (NSInteger x = columns.count - 1; x >= 0; x--) {
         [businessTable removeTableColumn:columns[x]];
@@ -129,7 +131,6 @@
     
     // Binds the data to a controller so that the data will be displayed in the table.
     [controller setContent:data];
-    [controller setEntityName:entityName];
     [controller setEditable:NO];
     
     // Binds the controller to the table.
@@ -137,22 +138,35 @@
     
     // Creates and adds columns to the table using the data information.
     for (NSInteger x = 0; x < columnIdentifiers.count; x++) {
+        NSString *identifier = columnIdentifiers[x];
+        
         // Creates the column with an identifier and a header name.
-        NSTableColumn *column = [[NSTableColumn alloc] initWithIdentifier:columnIdentifiers[x]];
+        NSTableColumn *column = [[NSTableColumn alloc] initWithIdentifier:identifier];
         [column.headerCell setStringValue:columnNames[x]];
         
         // Binds the column to its specified data in the array controller.
-        NSString *keyPath = [NSString stringWithFormat:@"arrangedObjects.%@", columnIdentifiers[x]];
+        NSString *keyPath = [NSString stringWithFormat:@"arrangedObjects.%@", identifier];
         [column bind:NSValueBinding toObject:controller withKeyPath:keyPath options:nil];
         [column setHidden:NO];
         [column setEditable:NO];
         
+        // Adds sorting description to the column in case user wants to sort the column.
+        NSString *selector;
+        if ([identifier isEqualToString:@"emp_id"] || [identifier isEqualToString:@"pay"] || [identifier isEqualToString:@"active"]) {
+            selector = @"compare:";
+        } else {
+            selector = @"caseInsensitiveCompare:";
+        }
+        [column setSortDescriptorPrototype:[NSSortDescriptor sortDescriptorWithKey:identifier
+                                                                         ascending:YES
+                                                                          selector:NSSelectorFromString(selector)]];
+
         // Sets the column width to the default specified width. If it can not be converted, will give it a different
         //  default.
         NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
         NSNumber *numWidth = [numFormatter numberFromString:columnWidths[x]];
         if (numWidth == nil) {
-            NSLog(@"Could not convert column width for column identifier: %@.", columnIdentifiers[x]);
+            NSLog(@"Could not convert column width for column identifier: %@.", identifier);
             numWidth = [NSNumber numberWithDouble:100.0];
         }
         [column setWidth:[numWidth doubleValue]];
@@ -172,6 +186,37 @@
                toObject:controller
             withKeyPath:@"arrangedObjects.@count"
                 options:@{NSDisplayPatternBindingOption : label}];
+    
 }
+
+- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
+{
+    // Sets the sort descriptor on the current controller and reloads the table.
+    [controller setSortDescriptors:[businessTable sortDescriptors]];
+    [businessTable reloadData];
+}
+
+//- (void)setEmployeeInfoBox
+//{
+//    NSTextField *name = [[NSTextField alloc] init];
+//    NSFont *defaultFont = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[[name cell] controlSize]]];
+//    [name setStringValue:@"Testing:"];
+//    [name setEditable:NO];
+//    [name setBordered:NO];
+//    [name setBezeled:NO];
+//    [name setDrawsBackground:NO];
+//    [name setFont:defaultFont];
+//    [name sizeToFit];
+//    [_infoBox addSubview:name];
+//    
+//    NSLog(@"Test Label Width %f, Height: %f", name.fittingSize.width, name.fittingSize.height);
+//    NSLog(@"Id Label: X: %f Y: %f", _idLabel.frame.origin.x, _idLabel.frame.origin.y);
+//    NSLog(@"Info Box Height: %f, Width %f", _infoBox.fittingSize.height, _infoBox.fittingSize.width);
+//    
+//    CGFloat x = NSMaxX(_idLabel.frame) - name.fittingSize.width;
+//    CGFloat y = _idLabel.frame.origin.y - name.fittingSize.height;
+//    
+//    [name setFrame:CGRectMake(x, y, name.fittingSize.width, name.fittingSize.height)];
+//}
 
 @end

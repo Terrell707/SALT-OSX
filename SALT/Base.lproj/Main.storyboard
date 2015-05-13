@@ -861,7 +861,7 @@ DQ
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="9xr-qS-IF4" id="OEJ-hc-qht">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="9xr-qS-IF4" id="OEJ-hc-qht">
                                             <rect key="frame" x="0.0" y="0.0" width="810" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -897,6 +897,7 @@ DQ
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
+                                                <outlet property="dataSource" destination="PoC-bN-CAA" id="aBr-HN-zEy"/>
                                                 <outlet property="delegate" destination="PoC-bN-CAA" id="3ke-8E-xra"/>
                                             </connections>
                                         </tableView>
@@ -1107,18 +1108,14 @@ DQ
                     </view>
                     <connections>
                         <outlet property="businessTable" destination="OEJ-hc-qht" id="zbu-oa-uJa"/>
-                        <outlet property="employeeController" destination="LwA-1f-BOW" id="XYJ-BP-Y7m"/>
+                        <outlet property="idLabel" destination="XlN-mL-lSf" id="GTx-9A-BPB"/>
                         <outlet property="infoBox" destination="7z3-ZN-YYv" id="yhf-Ys-eds"/>
                         <outlet property="listOfTables" destination="K1V-1c-sAx" id="F7U-Mu-6yZ"/>
+                        <outlet property="numLabel" destination="B7d-Pk-nVn" id="lSG-ad-tzS"/>
                         <outlet property="numRowsLabel" destination="PAu-Cv-W0Y" id="IZ5-Ej-Czx"/>
                     </connections>
                 </viewController>
                 <customObject id="Akz-yD-FRv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Employee" editable="NO" id="LwA-1f-BOW" userLabel="EmployeeArrayController">
-                    <connections>
-                        <binding destination="PoC-bN-CAA" name="contentArray" keyPath="employees" id="Cwq-eN-nkE"/>
-                    </connections>
-                </arrayController>
             </objects>
             <point key="canvasLocation" x="1857" y="690"/>
         </scene>
