@@ -64,7 +64,7 @@
     if (firstLoad == NO) {
         // Moves focus to the ticket table when view first loads.
         [self.view.window makeFirstResponder:ticketTable];
-        
+        // Makes sure the focus doesn't jump to the table view anymore.
         firstLoad = YES;
     }
 }
