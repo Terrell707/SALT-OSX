@@ -14,6 +14,7 @@
 
 @interface TicketViewController : NSViewController <NSTableViewDelegate, NSMenuDelegate> {
     BOOL lastNameFirst;
+    BOOL firstLoad;
     
     NSArray *ticketsBeforeFilter;
     NSPredicate *searchPredicate;

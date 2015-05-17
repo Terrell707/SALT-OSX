@@ -20,11 +20,18 @@
 {
     [super viewDidLoad];
     
+    // Determines whether to move focus to the Table View or not.
+    firstLoad = NO;
+    
     // Observes the DataController for any new tickets that were added.
     [[DataController sharedDataController] addObserver:self
                                             forKeyPath:@"tickets"
                                                options:NSKeyValueObservingOptionNew
                                                context:NULL];
+    
+    // Populates the context menu with all of the column names.
+    [self fillHeaderMenu:ticketTable];
+    
 }
 
 - (void)viewDidAppear
@@ -54,11 +61,12 @@
     // Displays the information for the initial selected ticket.
     [self updateFields];
     
-    // Populates the context menu with all of the column names.
-    [self fillHeaderMenu:ticketTable];
-    
-    // Moves focus to the ticket table.
-    [self.view.window makeFirstResponder:ticketTable];
+    if (firstLoad == NO) {
+        // Moves focus to the ticket table when view first loads.
+        [self.view.window makeFirstResponder:ticketTable];
+        
+        firstLoad = YES;
+    }
 }
 
 #pragma mark Observing methods
@@ -145,11 +153,17 @@
 - (void)bindFullNameColumn:(NSTableColumn *)col withFirst:(NSString *)first andLast:(NSString *)last
 {
     NSString *namePattern;
+    NSString *sortKey;
+    
+    // If the last name boolean is set, then the full name will be displayed with last name first,
+    //  otherwise it will be first name first. This also determines its sorting order.
     if (lastNameFirst) {
         namePattern = @"%{value2}@, %{value1}@";
+        sortKey = last;
     }
     else {
         namePattern = @"%{value1}@ %{value2}@";
+        sortKey = first;
     }
     
     NSString *value1 = [NSString stringWithFormat:@"arrangedObjects.%@", first];
@@ -164,6 +178,11 @@
                 toObject:ticketController
              withKeyPath:value2
                  options:@{NSDisplayPatternBindingOption : namePattern}];
+    
+    // Sets the sort descriptor for the column.
+    [col setSortDescriptorPrototype:[NSSortDescriptor sortDescriptorWithKey:sortKey
+                                                                  ascending:YES
+                                                                   selector:@selector(caseInsensitiveCompare:)]];
 }
 
 #pragma mark NSMenu Methods
