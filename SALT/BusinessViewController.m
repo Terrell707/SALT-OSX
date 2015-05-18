@@ -169,6 +169,21 @@
             [column.dataCell setFormatter:phoneFormatter];
         }
         
+        // Formats pay columns to a currency style.
+        if ([identifier isEqualToString:@"pay"]) {
+            NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+            [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [column.dataCell setFormatter:currencyFormatter];
+        }
+        
+        // Represents boolean values as check boxes.
+        if ([identifier isEqualToString:@"active"]) {
+            NSButtonCell *checkBox = [[NSButtonCell alloc] init];
+            [checkBox setButtonType:NSSwitchButton];
+            [checkBox setTitle:@""];
+            [column setDataCell:checkBox];
+        }
+        
         // Sets the column width to the default specified width. If it can not be converted, will give it a different
         //  default.
         NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];
