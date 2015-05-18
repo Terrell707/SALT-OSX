@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    fieldFormatter = [[FieldFormatter alloc] init];
+    
     _employees = [[NSMutableArray alloc] init];
     _judges = [[NSMutableArray alloc] init];
     _sites = [[NSMutableArray alloc] init];
@@ -160,7 +162,13 @@
         [column setSortDescriptorPrototype:[NSSortDescriptor sortDescriptorWithKey:identifier
                                                                          ascending:YES
                                                                           selector:NSSelectorFromString(selector)]];
-
+        
+        // If the column is a phone number, format it accordingly.
+        if ([identifier isEqualToString:@"phone_number"]) {
+            ECPhoneNumberFormatter *phoneFormatter = [[ECPhoneNumberFormatter alloc] init];
+            [column.dataCell setFormatter:phoneFormatter];
+        }
+        
         // Sets the column width to the default specified width. If it can not be converted, will give it a different
         //  default.
         NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc] init];

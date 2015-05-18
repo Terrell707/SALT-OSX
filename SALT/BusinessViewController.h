@@ -8,11 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
+#import "FieldFormatter.h"
+#import "ECPhoneNumberFormatter.h"
 
 @interface BusinessViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
     IBOutlet NSArrayController *employeeController;
     IBOutlet NSArrayController *controller;
     IBOutlet NSTableView *businessTable;
+    
+    FieldFormatter *fieldFormatter;
 }
 
 @property NSMutableArray *employees;
