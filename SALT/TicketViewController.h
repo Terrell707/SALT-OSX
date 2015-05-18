@@ -11,6 +11,7 @@
 #import "InsertTicketViewController.h"
 #import "TicketPrintView.h"
 #import "TicketSettingsViewController.h"
+#import "DataSearch.h"
 
 @interface TicketViewController : NSViewController <NSTableViewDelegate, NSMenuDelegate> {
     BOOL lastNameFirst;

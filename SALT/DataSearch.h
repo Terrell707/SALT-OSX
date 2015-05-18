@@ -10,4 +10,6 @@
 
 @interface DataSearch : NSObject
 
++ (NSMutableArray *)searchData:(NSMutableArray *)data withKeys:(NSArray *)keys withSearchText:(NSString *)searchText;
+
 @end
