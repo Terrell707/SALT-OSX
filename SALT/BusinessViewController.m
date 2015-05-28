@@ -248,7 +248,7 @@
     // Creates a list of attributes to compare the entered text against depending on the currently selected table.
     if (curTable == EMPLOYEES || curTable == DEFAULT) {
         NSLog(@"Searching Employees");
-        keys = [NSArray arrayWithObjects:@"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", nil];
+        keys = [NSArray arrayWithObjects:@"emp_id.stringValue", @"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay.stringValue", nil];
         
         [self setEmployees:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_employees withKeys:keys withSearchText:searchText];
@@ -270,7 +270,7 @@
     }
     else if (curTable == SITES) {
         NSLog(@"Searching Sites");
-        keys = [NSArray arrayWithObjects:@"office_code", @"address", @"phone_number", @"email", @"can", nil];
+        keys = [NSArray arrayWithObjects:@"office_code", @"address", @"phone_number", @"email", @"can", @"pay.stringValue", nil];
         [self setSites:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_sites withKeys:keys withSearchText:searchText];
         [self setSites:filteredData];
