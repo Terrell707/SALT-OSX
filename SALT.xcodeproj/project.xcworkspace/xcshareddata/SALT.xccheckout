@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>7DF20383-D22F-453D-8BB6-907C77973F5C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>SALT</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3774630E8693B71CC83D9AC6A6DA2390971EEFD1</key>
 		<string>https://github.com/Terrell707/SALT-OSX.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SALT.xcodeproj</string>
+	<string>SALT.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3774630E8693B71CC83D9AC6A6DA2390971EEFD1</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>3774630E8693B71CC83D9AC6A6DA2390971EEFD1</string>
 			<key>IDESourceControlWCCName</key>
-			<string>SALT</string>
+			<string>master</string>
 		</dict>
 	</array>
 </dict>
