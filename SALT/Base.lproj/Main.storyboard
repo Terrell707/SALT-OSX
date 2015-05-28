@@ -845,10 +845,10 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <objectValues>
                                         <string>Employees</string>
-                                        <string>Sites</string>
                                         <string>Judges</string>
-                                        <string>Clerks</string>
                                         <string>Experts</string>
+                                        <string>Sites</string>
+                                        <string>Clerks</string>
                                     </objectValues>
                                 </comboBoxCell>
                                 <connections>
@@ -1082,6 +1082,9 @@ DQ
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </searchFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="PoC-bN-CAA" id="Wsb-BR-AmS"/>
+                                </connections>
                             </searchField>
                         </subviews>
                         <constraints>
@@ -1113,6 +1116,7 @@ DQ
                         <outlet property="listOfTables" destination="K1V-1c-sAx" id="F7U-Mu-6yZ"/>
                         <outlet property="numLabel" destination="B7d-Pk-nVn" id="lSG-ad-tzS"/>
                         <outlet property="numRowsLabel" destination="PAu-Cv-W0Y" id="IZ5-Ej-Czx"/>
+                        <outlet property="searchField" destination="UQr-nF-Wex" id="IVc-UU-MiD"/>
                     </connections>
                 </viewController>
                 <customObject id="Akz-yD-FRv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

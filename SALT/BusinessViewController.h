@@ -8,15 +8,27 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DataController.h"
+#import "DataSearch.h"
 #import "FieldFormatter.h"
 #import "ECPhoneNumberFormatter.h"
 
 @interface BusinessViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
-    IBOutlet NSArrayController *employeeController;
     IBOutlet NSArrayController *controller;
     IBOutlet NSTableView *businessTable;
+    IBOutlet NSSearchField *searchField;
     
     FieldFormatter *fieldFormatter;
+    
+    NSArray *dataBeforeFilter;
+    
+    enum {
+        DEFAULT = -1,
+        EMPLOYEES = 0,
+        JUDGES = 1,
+        EXPERTS = 2,
+        SITES = 3,
+        CLERKS = 4
+    };
 }
 
 @property NSMutableArray *employees;

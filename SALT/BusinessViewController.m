@@ -19,6 +19,7 @@
     
     fieldFormatter = [[FieldFormatter alloc] init];
     
+    dataBeforeFilter = [[NSMutableArray alloc] init];
     _employees = [[NSMutableArray alloc] init];
     _judges = [[NSMutableArray alloc] init];
     _sites = [[NSMutableArray alloc] init];
@@ -36,7 +37,7 @@
     
     // Checks to see if user selected something other than the initial table. If so, it reloads that table. Otherwise,
     //  it loads the default table.
-    if (selectedIndex == -1) [self setEmployeeTable];
+    if (selectedIndex == DEFAULT) [self setEmployeeTable];
     else [self selectTable];
     
 }
@@ -48,23 +49,26 @@
 - (void)selectTable
 {
     NSInteger selectedIndex = [_listOfTables indexOfSelectedItem];
-    if (selectedIndex == 0) [self setEmployeeTable];
-    else if (selectedIndex == 1) [self setSiteTable];
-    else if (selectedIndex == 2) [self setJudgeTable];
-    else if (selectedIndex == 3) [self setClerkTable];
-    else if (selectedIndex == 4) [self setExpertTable];
+    if (selectedIndex == EMPLOYEES) [self setEmployeeTable];
+    else if (selectedIndex == SITES) [self setSiteTable];
+    else if (selectedIndex == JUDGES) [self setJudgeTable];
+    else if (selectedIndex == CLERKS) [self setClerkTable];
+    else if (selectedIndex == EXPERTS) [self setExpertTable];
+    
+    [self searchData];
 }
 
 - (void)setEmployeeTable
 {
     _employees = [[DataController sharedDataController] employees];
+    dataBeforeFilter = _employees;
     
     NSArray *columnIdentifers = [NSArray arrayWithObjects:@"emp_id", @"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay", @"active", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"Emp ID", @"First Name", @"M.I.", @"Last Name", @"Phone Number",
                             @"E-Mail", @"Street", @"City", @"State", @"Zip", @"Pay", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"50.0", @"125.0", @"100.0", @"125.0", @"125.0", @"125.0", @"100.0", @"100.0", @"50.0", @"75.0", @"50.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames withWidths:columnWidths boundToData:_employees];
+    [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames withWidths:columnWidths boundToData:@"employees"];
     
     [_infoBox setTitle:@"Employee Information"];
 }
@@ -72,12 +76,13 @@
 - (void)setSiteTable
 {
     _sites = [[DataController sharedDataController] sites];
+    dataBeforeFilter = _sites;
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"office_code", @"name", @"address", @"email", @"can", @"pay", @"active", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"Office Code", @"Office Name", @"Address", @"E-Mail", @"CAN No.", @"Pay", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"75.0", @"125.0", @"175.0", @"125.0", @"100.0", @"100.0", @"75.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_sites];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:@"sites"];
     
     [_infoBox setTitle:@"Office Information"];
 }
@@ -85,12 +90,13 @@
 - (void)setJudgeTable
 {
     _judges = [[DataController sharedDataController] judges];
+    dataBeforeFilter = _judges;
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"office", @"first_name", @"last_name", @"active", nil];
     NSArray *columnNames  = [NSArray arrayWithObjects:@"Office", @"First Name", @"Last Name", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"125.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_judges];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:@"judges"];
     
     [_infoBox setTitle:@"Judge Information"];
 }
@@ -99,6 +105,7 @@
 {
     // ADD CLERK ARRAY INFORMATION HERE!!!
 //    _clerks = [[DataController sharedDataController] clerks];
+//    dataBeforeFilter = _clerks;
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"first_name", @"last_name", @"email", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"First Name", @"Last Name", @"E-Mail", nil];
@@ -112,17 +119,18 @@
 - (void)setExpertTable
 {
     _experts = [[DataController sharedDataController] experts];
+    dataBeforeFilter = _experts;
     
     NSArray *columnIdentifiers = [NSArray arrayWithObjects:@"first_name", @"last_name", @"role", @"active", nil];
     NSArray *columnNames = [NSArray arrayWithObjects:@"First Name", @"Last Name", @"Role", @"Active", nil];
     NSArray *columnWidths = [NSArray arrayWithObjects:@"125.0", @"125.0", @"50.0", @"50.0", nil];
     
-    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:_experts];
+    [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:@"experts"];
     
     [_infoBox setTitle:@"Expert Information"];
 }
 
-- (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames withWidths:(NSArray *)columnWidths boundToData:(NSArray *)data
+- (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames withWidths:(NSArray *)columnWidths boundToData:(NSString *)data
 {
     // Removes each column from the business table.
     [businessTable setDelegate:self];
@@ -132,8 +140,9 @@
     }
     
     // Binds the data to a controller so that the data will be displayed in the table.
-    [controller setContent:data];
+//    [controller setContent:data];
     [controller setEditable:NO];
+    [controller bind:@"contentArray" toObject:self withKeyPath:data options:nil];
     
     // Binds the controller to the table.
     [businessTable bind:@"content" toObject:controller withKeyPath:@"arrangedObjects" options:nil];
@@ -217,6 +226,63 @@
     // Sets the sort descriptor on the current controller and reloads the table.
     [controller setSortDescriptors:[businessTable sortDescriptors]];
     [businessTable reloadData];
+}
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    // Will update the search whenever something is typed into the search field.
+    if ([notification object] == searchField) {
+        [self searchData];
+        [businessTable reloadData];
+    }
+}
+
+- (void)searchData
+{
+    NSString *searchText = [searchField stringValue];
+    NSInteger curTable = [_listOfTables indexOfSelectedItem];
+    NSArray *keys;
+    
+    NSLog(@"Search Field: %@", searchText);
+    
+    // Creates a list of attributes to compare the entered text against depending on the currently selected table.
+    if (curTable == EMPLOYEES || curTable == DEFAULT) {
+        NSLog(@"Searching Employees");
+        keys = [NSArray arrayWithObjects:@"emp_id.stringValue", @"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay.stringValue", nil];
+        
+        [self setEmployees:(NSMutableArray *)dataBeforeFilter];
+        NSMutableArray *filteredData = [DataSearch searchData:_employees withKeys:keys withSearchText:searchText];
+        [self setEmployees:filteredData];
+    }
+    else if (curTable == JUDGES) {
+        NSLog(@"Searching Judges");
+        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", @"office", nil];
+        [self setJudges:(NSMutableArray *)dataBeforeFilter];
+        NSMutableArray *filteredData = [DataSearch searchData:_judges withKeys:keys withSearchText:searchText];
+        [self setJudges:filteredData];
+    }
+    else if (curTable == EXPERTS) {
+        NSLog(@"Searching Experts");
+        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", @"role", nil];
+        [self setExperts:(NSMutableArray *)dataBeforeFilter];
+        NSMutableArray *filteredData = [DataSearch searchData:_experts withKeys:keys withSearchText:searchText];
+        [self setExperts:filteredData];
+    }
+    else if (curTable == SITES) {
+        NSLog(@"Searching Sites");
+        keys = [NSArray arrayWithObjects:@"office_code", @"address", @"phone_number", @"email", @"can", @"pay.stringValue", nil];
+        [self setSites:(NSMutableArray *)dataBeforeFilter];
+        NSMutableArray *filteredData = [DataSearch searchData:_sites withKeys:keys withSearchText:searchText];
+        [self setSites:filteredData];
+    }
+    else if (curTable == CLERKS) {
+        NSLog(@"Searching Clerks");
+        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", @"email", nil];
+        [self setClerks:(NSMutableArray *)dataBeforeFilter];
+        NSMutableArray *filteredData = [DataSearch searchData:_clerks withKeys:keys withSearchText:searchText];
+        [self setClerks:filteredData];
+    }
+    
 }
 
 //- (void)setEmployeeInfoBox
