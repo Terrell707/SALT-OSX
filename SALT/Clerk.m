@@ -19,4 +19,9 @@
 @synthesize email;
 @synthesize worksFor;
 
++ (NSArray *)searchableKeys
+{
+    return [NSArray arrayWithObjects:@"first_name", @"last_name", @"email", nil];
+}
+
 @end

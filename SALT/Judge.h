@@ -30,7 +30,7 @@
 //-----------------------------------------------
 + (NSArray *)propsForDatabase;
 + (NSArray *)properties;
-+ (NSArray *)searchKeys;
++ (NSArray *)searchableKeys;
 
 //-----------------------------------------------
 // Worked Object Methods

@@ -19,4 +19,6 @@
 @property (readwrite, retain) NSString * email;
 @property (nonatomic, retain) Judge *worksFor;
 
++ (NSArray *)searchableKeys;
+
 @end

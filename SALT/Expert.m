@@ -65,7 +65,7 @@
     return [self propsForDatabase];
 }
 
-+ (NSArray *)searchKeys
++ (NSArray *)searchableKeys
 {
     return [NSArray arrayWithObjects:@"first_name", @"last_name", @"role", nil];
 }

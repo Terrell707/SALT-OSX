@@ -58,7 +58,7 @@
     return [propsForDatabase arrayByAddingObjectsFromArray:props];
 }
 
-+ (NSArray *)searchKeys
++ (NSArray *)searchableKeys
 {
     return [NSArray arrayWithObjects:@"first_name", @"last_name", @"office", nil];
 }

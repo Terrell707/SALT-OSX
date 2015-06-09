@@ -33,7 +33,7 @@
 //-----------------------------------------------
 + (NSArray *)propsForDatabase;
 + (NSArray *)properties;
-+ (NSArray *)searchKeys;
++ (NSArray *)searchableKeys;
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket;
 
 @end
