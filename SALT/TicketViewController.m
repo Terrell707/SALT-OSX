@@ -450,8 +450,8 @@
 - (void)searchTickets
 {
     // An array of keys that will be compared against.
-    NSArray *keys = @[@"ticket_no.stringValue", @"first_name", @"last_name", @"heldAt.office_code", @"heldAt.name",
-                      @"status", @"workedBy.first_name", @"workedBy.last_name"];
+//    NSArray *keys = [NSArray arrayWithObjects: @"ticket_no.stringValue", @"first_name", @"last_name", @"heldAt.office_code", @"heldAt.name", @"status", @"workedBy.first_name", @"workedBy.last_name"];
+    NSArray *keys = [Ticket searchableKeys];
     
     // Restores the ticket array to what it was prior to being searched.
     [self setTickets:(NSMutableArray *)ticketsBeforeFilter];

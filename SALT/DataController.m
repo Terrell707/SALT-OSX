@@ -277,7 +277,7 @@ static DataController *sharedDataController = nil;
 - (BOOL)insertExpert:(Expert *)expert
 {
     // Creates a dictionary using the properties as keys and each of its corresponding values.
-    NSArray *keys = [expert propsForDatabase];
+    NSArray *keys = [Expert propsForDatabase];
     NSMutableArray *values = [[NSMutableArray alloc] init];
     for (NSString *key in keys) {
         if ([key isEqualToString:@"expert_id"] || [key isEqualToString:@"active"]) {
@@ -395,7 +395,7 @@ static DataController *sharedDataController = nil;
     
     // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Ticket
     //  to the database.
-    NSArray *keys = [ticket propsForDatabase];
+    NSArray *keys = [Ticket propsForDatabase];
     NSMutableArray *values = [[NSMutableArray alloc] init];
     for (NSString *key in keys) {
         if ([key isEqualToString:@"order_date"] || [key isEqualToString:@"hearing_date"]) {
@@ -444,7 +444,7 @@ static DataController *sharedDataController = nil;
     
     // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Ticket
     //  to the database.
-    NSArray *keys = [ticket propsForDatabase];
+    NSArray *keys = [Ticket propsForDatabase];
     NSMutableArray *values = [[NSMutableArray alloc] init];
     for (NSString *key in keys) {
         if ([key isEqualToString:@"order_date"] || [key isEqualToString:@"hearing_date"]) {
@@ -545,7 +545,7 @@ static DataController *sharedDataController = nil;
 {
     // Creates a dictionary out of an array of keys and values. This dictionary is used to insert the Witness
     //  to the database.
-    NSArray *keys = [witness propsForDatabase];
+    NSArray *keys = [Witness propsForDatabase];
     NSMutableArray *values = [[NSMutableArray alloc] init];
     for (NSString *key in keys) {
         [values addObject:[[witness valueForKey:key] stringValue]];

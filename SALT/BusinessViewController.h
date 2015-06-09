@@ -7,6 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Employee.h"
+#import "Judge.h"
+#import "Site.h"
+#import "Clerk.h"
+#import "Expert.h"
 #import "DataController.h"
 #import "DataSearch.h"
 #import "FieldFormatter.h"
