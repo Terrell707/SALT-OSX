@@ -21,6 +21,10 @@
 @synthesize assistedBy;
 @synthesize worked;
 
+#pragma mark - Inits
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data
 {
     self = [super init];
@@ -37,7 +41,32 @@
     return self;
 }
 
-#pragma Worked Objects
+#pragma mark - Methods for Judge
+//-----------------------------------------------
+// Methods for Judge
+//-----------------------------------------------
++ (NSArray *)propsForDatabase
+{
+    return [NSArray arrayWithObjects:@"judge_id", @"office", @"first_name", @"last_name", @"active", nil];
+}
+
++ (NSArray *)properties
+{
+    NSArray *propsForDatabase = [self propsForDatabase];
+    NSArray *props = [NSArray arrayWithObjects:@"assistedBy", @"worked", nil];
+    
+    return [propsForDatabase arrayByAddingObjectsFromArray:props];
+}
+
++ (NSArray *)searchKeys
+{
+    return [NSArray arrayWithObjects:@"first_name", @"last_name", @"office", nil];
+}
+
+#pragma mark - Worked Objects Methods
+//-----------------------------------------------
+// Worked Objects Methods
+//-----------------------------------------------
 - (void)addWorkedObject:(Ticket *)value
 {
     [worked addObject:value];

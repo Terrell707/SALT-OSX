@@ -27,12 +27,13 @@
 // Methods for Expert
 //-----------------------------------------------
 - (void)expertIDFromJSON:(NSDictionary *)data;
-- (NSArray *)propsForDatabase;
-- (NSArray *)properties;
 
 //-----------------------------------------------
 // Static Methods for Expert
 //-----------------------------------------------
++ (NSArray *)propsForDatabase;
++ (NSArray *)properties;
++ (NSArray *)searchKeys;
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket;
 
 @end

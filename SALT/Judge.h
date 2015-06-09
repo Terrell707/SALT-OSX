@@ -20,8 +20,21 @@
 @property (readwrite, retain) Clerk *assistedBy;
 @property (readwrite, retain) NSMutableSet *worked;
 
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data;
 
+//-----------------------------------------------
+// Methods For Judge
+//-----------------------------------------------
++ (NSArray *)propsForDatabase;
++ (NSArray *)properties;
++ (NSArray *)searchKeys;
+
+//-----------------------------------------------
+// Worked Object Methods
+//-----------------------------------------------
 - (void)addWorkedObject:(Ticket *)value;
 - (void)removeWorkedObject:(Ticket *)value;
 - (void)addWorked:(NSSet *)values;

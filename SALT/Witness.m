@@ -18,6 +18,7 @@
 @synthesize expert;
 @synthesize ticket;
 
+#pragma mark - Inits
 //-----------------------------------------------
 // Inits
 //-----------------------------------------------
@@ -35,17 +36,17 @@
     return self;
 }
 
+#pragma mark - Methods for Witness
 //-----------------------------------------------
 // Methods for Witness
 //-----------------------------------------------
-- (NSArray *)propsForDatabase
++ (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"expert_id", @"ticket_no", nil];
     
     return props;
 }
-
-- (NSArray *)properties
++ (NSArray *)properties
 {
     NSArray *propsForDatabase = [self propsForDatabase];
     NSArray *props = [NSArray arrayWithObjects:@"expert", @"ticket", nil];

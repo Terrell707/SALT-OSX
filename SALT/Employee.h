@@ -37,8 +37,9 @@
 //-----------------------------------------------
 // Methods for Employee
 //-----------------------------------------------
-- (NSArray *)propsForDatabase;
-- (NSArray *)properties;
++ (NSArray *)propsForDatabase;
++ (NSArray *)properties;
++ (NSArray *)searchableKeys;
 
 //-----------------------------------------------
 // Worked Object Methods

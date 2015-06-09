@@ -17,6 +17,10 @@
 @synthesize role;
 @synthesize active;
 
+#pragma mark - Inits
+//-----------------------------------------------
+// Inits
+//-----------------------------------------------
 - (id)initWithData:(NSDictionary *)data
 {
     self = [super init];
@@ -34,6 +38,7 @@
     return self;
 }
 
+#pragma mark - Methods for Expert
 //-----------------------------------------------
 // Methods for Expert
 //-----------------------------------------------
@@ -44,21 +49,27 @@
     expert_id = [numFormat numberFromString:data[@"expert_id"]];
 }
 
-- (NSArray *)propsForDatabase
+#pragma mark - Static Methods for Expert
+//-----------------------------------------------
+// Static Methods for Expert
+//-----------------------------------------------
++ (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"expert_id", @"first_name", @"last_name", @"role", @"active", nil];
     
     return props;
 }
 
-- (NSArray *)properties
++ (NSArray *)properties
 {
     return [self propsForDatabase];
 }
 
-//-----------------------------------------------
-// Static Methods for Expert
-//-----------------------------------------------
++ (NSArray *)searchKeys
+{
+    return [NSArray arrayWithObjects:@"first_name", @"last_name", @"role", nil];
+}
+
 // Static Method that will find every expert for every role within a ticket and return it as a dictionary.
 + (NSDictionary *)findExpertsForTicket:(Ticket *)ticket
 {

@@ -29,6 +29,13 @@
 - (id)initWithData:(NSDictionary *)data;
 
 //-----------------------------------------------
+// Methods for Site
+//-----------------------------------------------
++ (NSArray *)propsForDatabase;
++ (NSArray *)properties;
++ (NSArray *)searchableKeys;
+
+//-----------------------------------------------
 // Schedule Object Methods
 //-----------------------------------------------
 - (void)addScheduledObject:(Schedule *)value;

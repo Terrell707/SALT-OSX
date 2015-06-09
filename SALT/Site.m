@@ -24,6 +24,7 @@
 @synthesize scheduled;
 @synthesize tickets;
 
+#pragma mark - Inits
 //-----------------------------------------------
 // Inits
 //-----------------------------------------------
@@ -57,6 +58,29 @@
     return self;
 }
 
+#pragma mark - Methods for Site
+//-----------------------------------------------
+// Methods for Site
+//-----------------------------------------------
++ (NSArray *)propsForDatabase
+{
+    return [NSArray arrayWithObjects:@"office_code", @"name", @"address", @"phone_number", @"email", @"can", @"pay", @"active", nil];
+}
+
++ (NSArray *)properties
+{
+    NSArray *propsForDatabase = [self propsForDatabase];
+    NSArray *props = [NSArray arrayWithObjects:@"scheduled", @"tickets", nil];
+    
+    return [propsForDatabase arrayByAddingObjectsFromArray:props];
+}
+
++ (NSArray *)searchableKeys
+{
+    return [NSArray arrayWithObjects:@"office_code", @"address", @"phone_number", @"email", @"can", @"pay.stringValue", nil];
+}
+
+#pragma mark - Ticket Object Methods
 //-----------------------------------------------
 // Ticket Object Methods
 //-----------------------------------------------
@@ -84,6 +108,7 @@
     }
 }
 
+#pragma mark - Schedule Object Methods
 //-----------------------------------------------
 // Schedule Object Methods
 //-----------------------------------------------

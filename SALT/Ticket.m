@@ -34,6 +34,7 @@
 @synthesize heldAt;
 @synthesize helpedBy;
 
+#pragma mark - Inits
 //-----------------------------------------------
 // Inits
 //-----------------------------------------------
@@ -82,10 +83,11 @@
     return self;
 }
 
+#pragma mark - Methods for Ticket
 //-----------------------------------------------
 // Methods for Ticket
 //-----------------------------------------------
-- (NSArray *)propsForDatabase
++ (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"ticket_no", @"order_date", @"call_order_no", @"first_name",
                            @"last_name", @"soc", @"hearing_date", @"hearing_time",
@@ -94,7 +96,7 @@
     return props;
 }
 
-- (NSArray *)properties
++ (NSArray *)properties
 {
     NSArray *propsForDatabase = [self propsForDatabase];
     NSArray *props = [NSArray arrayWithObjects:@"workedBy", @"judgePresided", @"heldAt", @"helpedBy", nil];
@@ -102,6 +104,12 @@
     return [propsForDatabase arrayByAddingObjectsFromArray:props];
 }
 
++ (NSArray *)searchableKeys
+{
+    return [NSArray arrayWithObjects:@"ticket_no.stringValue", @"first_name", @"last_name", @"heldAt.office_code", @"heldAt.name", @"status", @"workedBy.first_name", @"workedBy.last_name", nil];
+}
+
+#pragma mark - HelpedBy Methods
 //-----------------------------------------------
 // HelpedBy Methods
 //-----------------------------------------------

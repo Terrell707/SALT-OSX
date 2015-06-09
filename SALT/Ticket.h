@@ -39,8 +39,9 @@
 //-----------------------------------------------
 // Methods for Ticket
 //-----------------------------------------------
-- (NSArray *)propsForDatabase;
-- (NSArray *)properties;
++ (NSArray *)propsForDatabase;
++ (NSArray *)properties;
++ (NSArray *)searchableKeys;
 
 //-----------------------------------------------
 // HelpedBy Methods

@@ -25,7 +25,7 @@
 //-----------------------------------------------
 // Methods for Witness
 //-----------------------------------------------
-- (NSArray *)propsForDatabase;
-- (NSArray *)properties;
++ (NSArray *)propsForDatabase;
++ (NSArray *)properties;
 
 @end

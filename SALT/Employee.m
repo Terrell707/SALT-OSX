@@ -31,6 +31,7 @@
 @synthesize username;
 @synthesize scheduled;
 
+#pragma mark - Inits
 //-----------------------------------------------
 // Inits
 //-----------------------------------------------
@@ -72,17 +73,18 @@
     return self;
 }
 
+#pragma mark - Methods for Employee
 //-----------------------------------------------
 // Methods for Employee
 //-----------------------------------------------
-- (NSArray *)propsForDatabase
++ (NSArray *)propsForDatabase
 {
     NSArray *props = [NSArray arrayWithObjects:@"database_id", @"emp_id", @"first_name", @"middle_init",
                       @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay", @"active", nil];
     return props;
 }
 
-- (NSArray *)properties
++ (NSArray *)properties
 {
     NSArray *props = [self propsForDatabase];
     NSArray *sets = [NSArray arrayWithObjects:@"worked", @"username", @"scheduled", nil];
@@ -90,6 +92,12 @@
     return [props arrayByAddingObject:sets];
 }
 
++ (NSArray *)searchableKeys
+{
+    return [NSArray arrayWithObjects:@"emp_id.stringValue", @"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay.stringValue", nil];
+}
+
+#pragma mark - Worked Object Methods
 //-----------------------------------------------
 // Worked Object Methods
 //-----------------------------------------------
@@ -116,6 +124,7 @@
     }
 }
 
+#pragma mark - Schedule Object Methods
 //-----------------------------------------------
 // Schedule Object Methods
 //-----------------------------------------------
