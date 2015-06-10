@@ -248,7 +248,6 @@
     // Creates a list of attributes to compare the entered text against depending on the currently selected table.
     if (curTable == EMPLOYEES || curTable == DEFAULT) {
         NSLog(@"Searching Employees");
-//        keys = [NSArray arrayWithObjects:@"emp_id.stringValue", @"first_name", @"middle_init", @"last_name", @"phone_number", @"email", @"street", @"city", @"state", @"zip", @"pay.stringValue", nil];
         keys = [Employee searchableKeys];
         [self setEmployees:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_employees withKeys:keys withSearchText:searchText];
@@ -256,7 +255,6 @@
     }
     else if (curTable == JUDGES) {
         NSLog(@"Searching Judges");
-//        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", @"office", nil];
         keys = [Judge searchableKeys];
         [self setJudges:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_judges withKeys:keys withSearchText:searchText];
@@ -264,7 +262,6 @@
     }
     else if (curTable == EXPERTS) {
         NSLog(@"Searching Experts");
-//        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", @"role", nil];
         keys = [Expert searchableKeys];
         [self setExperts:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_experts withKeys:keys withSearchText:searchText];
@@ -272,7 +269,6 @@
     }
     else if (curTable == SITES) {
         NSLog(@"Searching Sites");
-//        keys = [NSArray arrayWithObjects:@"office_code", @"address", @"phone_number", @"email", @"can", @"pay.stringValue", nil];
         keys = [Site searchableKeys];
         [self setSites:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_sites withKeys:keys withSearchText:searchText];
@@ -280,7 +276,6 @@
     }
     else if (curTable == CLERKS) {
         NSLog(@"Searching Clerks");
-//        keys = [NSArray arrayWithObjects:@"first_name", @"last_name", @"email", nil];
         keys = [Clerk searchableKeys];
         [self setClerks:(NSMutableArray *)dataBeforeFilter];
         NSMutableArray *filteredData = [DataSearch searchData:_clerks withKeys:keys withSearchText:searchText];
