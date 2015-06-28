@@ -40,6 +40,7 @@
     if (selectedIndex == DEFAULT) [self setEmployeeTable];
     else [self selectTable];
     
+    [self setEmployeeInfoBox];
 }
 
 - (IBAction)businessCombo:(id)sender {
@@ -284,27 +285,195 @@
     
 }
 
-//- (void)setEmployeeInfoBox
-//{
-//    NSTextField *name = [[NSTextField alloc] init];
-//    NSFont *defaultFont = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[[name cell] controlSize]]];
-//    [name setStringValue:@"Testing:"];
-//    [name setEditable:NO];
-//    [name setBordered:NO];
-//    [name setBezeled:NO];
-//    [name setDrawsBackground:NO];
-//    [name setFont:defaultFont];
-//    [name sizeToFit];
-//    [_infoBox addSubview:name];
-//    
-//    NSLog(@"Test Label Width %f, Height: %f", name.fittingSize.width, name.fittingSize.height);
-//    NSLog(@"Id Label: X: %f Y: %f", _idLabel.frame.origin.x, _idLabel.frame.origin.y);
-//    NSLog(@"Info Box Height: %f, Width %f", _infoBox.fittingSize.height, _infoBox.fittingSize.width);
-//    
-//    CGFloat x = NSMaxX(_idLabel.frame) - name.fittingSize.width;
-//    CGFloat y = _idLabel.frame.origin.y - name.fittingSize.height;
-//    
-//    [name setFrame:CGRectMake(x, y, name.fittingSize.width, name.fittingSize.height)];
-//}
+- (void)setEmployeeInfoBox
+{
+    BOOL debug = YES;
+    
+    NSLog(@"NSBox Subviews: %@", [_infoBox subviews]);
+//    NSArray *subviews = [_infoBox subviews];
+//    for (NSUInteger x = subviews.count-1; x > 1; x--) {
+//        [subviews[x] removeFromSuperview];
+//    }
+    
+    [_infoBox setTitle:@"Employee Information"];
+    
+    // Creates the text fields and places them in their appropriate areas.
+    NSTextField *empIDText = [[NSTextField alloc] init];
+    [empIDText setStringValue:@"Employee ID:"];
+    [self setInfoTextFieldProperties:empIDText];
+    
+    NSTextField *empIDNum = [[NSTextField alloc] init];
+    [empIDNum setStringValue:@"2"];
+    [self setInfoTextFieldProperties:empIDNum];
+    
+    NSTextField *empNameText = [[NSTextField alloc] init];
+    [empNameText setStringValue:@"Name:"];
+    [self setInfoTextFieldProperties:empNameText];
+    
+    NSTextField *empName = [[NSTextField alloc] init];
+    [empName setStringValue:@"Adrian T. Chambers"];
+    [self setInfoTextFieldProperties:empName];
+    
+    NSTextField *empPhoneText = [[NSTextField alloc] init];
+    [empPhoneText setStringValue:@"Phone Number:"];
+    [self setInfoTextFieldProperties:empPhoneText];
+    
+    NSTextField *empPhone = [[NSTextField alloc] init];
+    [empPhone setStringValue:@"(707) 657-9012"];
+    [self setInfoTextFieldProperties:empPhone];
+    
+    NSTextField *empEmailText = [[NSTextField alloc] init];
+    [empEmailText setStringValue:@"E-mail:"];
+    [self setInfoTextFieldProperties:empEmailText];
+    
+    NSTextField *empEmail = [[NSTextField alloc] init];
+    [empEmail setStringValue:@"testemailaddress@gmail.com"];
+    [self setInfoTextFieldProperties:empEmail];
+    
+    NSTextField *empAddressText = [[NSTextField alloc] init];
+    [empAddressText setStringValue:@"Address:"];
+    [self setInfoTextFieldProperties:empAddressText];
+    
+    NSTextField *empStreet = [[NSTextField alloc] init];
+    [empStreet setStringValue:@"4300 Somewhere Over There Street"];
+    [self setInfoTextFieldProperties:empStreet];
+    
+    NSTextField *empBlankText = [[NSTextField alloc] init];
+    [empBlankText setStringValue:@""];
+    [self setInfoTextFieldProperties:empBlankText];
+    
+    NSTextField *empCity = [[NSTextField alloc] init];
+    [empCity setStringValue:@"San Jose"];
+    [self setInfoTextFieldProperties:empCity];
+    
+    NSTextField *empState = [[NSTextField alloc] init];
+    [empState setStringValue:@"CA"];
+    [self setInfoTextFieldProperties:empState];
+    
+    NSTextField *empZip = [[NSTextField alloc] init];
+    [empZip setStringValue:@"95136"];
+    [self setInfoTextFieldProperties:empZip];
+    
+    NSTextField *empPayText = [[NSTextField alloc] init];
+    [empPayText setStringValue:@"Pay:"];
+    [self setInfoTextFieldProperties:empPayText];
+    
+    NSTextField *empPay = [[NSTextField alloc] init];
+    [empPay setStringValue:@"$60.00"];
+    [self setInfoTextFieldProperties:empPay];
+    
+    NSTextField *empActiveText = [[NSTextField alloc] init];
+    [empActiveText setStringValue:@"Active:"];
+    [self setInfoTextFieldProperties:empActiveText];
+    
+    NSButton *empActiveCheck = [[NSButton alloc] initWithFrame:NSZeroRect];
+    [empActiveCheck setTitle:@""];
+    [empActiveCheck setButtonType:NSSwitchButton];
+    [empActiveCheck setBezelStyle:0];
+    [empActiveCheck setTitle:@""];
+    [empActiveCheck setState:NSOnState];
+    
+    // Adds the views to the info box.
+    [_infoBox addSubview:empIDText];
+    [_infoBox addSubview:empIDNum];
+    [_infoBox addSubview:empNameText];
+    [_infoBox addSubview:empName];
+    [_infoBox addSubview:empPhoneText];
+    [_infoBox addSubview:empPhone];
+    [_infoBox addSubview:empEmailText];
+    [_infoBox addSubview:empEmail];
+    [_infoBox addSubview:empAddressText];
+    [_infoBox addSubview:empStreet];
+    [_infoBox addSubview:empBlankText];
+    [_infoBox addSubview:empCity];
+    [_infoBox addSubview:empState];
+    [_infoBox addSubview:empZip];
+    [_infoBox addSubview:empPayText];
+    [_infoBox addSubview:empPay];
+    [_infoBox addSubview:empActiveText];
+    [_infoBox addSubview:empActiveCheck];
+    
+    
+    NSDictionary *textViews = NSDictionaryOfVariableBindings(empIDText, empIDNum, empNameText, empName, empPhoneText, empPhone, empEmailText, empEmail, empAddressText, empStreet, empBlankText, empCity, empState, empZip, empPayText, empPay, empActiveText, empActiveCheck);
+    
+    // Lays out each row of the employee's properties.
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empIDText]-[empIDNum]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empNameText]-[empName]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[empPhoneText]-[empPhone]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empEmailText]-[empEmail]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empAddressText]-[empStreet]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empBlankText]-[empCity]-[empState]-[empZip]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empPayText]-[empPay]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empActiveText]-[empActiveCheck]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    
+    // Aligns each of the properties vertically.
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDText]-[empNameText]-[empPhoneText]-[empEmailText]-[empAddressText]-[empBlankText]-[empPayText]"
+                                                                     options:NSLayoutFormatAlignAllTrailing
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDNum]-[empName]-[empPhone]-[empEmail]-[empStreet]-[empCity]-[empPay]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[empStreet]-[empState]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[empStreet]-[empZip]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:textViews]];
+    
+    [_infoBox sizeToFit];
+}
+
+- (void)setInfoTextFieldProperties:(NSTextField *)textField
+{
+    BOOL debug = YES;
+    
+    NSFont *defaultFont = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[[textField cell] controlSize]]];
+    [textField setEditable:NO];
+    [textField setBordered:NO];
+    [textField setBezeled:NO];
+    [textField setDrawsBackground:debug];
+    [textField setFont:defaultFont];
+    textField.translatesAutoresizingMaskIntoConstraints = NO;
+}
 
 @end

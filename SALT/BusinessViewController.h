@@ -45,8 +45,6 @@
 @property (weak) IBOutlet NSComboBox *listOfTables;
 @property (weak) IBOutlet NSTextField *numRowsLabel;
 @property (weak) IBOutlet NSBox *infoBox;
-@property (weak) IBOutlet NSTextField *idLabel;
-@property (weak) IBOutlet NSTextField *numLabel;
 
 - (IBAction)businessCombo:(id)sender;
 
