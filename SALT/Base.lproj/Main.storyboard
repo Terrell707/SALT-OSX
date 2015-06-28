@@ -855,9 +855,9 @@ DQ
                                     <action selector="businessCombo:" target="PoC-bN-CAA" id="uB4-aE-hjW"/>
                                 </connections>
                             </comboBox>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kp2-pj-D10">
+                            <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kp2-pj-D10">
                                 <rect key="frame" x="20" y="284" width="812" height="208"/>
-                                <clipView key="contentView" id="yH5-x2-LEt">
+                                <clipView key="contentView" misplaced="YES" id="yH5-x2-LEt">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -917,7 +917,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <box autoresizesSubviews="NO" title="Employee Information" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="7z3-ZN-YYv">
+                            <box autoresizesSubviews="NO" misplaced="YES" title="Information" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="7z3-ZN-YYv">
                                 <rect key="frame" x="267" y="16" width="389" height="207"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="387" height="191"/>
@@ -925,26 +925,25 @@ DQ
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="383" id="1nR-Ko-cfl"/>
-                                    <constraint firstAttribute="height" constant="203" id="b2F-zk-Hxr"/>
                                 </constraints>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pho-xP-g3k">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pho-xP-g3k">
                                 <rect key="frame" x="732" y="236" width="106" height="32"/>
                                 <buttonCell key="cell" type="push" title="Deactivate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Zl-ku-0f2">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oGg-Mh-9aD">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGg-Mh-9aD">
                                 <rect key="frame" x="664" y="236" width="68" height="32"/>
                                 <buttonCell key="cell" type="push" title="New" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m3Y-Yv-h6S">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="25K-U0-Cas">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25K-U0-Cas">
                                 <rect key="frame" x="578" y="236" width="86" height="32"/>
                                 <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M4N-vZ-VGw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

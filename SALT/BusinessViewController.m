@@ -27,6 +27,7 @@
     _experts = [[NSMutableArray alloc] init];
     
     controller = [[NSArrayController alloc] init];
+
 }
 
 - (void)viewDidAppear {
@@ -287,8 +288,6 @@
 
 - (void)setEmployeeInfoBox
 {
-    BOOL debug = YES;
-    
     NSLog(@"NSBox Subviews: %@", [_infoBox subviews]);
 //    NSArray *subviews = [_infoBox subviews];
 //    for (NSUInteger x = subviews.count-1; x > 1; x--) {
@@ -368,11 +367,8 @@
     
     NSButton *empActiveCheck = [[NSButton alloc] initWithFrame:NSZeroRect];
     [empActiveCheck setTitle:@""];
-    [empActiveCheck setButtonType:NSSwitchButton];
-    [empActiveCheck setBezelStyle:0];
-    [empActiveCheck setTitle:@""];
-    [empActiveCheck setState:NSOnState];
-    
+    [self setInfoButtonProperties:empActiveCheck];
+
     // Adds the views to the info box.
     [_infoBox addSubview:empIDText];
     [_infoBox addSubview:empIDNum];
@@ -393,79 +389,102 @@
     [_infoBox addSubview:empActiveText];
     [_infoBox addSubview:empActiveCheck];
     
+//    NSLog(@"Box Constraints: %@", [_infoBox constraints]);
     
-    NSDictionary *textViews = NSDictionaryOfVariableBindings(empIDText, empIDNum, empNameText, empName, empPhoneText, empPhone, empEmailText, empEmail, empAddressText, empStreet, empBlankText, empCity, empState, empZip, empPayText, empPay, empActiveText, empActiveCheck);
+    NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(empIDText, empIDNum, empNameText, empName, empPhoneText, empPhone, empEmailText, empEmail, empAddressText, empStreet, empBlankText, empCity, empState, empZip, empPayText, empPay, empActiveText, empActiveCheck);
+    
+    NSDictionary *mainViewSubviews = NSDictionaryOfVariableBindings(_infoBox, businessTable);
     
     // Lays out each row of the employee's properties.
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empIDText]-[empIDNum]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empNameText]-[empName]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[empPhoneText]-[empPhone]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empEmailText]-[empEmail]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empAddressText]-[empStreet]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empBlankText]-[empCity]-[empState]-[empZip]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empPayText]-[empPay]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empActiveText]-[empActiveCheck]"
-                                                                     options:0
+                                                                     options:NSLayoutFormatAlignAllCenterY
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     
     // Aligns each of the properties vertically.
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDText]-[empNameText]-[empPhoneText]-[empEmailText]-[empAddressText]-[empBlankText]-[empPayText]"
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDText]-[empNameText]-[empPhoneText]-[empEmailText]-[empAddressText]-[empBlankText]-[empPayText]-[empActiveText]"
                                                                      options:NSLayoutFormatAlignAllTrailing
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDNum]-[empName]-[empPhone]-[empEmail]-[empStreet]-[empCity]-[empPay]"
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDNum]-[empName]-[empPhone]-[empEmail]-[empStreet]-[empCity]-[empPay]-[empActiveCheck]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[empStreet]-[empState]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[empStreet]-[empZip]"
                                                                      options:0
                                                                      metrics:nil
-                                                                       views:textViews]];
+                                                                       views:infoBoxSubviews]];
     
+    // Forces the infobox to layout the constraints for all of its textfields. This is so we can calculate the height
+    //  we need to set the box to.
+    [_infoBox setNeedsLayout:YES];
+    [_infoBox layoutSubtreeIfNeeded];
     [_infoBox sizeToFit];
+    
+    float infoBoxHeight = 0;
+    infoBoxHeight = _infoBox.frame.size.height + 20;
+    NSDictionary *boxMetrics = @{@"boxWidth":@383, @"boxHeight":[NSNumber numberWithFloat:infoBoxHeight]};
+    
+    // Sets the height and width of the info box.
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_infoBox(>=boxWidth)]"
+                                                                      options:NSLayoutFormatAlignAllCenterX
+                                                                      metrics:boxMetrics
+                                                                        views:mainViewSubviews]];
+
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_infoBox(boxHeight)]"
+                                                                      options:0
+                                                                      metrics:boxMetrics
+                                                                        views:mainViewSubviews]];
+    
 }
 
 - (void)setInfoTextFieldProperties:(NSTextField *)textField
 {
-    BOOL debug = YES;
+    BOOL debug = NO;
     
     NSFont *defaultFont = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:[[textField cell] controlSize]]];
     [textField setEditable:NO];
@@ -474,6 +493,14 @@
     [textField setDrawsBackground:debug];
     [textField setFont:defaultFont];
     textField.translatesAutoresizingMaskIntoConstraints = NO;
+}
+
+- (void)setInfoButtonProperties:(NSButton *)button
+{
+    [button setButtonType:NSSwitchButton];
+    [button setBezelStyle:0];
+    [button setEnabled:NO];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 @end
