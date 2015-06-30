@@ -36,12 +36,18 @@
     };
 }
 
+// Holds the entities from the SALT Database.
 @property NSMutableArray *employees;
 @property NSMutableArray *judges;
 @property NSMutableArray *sites;
 @property NSMutableArray *clerks;
 @property NSMutableArray *experts;
 
+// Holds the NSTextFields that are a part of the NSBox (infoBox).
+@property NSMutableArray *infoTextFields;
+
+// Used to show the correct table, the number of rows in the table, and the specific information
+//  for the currently selected item in the table.
 @property (weak) IBOutlet NSComboBox *listOfTables;
 @property (weak) IBOutlet NSTextField *numRowsLabel;
 @property (weak) IBOutlet NSBox *infoBox;

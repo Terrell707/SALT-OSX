@@ -26,6 +26,8 @@
     _clerks = [[NSMutableArray alloc] init];
     _experts = [[NSMutableArray alloc] init];
     
+    _infoTextFields = [[NSMutableArray alloc] init];
+    
     controller = [[NSArrayController alloc] init];
 
 }
@@ -46,6 +48,13 @@
 
 - (IBAction)businessCombo:(id)sender {
     [self selectTable];
+    [self updateFields];
+}
+
+-(void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+    // Updates the info fields for the currently selected row in the table.
+    [self updateFields];
 }
 
 - (void)selectTable
@@ -294,6 +303,8 @@
 //        [subviews[x] removeFromSuperview];
 //    }
     
+    [_infoTextFields removeAllObjects];
+    
     [_infoBox setTitle:@"Employee Information"];
     
     // Creates the text fields and places them in their appropriate areas.
@@ -304,6 +315,7 @@
     NSTextField *empIDNum = [[NSTextField alloc] init];
     [empIDNum setStringValue:@"2"];
     [self setInfoTextFieldProperties:empIDNum];
+    [self trackInfoTextField:empIDNum withIdentifier:@"emp_id"];
     
     NSTextField *empNameText = [[NSTextField alloc] init];
     [empNameText setStringValue:@"Name:"];
@@ -312,6 +324,7 @@
     NSTextField *empName = [[NSTextField alloc] init];
     [empName setStringValue:@"Adrian T. Chambers"];
     [self setInfoTextFieldProperties:empName];
+    [self trackInfoTextField:empName withIdentifier:@"emp_name"];
     
     NSTextField *empPhoneText = [[NSTextField alloc] init];
     [empPhoneText setStringValue:@"Phone Number:"];
@@ -320,6 +333,7 @@
     NSTextField *empPhone = [[NSTextField alloc] init];
     [empPhone setStringValue:@"(707) 657-9012"];
     [self setInfoTextFieldProperties:empPhone];
+    [self trackInfoTextField:empPhone withIdentifier:@"phone_number"];
     
     NSTextField *empEmailText = [[NSTextField alloc] init];
     [empEmailText setStringValue:@"E-mail:"];
@@ -328,30 +342,25 @@
     NSTextField *empEmail = [[NSTextField alloc] init];
     [empEmail setStringValue:@"testemailaddress@gmail.com"];
     [self setInfoTextFieldProperties:empEmail];
+    [self trackInfoTextField:empEmail withIdentifier:@"email"];
     
     NSTextField *empAddressText = [[NSTextField alloc] init];
     [empAddressText setStringValue:@"Address:"];
     [self setInfoTextFieldProperties:empAddressText];
     
-    NSTextField *empStreet = [[NSTextField alloc] init];
-    [empStreet setStringValue:@"4300 Somewhere Over There Street"];
-    [self setInfoTextFieldProperties:empStreet];
+    NSTextField *empAddress1 = [[NSTextField alloc] init];
+    [empAddress1 setStringValue:@"4300 Somewhere Over There Street"];
+    [self setInfoTextFieldProperties:empAddress1];
+    [self trackInfoTextField:empAddress1 withIdentifier:@"address1"];
     
     NSTextField *empBlankText = [[NSTextField alloc] init];
     [empBlankText setStringValue:@""];
     [self setInfoTextFieldProperties:empBlankText];
     
-    NSTextField *empCity = [[NSTextField alloc] init];
-    [empCity setStringValue:@"San Jose"];
-    [self setInfoTextFieldProperties:empCity];
-    
-    NSTextField *empState = [[NSTextField alloc] init];
-    [empState setStringValue:@"CA"];
-    [self setInfoTextFieldProperties:empState];
-    
-    NSTextField *empZip = [[NSTextField alloc] init];
-    [empZip setStringValue:@"95136"];
-    [self setInfoTextFieldProperties:empZip];
+    NSTextField *empAddress2 = [[NSTextField alloc] init];
+    [empAddress2 setStringValue:@"San Jose"];
+    [self setInfoTextFieldProperties:empAddress2];
+    [self trackInfoTextField:empAddress2 withIdentifier:@"address2"];
     
     NSTextField *empPayText = [[NSTextField alloc] init];
     [empPayText setStringValue:@"Pay:"];
@@ -360,6 +369,7 @@
     NSTextField *empPay = [[NSTextField alloc] init];
     [empPay setStringValue:@"$60.00"];
     [self setInfoTextFieldProperties:empPay];
+    [self trackInfoTextField:empPay withIdentifier:@"pay"];
     
     NSTextField *empActiveText = [[NSTextField alloc] init];
     [empActiveText setStringValue:@"Active:"];
@@ -368,6 +378,7 @@
     NSButton *empActiveCheck = [[NSButton alloc] initWithFrame:NSZeroRect];
     [empActiveCheck setTitle:@""];
     [self setInfoButtonProperties:empActiveCheck];
+    [empActiveCheck bind:@"value" toObject:controller withKeyPath:@"selection.active" options:nil];
 
     // Adds the views to the info box.
     [_infoBox addSubview:empIDText];
@@ -379,19 +390,16 @@
     [_infoBox addSubview:empEmailText];
     [_infoBox addSubview:empEmail];
     [_infoBox addSubview:empAddressText];
-    [_infoBox addSubview:empStreet];
+    [_infoBox addSubview:empAddress1];
     [_infoBox addSubview:empBlankText];
-    [_infoBox addSubview:empCity];
-    [_infoBox addSubview:empState];
-    [_infoBox addSubview:empZip];
+    [_infoBox addSubview:empAddress2];
     [_infoBox addSubview:empPayText];
     [_infoBox addSubview:empPay];
     [_infoBox addSubview:empActiveText];
     [_infoBox addSubview:empActiveCheck];
     
-//    NSLog(@"Box Constraints: %@", [_infoBox constraints]);
     
-    NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(empIDText, empIDNum, empNameText, empName, empPhoneText, empPhone, empEmailText, empEmail, empAddressText, empStreet, empBlankText, empCity, empState, empZip, empPayText, empPay, empActiveText, empActiveCheck);
+    NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(empIDText, empIDNum, empNameText, empName, empPhoneText, empPhone, empEmailText, empEmail, empAddressText, empAddress1, empBlankText, empAddress2, empPayText, empPay, empActiveText, empActiveCheck);
     
     NSDictionary *mainViewSubviews = NSDictionaryOfVariableBindings(_infoBox, businessTable);
     
@@ -416,12 +424,12 @@
                                                                      metrics:nil
                                                                        views:infoBoxSubviews]];
     
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empAddressText]-[empStreet]"
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empAddressText]-[empAddress1]"
                                                                      options:0
                                                                      metrics:nil
                                                                        views:infoBoxSubviews]];
     
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empBlankText]-[empCity]-[empState]-[empZip]"
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empBlankText]-[empAddress2]"
                                                                      options:0
                                                                      metrics:nil
                                                                        views:infoBoxSubviews]];
@@ -443,18 +451,7 @@
                                                                      metrics:nil
                                                                        views:infoBoxSubviews]];
     
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDNum]-[empName]-[empPhone]-[empEmail]-[empStreet]-[empCity]-[empPay]-[empActiveCheck]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:infoBoxSubviews]];
-    
-    
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[empStreet]-[empState]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:infoBoxSubviews]];
-    
-    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[empStreet]-[empZip]"
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[empIDNum]-[empName]-[empPhone]-[empEmail]-[empAddress1]-[empAddress2]-[empPay]-[empActiveCheck]"
                                                                      options:0
                                                                      metrics:nil
                                                                        views:infoBoxSubviews]];
@@ -479,7 +476,65 @@
                                                                       options:0
                                                                       metrics:boxMetrics
                                                                         views:mainViewSubviews]];
+}
+
+- (void)updateFields
+{
+    // If the user clicked a column to sort the data, this will get the most current sort.
+    NSArray *arrangedObjects = [controller arrangedObjects];
+    NSUInteger selection = [controller selectionIndex];
     
+    NSLog(@"Currently Selected: %ld", selection);
+    
+    // Blank out all fields.
+    for (NSTextField *field in _infoTextFields) {
+        [field setStringValue:@""];
+    }
+    
+    // Checks to make sure an item is actually selected.
+    if (selection > [arrangedObjects count]) {
+        for (NSTextField *textField in _infoTextFields)
+        {
+            NSString *identifier = textField.identifier;
+            if (![identifier isEqualToString:@"address2"])
+            {
+                [textField setStringValue:@"No Selection"];
+            }
+        }
+    }
+    else {
+        // Updates the fields depending on the currently selected table.
+        NSInteger curTable = [_listOfTables indexOfSelectedItem];
+        if (curTable == EMPLOYEES || curTable == DEFAULT) [self updateEmployeeFieldsWithEmployee:arrangedObjects[selection]];
+    }
+    
+}
+
+- (void)updateEmployeeFieldsWithEmployee:(Employee *)employee
+{
+    for (NSTextField *textField in _infoTextFields) {
+        NSString *identifier = textField.identifier;
+        
+        if ([identifier isEqualToString:@"emp_id"]) [textField setStringValue:[employee.emp_id stringValue]];
+        if ([identifier isEqualToString:@"emp_name"]) {
+            if ([employee.middle_init isEqualToString:@""]) [textField setStringValue:[NSString stringWithFormat:@"%@ %@", employee.first_name, employee.last_name]];
+            else [textField setStringValue:[NSString stringWithFormat:@"%@ %@. %@", employee.first_name, employee.middle_init, employee.last_name]];
+        }
+        if ([identifier isEqualToString:@"phone_number"]) {
+            ECPhoneNumberFormatter *phoneFormatter = [[ECPhoneNumberFormatter alloc] init];
+            [textField setStringValue:[phoneFormatter stringForObjectValue:employee.phone_number]];
+        }
+        if ([identifier isEqualToString:@"email"]) [textField setStringValue:employee.email];
+        if ([identifier isEqualToString:@"address1"]) [textField setStringValue:employee.street];
+        if ([identifier isEqualToString:@"address2"]) {
+            [textField setStringValue:[NSString stringWithFormat:@"%@, %@ %@", employee.city, employee.state, employee.zip]];
+        }
+        if ([identifier isEqualToString:@"pay"]) {
+            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [textField setStringValue:[NSString stringWithFormat:@"%@", [nf stringFromNumber:employee.pay]]];
+        }
+    }
 }
 
 - (void)setInfoTextFieldProperties:(NSTextField *)textField
@@ -493,6 +548,12 @@
     [textField setDrawsBackground:debug];
     [textField setFont:defaultFont];
     textField.translatesAutoresizingMaskIntoConstraints = NO;
+}
+
+- (void)trackInfoTextField:(NSTextField *)textField withIdentifier:(NSString *)identifier
+{
+    [textField setIdentifier:identifier];
+    [_infoTextFields addObject:textField];
 }
 
 - (void)setInfoButtonProperties:(NSButton *)button
