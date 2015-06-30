@@ -57,6 +57,7 @@
     [self updateFields];
 }
 
+#pragma mark - Set Table Methods
 - (void)selectTable
 {
     NSInteger selectedIndex = [_listOfTables indexOfSelectedItem];
@@ -81,7 +82,7 @@
     
     [self changeTableWithColumnIdentifiers:columnIdentifers withNames:columnNames withWidths:columnWidths boundToData:@"employees"];
     
-    [_infoBox setTitle:@"Employee Information"];
+    [self setEmployeeInfoBox];
 }
 
 - (void)setSiteTable
@@ -109,7 +110,7 @@
     
     [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:@"judges"];
     
-    [_infoBox setTitle:@"Judge Information"];
+    [self setJudgeInfoBox];
 }
 
 - (void)setClerkTable
@@ -295,16 +296,60 @@
     
 }
 
-- (void)setEmployeeInfoBox
+# pragma mark - Set Info Box Methods
+- (void)clearInfoBox
 {
     NSLog(@"NSBox Subviews: %@", [_infoBox subviews]);
-//    NSArray *subviews = [_infoBox subviews];
-//    for (NSUInteger x = subviews.count-1; x > 1; x--) {
-//        [subviews[x] removeFromSuperview];
-//    }
     
+    // Finds the view with in the NSBox that has the textfields, buttons, etc, and then removes everything
+    //  from that view.
+    NSArray *boxSubviews = [_infoBox subviews];
+    
+    for (NSInteger x = boxSubviews.count-1; x >= 0; x--) {
+        NSArray *subviews = [boxSubviews[x] subviews];
+        if (subviews.count > 0) {
+            for (NSInteger y = subviews.count-1; y >= 0; y--) {
+                [subviews[y] removeFromSuperview];
+            }
+        }
+    }
+    
+    // Removes all the text fields that we are tracking.
     [_infoTextFields removeAllObjects];
+}
+
+- (void)resizeInfoBox
+{
+    NSDictionary *mainViewSubviews = NSDictionaryOfVariableBindings(_infoBox, businessTable);
     
+    // Forces the infobox to layout the constraints for all of its textfields. This is so we can calculate the height
+    //  we need to set the box to.
+    [_infoBox setNeedsLayout:YES];
+    [_infoBox layoutSubtreeIfNeeded];
+    [_infoBox sizeToFit];
+    
+    float infoBoxHeight = 0;
+    infoBoxHeight = _infoBox.frame.size.height + 20;
+    NSDictionary *boxMetrics = @{@"boxWidth":@383, @"boxHeight":[NSNumber numberWithFloat:infoBoxHeight]};
+    
+    // Sets the height and width of the info box.
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_infoBox(>=boxWidth)]"
+                                                                      options:NSLayoutFormatAlignAllCenterX
+                                                                      metrics:boxMetrics
+                                                                        views:mainViewSubviews]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_infoBox(boxHeight)]"
+                                                                      options:0
+                                                                      metrics:boxMetrics
+                                                                        views:mainViewSubviews]];
+}
+
+- (void)setEmployeeInfoBox
+{
+    // Prepares the info box for new information.
+    [self clearInfoBox];
+    
+    // Change title of info box.
     [_infoBox setTitle:@"Employee Information"];
     
     // Creates the text fields and places them in their appropriate areas.
@@ -401,8 +446,6 @@
     
     NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(empIDText, empIDNum, empNameText, empName, empPhoneText, empPhone, empEmailText, empEmail, empAddressText, empAddress1, empBlankText, empAddress2, empPayText, empPay, empActiveText, empActiveCheck);
     
-    NSDictionary *mainViewSubviews = NSDictionaryOfVariableBindings(_infoBox, businessTable);
-    
     // Lays out each row of the employee's properties.
     [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[empIDText]-[empIDNum]"
                                                                      options:0
@@ -456,26 +499,78 @@
                                                                      metrics:nil
                                                                        views:infoBoxSubviews]];
     
-    // Forces the infobox to layout the constraints for all of its textfields. This is so we can calculate the height
-    //  we need to set the box to.
-    [_infoBox setNeedsLayout:YES];
-    [_infoBox layoutSubtreeIfNeeded];
-    [_infoBox sizeToFit];
-    
-    float infoBoxHeight = 0;
-    infoBoxHeight = _infoBox.frame.size.height + 20;
-    NSDictionary *boxMetrics = @{@"boxWidth":@383, @"boxHeight":[NSNumber numberWithFloat:infoBoxHeight]};
-    
-    // Sets the height and width of the info box.
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_infoBox(>=boxWidth)]"
-                                                                      options:NSLayoutFormatAlignAllCenterX
-                                                                      metrics:boxMetrics
-                                                                        views:mainViewSubviews]];
+    [self resizeInfoBox];
+}
 
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_infoBox(boxHeight)]"
-                                                                      options:0
-                                                                      metrics:boxMetrics
-                                                                        views:mainViewSubviews]];
+- (void)setJudgeInfoBox
+{
+    [self clearInfoBox];
+    
+    [_infoBox setTitle:@"Judge Information"];
+    
+    // Creates the text fields and places them in their appropriate areas.
+    NSTextField *judgeNameText = [[NSTextField alloc] init];
+    [judgeNameText setStringValue:@"Name:"];
+    [self setInfoTextFieldProperties:judgeNameText];
+    
+    NSTextField *judgeName = [[NSTextField alloc] init];
+    [judgeName setStringValue:@"David Blume"];
+    [self setInfoTextFieldProperties:judgeName];
+    [self trackInfoTextField:judgeName withIdentifier:@"judge_name"];
+    
+    NSTextField *judgeSiteText = [[NSTextField alloc] init];
+    [judgeSiteText setStringValue:@"Office:"];
+    [self setInfoTextFieldProperties:judgeSiteText];
+    
+    NSTextField *judgeSite = [[NSTextField alloc] init];
+    [judgeSite setStringValue:@"Sacramento, X-63"];
+    [self setInfoTextFieldProperties:judgeSite];
+    [self trackInfoTextField:judgeSite withIdentifier:@"judge_site"];
+    
+    NSTextField *judgeActiveText = [[NSTextField alloc] init];
+    [judgeActiveText setStringValue:@"Active:"];
+    [self setInfoTextFieldProperties:judgeActiveText];
+    
+    NSButton *judgeActiveCheck = [[NSButton alloc] initWithFrame:NSZeroRect];
+    [judgeActiveCheck setTitle:@""];
+    [self setInfoButtonProperties:judgeActiveCheck];
+    [judgeActiveCheck bind:@"value" toObject:controller withKeyPath:@"selection.active" options:nil];
+    
+    // Add all the text fields and buttons to the view.
+    [_infoBox addSubview:judgeNameText];
+    [_infoBox addSubview:judgeName];
+    [_infoBox addSubview:judgeSiteText];
+    [_infoBox addSubview:judgeSite];
+    [_infoBox addSubview:judgeActiveText];
+    [_infoBox addSubview:judgeActiveCheck];
+    
+    NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(judgeNameText, judgeName, judgeSiteText, judgeSite, judgeActiveText, judgeActiveCheck);
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[judgeNameText]-[judgeName]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[judgeSiteText]-[judgeSite]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[judgeActiveText]-[judgeActiveCheck]"
+                                                                     options:NSLayoutFormatAlignAllCenterY
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[judgeNameText]-[judgeSiteText]-[judgeActiveText]"
+                                                                     options:NSLayoutFormatAlignAllTrailing
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[judgeName]-[judgeSite]-[judgeActiveCheck]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [self resizeInfoBox];
 }
 
 - (void)updateFields
@@ -510,6 +605,7 @@
     
 }
 
+# pragma mark - Update Info Fields Methods
 - (void)updateEmployeeFieldsWithEmployee:(Employee *)employee
 {
     for (NSTextField *textField in _infoTextFields) {
@@ -537,6 +633,7 @@
     }
 }
 
+# pragma mark - Info Box Helper Methods
 - (void)setInfoTextFieldProperties:(NSTextField *)textField
 {
     BOOL debug = NO;
