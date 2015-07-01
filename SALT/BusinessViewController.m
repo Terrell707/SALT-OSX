@@ -43,7 +43,8 @@
     if (selectedIndex == DEFAULT) [self setEmployeeTable];
     else [self selectTable];
     
-    [self setEmployeeInfoBox];
+    _sites = [[DataController sharedDataController] sites];
+    
 }
 
 - (IBAction)businessCombo:(id)sender {
@@ -68,6 +69,7 @@
     else if (selectedIndex == EXPERTS) [self setExpertTable];
     
     [self searchData];
+    [self updateFields];
 }
 
 - (void)setEmployeeTable
@@ -96,7 +98,7 @@
     
     [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:@"sites"];
     
-    [_infoBox setTitle:@"Office Information"];
+    [self setSiteInfoBox];
 }
 
 - (void)setJudgeTable
@@ -330,18 +332,22 @@
     
     float infoBoxHeight = 0;
     infoBoxHeight = _infoBox.frame.size.height + 20;
-    NSDictionary *boxMetrics = @{@"boxWidth":@383, @"boxHeight":[NSNumber numberWithFloat:infoBoxHeight]};
     
-    // Sets the height and width of the info box.
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_infoBox(>=boxWidth)]"
-                                                                      options:NSLayoutFormatAlignAllCenterX
-                                                                      metrics:boxMetrics
-                                                                        views:mainViewSubviews]];
+    NSDictionary *boxMetrics = @{@"boxHeight":[NSNumber numberWithFloat:infoBoxHeight]};
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_infoBox(boxHeight)]"
-                                                                      options:0
-                                                                      metrics:boxMetrics
-                                                                        views:mainViewSubviews]];
+    // Removes the previous height constraint on the info box if there was one. Will then give it a new height. This will also
+    //  force the table to resize itself while keeping the window the same size.
+    if (boxHeightConstraint != nil) {
+        [self.view removeConstraints:boxHeightConstraint];
+    }
+    
+    boxHeightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_infoBox(boxHeight)]-|"
+                                                                  options:0
+                                                                  metrics:boxMetrics
+                                                                    views:mainViewSubviews];
+    
+    [self.view addConstraints:boxHeightConstraint];
+    
 }
 
 - (void)setEmployeeInfoBox
@@ -573,6 +579,176 @@
     [self resizeInfoBox];
 }
 
+- (void)setSiteInfoBox
+{
+    [self clearInfoBox];
+    
+    [_infoBox setTitle:@"Office Information"];
+    
+    // Creates the text fields and places them in their appropriate areas.
+    NSTextField *siteCodeText = [[NSTextField alloc] init];
+    [siteCodeText setStringValue:@"Office Code:"];
+    [self setInfoTextFieldProperties:siteCodeText];
+    
+    NSTextField *siteCode = [[NSTextField alloc] init];
+    [siteCode setStringValue:@"X63"];
+    [self setInfoTextFieldProperties:siteCode];
+    [self trackInfoTextField:siteCode withIdentifier:@"office_code"];
+    
+    NSTextField *siteNameText = [[NSTextField alloc] init];
+    [siteNameText setStringValue:@"Name:"];
+    [self setInfoTextFieldProperties:siteNameText];
+    
+    NSTextField *siteName = [[NSTextField alloc] init];
+    [siteName setStringValue:@"Sacramento"];
+    [self setInfoTextFieldProperties:siteName];
+    [self trackInfoTextField:siteName withIdentifier:@"name"];
+    
+    NSTextField *siteAddressText = [[NSTextField alloc] init];
+    [siteAddressText setStringValue:@"Address:"];
+    [self setInfoTextFieldProperties:siteAddressText];
+    
+    NSTextField *siteAddress1 = [[NSTextField alloc] init];
+    [siteAddress1 setStringValue:@"52 Heritage Lane Bld 2"];
+    [self setInfoTextFieldProperties:siteAddress1];
+    [self trackInfoTextField:siteAddress1 withIdentifier:@"address1"];
+    
+    NSTextField *siteBlankText = [[NSTextField alloc] init];
+    [siteBlankText setStringValue:@""];
+    [self setInfoTextFieldProperties:siteBlankText];
+    
+    NSTextField *siteAddress2 = [[NSTextField alloc] init];
+    [siteAddress2 setStringValue:@"Sacramento, CA 95815"];
+    [self setInfoTextFieldProperties:siteAddress2];
+    [self trackInfoTextField:siteAddress2 withIdentifier:@"address2"];
+    
+    NSTextField *sitePhoneNumberText = [[NSTextField alloc] init];
+    [sitePhoneNumberText setStringValue:@"Phone Number:"];
+    [self setInfoTextFieldProperties:sitePhoneNumberText];
+    
+    NSTextField *sitePhoneNumber = [[NSTextField alloc] init];
+    [sitePhoneNumber setStringValue:@"(916) 567-1234"];
+    [self setInfoTextFieldProperties:sitePhoneNumber];
+    [self trackInfoTextField:sitePhoneNumber withIdentifier:@"phone_number"];
+    
+    NSTextField *siteEmailText = [[NSTextField alloc] init];
+    [siteEmailText setStringValue:@"Email:"];
+    [self setInfoTextFieldProperties:siteEmailText];
+    
+    NSTextField *siteEmail = [[NSTextField alloc] init];
+    [siteEmail setStringValue:@"sacodar@ssa.gov"];
+    [self setInfoTextFieldProperties:siteEmail];
+    [self trackInfoTextField:siteEmail withIdentifier:@"email"];
+    
+    NSTextField *siteCanText = [[NSTextField alloc] init];
+    [siteCanText setStringValue:@"CAN:"];
+    [self setInfoTextFieldProperties:siteCanText];
+    
+    NSTextField *siteCan = [[NSTextField alloc] init];
+    [siteCan setStringValue:@"sacodar@ssa.gov"];
+    [self setInfoTextFieldProperties:siteCan];
+    [self trackInfoTextField:siteCan withIdentifier:@"can"];
+    
+    NSTextField *sitePayText = [[NSTextField alloc] init];
+    [sitePayText setStringValue:@"Pay:"];
+    [self setInfoTextFieldProperties:sitePayText];
+    
+    NSTextField *sitePay = [[NSTextField alloc] init];
+    [sitePay setStringValue:@"$60.00"];
+    [self setInfoTextFieldProperties:sitePay];
+    [self trackInfoTextField:sitePay withIdentifier:@"pay"];
+    
+    NSTextField *siteActiveText = [[NSTextField alloc] init];
+    [siteActiveText setStringValue:@"Active:"];
+    [self setInfoTextFieldProperties:siteActiveText];
+    
+    NSButton *siteActiveCheck = [[NSButton alloc] initWithFrame:NSZeroRect];
+    [siteActiveCheck setTitle:@""];
+    [self setInfoButtonProperties:siteActiveCheck];
+    [siteActiveCheck bind:@"value" toObject:controller withKeyPath:@"selection.active" options:nil];
+    
+    // Add all the text fields and buttons to the view.
+    [_infoBox addSubview:siteCodeText];
+    [_infoBox addSubview:siteCode];
+    [_infoBox addSubview:siteNameText];
+    [_infoBox addSubview:siteName];
+    [_infoBox addSubview:siteAddressText];
+    [_infoBox addSubview:siteAddress1];
+    [_infoBox addSubview:siteBlankText];
+    [_infoBox addSubview:siteAddress2];
+    [_infoBox addSubview:sitePhoneNumberText];
+    [_infoBox addSubview:sitePhoneNumber];
+    [_infoBox addSubview:siteEmailText];
+    [_infoBox addSubview:siteEmail];
+    [_infoBox addSubview:siteCanText];
+    [_infoBox addSubview:siteCan];
+    [_infoBox addSubview:sitePayText];
+    [_infoBox addSubview:sitePay];
+    [_infoBox addSubview:siteActiveText];
+    [_infoBox addSubview:siteActiveCheck];
+    
+    NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(siteCodeText, siteCode, siteNameText, siteName, siteAddressText,
+                                                                   siteAddress1, siteBlankText, siteAddress2, sitePhoneNumberText, sitePhoneNumber,
+                                                                   siteEmailText, siteEmail, siteCanText, siteCan, sitePayText, sitePay, siteActiveText,
+                                                                   siteActiveCheck);
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteCodeText]-[siteCode]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteNameText]-[siteName]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteAddressText]-[siteAddress1]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteBlankText]-[siteAddress2]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[sitePhoneNumberText]-[sitePhoneNumber]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteEmailText]-[siteEmail]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteCanText]-[siteCan]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[sitePayText]-[sitePay]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[siteActiveText]-[siteActiveCheck]"
+                                                                     options:NSLayoutFormatAlignAllCenterY
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[siteCodeText]-[siteNameText]-[siteAddressText]-[siteBlankText]-[sitePhoneNumberText]-[siteEmailText]-[siteCanText]-[sitePayText]-[siteActiveText]"
+                                                                     options:NSLayoutFormatAlignAllTrailing
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[siteCode]-[siteName]-[siteAddress1]-[siteAddress2]-[sitePhoneNumber]-[siteEmail]-[siteCan]-[sitePay]-[siteActiveCheck]"
+                                                                     options:NSLayoutFormatAlignAllTrailing
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [self resizeInfoBox];
+}
+
 - (void)updateFields
 {
     // If the user clicked a column to sort the data, this will get the most current sort.
@@ -601,6 +777,7 @@
         // Updates the fields depending on the currently selected table.
         NSInteger curTable = [_listOfTables indexOfSelectedItem];
         if (curTable == EMPLOYEES || curTable == DEFAULT) [self updateEmployeeFieldsWithEmployee:arrangedObjects[selection]];
+        if (curTable == JUDGES) [self updateJudgeFieldsWithJudge:arrangedObjects[selection]];
     }
     
 }
@@ -629,6 +806,30 @@
             NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
             [textField setStringValue:[NSString stringWithFormat:@"%@", [nf stringFromNumber:employee.pay]]];
+        }
+    }
+}
+
+- (void)updateJudgeFieldsWithJudge:(Judge *)judge
+{
+    for (NSTextField *textField in _infoTextFields) {
+        NSString *identifier = textField.identifier;
+        
+        if ([identifier isEqualToString:@"judge_name"]) {
+            [textField setStringValue:[NSString stringWithFormat:@"%@ %@", judge.first_name, judge.last_name]];
+        }
+        if ([identifier isEqualToString:@"judge_site"]) {
+            Site *site;
+            
+            if (judge.office != nil) {
+                NSPredicate *matchingSite = [NSPredicate predicateWithFormat:@"office_code == %@", judge.office];
+                NSArray *results = [_sites filteredArrayUsingPredicate:matchingSite];
+                if (results.count > 0) {
+                    site = results[0];
+                }
+                if (site != nil) [textField setStringValue:[NSString stringWithFormat:@"%@, %@", site.name, site.office_code]];
+                else [textField setStringValue:[NSString stringWithFormat:@"%@", judge.office]];
+            }
         }
     }
 }

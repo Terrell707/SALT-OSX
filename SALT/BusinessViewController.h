@@ -25,6 +25,7 @@
     FieldFormatter *fieldFormatter;
     
     NSArray *dataBeforeFilter;
+    NSArray *boxHeightConstraint;
     
     enum {
         DEFAULT = -1,
@@ -34,6 +35,7 @@
         SITES = 3,
         CLERKS = 4
     };
+    
 }
 
 // Holds the entities from the SALT Database.
