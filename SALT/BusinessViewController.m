@@ -40,8 +40,7 @@
     
     // Checks to see if user selected something other than the initial table. If so, it reloads that table. Otherwise,
     //  it loads the default table.
-    if (selectedIndex == DEFAULT) [self setEmployeeTable];
-    else [self selectTable];
+    [self selectTable];
     
     _sites = [[DataController sharedDataController] sites];
     
@@ -67,6 +66,7 @@
     else if (selectedIndex == JUDGES) [self setJudgeTable];
     else if (selectedIndex == CLERKS) [self setClerkTable];
     else if (selectedIndex == EXPERTS) [self setExpertTable];
+    else if (selectedIndex == DEFAULT) [self setEmployeeTable];
     
     [self searchData];
     [self updateFields];
@@ -154,7 +154,6 @@
     }
     
     // Binds the data to a controller so that the data will be displayed in the table.
-//    [controller setContent:data];
     [controller setEditable:NO];
     [controller bind:@"contentArray" toObject:self withKeyPath:data options:nil];
     
@@ -364,7 +363,6 @@
     [self setInfoTextFieldProperties:empIDText];
     
     NSTextField *empIDNum = [[NSTextField alloc] init];
-    [empIDNum setStringValue:@"2"];
     [self setInfoTextFieldProperties:empIDNum];
     [self trackInfoTextField:empIDNum withIdentifier:@"emp_id"];
     
@@ -373,7 +371,6 @@
     [self setInfoTextFieldProperties:empNameText];
     
     NSTextField *empName = [[NSTextField alloc] init];
-    [empName setStringValue:@"Adrian T. Chambers"];
     [self setInfoTextFieldProperties:empName];
     [self trackInfoTextField:empName withIdentifier:@"emp_name"];
     
@@ -382,7 +379,6 @@
     [self setInfoTextFieldProperties:empPhoneText];
     
     NSTextField *empPhone = [[NSTextField alloc] init];
-    [empPhone setStringValue:@"(707) 657-9012"];
     [self setInfoTextFieldProperties:empPhone];
     [self trackInfoTextField:empPhone withIdentifier:@"phone_number"];
     
@@ -391,7 +387,6 @@
     [self setInfoTextFieldProperties:empEmailText];
     
     NSTextField *empEmail = [[NSTextField alloc] init];
-    [empEmail setStringValue:@"testemailaddress@gmail.com"];
     [self setInfoTextFieldProperties:empEmail];
     [self trackInfoTextField:empEmail withIdentifier:@"email"];
     
@@ -400,7 +395,6 @@
     [self setInfoTextFieldProperties:empAddressText];
     
     NSTextField *empAddress1 = [[NSTextField alloc] init];
-    [empAddress1 setStringValue:@"4300 Somewhere Over There Street"];
     [self setInfoTextFieldProperties:empAddress1];
     [self trackInfoTextField:empAddress1 withIdentifier:@"address1"];
     
@@ -409,7 +403,6 @@
     [self setInfoTextFieldProperties:empBlankText];
     
     NSTextField *empAddress2 = [[NSTextField alloc] init];
-    [empAddress2 setStringValue:@"San Jose"];
     [self setInfoTextFieldProperties:empAddress2];
     [self trackInfoTextField:empAddress2 withIdentifier:@"address2"];
     
@@ -418,7 +411,6 @@
     [self setInfoTextFieldProperties:empPayText];
     
     NSTextField *empPay = [[NSTextField alloc] init];
-    [empPay setStringValue:@"$60.00"];
     [self setInfoTextFieldProperties:empPay];
     [self trackInfoTextField:empPay withIdentifier:@"pay"];
     
@@ -520,7 +512,6 @@
     [self setInfoTextFieldProperties:judgeNameText];
     
     NSTextField *judgeName = [[NSTextField alloc] init];
-    [judgeName setStringValue:@"David Blume"];
     [self setInfoTextFieldProperties:judgeName];
     [self trackInfoTextField:judgeName withIdentifier:@"judge_name"];
     
@@ -529,7 +520,6 @@
     [self setInfoTextFieldProperties:judgeSiteText];
     
     NSTextField *judgeSite = [[NSTextField alloc] init];
-    [judgeSite setStringValue:@"Sacramento, X-63"];
     [self setInfoTextFieldProperties:judgeSite];
     [self trackInfoTextField:judgeSite withIdentifier:@"judge_site"];
     
@@ -591,7 +581,6 @@
     [self setInfoTextFieldProperties:siteCodeText];
     
     NSTextField *siteCode = [[NSTextField alloc] init];
-    [siteCode setStringValue:@"X63"];
     [self setInfoTextFieldProperties:siteCode];
     [self trackInfoTextField:siteCode withIdentifier:@"office_code"];
     
@@ -600,7 +589,6 @@
     [self setInfoTextFieldProperties:siteNameText];
     
     NSTextField *siteName = [[NSTextField alloc] init];
-    [siteName setStringValue:@"Sacramento"];
     [self setInfoTextFieldProperties:siteName];
     [self trackInfoTextField:siteName withIdentifier:@"name"];
     
@@ -609,7 +597,6 @@
     [self setInfoTextFieldProperties:siteAddressText];
     
     NSTextField *siteAddress1 = [[NSTextField alloc] init];
-    [siteAddress1 setStringValue:@"52 Heritage Lane Bld 2"];
     [self setInfoTextFieldProperties:siteAddress1];
     [self trackInfoTextField:siteAddress1 withIdentifier:@"address1"];
     
@@ -618,7 +605,6 @@
     [self setInfoTextFieldProperties:siteBlankText];
     
     NSTextField *siteAddress2 = [[NSTextField alloc] init];
-    [siteAddress2 setStringValue:@"Sacramento, CA 95815"];
     [self setInfoTextFieldProperties:siteAddress2];
     [self trackInfoTextField:siteAddress2 withIdentifier:@"address2"];
     
@@ -627,7 +613,6 @@
     [self setInfoTextFieldProperties:sitePhoneNumberText];
     
     NSTextField *sitePhoneNumber = [[NSTextField alloc] init];
-    [sitePhoneNumber setStringValue:@"(916) 567-1234"];
     [self setInfoTextFieldProperties:sitePhoneNumber];
     [self trackInfoTextField:sitePhoneNumber withIdentifier:@"phone_number"];
     
@@ -636,7 +621,6 @@
     [self setInfoTextFieldProperties:siteEmailText];
     
     NSTextField *siteEmail = [[NSTextField alloc] init];
-    [siteEmail setStringValue:@"sacodar@ssa.gov"];
     [self setInfoTextFieldProperties:siteEmail];
     [self trackInfoTextField:siteEmail withIdentifier:@"email"];
     
@@ -645,7 +629,6 @@
     [self setInfoTextFieldProperties:siteCanText];
     
     NSTextField *siteCan = [[NSTextField alloc] init];
-    [siteCan setStringValue:@"sacodar@ssa.gov"];
     [self setInfoTextFieldProperties:siteCan];
     [self trackInfoTextField:siteCan withIdentifier:@"can"];
     
@@ -654,7 +637,6 @@
     [self setInfoTextFieldProperties:sitePayText];
     
     NSTextField *sitePay = [[NSTextField alloc] init];
-    [sitePay setStringValue:@"$60.00"];
     [self setInfoTextFieldProperties:sitePay];
     [self trackInfoTextField:sitePay withIdentifier:@"pay"];
     
@@ -778,6 +760,7 @@
         NSInteger curTable = [_listOfTables indexOfSelectedItem];
         if (curTable == EMPLOYEES || curTable == DEFAULT) [self updateEmployeeFieldsWithEmployee:arrangedObjects[selection]];
         if (curTable == JUDGES) [self updateJudgeFieldsWithJudge:arrangedObjects[selection]];
+        if (curTable == SITES) [self updateSiteFieldsWithSite:arrangedObjects[selection]];
     }
     
 }
@@ -830,6 +813,43 @@
                 if (site != nil) [textField setStringValue:[NSString stringWithFormat:@"%@, %@", site.name, site.office_code]];
                 else [textField setStringValue:[NSString stringWithFormat:@"%@", judge.office]];
             }
+        }
+    }
+}
+
+- (void)updateSiteFieldsWithSite:(Site *)site
+{
+    for (NSTextField *textField in _infoTextFields) {
+        NSString *identifer = textField.identifier;
+        
+        if ([identifer isEqualToString:@"office_code"]) [textField setStringValue:site.office_code];
+        if ([identifer isEqualToString:@"name"]) [textField setStringValue:site.name];
+        if ([identifer isEqualToString:@"address1"] || [identifer isEqualToString:@"address2"]) {
+            // Seperates the string by commas so that it can be placed on two lines.
+            NSArray *address = [site.address componentsSeparatedByString:@","];
+            if (address.count > 0) {
+                if ([identifer isEqualToString:@"address1"]) [textField setStringValue:address[0]];
+                else {
+                    // Builds the string piece by piece in case the address isn't broken apart correctly.
+                    NSMutableString *address2 = [NSMutableString stringWithString:@""];
+                    if (address.count > 1) [address2 appendString:
+                                            [address[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                    if (address.count > 2) [address2 appendFormat:@", %@",
+                                            [address[2] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                    [textField setStringValue:address2];
+                }
+            }
+        }
+        if ([identifer isEqualToString:@"phone_number"]) {
+            ECPhoneNumberFormatter *phoneFormatter = [[ECPhoneNumberFormatter alloc] init];
+            [textField setStringValue:[phoneFormatter stringForObjectValue:site.phone_number]];
+        }
+        if ([identifer isEqualToString:@"email"]) [textField setStringValue:site.email];
+        if ([identifer isEqualToString:@"can"]) [textField setStringValue:site.can];
+        if ([identifer isEqualToString:@"pay"]) {
+            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+            [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [textField setStringValue:[NSString stringWithFormat:@"%@", [nf stringFromNumber:site.pay]]];
         }
     }
 }
