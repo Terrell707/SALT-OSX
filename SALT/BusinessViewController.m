@@ -141,7 +141,7 @@
     
     [self changeTableWithColumnIdentifiers:columnIdentifiers withNames:columnNames withWidths:columnWidths boundToData:@"experts"];
     
-    [_infoBox setTitle:@"Expert Information"];
+    [self setExpertInfoBox];
 }
 
 - (void)changeTableWithColumnIdentifiers:(NSArray *)columnIdentifiers withNames:(NSArray *)columnNames withWidths:(NSArray *)columnWidths boundToData:(NSString *)data
@@ -731,6 +731,77 @@
     [self resizeInfoBox];
 }
 
+- (void)setExpertInfoBox
+{
+    [self clearInfoBox];
+    
+    [_infoBox setTitle:@"Expert Information"];
+    
+    // Creates the text fields and places them in their appropriate areas.
+    NSTextField *expertNameText = [[NSTextField alloc] init];
+    [expertNameText setStringValue:@"Name:"];
+    [self setInfoTextFieldProperties:expertNameText];
+    
+    NSTextField *expertName = [[NSTextField alloc] init];
+    [self setInfoTextFieldProperties:expertName];
+    [self trackInfoTextField:expertName withIdentifier:@"expert_name"];
+    
+    NSTextField *expertRoleText = [[NSTextField alloc] init];
+    [expertRoleText setStringValue:@"Role:"];
+    [self setInfoTextFieldProperties:expertRoleText];
+    
+    NSTextField *expertRole = [[NSTextField alloc] init];
+    [self setInfoTextFieldProperties:expertRole];
+    [self trackInfoTextField:expertRole withIdentifier:@"role"];
+    
+    NSTextField *expertActiveText = [[NSTextField alloc] init];
+    [expertActiveText setStringValue:@"Active:"];
+    [self setInfoTextFieldProperties:expertActiveText];
+    
+    NSButton *expertActiveCheck = [[NSButton alloc] initWithFrame:NSZeroRect];
+    [expertActiveCheck setTitle:@""];
+    [self setInfoButtonProperties:expertActiveCheck];
+    [expertActiveCheck bind:@"value" toObject:controller withKeyPath:@"selection.active" options:nil];
+    
+    // Adds the fields to the info box.
+    [_infoBox addSubview:expertNameText];
+    [_infoBox addSubview:expertName];
+    [_infoBox addSubview:expertRoleText];
+    [_infoBox addSubview:expertRole];
+    [_infoBox addSubview:expertActiveText];
+    [_infoBox addSubview:expertActiveCheck];
+    
+    NSDictionary *infoBoxSubviews = NSDictionaryOfVariableBindings(expertNameText, expertName, expertRoleText, expertRole,
+                                                                   expertActiveText, expertActiveCheck);
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[expertNameText]-[expertName]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[expertRoleText]-[expertRole]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[expertActiveText]-[expertActiveCheck]"
+                                                                     options:NSLayoutFormatAlignAllCenterY
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[expertNameText]-[expertRoleText]-[expertActiveText]"
+                                                                     options:NSLayoutFormatAlignAllTrailing
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [_infoBox addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[expertName]-[expertRole]-[expertActiveCheck]"
+                                                                     options:NSLayoutFormatAlignAllTrailing
+                                                                     metrics:nil
+                                                                       views:infoBoxSubviews]];
+    
+    [self resizeInfoBox];
+}
+
 - (void)updateFields
 {
     // If the user clicked a column to sort the data, this will get the most current sort.
@@ -761,6 +832,7 @@
         if (curTable == EMPLOYEES || curTable == DEFAULT) [self updateEmployeeFieldsWithEmployee:arrangedObjects[selection]];
         if (curTable == JUDGES) [self updateJudgeFieldsWithJudge:arrangedObjects[selection]];
         if (curTable == SITES) [self updateSiteFieldsWithSite:arrangedObjects[selection]];
+        if (curTable == EXPERTS) [self updateExpertFieldsWithExpert:arrangedObjects[selection]];
     }
     
 }
@@ -850,6 +922,22 @@
             NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
             [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
             [textField setStringValue:[NSString stringWithFormat:@"%@", [nf stringFromNumber:site.pay]]];
+        }
+    }
+}
+
+- (void)updateExpertFieldsWithExpert:(Expert *)expert
+{
+    for (NSTextField *textField in _infoTextFields) {
+        NSString *identifier = textField.identifier;
+        
+        if ([identifier isEqualToString:@"expert_name"]) [textField setStringValue:[NSString stringWithFormat:@"%@ %@", expert.first_name, expert.last_name]];
+        if ([identifier isEqualToString:@"role"]) {
+            NSString *role = expert.role;
+            if ([role isEqualToString:@"VE"]) [textField setStringValue:@"Vocational Expert"];
+            else if ([role isEqualToString:@"REP"]) [textField setStringValue:@"Representative"];
+            else if ([role isEqualToString:@"ME"]) [textField setStringValue:@"Medical Expert"];
+            else if ([role isEqualToString:@"INS"]) [textField setStringValue:@"Interpreter"];
         }
     }
 }
