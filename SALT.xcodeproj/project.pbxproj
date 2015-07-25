@@ -19,6 +19,7 @@
 		3A654A1A1AB39223001899A6 /* TicketPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A654A191AB39223001899A6 /* TicketPrintView.m */; };
 		3A729C151ABF69980089FE2A /* TicketPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A729C141ABF69980089FE2A /* TicketPrintViewController.m */; };
 		3A729C191AC4EABA0089FE2A /* TicketSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A729C181AC4EABA0089FE2A /* TicketSettingsViewController.m */; };
+		3AD2393C1B4711D300EF4887 /* BusinessUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD2393B1B4711D300EF4887 /* BusinessUpdateViewController.m */; };
 		3AFD09191A8836C4001D8688 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD09181A8836C4001D8688 /* AppDelegate.m */; };
 		3AFD091B1A8836C4001D8688 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091A1A8836C4001D8688 /* main.m */; };
 		3AFD09211A8836C4001D8688 /* SALT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD091F1A8836C4001D8688 /* SALT.xcdatamodeld */; };
@@ -74,6 +75,8 @@
 		3A729C141ABF69980089FE2A /* TicketPrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketPrintViewController.m; sourceTree = "<group>"; };
 		3A729C171AC4EABA0089FE2A /* TicketSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketSettingsViewController.h; sourceTree = "<group>"; };
 		3A729C181AC4EABA0089FE2A /* TicketSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketSettingsViewController.m; sourceTree = "<group>"; };
+		3AD2393A1B4711D300EF4887 /* BusinessUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessUpdateViewController.h; sourceTree = "<group>"; };
+		3AD2393B1B4711D300EF4887 /* BusinessUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessUpdateViewController.m; sourceTree = "<group>"; };
 		3AFD09121A8836C4001D8688 /* SALT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SALT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFD09161A8836C4001D8688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AFD09171A8836C4001D8688 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 		3A4582D01ADA279C00DF28ED /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				3AD2393A1B4711D300EF4887 /* BusinessUpdateViewController.h */,
+				3AD2393B1B4711D300EF4887 /* BusinessUpdateViewController.m */,
 				3A4582D11ADA27B300DF28ED /* BusinessViewController.h */,
 				3A4582D21ADA27B300DF28ED /* BusinessViewController.m */,
 			);
@@ -424,6 +429,7 @@
 				3AFD09A11A902FDA001D8688 /* InsertTicketViewController.m in Sources */,
 				3A3881731ADC7983006241BB /* FieldFormatter.m in Sources */,
 				3AFD09891A8AB507001D8688 /* User.m in Sources */,
+				3AD2393C1B4711D300EF4887 /* BusinessUpdateViewController.m in Sources */,
 				3A729C151ABF69980089FE2A /* TicketPrintViewController.m in Sources */,
 				3AFD09801A8AB507001D8688 /* Expert.m in Sources */,
 				3AFD098F1A8AB507001D8688 /* Clerk.m in Sources */,

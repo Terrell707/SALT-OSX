@@ -949,6 +949,9 @@ DQ
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="Slg-uT-iTg" kind="modal" id="dDE-y1-GHH"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PAu-Cv-W0Y">
                                 <rect key="frame" x="20" y="502" width="38" height="17"/>
@@ -1006,6 +1009,19 @@ DQ
                 <customObject id="Akz-yD-FRv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1857" y="690"/>
+        </scene>
+        <!--Business Update View Controller-->
+        <scene sceneID="gJc-jh-Sa7">
+            <objects>
+                <viewController showSeguePresentationStyle="single" id="Slg-uT-iTg" customClass="BusinessUpdateViewController" sceneMemberID="viewController">
+                    <view key="view" id="NUN-UH-MOJ">
+                        <rect key="frame" x="0.0" y="0.0" width="351" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="83D-Jz-GYG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2594.5" y="690"/>
         </scene>
         <!--Tickets Settings-->
         <scene sceneID="XfD-4K-9q5">
