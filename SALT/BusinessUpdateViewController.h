@@ -10,4 +10,6 @@
 
 @interface BusinessUpdateViewController : NSViewController
 
+- (void)setTextFieldProperties:(NSTextField *)textField withEditable:(BOOL)editable;
+
 @end
